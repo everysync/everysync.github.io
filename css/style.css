@@ -27,7 +27,48 @@
 
 
 ********************************************************************************************  */
-.demopagec-1 {background-color: #8204ff;}
-.demopagec-2 {background-color: #04a8ff;}
-.demopagec-3 {background-color: #91ba62;}
-.demopagec-4 {background-color: #ffb857;}
+.app_container {
+	overflow: hidden;
+	height: 100%;
+	width: 100%;
+}
+.app_header {
+	z-index: 10;
+	height: 80px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	background: url(../images/svg/logo.svg) center center no-repeat;
+	background-color: rgba(0, 0, 0, 0.2);
+}
+.nosvg .app_header {
+	background-image: url(../images/bitmap/logo.png);
+}
+.eachBlck {
+	padding-top: 80px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.demopagec-1 {
+	background-image: -moz-linear-gradient( 60deg, rgb(39,51,62) 0%, rgb(83,133,149) 100%);
+	background-image: -webkit-linear-gradient( 60deg, rgb(39,51,62) 0%, rgb(83,133,149) 100%);
+	background-image: -ms-linear-gradient( 60deg, rgb(39,51,62) 0%, rgb(83,133,149) 100%);
+}
+.demopagec-2 {
+	background-image: -moz-linear-gradient( 60deg, #0d95b7 0%, #00d0bf 100%);
+	background-image: -webkit-linear-gradient( 60deg, #0d95b7 0%, #00d0bf 100%);
+	background-image: -ms-linear-gradient( 60deg, #0d95b7 0%, #00d0bf 100%);
+}
+.demopagec-3 {
+	background-image: -moz-linear-gradient( 60deg, #2d2f44 0%, #6e73b0 100%);
+	background-image: -webkit-linear-gradient( 60deg, #2d2f44 0%, #6e73b0 100%);
+	background-image: -ms-linear-gradient( 60deg, #2d2f44 0%, #6e73b0 100%);
+}
+.demopagec-4 {
+	background-image: -moz-linear-gradient( 60deg, #3b2f24 0%, #937251 100%);
+	background-image: -webkit-linear-gradient( 60deg, #3b2f24 0%, #937251 100%);
+	background-image: -ms-linear-gradient( 60deg, #3b2f24 0%, #937251 100%);
+}
