@@ -60,5 +60,6 @@
 		} else {
 			$('body').prepend(ghostElem);
 		}
+		//console.log(styles)
 	};
 }));

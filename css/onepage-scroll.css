@@ -17,7 +17,7 @@ body.onepage-scroll-enabled {
   height: 100%;
   padding: 0;
   position: relative;
-  -webkit-transform-style: preserve-3d;
+  /*-webkit-transform-style: preserve-3d;*/
 }
 /* line 23, ../src/onepage-scroll.scss */
 .onepage-wrapper .section {
