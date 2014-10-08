@@ -162,7 +162,7 @@ function page_1fn() {
 			'</div>';
 	$.ajax({
 		type: "get",
-		url: "http://127.0.0.1/jsonpcallback/jsonpcallback.js",
+		url: "jsonpcallback/jsonpcallback.js",
 		dataType: "jsonp",
 		jsonpCallback:"mapListData"
 	}).done(function(data){
@@ -172,8 +172,8 @@ function page_1fn() {
 		for (var i=0; i<MapArrylength; i++) {
 			var $kt = $(liTemplate);
 			var $ktlist = $kt.find(".mdhlist");
-			$kt.find(".mdh2_1").html(MapArry[i]["listName"]+":");
-			$kt.find(".mdh2_2").html(MapArry[i]["listTitle"]);
+			$kt.find(".mdh2_1").html(MapArry[i]["listTitle"]+":");
+			$kt.find(".mdh2_2").html(MapArry[i]["listName"]);
 			$ktlist.html("");
 			$.each(MapArry[i]["listdata"], function(i,d) {
 				$ktlist.append(
