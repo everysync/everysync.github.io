@@ -158,9 +158,8 @@ function page_1fn() {
         }
 	});
 	$.when(
-		$.getScript( "echart/echart/echartsConfig.js" ),
-		$.getScript( "echart/echart/esl.js" ),
-		$.getScript( "echart/echart/chart_map.js" ),
+		// // $.getScript( "echart/echart/echartsConfig.js" ),
+		$.getScript( "js/echart/chart_map.js" ),
 		$.Deferred(function( deferred ){
 			$( deferred.resolve );
 		})

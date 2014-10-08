@@ -7,6 +7,10 @@ require.config({
 		"scalcheight"		:"jay.plugins.scalcHeight",
 		"onepageScroll"		:"jquery.onepage-scroll.min",
 		"finger"			:"jquery.finger",
+		"echarts"			:"echart/echarts-map",
+		'echarts/chart/pie' : 'echart/echarts-map',
+		'echarts/chart/map' : 'echart/echarts-map',  
+		"echartsConfig":"echart/echartsConfig",
 		"jay"				:"jay"
 	},
 	shim: {//模块依赖关系
@@ -17,7 +21,7 @@ require.config({
 		'jay'  			: {deps: ['jquery','utf','onepageScroll','scalcheight','swiper']}
 	}
 });
-require(['jquery','onepageScroll','finger','jay'], function($) {
+require(['jquery','onepageScroll','finger','echartsConfig','jay'], function($) {
 	$(function() {
 		jayfunction();
 	});
