@@ -1,5 +1,5 @@
 //var window=window,$=$,console=window.console,alert=window.alert;
-
+var $win,$doc,$body,$html;
 //TO: AJAX_DATA
 function ajaxLoadData(URL,DATA) {
 	$.ajax({
@@ -8,10 +8,12 @@ function ajaxLoadData(URL,DATA) {
 		dataType: "jsonp",
 		jsonpCallback:DATA
 	}).done(function(data){
-		console.log(data);
 		//do something
+		//listdata = [];
+		//listdata = data;
+		
 	}).error(function(){
-		window.console?console.log("Fail to load data!"):'';
+		return window.console?console.log("Fail to load data!"):'';
 		//do something
 	}).always(function() {
 		//do something
@@ -59,12 +61,12 @@ function pagescroll(obj,content,options) {
 			});
 		},
 		beforeMove:function(a) {
-			$(document).trigger("pageout_"+a)
-			$obj.addClass("hardware-acceleration")
+			$(document).trigger("pageout_"+a);
+			$obj.addClass("hardware-acceleration");
 		},
     	afterMove: function(a) {
-			$obj.removeClass("hardware-acceleration")
-			$(document).trigger("pagein_"+a)
+			$obj.removeClass("hardware-acceleration");
+			$(document).trigger("pagein_"+a);
 		}
 	};
 	$.extend(opts,{sectionContainer: content});
@@ -89,7 +91,7 @@ function sidebaract(obj,options) {
 	var styles = $("<style>");
 	var duration = function(n) {
 		return "\n"+"transition-duration:"+ n +"s;"+"\n" + "-webkit-transition-duration:"+ n +"s;"+"\n" + "-moz-transition-duration:"+ n +"s;"+"\n"+ "-ms-transition-duration:"+ n +"s;"+"\n";
-	}
+	};
 	var delays = function(n) {
 		return "\n"+"transition-delay:"+ n +"s;"+"\n" + "-webkit-transition-delay:"+ n +"s;"+"\n" + "-moz-transition-delay:"+ n +"s;"+"\n"+ "-ms-transition-delay:"+ n +"s;"+"\n";
 	};
@@ -106,7 +108,7 @@ function sidebaract(obj,options) {
 		
 		for (var i =0; i< isecLength; i++ ) {
 			var k = i*opts.speed;
-			styles.append( opts.itemsw+":nth-of-type("+ (itemsindex+1) +") "+ opts.items +" "+opts.itemsSeclinks+":nth-of-type("+(isecLength-i)+")"+" {" + delays(k) + "}")
+			styles.append( opts.itemsw+":nth-of-type("+ (itemsindex+1) +") "+ opts.items +" "+opts.itemsSeclinks+":nth-of-type("+(isecLength-i)+")"+" {" + delays(k) + "}");
 		}
 	});
 	
@@ -123,9 +125,9 @@ function sidebaract(obj,options) {
 	}).on("tap", ".side_hide_btn",function(e) {
 		$sideBtnWrap.addClass("show").removeClass("hide");
 		$objparent.addClass("hide").removeClass("show");
-	})
+	});
 	
-	ghostElem.append(styles)
+	ghostElem.append(styles);
 	var ghostTemp = document.getElementById("jay-side-css");
 	if (ghostTemp) {
 		$(ghostTemp).html(styles);
@@ -142,21 +144,84 @@ function page_1fn() {
 		e.stopPropagation();
 		return false;
 	});
-	var page_1_swiper = $(".mapSideBot").swiper({
-		mode:'vertical',
-		initialSlide:1,
-		slidesPerView:'auto',
-		visibilityFullFit:true,
-		mousewheelControl:true,
-		calculateHeight:true,
-		slidesPerViewFit:true,
-		centeredSlides:true,
-		onSlideClick:function(sw) {
-            page_1_swiper.swipeTo(page_1_swiper.clickedSlideIndex);
-			var $sides = $(page_1_swiper.clickedSlide);
-			$sides.addClass("swiper-slide-click-active").siblings().removeClass("swiper-slide-click-active");
-        }
-	});
+	
+	var $mslistwrap = $(".mslist");
+	var liTempWrap = $("<div>").attr("id","wpt");
+	var liTemplate = 
+			'<div class="mapDataDetail">'+
+			'	<h2 class="mdh2">'+
+			'		<span class="mdh2_1">标题:</span>'+
+			'		<span class="mdh2_2">标题名</span>'+
+			'	</h2>'+
+			'	<ul class="mdhlist">'+
+			'		<li class="mdhli">'+
+			'			<span class="mli_l">名字</span>'+
+			'			<span class="mli_r">数据</span>'+
+			'		</li>'+
+			'	</ul>'+
+			'</div>';
+	$.ajax({
+		type: "get",
+		url: "http://127.0.0.1/jsonpcallback/jsonpcallback.js",
+		dataType: "jsonp",
+		jsonpCallback:"mapListData"
+	}).done(function(data){
+		var MapArry = data["mapListData"];
+		var MapArrylength = MapArry.length;
+		var $a = $(liTemplate);
+		for (var i=0; i<MapArrylength; i++) {
+			var $kt = $(liTemplate);
+			var $ktlist = $kt.find(".mdhlist");
+			$kt.find(".mdh2_1").html(MapArry[i]["listName"]+":");
+			$kt.find(".mdh2_2").html(MapArry[i]["listTitle"]);
+			$ktlist.html("");
+			$.each(MapArry[i]["listdata"], function(i,d) {
+				$ktlist.append(
+					$("<li>").addClass("mdhli").html(
+						'<span class="mli_l">'+ d[0] +'</span>'+' <span class="mli_r">'+ d[1] +'</span>'
+					)
+				);
+			});
+			liTempWrap.append( $('<li class="msEachlist swiper-slide"></li>').append($kt) )
+		}
+		$mslistwrap.html( liTempWrap.html() )
+		
+		//init swiper
+		
+		var page_1_swiper = $(".mapSideBot").swiper({
+			mode:'vertical',
+			initialSlide:1,
+			slidesPerView:'auto',
+			visibilityFullFit:true,
+			mousewheelControl:true,
+			calculateHeight:true,
+			slidesPerViewFit:true,
+			centeredSlides:true,
+			onSlideClick:function(sw) {
+				page_1_swiper.swipeTo(page_1_swiper.clickedSlideIndex);
+				var $sides = $(page_1_swiper.clickedSlide);
+				$sides
+					.addClass("swiper-slide-click-active")
+					.siblings()
+					.removeClass("swiper-slide-click-active");
+			}
+		});
+		
+		//clean
+		$mslistwrap ="";
+		liTempWrap ="";
+		liTemplate ="";
+		MapArry ="";
+		MapArrylength ="";
+		$a ="";
+		
+	}).error(function(a){
+		window.console?console.log("Fail to load data!"):'';
+		//do something
+	}).always(function(data) {
+	});	
+	
+	
 	$.when(
 		// // $.getScript( "echart/echart/echartsConfig.js" ),
 		$.getScript( "js/echart/chart_map.js" ),
@@ -177,11 +242,15 @@ function page_1fn() {
 
 //INIT FUNCTIONS
 function jayfunction() {
+	$win=$(window);
+	$doc=$(document);
+	$body=$("body");
+	$html=$("html");
 	//Building_layouts
 	buildLayout();
-	
 	//AJAX_DATA
-	ajaxLoadData(utf8to16(base64decode("aHR0cDovLzEyNy4wLjAuMS9qc29ucGNhbGxiYWNrL2pzb25wY2FsbGJhY2suanM=")), "mydata");
+	//ajaxLoadData("http://127.0.0.1/jsonpcallback/jsonpcallback.js", "mydata");
+	//console.log(listdata)
 	//PAGESCROLL
 	pagescroll(".container",".eachBlck");
 	//SIDEBAR_ACTION

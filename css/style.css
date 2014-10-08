@@ -573,6 +573,19 @@ Pagination Styles
 .mdhlist {
 	
 }
+.mdhlist .mdhli{
+	overflow: hidden;
+	line-height: 30px;
+	font-size: 18px;
+}
+
+.mdhli .mli_l {
+	float: left;
+}
+.mdhli .mli_r {
+	float: right;
+	color: #ffe900;
+}
 .mapswipebtn {
 	height: 56px;
 	line-height: 56px;
