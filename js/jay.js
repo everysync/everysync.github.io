@@ -220,18 +220,13 @@ function page_1fn() {
 		//do something
 	}).always(function(data) {
 	});	
-	
-	
 	$.when(
-		// // $.getScript( "echart/echart/echartsConfig.js" ),
-		$.getScript( "js/echart/chart_map.js" ),
 		$.Deferred(function( deferred ){
 			$( deferred.resolve );
 		})
 	).done(function(){
-
 		//place your code here, the scripts are all loaded
-
+		require(["chart_map"]);
 	});
 }
 
