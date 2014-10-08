@@ -6,7 +6,7 @@ mapListData(
       "listTitle": "ODM Name",
       "listName": "T&I_SH_DT",
       "valu": 4,
-	  "color":"s1",
+	   "color":"s1",
       "geo": [
         120.7,
         29.93
