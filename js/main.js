@@ -10,7 +10,8 @@ require.config({
 		"echarts"			:"echart/echarts-map",
 		'echarts/chart/pie' : 'echart/echarts-map',
 		'echarts/chart/map' : 'echart/echarts-map',  
-		"echartsConfig":"echart/echartsConfig",
+		"echartsConfig"	:"echart/echartsConfig",
+		"chart_map"	:"echart/chart_map",
 		"jay"				:"jay"
 	},
 	shim: {//模块依赖关系
@@ -18,10 +19,11 @@ require.config({
 		'finger'		: {deps: ['jquery']},
 		'swiper'		: {deps: ['jquery']},
 		'onepageScroll'	: {deps: ['jquery',"finger"]},
+		'chart_map'	: {deps: ['echartsConfig']},
 		'jay'  			: {deps: ['jquery','utf','onepageScroll','scalcheight','swiper']}
 	}
 });
-require(['jquery','onepageScroll','finger','echartsConfig','jay'], function($) {
+require(['jquery','onepageScroll','finger','jay'], function($) {
 	$(function() {
 		jayfunction();
 	});

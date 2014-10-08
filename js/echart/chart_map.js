@@ -58,27 +58,9 @@ var option_map = {
             },
             selectedMode: null,
             hoverable: false,
-            roam: true,
+            roam: false,
             data: [{name: '北京', selected: false }, {name: '天津', selected: false }, {name: '上海', selected: false }, {name: '重庆', selected: false }, {name: '河北', selected: false }, {name: '河南', selected: false }, {name: '云南', selected: false }, {name: '辽宁', selected: false }, {name: '黑龙江', selected: false }, {name: '湖南', selected: false }, {name: '安徽', selected: false }, {name: '山东', selected: false }, {name: '新疆', selected: false }, {name: '江苏', selected: false }, {name: '浙江', selected: false }, {name: '江西', selected: false }, {name: '湖北', selected: false }, {name: '广西', selected: false }, {name: '甘肃', selected: false }, {name: '山西', selected: false }, {name: '内蒙古', selected: false }, {name: '陕西', selected: false }, {name: '吉林', selected: false }, {name: '福建', selected: false }, {name: '贵州', selected: false }, {name: '广东', selected: false }, {name: '青海', selected: false }, {name: '西藏', selected: false }, {name: '四川', selected: false }, {name: '宁夏', selected: false }, {name: '海南', selected: false }, {name: '台湾', selected: false }, {name: '香港', selected: false }, {name: '澳门', selected: false }], 
             geoCoord: {
-                "BJ-BJP": [116.46, 39.92],
-                "SH-TNI":[121.40,31.63],
-                "SH-SHP":[122.44,31.19],
-                "SH-Pegatron":[121.35,30.75],
-                "SH-Pegatron2":[122.35,30.15],
-                "SJ-Quanta": [120.50, 32.53],
-                "SJ-Quanta2": [119.25, 32.43],
-                "KS-Compal": [119.45, 31.39],
-                "KS-Compal2": [119.45, 30.19],
-                "KS-Wistron": [120.35,33.52],
-                "HF-LCFC": [117.27, 30.86],
-                "HF-Bitland": [117.34, 32.08],
-                "HF-Bitland2": [117.04, 33.28],
-                "HY-HYP":[115.46,22.85],
-                "CD-Compal": [105.06, 30.67],
-                "CD-Wistron":[106.17,31.75],
-                "CD-CDP":[104.01,30.48],
-                "ZS-Wistron": [113.38, 22.52],
             },
             markPoint: {
                 itemStyle: {
@@ -163,7 +145,7 @@ var option_map = {
             name: 'city_Type1',
             type: 'map',
             mapType: 'china',
-            roam: true,
+            roam: false,
             mapLocation: {
                 x: '5%',
                 y: '5%',
@@ -254,9 +236,7 @@ $(function() {
         lvChart.ecConfig = require('echarts/config');
         getChartData();
     }
-    require(["echartsConfig"], function() {
-        requireEcharts(1, requireCallback);
-    });
+    requireEcharts(1, requireCallback);
 });
 
 var chart_arr = [];
