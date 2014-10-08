@@ -9,9 +9,12 @@ require.config({
 		"finger"			:"jquery.finger",
 		"echarts"			:"echart/echarts-map",
 		'echarts/chart/pie' : 'echart/echarts-map',
+		'echarts/chart/line' : 'echart/echarts-map',
+		'echarts/chart/bar' : 'echart/echarts-map',
 		'echarts/chart/map' : 'echart/echarts-map',  
 		"echartsConfig"	:"echart/echartsConfig",
 		"chart_map"	:"echart/chart_map",
+		"chart_timeLine"	:"echart/chart_timeLine",
 		"jay"				:"jay"
 	},
 	shim: {//模块依赖关系
@@ -20,6 +23,7 @@ require.config({
 		'swiper'		: {deps: ['jquery']},
 		'onepageScroll'	: {deps: ['jquery',"finger"]},
 		'chart_map'	: {deps: ['echartsConfig']},
+		'chart_timeLine'	: {deps: ['echartsConfig']},
 		'jay'  			: {deps: ['jquery','utf','onepageScroll','scalcheight','swiper']}
 	}
 });

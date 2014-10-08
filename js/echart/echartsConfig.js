@@ -1,14 +1,7 @@
-function requireEcharts(needMap, requireCallback) {
-    var pathArr = [
-            'echarts',
-            'echarts/chart/map'
-        ];
-        
-    require(
-        pathArr,
-        requireCallback
-    );
-}
+var lvChart = {
+    echarts:null,
+    ecConfig:null
+};
 
 function MyChart(myEcharts, ecConfig, dom_id, option, flag, initFlag) {
     this.myEcharts = myEcharts;

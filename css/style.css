@@ -609,3 +609,8 @@ Pagination Styles
 	margin-left: 40px;
 	/*background: #000;*/
 }
+
+#chart_timeLine {
+	height: 100%;
+	width: 100%;
+}
