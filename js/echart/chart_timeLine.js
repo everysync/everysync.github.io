@@ -15,6 +15,7 @@ $(function() {
     function drawChart_line(container,mydata){
         var option = {
             timeline:{
+                y2:30,
                 data:['1','2','3','4','5','6', '7','8','9','10','11','12'], 
                 label : {
                     'interval':0,
@@ -42,13 +43,22 @@ $(function() {
             options:[
                 {
                     title : {
-                        'text':'FPY/OOB',
-                        'subtext':''
+                        'text':'FPY/OOB Mass Production',
+                        x:40,
+                        y:20,
+                        textStyle:{
+                            fontSize: 24, 
+                            fontWeight: 'normal',
+                            color: '#fff'
+                        }
                     },
                     tooltip : {'trigger':'axis'},
                     color:['#B7E1EA','#FFF100','#E2F3F6','#E2F3F6'],
                     legend : {
                         x:'right',
+                        y:100,
+                        padding:25,
+                        itemGap:25,
                         textStyle:{color: '#B7E1EA',fontSize:14},
                         'data':mydata.legend
                     },
@@ -67,8 +77,10 @@ $(function() {
                     },
                     calculable : false,
                     grid : {
-                        'y':80,
-                        'y2':100,
+                        'x':70,
+                        'y':150,
+                        'x2':70,
+                        'y2':130,
                         borderWidth:0
                     },
                     xAxis : [{

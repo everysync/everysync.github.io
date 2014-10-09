@@ -11,10 +11,12 @@ require.config({
 		'echarts/chart/pie' : 'echart/echarts-map',
 		'echarts/chart/line' : 'echart/echarts-map',
 		'echarts/chart/bar' : 'echart/echarts-map',
-		'echarts/chart/map' : 'echart/echarts-map',  
+		'echarts/chart/map' : 'echart/echarts-map',
+		'echarts/chart/gauge' : 'echart/echarts-map',  
 		"echartsConfig"	:"echart/echartsConfig",
 		"chart_map"	:"echart/chart_map",
 		"chart_timeLine"	:"echart/chart_timeLine",
+		"chart_gauge"	:"echart/chart_gauge",
 		"jay"				:"jay"
 	},
 	shim: {//模块依赖关系
@@ -24,6 +26,7 @@ require.config({
 		'onepageScroll'	: {deps: ['jquery',"finger"]},
 		'chart_map'	: {deps: ['echartsConfig']},
 		'chart_timeLine'	: {deps: ['echartsConfig']},
+		'chart_gauge'	: {deps: ['echartsConfig']},
 		'jay'  			: {deps: ['jquery','utf','onepageScroll','scalcheight','swiper']}
 	}
 });

@@ -228,6 +228,7 @@ function page_1fn() {
 		//place your code here, the scripts are all loaded
 		require(["chart_map"]);
 		require(["chart_timeLine"]);
+		require(["chart_gauge"]);
 	});
 }
 
