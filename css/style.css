@@ -173,6 +173,11 @@ Pagination Styles
 	height: 100%;
 	width: 100%;
 }
+.container {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
 .app_header {
 	z-index: 10;
 	height: 80px;
@@ -203,8 +208,14 @@ Pagination Styles
 	overflow: hidden;
 	height: auto;
 	padding: 32px 0;
+	padding-right: 32px;
+	position: absolute;
+	right: 0;
+	top: 80px;
+	z-index: 1;
 }
 .mapSideBot {
+	margin-top: 124px;
 	/*如果有生之年能看到这个样式被其它浏览器支持，请Mail告诉我*/
 	mask-image:url(../images/bitmap/mapsidemask.png);
 	mask-size:100% 100%;
@@ -253,24 +264,82 @@ Pagination Styles
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	position: absolute;
 }
-
+.eachBlck.switch_1 .page_swicher_wrap,
+.eachBlck.switch_1 .first_page_swicher_wrap{
+	transition: transform .5s cubic-bezier(0, .84, .13, .96);
+	transform: translateX(0);
+}
+.eachBlck.switch_2 .page_swicher_wrap,
+.eachBlck.switch_2 .first_page_swicher_wrap{
+	transition: transform .5s cubic-bezier(0, .84, .13, .96);
+	transform: translateX(-100%) translateZ(0);
+}
+.eachBlockTitle {
+	position: absolute;
+	z-index: 1;
+	top: 80px;
+	line-height: 56px;
+	height: 56px;
+	left: 72px;
+	color: #fff;
+	font-size: 25px;
+	font-weight: 500;
+}
+.page_swicher_wrap,
+.first_page_swicher_wrap {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+.page_swicher_1,
+.first_page_swicher_1 {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left: 0;
+}
+.page_swicher_2,
+.first_page_swicher_2 {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left: 100%;
+}
 .demopagec-1 {
+	top: 0;
 	background-image: -moz-linear-gradient( 60deg, rgb(39,51,62) 0%, rgb(83,133,149) 100%);
 	background-image: -webkit-linear-gradient( 60deg, rgb(39,51,62) 0%, rgb(83,133,149) 100%);
 	background-image: -ms-linear-gradient( 60deg, rgb(39,51,62) 0%, rgb(83,133,149) 100%);
 }
 .demopagec-2 {
-	background-image: -moz-linear-gradient( 60deg, #0d95b7 0%, #00d0bf 100%);
-	background-image: -webkit-linear-gradient( 60deg, #0d95b7 0%, #00d0bf 100%);
-	background-image: -ms-linear-gradient( 60deg, #0d95b7 0%, #00d0bf 100%);
+	top: 100%;
+	-webkit-transition: background-image 10s linear;
+	transition: background-image 10s linear;
+	background-image: -webkit-linear-gradient(30deg, #0d95b7, #00d0bf);
+	background-image: linear-gradient(60deg, #0d95b7, #00d0bf);
 }
+
+.demopagec-2.switch_2 {
+	-webkit-transition: background-image 10s linear;
+	transition: background-image 10s linear;
+	background-image: -webkit-linear-gradient(30deg, #0d7db7, #00c6d0);
+	background-image: linear-gradient(60deg, #0d7db7, #00c6d0);
+}
+
 .demopagec-3 {
+	top: 200%;
 	background-image: -moz-linear-gradient( 60deg, #2d2f44 0%, #6e73b0 100%);
 	background-image: -webkit-linear-gradient( 60deg, #2d2f44 0%, #6e73b0 100%);
 	background-image: -ms-linear-gradient( 60deg, #2d2f44 0%, #6e73b0 100%);
 }
 .demopagec-4 {
+	top: 300%;
 	background-image: -moz-linear-gradient( 60deg, #3b2f24 0%, #937251 100%);
 	background-image: -webkit-linear-gradient( 60deg, #3b2f24 0%, #937251 100%);
 	background-image: -ms-linear-gradient( 60deg, #3b2f24 0%, #937251 100%);
@@ -610,19 +679,42 @@ Pagination Styles
 	/*background: #000;*/
 }
 
-#chart_timeLine {
+#chart_home_bar {
+	height: 100%;
+	width:100%;
+}
+
+#chart_fpy_timeLine {
 	height: 100%;
 	width: 100%;
 }
 
-#chart_gauge_1 {
+#chart_audit_gauge {
 	height: 50%;
 	width: 50%;
 }
 
-#chart_gauge_2 {
+#chart_audit_bar {
 	height: 50%;
 	width: 100%;
+}
+
+.topChartContainer{
+	padding:56px 0 0 50px;
+	height:40%;
+}
+
+#chart_fai_pie{
+	border: 1px #917D69 solid;
+	width: 38%;
+	height: 100%;
+	float: left;
+}
+
+#chart_fai_bar{
+	height: 100%;
+	width: 58%;
+	float: right;
 }
 
 .demoSideTop{

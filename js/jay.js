@@ -62,10 +62,10 @@ function pagescroll(obj,content,options) {
 		},
 		beforeMove:function(a) {
 			$(document).trigger("pageout_"+a);
-			$obj.addClass("hardware-acceleration");
+			//$obj.addClass("hardware-acceleration");
 		},
     	afterMove: function(a) {
-			$obj.removeClass("hardware-acceleration");
+			//$obj.removeClass("hardware-acceleration");
 			$(document).trigger("pagein_"+a);
 		}
 	};
@@ -144,10 +144,10 @@ function page_1fn() {
 		e.stopPropagation();
 		return false;
 	});
-	
-	var $mslistwrap = $(".mslist");
-	var liTempWrap = $("<div>").attr("id","wpt");
-	var liTemplate = 
+	var page_1_content = $(".demopagec-1");
+	var $mslistwrap    = $(".mslist");
+	var liTempWrap     = $("<div>").attr("id","wpt");
+	var liTemplate     = 
 			'<div class="mapDataDetail">'+
 			'	<h2 class="mdh2">'+
 			'		<span class="mdh2_1">标题:</span>'+
@@ -187,8 +187,8 @@ function page_1fn() {
 		$mslistwrap.html( liTempWrap.html() )
 		
 		//init swiper
-		
-		var page_1_swiper = $(".mapSideBot").swiper({
+		var $swiperTarget = $(".mapSideBot");
+		var page_1_swiper = $swiperTarget.swiper({
 			mode:'vertical',
 			initialSlide:1,
 			slidesPerView:'auto',
@@ -206,32 +206,109 @@ function page_1fn() {
 					.removeClass("swiper-slide-click-active");
 			}
 		});
-		
+		$swiperTarget.on("transitionend.swiper webkitTransitionEnd.swiper oTransitionEnd.swiper", function(e) {
+			e.stopPropagation();
+		});
 		//clean
-		$mslistwrap ="";
-		liTempWrap ="";
-		liTemplate ="";
-		MapArry ="";
+		$mslistwrap   ="";
+		liTempWrap    ="";
+		liTemplate    ="";
+		MapArry       ="";
 		MapArrylength ="";
-		$a ="";
+		$a            ="";
 		
 	}).error(function(a){
 		window.console?console.log("Fail to load data!"):'';
 		//do something
 	}).always(function(data) {
 	});	
-	$.when(
-		$.Deferred(function( deferred ){
-			$( deferred.resolve );
-		})
-	).done(function(){
-		//place your code here, the scripts are all loaded
-		require(["chart_map"]);
-		require(["chart_timeLine"]);
-		require(["chart_gauge"]);
+	
+	//place your code here, the scripts are all loaded
+	require(["chart_map"],function(LvMap){
+		console.log(LvMap);
+		var myMap = new LvMap('mapWrap');
+		//map.getChartData();
 	});
+	require(["chart_home"]);
+	require(["chart_timeLine"]);
+	require(["chart_gauge"]);
+	require(["chart_fai"]);
+	//Switching
+	var $p1c_innerWrap = $(".first_page_swicher_wrap");
+	/*page_1_content.on("tap",".mapswipebtn",function() {
+		var $this = $(this);
+		$this.addClass("cur").siblings().removeClass("cur");
+		page_1_content.trigger("Switch_" + $this.index() );
+	}).on("Switch_0", function() {
+		page_1_content.addClass("switch_1").removeClass("switch_2");
+		$p1c_innerWrap.one("transitionend.switch webkitTransitionEnd.switch oTransitionEnd.switch", function(e) {
+			e.stopPropagation();
+			page_1_content.trigger("Switch_0_ani_end");
+		});
+	}).on("Switch_1", function() {
+		page_1_content.addClass("switch_2").removeClass("switch_1");
+		$p1c_innerWrap.one("transitionend.switch webkitTransitionEnd.switch oTransitionEnd.switch", function(e) {
+			e.stopPropagation();
+			page_1_content.trigger("Switch_1_ani_end");
+		});
+	});*/
+	//testing
+	page_1_content.on({
+		'Switch_0_ani_end':function() {
+		 //alert("0 end")
+		},
+		'Switch_1_ani_end':function() { 
+			//alert("1 end")
+		}
+	})
+	
+	
 }
 
+//TO:SWITCH
+function eachblock_Switcher(obj,options) {
+	var opts = $.extend({
+		switchClass:["switch_1","switch_2"],
+		switchWrapper:".page_swicher_wrap",
+		switchBtn:".mapswipebtn",
+		switchBtnCurMark:"cur"
+	},options);
+	var $objs = $(obj);
+	if ($objs.length) {
+		$objs.each(function(i,el) {
+			var $el          = $(el);
+			var $switchBtn   = $el.find(opts.switchBtn);
+			var $switchWrap  = $el.find(opts.switchWrapper);
+			var cacheIndex   = "";
+			$el.on("tap", opts.switchBtn, function() {
+				var $this = $(this);
+				cacheIndex = $this.index()
+				//console.log(cacheIndex)
+				$this.addClass("cur").siblings().removeClass("cur");
+				$el.trigger("Switch_" + cacheIndex );
+			}).on({
+				'Switch_0':function() {
+					var class_1 = opts.switchClass[cacheIndex];
+					var class_2 = opts.switchClass[(cacheIndex+1)];
+					$el.addClass(class_1).removeClass(class_2);
+					$switchWrap.one("transitionend.switch webkitTransitionEnd.switch oTransitionEnd.switch", function(e) {
+						e.stopPropagation();
+						$el.trigger("Switch_"+cacheIndex+"_ani_end");
+					});
+				},
+				'Switch_1':function() {
+					var class_1 = opts.switchClass[cacheIndex];
+					var class_2 = opts.switchClass[(cacheIndex-1)];
+					$el.addClass(class_1).removeClass(class_2);
+					$switchWrap.one("transitionend.switch webkitTransitionEnd.switch oTransitionEnd.switch", function(e) {
+						e.stopPropagation();
+						$el.trigger("Switch_"+cacheIndex+"_ani_end");
+					});
+				}
+			});
+		});	
+	}
+}
 
 
 
@@ -239,19 +316,21 @@ function page_1fn() {
 
 //INIT FUNCTIONS
 function jayfunction() {
-	$win=$(window);
-	$doc=$(document);
+	$win =$(window);
+	$doc =$(document);
 	$body=$("body");
 	$html=$("html");
 	//Building_layouts
 	buildLayout();
+	//SWITCH
+	eachblock_Switcher(".eachBlck");
 	//AJAX_DATA
 	//ajaxLoadData("http://127.0.0.1/jsonpcallback/jsonpcallback.js", "mydata");
-	//console.log(listdata)
 	//PAGESCROLL
 	pagescroll(".container",".eachBlck");
 	//SIDEBAR_ACTION
 	sidebaract("#sidebar");
 	//PAGE_1FN
 	page_1fn();
+	
 }

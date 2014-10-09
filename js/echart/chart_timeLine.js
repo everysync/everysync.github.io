@@ -43,7 +43,7 @@ $(function() {
             options:[
                 {
                     title : {
-                        'text':'FPY/OOB Mass Production',
+                        'text':'',
                         x:40,
                         y:20,
                         textStyle:{
@@ -204,7 +204,7 @@ $(function() {
             mydata1.series_bar_1.data.push(newBarArr);
             mydata1.series_line_1.data.push(newLineArr);
         };
-        var myChart1 = drawChart_line('chart_timeLine',mydata1);
+        var myChart1 = drawChart_line('chart_fpy_timeLine',mydata1);
         myChart1.loadingData();
     }
 });

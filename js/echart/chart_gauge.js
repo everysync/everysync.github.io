@@ -18,7 +18,7 @@ $(function() {
                 formatter: "{a} <br/>{b} : {c}"
             },
             title : {
-                'text':'AUDIT',
+                'text':'',
                 x:40,
                 y:20,
                 textStyle:{
@@ -239,14 +239,14 @@ $(function() {
           axisLineData:[20,30,40,50,60,70,80],
           data:[{value: 58, name: '仪表盘'}]
         };
-        var myChart1 = drawChart_gauge('chart_gauge_1',mydata1);
+        var myChart1 = drawChart_gauge('chart_audit_gauge',mydata1);
         myChart1.loadingData();
 
         var mydata2 = {
             series_bar_1:[320, 302, 341, 374, 390, 450],
             series_bar_2:[120, 132, 101, 134, 190, 230]
         };
-        var myChart2 = drawChart_bar('chart_gauge_2',mydata2);
+        var myChart2 = drawChart_bar('chart_audit_bar',mydata2);
         myChart2.loadingData();
     }
 });                
