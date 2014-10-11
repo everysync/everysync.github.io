@@ -23,31 +23,27 @@ define(function(){
 		chartObj['fpyOob_mass'].push(line);
 	});
 	require(["chart_fpyoob_ramp"],function(LvFpyOobRamp){//FPY/OOB Ramp
-		var line1 = new LvFpyOobRamp('chart_fpy_Line1'),
-				line2 = new LvFpyOobRamp('chart_fpy_Line2')
-				line3 = new LvFpyOobRamp('chart_fpy_Line3');
-		line1.getChartDataLine1();
-		line2.getChartDataLine2();
-		line3.getChartDataLine3();
+		var line1 = new LvFpyOobRamp('chart_fpy_Line1','line1'),
+				line2 = new LvFpyOobRamp('chart_fpy_Line2','line2')
+				line3 = new LvFpyOobRamp('chart_fpy_Line3','line3');
 		chartObj['fpyOob_ramp'].push(line1, line2, line3);
 		chartObj['p2'] = chartObj['fpyOob_ramp'];
 	});
 	require(["chart_audit"],function(LvAudit){ //AUDIT
 		var gauge = new LvAudit('chart_audit_gauge','gauge'),
 				bar = new LvAudit('chart_audit_bar','bar');
-		gauge.getChartDataGauge();
-		bar.getChartDataBar();
 		chartObj['p3'].push(gauge, bar);
 	});
 	require(["chart_fai"],function(LvFai){//FAI
 		var pie = new LvFai('chart_fai_pie','pie'),
 				bar = new LvFai('chart_fai_bar','bar');
-		pie.getChartDataPie();
-		bar.getChartDataBar();
 		chartObj['p4'].push(pie, bar);
 	});
 	function disposeChart(index){//清除chart实例，减小内存使用
 		$.each(chartObj['p'+index],function(k,v){
+			// var img = new Image();
+   //    img.src = v.chart.getDataURL();
+   //    $("#"+v.dom_id).html(img);
 			v.chart.dispose();
 		});
 	}

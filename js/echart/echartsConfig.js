@@ -26,8 +26,16 @@ MyChart.prototype.init = function () {
 }
 
 MyChart.prototype.resetOption = function () {
+    if(!this.loadStatus){
+        this.getChartData(1);
+    }
     this.chart = this.myEcharts.init(document.getElementById(this.dom_id));
     this.chart.setOption(this.option);
+    this.bindEvents();
+}
+
+MyChart.prototype.bindEvents = function () {//绑定相关事件
+    
 }
 
 MyChart.prototype.eConsole = function (param) {

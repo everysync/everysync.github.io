@@ -6,8 +6,8 @@ define(['echarts','echarts/chart/pie','echarts/chart/bar'],
         };
         function LvFai(container,chartType){
             MyChart.call(this, lvChart.echarts, lvChart.ecConfig, container, {}, 0, 0);
-            // this.chartType = chartType;
-            // this.getChartData();
+            this.chartType = chartType;
+            this.getChartData(0);
         }
         iheritPrototype(LvFai, MyChart);
         LvFai.prototype._setOptionPie = function(mydata){
@@ -60,7 +60,7 @@ define(['echarts','echarts/chart/pie','echarts/chart/bar'],
                 }
             }
             this.option = option;
-            loadStatus = true;
+            this.loadStatus = true;
             return option;
         };
         LvFai.prototype._setOptionBar = function(mydata){
@@ -220,10 +220,19 @@ define(['echarts','echarts/chart/pie','echarts/chart/bar'],
             }
             option.series[2].data = data_bar3;
             this.option = option;
-            loadStatus = true;
+            this.loadStatus = true;
             return option;
         };
-        LvFai.prototype.getChartDataPie = function(){
+        LvFai.prototype.getChartData = function(drawFlag){
+            switch(this.chartType){
+                case "pie":
+                    this.getChartDataPie(drawFlag);break;
+                case "bar":
+                    this.getChartDataBar(drawFlag);break;
+                default:break;
+            }
+        };
+        LvFai.prototype.getChartDataPie = function(drawFlag){
             var self = this;
             //饼图数据
             var mydata = {
@@ -235,8 +244,9 @@ define(['echarts','echarts/chart/pie','echarts/chart/bar'],
                 ]
             };
             self._setOptionPie(mydata);
+            drawFlag&&self.resetOption();
         };
-        LvFai.prototype.getChartDataBar = function(){
+        LvFai.prototype.getChartDataBar = function(drawFlag){
             var self = this;
             var axisData,
                 data_bar1 = [],
@@ -253,6 +263,7 @@ define(['echarts','echarts/chart/pie','echarts/chart/bar'],
                 series_bar_2:data_bar2
             };
             self._setOptionBar(mydata);
+            drawFlag&&self.resetOption();
         };
         return LvFai;
     }

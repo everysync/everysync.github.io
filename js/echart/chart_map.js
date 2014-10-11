@@ -9,28 +9,39 @@ define(['echarts','echarts/chart/map'],
             this.getChartData(1);
         }
         iheritPrototype(LvMap, MyChart);
+        LvMap.prototype.tipCallback = function(){
+            console.log(444);
+        }
         LvMap.prototype._setOption = function(mydata){
+            var self = this;
             var option = {
+                animation:true,
+                animationDuration:600,
+                backgroundColor:"rgba(0,0,0,0)",
                 tooltip : {
                     trigger: 'item',
-                    backgroundColor:'rgba(0,0,0,0)',
-                    showDelay:'200',
+                    backgroundColor:'#00FFB7',
+                    borderRadius: 3,
+                    textStyle:{ color:'#007F59' },
+                    //backgroundColor:"rgba(0,0,0,0)",
+                    showDelay:'300',
                     position : function(p) {
                         // 位置回调
                         //console.log && console.log(p);
-                        $("#tip_l").animate({'top':p[1]+'px','left':p[0]-50+'px'}, 200);
+                        //$(".map_tips").animate({'top':p[1]-20+'px','left':p[0]-50+'px'}, 200);
                         //$("#tip_l").css({'top':p[1]+'px','left':p[0]-50+'px'});
-                        return [p[0]-20, p[1]];
+                        return [p[0]-50, p[1]-20];
                     },
                     //{Function}，传递参数列表如下：
                     //<Array> params : 数组内容同模板变量，[[a, b, c, d], [a1, b1, c1, d1], ...]
                     //<String> ticket : 异步回调标识
                     //<Function> callback : 异步回调，回调时需要两个参数，第一个为前面提到的ticket，第二个为填充内容html
                     formatter:function(params,ticket,callback){
-                        console.log(params[5].name+','+params[5].value);
-                        $("#tip_l").html(params[5].name+':'+params[5].value);
+                        //console.log(callback);
+                        //$(".map_tips").html(params[5].name+':'+params[5].value);
                         var result = params[1][1]+'<br[5]>';
-                        return '';
+                        self.tipCallback();
+                        return ticket;
                     }
                 },
                 // roamController: {
@@ -45,7 +56,7 @@ define(['echarts','echarts/chart/map'],
                         tooltip : {
                             show:false
                         },
-                        name: 'Top5',
+                        name: 'Top',
                         type: 'map',
                         mapType: 'china',
                         itemStyle:{
@@ -116,7 +127,7 @@ define(['echarts','echarts/chart/map'],
                         }
                     }, {
                         hoverable: false,
-                        name: 'city_Type1',
+                        name: 'city',
                         type: 'map',
                         mapType: 'china',
                         roam: false,
@@ -170,24 +181,20 @@ define(['echarts','echarts/chart/map'],
                 geoCoord[v['listName']] = v['geo'];
                 dataMark.push({name: v['listName'], value: v['valu'], itemStyle: itemStyle[v.color]});
             }
-            option.series[1].geoCoord = geoCoord;
+            option.series[0].geoCoord = geoCoord;
             option.series[1].markPoint.data = dataMark;
             this.option = option;
             this.loadStatus = true;
             return option;
         };
-        LvMap.prototype.resetOption = function () {
-            if(!this.loadStatus){
-                this.getChartData(1);
-            }
-            this.chart = this.myEcharts.init(document.getElementById(this.dom_id));
-            this.chart.setOption(this.option);
+        LvMap.prototype.bindEvents = function () {
             this.chart.on(lvChart.ecConfig.EVENT.CLICK, function(param){
                 if(param.seriesIndex > 0){
                     alert(param.name);
                 }
             });
-            this.chart.component.tooltip.showTip({seriesIndex: "1", seriesName:'city_Type1', name:'Wistron_CD_NB'});
+            console.log(this.chart);
+            this.chart.component.tooltip.showTip({seriesIndex: "1", seriesName:'city', name:'Wistron_CD_NB'});
         };
         LvMap.prototype.getChartData = function(drawFlag){
             var self = this;
@@ -201,6 +208,7 @@ define(['echarts','echarts/chart/map'],
                 drawFlag&&self.resetOption();
             });
         };
+
         return LvMap;
     }
 );

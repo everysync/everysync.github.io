@@ -6,8 +6,8 @@ define(['echarts','echarts/chart/gauge','echarts/chart/bar'],
         };
         function LvAudit(container,chartType){
             MyChart.call(this, lvChart.echarts, lvChart.ecConfig, container, {}, 0, 0);
-            // this.chartType = chartType;
-            // this.getChartData();
+            this.chartType = chartType;
+            this.getChartData(0);
         }
         iheritPrototype(LvAudit, MyChart);
         LvAudit.prototype._setOptionGauge = function(mydata){
@@ -133,7 +133,7 @@ define(['echarts','echarts/chart/gauge','echarts/chart/bar'],
             };
             option.series[0]['axisLine']['lineStyle']['color'] = mycolor; 
             this.option = option;
-            loadStatus = true;
+            this.loadStatus = true;
             return option;
         };
         LvAudit.prototype._setOptionBar = function(mydata){
@@ -228,24 +228,35 @@ define(['echarts','echarts/chart/gauge','echarts/chart/bar'],
             };
             option.series[1].data = mydata.series_bar_2; 
             this.option = option;
-            loadStatus = true;
+            this.loadStatus = true;
             return option;
         };
-        LvAudit.prototype.getChartDataGauge = function(){
+        LvAudit.prototype.getChartData = function(drawFlag){
+            switch(this.chartType){
+                case "gauge":
+                    this.getChartDataGauge(drawFlag);break;
+                case "bar":
+                    this.getChartDataBar(drawFlag);break;
+                default:break;
+            }
+        };
+        LvAudit.prototype.getChartDataGauge = function(drawFlag){
             var self = this;
             var mydata = {
               axisLineData:[20,30,40,50,60,70,80],
               data:[{value: 58, name: '仪表盘'}]
             };
             self._setOptionGauge(mydata);
+            drawFlag&&self.resetOption();
         };
-        LvAudit.prototype.getChartDataBar = function(){
+        LvAudit.prototype.getChartDataBar = function(drawFlag){
             var self = this;
             var mydata = {
                 series_bar_1:[320, 302, 341, 374, 390, 450],
                 series_bar_2:[120, 132, 101, 134, 190, 230]
             };
             self._setOptionBar(mydata);
+            drawFlag&&self.resetOption();
         };
         return LvAudit;
     }

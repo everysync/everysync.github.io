@@ -6,8 +6,8 @@ define(['echarts','echarts/chart/line'],
         };
         function LvFpyOobRamp(container,chartType){
             MyChart.call(this, lvChart.echarts, lvChart.ecConfig, container, {}, 0, 0);
-            // this.chartType = chartType;
-            // this.getChartData();
+            this.chartType = chartType;
+            this.getChartData(0);
         }
         iheritPrototype(LvFpyOobRamp, MyChart);
         LvFpyOobRamp.prototype._setOptionLine1 = function(mydata){
@@ -100,7 +100,7 @@ define(['echarts','echarts/chart/line'],
                 ]
             };    
             this.option = option;
-            loadStatus = true;
+            this.loadStatus = true;
             return option;
         };
         LvFpyOobRamp.prototype._setOptionLine2 = function(mydata){
@@ -193,7 +193,7 @@ define(['echarts','echarts/chart/line'],
                 ]
             };  
             this.option = option;
-            loadStatus = true;
+            this.loadStatus = true;
             return option;
         };
         LvFpyOobRamp.prototype._setOptionLine3 = function(mydata){
@@ -286,32 +286,46 @@ define(['echarts','echarts/chart/line'],
                 ]
             };  
             this.option = option;
-            loadStatus = true;
+            this.loadStatus = true;
             return option;
         };
-        LvFpyOobRamp.prototype.getChartDataLine1 = function(){
+        LvFpyOobRamp.prototype.getChartData = function(drawFlag){
+            switch(this.chartType){
+                case "line1":
+                    this.getChartDataLine1(drawFlag);break;
+                case "line2":
+                    this.getChartDataLine2(drawFlag);break;
+                case "line3":
+                    this.getChartDataLine3(drawFlag);break;
+                default:break;
+            }
+        };
+        LvFpyOobRamp.prototype.getChartDataLine1 = function(drawFlag){
             var self = this;
             var mydata = {
               axisLineData:[20,30,40,50,60,70,80],
               data:[{value: 58, name: '仪表盘'}]
             };
             self._setOptionLine1(mydata);
+            drawFlag&&self.resetOption();
         };
-        LvFpyOobRamp.prototype.getChartDataLine2 = function(){
+        LvFpyOobRamp.prototype.getChartDataLine2 = function(drawFlag){
             var self = this;
             var mydata = {
               axisLineData:[20,30,40,50,60,70,80],
               data:[{value: 58, name: '仪表盘'}]
             };
             self._setOptionLine2(mydata);
+            drawFlag&&self.resetOption();
         };
-        LvFpyOobRamp.prototype.getChartDataLine3 = function(){
+        LvFpyOobRamp.prototype.getChartDataLine3 = function(drawFlag){
             var self = this;
             var mydata = {
               axisLineData:[20,30,40,50,60,70,80],
               data:[{value: 58, name: '仪表盘'}]
             };
             self._setOptionLine3(mydata);
+            drawFlag&&self.resetOption();
         };
         return LvFpyOobRamp;
     }

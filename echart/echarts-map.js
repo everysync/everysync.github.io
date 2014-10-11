@@ -20935,6 +20935,7 @@ define('echarts/component/tooltip',['require','./base','../util/shape/Cross','zr
                 }
             }
             else {
+                
                 // item trigger
                 var shapeList = chart.shapeList;
                 var x;

@@ -6,13 +6,14 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
         };
         function LvHome(container){
             MyChart.call(this, lvChart.echarts, lvChart.ecConfig, container, {}, 0, 0);
-            this.getChartData();
+            this.getChartData(0);
         }
         iheritPrototype(LvHome, MyChart);
         LvHome.prototype._setOptionDataZoom = function(mydata){
             var option = {
                 animation:true,
                 animationDuration:600,
+                backgroundColor:"rgba(0,0,0,0)",
                 color: ['#FF9080','#00BFB7', '#FFBB59', '#FFF100'],
                 title : {
                     text: '',
@@ -135,10 +136,10 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
             option.series[3].name = mydata.series_line_1.name;
             option.series[3].data = mydata.series_line_1.data;    
             this.option = option;
-            loadStatus = true;
+            this.loadStatus = true;
             return option;
         };
-        LvHome.prototype.getChartData = function(){
+        LvHome.prototype.getChartData = function(drawFlag){
             var self = this;
             var mydata =  {
                 legend:['Open', 'Monitor', 'Close','IRCT'],
@@ -157,6 +158,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                 target_value:8
             };
             self._setOptionDataZoom(mydata);
+            drawFlag&&self.resetOption();
         };
         return LvHome;
     }

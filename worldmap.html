@@ -11,40 +11,132 @@
 	<meta name="format-detection" content="telephone=no">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="mobile-web-app-capable" content="yes"> 
+	<script src="js/jquery-2.1.1.min.js"></script>
+	<script src="js/jquery.finger.js"></script>
 	<style type="text/css">
 		html,body {
 			background-image: -moz-linear-gradient( 60deg, #3b2f24 0%, #937251 100%);
 			background-image: -webkit-linear-gradient( 60deg, #3b2f24 0%, #937251 100%);
 			background-image: -ms-linear-gradient( 60deg, #3b2f24 0%, #937251 100%);
 		}
-		.st0{fill:#EFE3D7;stroke:rgba(0,0,0,0.4);stroke-width:2;stroke-miterlimit:10;}
+		.st1,
+		.st2,
+		.st3,
+		.st4,
+		.st5{
+			cursor: pointer;
+		}
+		
+		.st0{
+			fill:#EFE3D7;
+			stroke:rgba(0,0,0,0.4);
+			stroke-width:2;
+			stroke-miterlimit:1; 
+			stroke-linecap:round;
+		}
 		.st1{fill-rule:evenodd;clip-rule:evenodd;fill:#BEA893;}
 		.st2{fill:#B5987F;}
 		.st3{fill:#CCB59F;}
 		.st4{fill:#AB9681;}
 		.st5{fill:#D4BEA9;}
+		
+		.tts {
+			font-weight: bold;
+			font-size:18px;
+			opacity:0.75;
+			fill:#FFFFFF;
+			cursor: pointer;
+			font-family: "Helvetica Neue",\5FAE\8F6F\96C5\9ED1,Tohoma;
+		}
+		
+		#WORLD {filter:url(#f3);}
+		#MAP:hover .st3,
+		#EAP:hover .st2,
+		#AG:hover .st4,
+		#EMEA:hover .st5,
+		#PRC:hover .st1 {
+			stroke:rgba(255,255,255,1);
+			stroke-width:1;
+			stroke-miterlimit:1; 
+			stroke-linecap:round;
+			filter:url(#f4);
+		}
+		
+		.MAP:hover   .st3,
+		.EAP:hover   .st2,
+		.AG:hover    .st4 {fill:url(#radialGradient_1);}
+		.EMEA:hover  .st5 {fill:url(#radialGradient_2);}
+		.PRC:hover   .st1 {fill:url(#radialGradient_2);}
 	</style>
+	<script>
+	$(function() {
+		
+		function tap_act($tar,obj) {
+			$tar.on("tap",obj,function(e) {
+				e.stopPropagation();
+				var newClassName = $(obj).attr("id");
+				$tar.attr("class",newClassName).trigger(newClassName);
+			})
+		}
+		
+		var $maptar = $("#worldmapsvg");
+		tap_act($maptar, "#AG");
+		tap_act($maptar, "#EMEA");
+		tap_act($maptar, "#PRC");
+		tap_act($maptar, "#EAP");
+		tap_act($maptar, "#MAP");
+		
+		$maptar.on({
+			"AG":function() { console.log(1)},
+			"EMEA":function() {console.log(2)},
+			"PRC":function() {console.log(3)},
+			"EAP":function() {console.log(4)},
+			"MAP":function() {console.log(5)}
+		})
+	});
+	</script>
 </head>
 <body>
 	<div id="svgwrap">
-		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+		<svg id="worldmapsvg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 			 viewBox="0 0 1015.6 501.1" style="enable-background:new 0 0 1015.6 501.1;" xml:space="preserve">
 		<defs>
-		 <filter id="f3" x="0" y="0" width="100%" height="100%">
-		   <feOffset result="offOut" in="SourceAlpha" dx="0" dy="3" />		   
-		   <feColorMatrix in="offOut" result="color-out" type="matrix"
-			values="0 0 0 0   0
-					0 0 0 0   0 
-					0 0 0 0   0 
-					0 0 0 0.2 0"/>
-			<feGaussianBlur result="blurOut" in="color-out" stdDeviation="0" />
-		   <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
-		 </filter>
+			<filter id="f3" x="0" y="0" width="100%" height="100%">
+				<feOffset result="offOut" in="SourceAlpha" dx="0" dy="3" />		   
+				<feColorMatrix in="offOut" result="color-out" 
+					type="matrix"
+					values="0 0 0 0   0
+							0 0 0 0   0 
+							0 0 0 0   0 
+							0 0 0 0.2 0"
+				/>
+				<feGaussianBlur result="blurOut" in="color-out" stdDeviation="0" />
+				<feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+			</filter>
+			<filter id="f4" x="0" y="0" width="100%" height="100%">
+			<feOffset result="offOut" in="SourceAlpha" dx="2" dy="2" />		   
+				<feColorMatrix in="offOut" result="color-out" type="matrix"
+				values="0 0 0 0   0
+						0 0 0 0   0 
+						0 0 0 0   0 
+						0 0 0 0.6 0"
+				/>
+				<feGaussianBlur result="blurOut" in="color-out" stdDeviation="0" />
+				<feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+			</filter>
+		 
+			<radialGradient id="radialGradient_1" cx="286" cy="313" r="300.1216" gradientUnits="userSpaceOnUse">
+				<stop  offset="0" style="stop-color:#FFC389"/>
+				<stop  offset="1" style="stop-color:#B56110"/>
+			</radialGradient>
+			<radialGradient id="radialGradient_2" cx="974" cy="210" r="364.9274" gradientUnits="userSpaceOnUse">
+				<stop  offset="0" style="stop-color:#FFC389"/>
+				<stop  offset="1" style="stop-color:#B56110"/>
+			</radialGradient>
 		</defs>
 		   
-		   
 		<g id="WORLD">
-			<path class="st0" filter="url(#f3)" d="M795.4,348.4c0.1-0.1,4.4,1,3.7-0.5c-0.5-1-8.6-2.3-8.5-2.4c0.2-0.2,3.8-1.7,3.4-1.9c-1.9-1-5.6,0.7-8.1-0.3
+			<path class="st0" d="M795.4,348.4c0.1-0.1,4.4,1,3.7-0.5c-0.5-1-8.6-2.3-8.5-2.4c0.2-0.2,3.8-1.7,3.4-1.9c-1.9-1-5.6,0.7-8.1-0.3
 				c-1.3-0.5-2.2,0.6-3.9,0.1c-4.4-1.2-7.1-4-11.3-0.8c-0.7,0.5,2.5,1.6,2.9,2.3c1.1,1.9,4.9,0.7,6.4,0.6c2.8-0.1,4.7,2.2,7.3,2.7
 				C788.4,348.3,795,349,795.4,348.4C796,347.5,794.8,349.2,795.4,348.4z M771.8,336.4c-0.1-1.4,2.4-5.1,1.7-5.3
 				c-0.7-0.2-1.8-3.7-3.2-1.9c-0.8,1,2.2,0.9,1.7,2.3c-0.6,1.3-5.7-4.5-6-4.5c0,0-2-3.9-2-4.6c0-0.5-2.6-2.2-2.9-2.7
@@ -594,6 +686,7 @@
 					c0.3-0.2,0.4-0.7,0.7-1.2c0.4-0.6,1-1.3,1.3-1.8c1-1.7,2.6-3.5,2.8-5.3c0.2-1.1-0.3-2.3-1.2-2.4
 					C850.5,175.1,846.4,177.2,845.7,177.3z"/>
 			</g>
+			<text id="PRCtext" class="tts" x="748" y="225">PRC</text>
 		</g>
 		<g id="EAP">
 			<g>
@@ -672,6 +765,7 @@
 				<path class="st2" d="M828,348c-1.2-0.1-1.8,1.1-2.7,1.7c0.9,0.7,6.1,0.1,6.8-1.8C832.3,347.6,828.3,348,828,348
 					C826.9,347.9,829.7,348.1,828,348z"/>
 			</g>
+			<text id="EAPtext" class="tts" y="275" x="678">EAP</text>
 		</g>
 		<g id="MAP">
 			<g>
@@ -717,6 +811,7 @@
 					c-1.7,3.5,3.5,2.2,4.8,1.6c2-1.1,5.4-2,4.7-4c-0.8-2.4-0.2-3.9-1.9-6.1C836.2,209.5,833.5,208.7,831.8,210.3
 					C831.6,210.6,832.3,209.9,831.8,210.3z"/>
 			</g>
+			<text id="MAPtext" class="tts" x="828" y="405">MAP</text>
 		</g>
 		<g id="AG">
 			<g>
@@ -930,6 +1025,7 @@
 					 M255,250.7c-1.7-2.9,0.2,5.5,1.1,3.8C256.1,254.5,255.1,250.9,255,250.7C254.4,249.7,255.6,251.7,255,250.7z M301.1,294.9
 					c0.8,0.8,3.6-0.5,2-1.9C301.8,292,300.2,294,301.1,294.9C301.4,295.2,300.7,294.6,301.1,294.9z"/>
 			</g>
+			<text id="AGtext" class="tts" y="168" x="158">AG</text>
 		</g>
 		<g id="EMEA">
 			<g>
@@ -1172,7 +1268,10 @@
 					c-0.8-2.2-1.8,0.6-3.1,0.5c1.8,2.9,3.8,6.9,4.8,10.1c0.6,2-1.6,5.6,0.7,7.2c4.1,3.1,5.8,1.4,10.6,0c2.4-0.7,5.9-0.4,8.4-0.3
 					c0.7,0,1.5-1.2,2.8-1.2c2,0,4.4-2.4,5.8-3.7c2.5-2.4,4.9-5.2,6.7-8.2C562.3,410.6,569.6,401.7,567.1,401.8z"/>
 			</g>
+			<text id="EMEAtext" class="tts" x="700" y="125">EMEA</text>
 		</g>
+		
+
 		</svg>
 	</div>
 </body>
