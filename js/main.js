@@ -16,9 +16,11 @@ require.config({
 		"echartsConfig"	:"echart/echartsConfig",
 		"chart_map"	:"echart/chart_map",
 		"chart_home"	:"echart/chart_home",
-		"chart_timeLine"	:"echart/chart_timeLine",
-		"chart_gauge"	:"echart/chart_gauge",
+		"chart_fpyoob"	:"echart/chart_fpyoob",
+		"chart_fpyoob_ramp"	:"echart/chart_fpyoob_ramp",
+		"chart_audit"	:"echart/chart_audit",
 		"chart_fai"	:"echart/chart_fai",
+		"home_chart_control"	:"echart/home_chart_control",
 		"jay"				:"jay"
 	},
 	shim: {//模块依赖关系
@@ -28,8 +30,9 @@ require.config({
 		'onepageScroll'	: {deps: ['jquery',"finger"]},
 		'chart_map'	: {deps: ['echartsConfig']},
 		'chart_home'	: {deps: ['echartsConfig']},
-		'chart_timeLine'	: {deps: ['echartsConfig']},
-		'chart_gauge'	: {deps: ['echartsConfig']},
+		'chart_fpyoob'	: {deps: ['echartsConfig']},
+		'chart_fpyoob_ramp'	: {deps: ['echartsConfig']},
+		'chart_audit'	: {deps: ['echartsConfig']},
 		'chart_fai'	: {deps: ['echartsConfig']},
 		'jay'  			: {deps: ['jquery','utf','onepageScroll','scalcheight','swiper']}
 	}

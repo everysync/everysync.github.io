@@ -1,7 +1,11 @@
-var lvChart = {
-    echarts:null,
-    ecConfig:null
-};
+//寄生组合式继承的基本模式
+function iheritPrototype(subType, superType){
+    function F(){};
+    F.prototype = superType.prototype;
+    var prototype = new F();//创建对象
+    prototype.constructor = subType;//增强对象
+    subType.prototype = prototype;//指定对象
+}
 
 function MyChart(myEcharts, ecConfig, dom_id, option, flag, initFlag) {
     this.myEcharts = myEcharts;
@@ -10,14 +14,13 @@ function MyChart(myEcharts, ecConfig, dom_id, option, flag, initFlag) {
     this.option = option; //chart option
     this.loading_flag = flag; //显示过渡效果标志 --0:不显示, 1:显示
     this.chart = '';
-    if (initFlag) {
-        this.init();
-    }
-    var dom = $("#"+dom_id);
-    dom.css({"height":dom.height(),"width":dom.width(),"position":"relative","text-align":"left"});
+    this.loadStatus = false;//是否根据新数据重置了option
+    this.init();
 }
 
 MyChart.prototype.init = function () {
+    var dom = $("#"+this.dom_id);
+    dom.css({"height":dom.height(),"width":dom.width(),"position":"relative","text-align":"left"});
     this.chart = this.myEcharts.init(document.getElementById(this.dom_id));
     this.chart.on(this.ecConfig.EVENT.RESIZE, this.eConsole);
 }
@@ -56,7 +59,6 @@ MyChart.prototype.getDataBack = function(){//获取数据后,关闭过渡效果,
 //    }
     this.chart.setOption(this.option);
 }                   
-                    
 
 MyChart.prototype.getNewData = function () {//加载数据
     // ajax --------

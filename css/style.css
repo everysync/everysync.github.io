@@ -51,6 +51,14 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+/*SVG World map CSS*/
+.st0{fill:#EFE3D7;stroke:rgba(0,0,0,0.4);stroke-width:2;stroke-miterlimit:10;}
+.st1{fill-rule:evenodd;clip-rule:evenodd;fill:#BEA893;}
+.st2{fill:#B5987F;}
+.st3{fill:#CCB59F;}
+.st4{fill:#AB9681;}
+.st5{fill:#D4BEA9;}
+
 
 .ficon-icon-7:before {
 	content: "\e606";
@@ -321,15 +329,15 @@ Pagination Styles
 	top: 100%;
 	-webkit-transition: background-image 10s linear;
 	transition: background-image 10s linear;
-	background-image: -webkit-linear-gradient(30deg, #0d95b7, #00d0bf);
-	background-image: linear-gradient(60deg, #0d95b7, #00d0bf);
+	background-image: -webkit-linear-gradient(30deg, #0d7db7, #00c6d0);
+	background-image: linear-gradient(60deg, #0d7db7, #00c6d0);
 }
 
 .demopagec-2.switch_2 {
 	-webkit-transition: background-image 10s linear;
 	transition: background-image 10s linear;
-	background-image: -webkit-linear-gradient(30deg, #0d7db7, #00c6d0);
-	background-image: linear-gradient(60deg, #0d7db7, #00c6d0);
+	background-image: -webkit-linear-gradient(30deg, #0d95b7, #00d0bf);
+	background-image: linear-gradient(60deg, #0d95b7, #00d0bf);
 }
 
 .demopagec-3 {
@@ -687,6 +695,17 @@ Pagination Styles
 #chart_fpy_timeLine {
 	height: 100%;
 	width: 100%;
+}
+
+#chart_fpy_Line1,#chart_fpy_Line2{
+	width:30%;
+	height: 100%;
+	float:left;
+}
+#chart_fpy_Line3{
+	width:40%;
+	height: 100%;
+	float:left;
 }
 
 #chart_audit_gauge {

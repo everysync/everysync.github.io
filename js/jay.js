@@ -22,7 +22,7 @@ function ajaxLoadData(URL,DATA) {
 //Building_layouts 
 function buildLayout() {
 	
-	var $win = $(window);
+	var $win =  $win || $(window);
 	var $obj_1 = $(".app_header"),$obj_2 = $(".mapSideTop");
 	function initlayout() {
 		var scalcNum = [
@@ -61,12 +61,12 @@ function pagescroll(obj,content,options) {
 			});
 		},
 		beforeMove:function(a) {
-			$(document).trigger("pageout_"+a);
+			$doc.trigger("pageout_"+a);
 			//$obj.addClass("hardware-acceleration");
 		},
     	afterMove: function(a) {
 			//$obj.removeClass("hardware-acceleration");
-			$(document).trigger("pagein_"+a);
+			$doc.trigger("pagein_"+a);
 		}
 	};
 	$.extend(opts,{sectionContainer: content});
@@ -224,18 +224,10 @@ function page_1fn() {
 	});	
 	
 	//place your code here, the scripts are all loaded
-	require(["chart_map"],function(LvMap){
-		console.log(LvMap);
-		var myMap = new LvMap('mapWrap');
-		//map.getChartData();
-	});
-	require(["chart_home"]);
-	require(["chart_timeLine"]);
-	require(["chart_gauge"]);
-	require(["chart_fai"]);
+	require(['home_chart_control']);
 	//Switching
-	var $p1c_innerWrap = $(".first_page_swicher_wrap");
-	/*page_1_content.on("tap",".mapswipebtn",function() {
+	/*var $p1c_innerWrap = $(".first_page_swicher_wrap");
+	page_1_content.on("tap",".mapswipebtn",function() {
 		var $this = $(this);
 		$this.addClass("cur").siblings().removeClass("cur");
 		page_1_content.trigger("Switch_" + $this.index() );
@@ -253,16 +245,6 @@ function page_1fn() {
 		});
 	});*/
 	//testing
-	page_1_content.on({
-		'Switch_0_ani_end':function() {
-		 //alert("0 end")
-		},
-		'Switch_1_ani_end':function() { 
-			//alert("1 end")
-		}
-	})
-	
-	
 }
 
 //TO:SWITCH
