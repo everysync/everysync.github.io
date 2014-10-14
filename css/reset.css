@@ -32,7 +32,7 @@ body {
 	-ms-user-select: none;  
 	user-select: none; */	
 	/* 上面的css是用来禁止用户选中 */
-	font-family: "Helvetica Neue",\5FAE\8F6F\96C5\9ED1,Tohoma; /* mac字体，微软雅黑，xp字体，宋体有点问题，所以不用，除非自写*/
+	font-family: "Helvetica Neue",Arial,\5FAE\8F6F\96C5\9ED1,Tohoma /* mac字体，微软雅黑，xp字体，宋体有点问题，所以不用，除非自写*/
 }
 ol, ul { list-style: none; }
 blockquote, q { quotes: none; }

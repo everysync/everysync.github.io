@@ -19,8 +19,6 @@ function MyChart(myEcharts, ecConfig, dom_id, option, flag, initFlag) {
 }
 
 MyChart.prototype.init = function () {
-    var dom = $("#"+this.dom_id);
-    dom.css({"height":dom.height(),"width":dom.width(),"position":"relative","text-align":"left"});
     this.chart = this.myEcharts.init(document.getElementById(this.dom_id));
     this.chart.on(this.ecConfig.EVENT.RESIZE, this.eConsole);
 }
@@ -29,7 +27,8 @@ MyChart.prototype.resetOption = function () {
     if(!this.loadStatus){
         this.getChartData(1);
     }
-    this.chart = this.myEcharts.init(document.getElementById(this.dom_id));
+    console.log('resetOption');
+    //this.chart = this.myEcharts.init(document.getElementById(this.dom_id));
     this.chart.setOption(this.option);
     this.bindEvents();
 }

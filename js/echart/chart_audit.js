@@ -231,12 +231,237 @@ define(['echarts','echarts/chart/gauge','echarts/chart/bar'],
             this.loadStatus = true;
             return option;
         };
+        LvAudit.prototype._setOptionBar2 = function(mydata){
+            var option = {
+                color: ['#FF9080', '#00BFB7'],
+                tooltip : {
+                    trigger: 'axis',
+                    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                    }
+                },
+                legend: {
+                    x: 'right',
+                    y: '-300',
+                    itemGap: 30,
+                    data: []
+                },
+                grid: {
+                    y:60,
+                    x:250,
+                    x2:80,
+                    y2: 40,
+                    borderWidth:0
+                },
+                toolbox: {
+                    show : false,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                //calculable : true,
+                xAxis : [
+                    {
+                        type : 'value',
+                        axisTick: {show: false},
+                        axisLine: {show: false},
+                        splitArea: {show: false},
+                        axisLabel:{'textStyle':{color: 'rgba(255,255,255,0.35)'}},
+                        splitLine:{lineStyle: {color: 'rgba(255,255,255,0.15)', width:1, type: 'solid'} }
+                    }
+                ],
+                yAxis : [
+                    {
+                        type : 'category',
+                        splitArea: {show: false }, 
+                        axisLabel:{'textStyle':{color: 'rgba(255,255,255,0.75)',fontSize:14}},
+                        axisTick:{show: false},
+                        axisLine:{lineStyle: {color: 'rgba(255,255,255,0.15)', width:1, type: 'solid'}},
+                        splitLine:{show: false},
+                        data : []
+                    }
+                ],
+                series : []
+            };
+            // y轴
+            option.yAxis[0].data = mydata.yAxis;
+            // x轴
+            for(var i=0,len=mydata.series.length;i<len;i++){
+                option.legend.data.push(mydata.series[i].name);
+                var data = {
+                    name:mydata.series[i].name,
+                    type:'bar',
+                    stack: 'stack',
+                    itemStyle : { normal: {label : {show: false, position: 'inside'}}},
+                    data:mydata.series[i].value
+                };
+                option.series.push(data);
+            }
+            this.option = option;
+            this.loadStatus = true;
+            return option;
+        };
+        LvAudit.prototype._setOptionTimeLine = function(mydata){
+            var option = {
+                timeline:{
+                    y2:30,
+                    data:['1','2','3','4','5','6', '7','8','9','10','11','12'], 
+                    label : {
+                        'interval':0,
+                        textStyle: {
+                            color: 'rgba(255,255,255,0.65)'
+                        },
+                        formatter : function(s) {
+                            var month = ['', 'Jay.','Feb.','Mar.','Apr.','May.','Jun.', 'Jul.','Aug.','Sept.','Oct.','Nov.','Dec.'];
+                            return month[s];
+                        }
+                    },
+                    symbol:'emptyCircle',
+                    lineStyle:{color: '#E2F3F6', width: 1, type: 'solid'},
+                    checkpointStyle:{
+                        borderColor : '#076377',
+                        borderWidth : 1
+                    },
+                    controlStyle:{
+                        normal : { color : '#E2F3F6'},
+                        emphasis : { color : '#E2F3F6'}
+                    },  
+                    autoPlay : false,
+                    playInterval : 3000
+                },
+                options:[
+                    {
+                        title : {
+                            'text':'',
+                            x:40,
+                            y:20,
+                            textStyle:{
+                                fontSize: 24, 
+                                fontWeight: 'normal',
+                                color: '#fff'
+                            }
+                        },
+                        tooltip : {'trigger':'axis'},
+                        color:["#FFF"],
+                        legend : {
+                            x:'right',
+                            y:-300,
+                            padding:25,
+                            itemGap:25,
+                            textStyle:{color: '#B7E1EA',fontSize:14},
+                            'data':mydata.legend
+                        },
+                        toolbox : {
+                            'show':false, 
+                            orient : 'vertical',
+                            x: 'right', 
+                            y: 'center',
+                            'feature':{
+                                'mark':{'show':true},
+                                'dataView':{'show':true,'readOnly':false},
+                                'magicType':{'show':true,'type':['line','bar','stack','tiled']},
+                                'restore':{'show':true},
+                                'saveAsImage':{'show':true}
+                            }
+                        },
+                        calculable : false,
+                        animation:true,
+                        animationDuration:600,
+                        grid : {
+                            'x':70,
+                            'y':10,
+                            'x2':70,
+                            'y2':130,
+                            borderWidth:0
+                        },
+                        xAxis : [{
+                            'type':'category',
+                            'axisLabel':{'interval':0,'rotate':-45,'textStyle':{color: 'rgba(255,255,255,0.65)'}},
+                            'axisLine':{lineStyle:{color: 'rgba(255,255,255,0.1)', width: 1, type: 'solid'}},
+                            'axisTick':{show : true,lineStyle:{color: 'rgba(255,255,255,0.5)', width: 1.5, type: 'solid'}},
+                            'splitLine':{show : false},
+                            'data':mydata.series_line_1.data[0].xAxis
+                        }],
+                        yAxis : [
+                            {
+                                'type':'value',
+                                'splitLine':{show : true,lineStyle:{color: 'rgba(255,255,255,0.15)', width: 1, type: 'solid'}},
+                                'axisTick':{show : false,lineStyle:{color: '#076377', width: 1, type: 'solid'}},
+                                'axisLine':{show : false,lineStyle:{color: '#076377', width: 1, type: 'solid'}},
+                                'axisLabel':{'textStyle':{color: '#E2F3F6'}},
+                                'nameTextStyle':{color: '#E2F3F6'}
+                            }
+                        ],
+                        series : [
+                            {
+                                'name':'OOB',
+                                'yAxisIndex':0,
+                                'xAxisIndex':0,
+                                'type':'line',
+                                'itemStyle': {
+                                    'normal': {
+                                        lineStyle: { // 系列级个性化折线样式
+                                            width: 4
+                                        }
+                                    }
+                                },
+                                'data': mydata.series_line_1.data[0].data
+                            }
+                        ]
+                    }
+                ]
+            };
+            for (var i = 1; i < 12; i++) {
+                option.options.push({
+                    'xAxis': [{'data':mydata.series_line_1.data[i].xAxis}],
+                    series : [
+                        {
+                            'data': mydata.series_line_1.data[i].data
+                        }
+                    ]
+                });
+            }; 
+            this.option = option;
+            this.loadStatus = true;
+            return option;
+        };
+        LvAudit.prototype.getChartDataTimeLine = function(drawFlag){
+            var self = this;
+            var mydata = {
+              legend:['OOB'],
+              series_line_1:{name:'OOB',data:[]}
+            };
+            for (var i = 1; i <= 12; i++) {
+                var newLineArr = [],
+                    monthArr = [],
+                    len = new Date(2014,i,0).getDate();//获取某年某月的天数
+                for (var j = 1; j <= len; j++) {
+                    monthArr.push(i+'.'+j);
+                    newLineArr.push(Math.floor(Math.random()*100));
+                };
+                for (var k = len; k <= 30; k++) {//如果当月天数小于31天，需要补全
+                    monthArr.push('-.-');
+                    newLineArr.push('-');
+                };
+                mydata.series_line_1.data.push({'data':newLineArr,'xAxis':monthArr});
+            };
+            self._setOptionTimeLine(mydata);
+            drawFlag&&self.resetOption();
+        };
         LvAudit.prototype.getChartData = function(drawFlag){
             switch(this.chartType){
                 case "gauge":
                     this.getChartDataGauge(drawFlag);break;
                 case "bar":
                     this.getChartDataBar(drawFlag);break;
+                case "bar2":
+                    this.getChartDataBar2(drawFlag);break;
+                case "timeLine":
+                    this.getChartDataTimeLine(drawFlag);break;    
                 default:break;
             }
         };
@@ -256,6 +481,18 @@ define(['echarts','echarts/chart/gauge','echarts/chart/bar'],
                 series_bar_2:[120, 132, 101, 134, 190, 230]
             };
             self._setOptionBar(mydata);
+            drawFlag&&self.resetOption();
+        };
+        LvAudit.prototype.getChartDataBar2 = function(drawFlag){
+            var self = this;
+            var mydata = {
+                yAxis:['Lesson Learn','Quality Inspection','EC PC Audit','SOP Execution','Machine&Fixture Maintain','OP Quality'],
+                series:[
+                    {name: 'Error',value: [10,5,20,50,20,35]},
+                    {name: 'Right',value: [0,1000,500,400,50,800]}
+                ]
+            };
+            self._setOptionBar2(mydata);
             drawFlag&&self.resetOption();
         };
         return LvAudit;

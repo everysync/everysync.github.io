@@ -4,6 +4,7 @@ define(['echarts','echarts/chart/map'],
             echarts:ec,
             ecConfig:require('echarts/config')
         };
+
         function LvMap(container){
             MyChart.call(this, lvChart.echarts, lvChart.ecConfig, container, {}, 0, 0);
             this.getChartData(1);
@@ -39,26 +40,25 @@ define(['echarts','echarts/chart/map'],
                     formatter:function(params,ticket,callback){
                         //console.log(callback);
                         //$(".map_tips").html(params[5].name+':'+params[5].value);
-                        var result = params[1][1]+'<br[5]>';
-                        self.tipCallback();
-                        return ticket;
+                        var result = params[5].name+':'+params[5].value;
+                        //self.tipCallback();
+                        return result;
                     }
                 },
                 // roamController: {
                 //     show: false,
                 //     x: 'right',
+                //     y:0,
                 //     mapTypeControl: {
                 //         'china': true
                 //     }
                 // },
                 series: [
                     {
-                        tooltip : {
-                            show:false
-                        },
-                        name: 'Top',
+                        name: 'city',
                         type: 'map',
                         mapType: 'china',
+                        clickable:false,
                         itemStyle:{
                             normal:{
                                 borderColor:'rgba(46, 67, 79,1)',
@@ -68,69 +68,6 @@ define(['echarts','echarts/chart/map'],
                                 }
                             }
                         },
-                        mapLocation: {
-                            x:'center',
-                            //x: '5%',
-                            y: 'center',
-                            width: '90%',
-                            height: '80%'
-                        },
-                        selectedMode: null,
-                        hoverable: false,
-                        roam: false,
-                        data: [{name: '北京', selected: false }, {name: '天津', selected: false }, {name: '上海', selected: false }, {name: '重庆', selected: false }, {name: '河北', selected: false }, {name: '河南', selected: false }, {name: '云南', selected: false }, {name: '辽宁', selected: false }, {name: '黑龙江', selected: false }, {name: '湖南', selected: false }, {name: '安徽', selected: false }, {name: '山东', selected: false }, {name: '新疆', selected: false }, {name: '江苏', selected: false }, {name: '浙江', selected: false }, {name: '江西', selected: false }, {name: '湖北', selected: false }, {name: '广西', selected: false }, {name: '甘肃', selected: false }, {name: '山西', selected: false }, {name: '内蒙古', selected: false }, {name: '陕西', selected: false }, {name: '吉林', selected: false }, {name: '福建', selected: false }, {name: '贵州', selected: false }, {name: '广东', selected: false }, {name: '青海', selected: false }, {name: '西藏', selected: false }, {name: '四川', selected: false }, {name: '宁夏', selected: false }, {name: '海南', selected: false }, {name: '台湾', selected: false }, {name: '香港', selected: false }, {name: '澳门', selected: false }], 
-                        geoCoord: {
-                            india:[81.18,16.54],
-                            southAmerica:[92.18,16.54]
-                        },
-                        markPoint: {
-                            itemStyle: {
-                                normal: {
-                                    label: {
-                                        show: false
-                                    },
-                                    labelLine: {
-                                        show: false
-                                    }
-                                },
-                                emphasis: {
-                                    color:"#000",
-                                    areaStyle:{},
-                                    label: {
-                                        show: false,
-                                        position: 'outer'
-                                    },
-                                    labelLine: {
-                                        show: false,
-                                        lineStyle: {
-                                            color: 'red'
-                                        }
-                                    }
-                                }
-                            },
-                            data: [
-                                {
-                                    geoCoord : [81.18,16.54],
-                                    name:'india',
-                                    value: 'india',
-                                    symbolSize: 40,
-                                    symbol: 'image://images/india.png'
-                                },
-                                {
-                                    geoCoord : [92.18,16.54],
-                                    value: 'southAmerica',
-                                    name:'southAmerica',
-                                    symbolSize: 40,
-                                    symbol: 'image://images/southAmerica.png'
-                                }
-                            ]
-                        }
-                    }, {
-                        hoverable: false,
-                        name: 'city',
-                        type: 'map',
-                        mapType: 'china',
-                        roam: false,
                         geoCoord: {
                         },
                         mapLocation: {
@@ -140,11 +77,47 @@ define(['echarts','echarts/chart/map'],
                             width: '90%',
                             height: '80%'
                         },
-                        data: [],
+                        selectedMode: null,
+                        hoverable: false,
+                        roam: false,
+                        data: [{name: '北京', selected: false ,tooltip: {show: false} }, {name: '天津', selected: false ,tooltip: {show: false} }, {name: '上海', selected: false ,tooltip: {show: false} }, {name: '重庆', selected: false ,tooltip: {show: false} }, {name: '河北', selected: false ,tooltip: {show: false} }, {name: '河南', selected: false ,tooltip: {show: false} }, {name: '云南', selected: false ,tooltip: {show: false} }, {name: '辽宁', selected: false ,tooltip: {show: false} }, {name: '黑龙江', selected: false ,tooltip: {show: false} }, {name: '湖南', selected: false ,tooltip: {show: false} }, {name: '安徽', selected: false ,tooltip: {show: false} }, {name: '山东', selected: false ,tooltip: {show: false} }, {name: '新疆', selected: false ,tooltip: {show: false} }, {name: '江苏', selected: false ,tooltip: {show: false} }, {name: '浙江', selected: false ,tooltip: {show: false} }, {name: '江西', selected: false ,tooltip: {show: false} }, {name: '湖北', selected: false ,tooltip: {show: false} }, {name: '广西', selected: false ,tooltip: {show: false} }, {name: '甘肃', selected: false ,tooltip: {show: false} }, {name: '山西', selected: false ,tooltip: {show: false} }, {name: '内蒙古', selected: false ,tooltip: {show: false} }, {name: '陕西', selected: false ,tooltip: {show: false} }, {name: '吉林', selected: false ,tooltip: {show: false} }, {name: '福建', selected: false ,tooltip: {show: false} }, {name: '贵州', selected: false ,tooltip: {show: false} }, {name: '广东', selected: false ,tooltip: {show: false} }, {name: '青海', selected: false ,tooltip: {show: false} }, {name: '西藏', selected: false ,tooltip: {show: false} }, {name: '四川', selected: false ,tooltip: {show: false} }, {name: '宁夏', selected: false ,tooltip: {show: false} }, {name: '海南', selected: false ,tooltip: {show: false} }, {name: '台湾', selected: false ,tooltip: {show: false} }, {name: '香港', selected: false ,tooltip: {show: false} }, {name: '澳门', selected: false ,tooltip: {show: false} }],
                         markPoint: {
                             symbol: 'circle',
                             symbolSize: 6,
                             data: []
+                        }
+                    },{
+                        name:'',
+                        type:'pie',
+                        clickable:false,
+                        hoverable: false,
+                        data:[],
+                        markPoint: {
+                            symbol: 'circle',
+                            symbolSize: 6,
+                            data: [
+                                {
+                                    x: '25%',
+                                    y: '90%',
+                                    name:'india',
+                                    value: 'india',
+                                    symbolSize: 40,
+                                    symbol: 'image://images/india.png',
+                                    clickable:false,
+                                    tooltip : {show:false},
+                                    itemStyle: {normal: {label: {show: false }, labelLine: {show: false } }, emphasis: {color:"#000", areaStyle:{}, label: {show: false, position: 'outer'}, labelLine: {show: false, lineStyle: {color: 'red'} } } } 
+                                },{
+                                    x: '38%',
+                                    y: '92%',
+                                    value: 'southAmerica',
+                                    name:'southAmerica',
+                                    symbolSize: 40,
+                                    symbol: 'image://images/southAmerica.png',
+                                    tooltip : {show:false},
+                                    clickable:false,
+                                    itemStyle: {normal: {label: {show: false }, labelLine: {show: false } }, emphasis: {color:"#000", areaStyle:{}, label: {show: false, position: 'outer'}, labelLine: {show: false, lineStyle: {color: 'red'} } } } 
+                                }
+                            ]
                         }
                     }
                 ]      
@@ -176,25 +149,32 @@ define(['echarts','echarts/chart/map'],
             };
             var geoCoord = {},
                 dataMark = [];
+            // 地图-海外 点名称 
+            var Overseas = {"Pondicherry_IN_NB":{x:'25%',y:'90%'},"ITU_BR_NB":{x:'40%',y:'90%'},"Newsan_AR_NB":{x:'37%',y:'92%'}};
             for (var i = 0; i < mydata.length; i++) {
                 var v = mydata[i];
-                geoCoord[v['listName']] = v['geo'];
-                dataMark.push({name: v['listName'], value: v['valu'], itemStyle: itemStyle[v.color]});
+                if(!Overseas.hasOwnProperty(v['listName'])){
+                    geoCoord[v['listName']] = v['geo'];
+                    dataMark.push({name: v['listName'], value: v['valu'], itemStyle: itemStyle[v.color]});
+                }else{
+                    option.series[1].markPoint.data.push({name: v['listName'], x: Overseas[v['listName']].x,
+                                    y: Overseas[v['listName']].y,value: v['valu'], itemStyle: itemStyle[v.color]});
+                }
             }
             option.series[0].geoCoord = geoCoord;
-            option.series[1].markPoint.data = dataMark;
+            option.series[0].markPoint.data = dataMark;
             this.option = option;
             this.loadStatus = true;
             return option;
         };
         LvMap.prototype.bindEvents = function () {
             this.chart.on(lvChart.ecConfig.EVENT.CLICK, function(param){
-                if(param.seriesIndex > 0){
+                console.log(param);
+                if(param.seriesIndex >= 0){
                     alert(param.name);
                 }
             });
-            console.log(this.chart);
-            this.chart.component.tooltip.showTip({seriesIndex: "1", seriesName:'city', name:'Wistron_CD_NB'});
+            this.chart.component.tooltip.showTip({seriesIndex: "0", seriesName:'city', name:'Wistron_CD_NB'});
         };
         LvMap.prototype.getChartData = function(drawFlag){
             var self = this;

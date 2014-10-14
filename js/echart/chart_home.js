@@ -14,7 +14,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                 animation:true,
                 animationDuration:600,
                 backgroundColor:"rgba(0,0,0,0)",
-                color: ['#FF9080','#00BFB7', '#FFBB59', '#FFF100'],
+                color: ['#FF9080','#00BFB7', '#FFBB59', '#FFF100','#00BFB7','#FF9080','#2290B3','#C680C2'],
                 title : {
                     text: '',
                     x:'right',
@@ -31,7 +31,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                     show: true,
                     realtime: true,
                     x:70,
-                    y:document.getElementById(this.dom_id).offsetHeight - 70,
+                    //y:document.getElementById(this.dom_id).offsetHeight - 70,
                     backgroundColor:'rgba(61, 72, 82,0.5)',
                     dataBackgroundColor: 'rgba(90, 99, 107,1)',            
                     fillerColor: 'rgba(156, 161, 166,0.5)',
@@ -41,9 +41,9 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                 },
                 grid: {
                     'x':70,
-                    'y':150,
+                    'y':220,
                     'x2':70,
-                    'y2':130,
+                    'y2':80,
                     borderWidth:0
                 },
                 legend: {
@@ -54,24 +54,24 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                 },
                 xAxis: [{
                     type: 'category',
-                    'axisLabel':{'interval':0,'rotate':-45,'textStyle':{color: '#E2F3F6'}},
-                    'axisLine':{lineStyle:{color: '#717980', width: 1, type: 'solid'}},
-                    'axisTick':{show : true,lineStyle:{color: '#717980', width: 1, type: 'solid'}},
+                    'axisLabel':{'interval':0,'rotate':-45,'textStyle':{color: 'rgba(255,255,255,0.6)'}},
+                    'axisLine':{show : false,lineStyle:{color: 'rgba(255,255,255,0.35)', width: 1, type: 'solid'}},
+                    'axisTick':{show : true,lineStyle:{color: 'rgba(255,255,255,0.35)', width: 1, type: 'solid'}},
                     'splitLine':{show : false},
                     data: [],
                 }],
                 yAxis: [{
                     type: 'value',
                     'splitLine':{show : false},
-                    'axisTick':{show : true,lineStyle:{color: '#717980', width: 1, type: 'solid'}},
-                    'axisLine':{lineStyle:{color: '#717980', width: 1, type: 'solid'}},
+                    'axisTick':{show : true,inside:true,lineStyle:{color: 'rgba(255,255,255,0.35)', width: 1, type: 'solid'}},
+                    'axisLine':{lineStyle:{color: 'rgba(255,255,255,0.35)', width: 1, type: 'solid'}},
                     'axisLabel':{'textStyle':{color: '#E2F3F6'}},
                     'nameTextStyle':{color: '#E2F3F6'}
                 }, {
                     type: 'value',
                     'splitLine':{show : false},
-                    'axisTick':{show : true,lineStyle:{color: '#717980', width: 1, type: 'solid'}},
-                    'axisLine':{lineStyle:{color: '#717980', width: 1, type: 'solid'}},
+                    'axisTick':{show : true,inside:true,lineStyle:{color: 'rgba(255,255,255,0.35)', width: 1, type: 'solid'}},
+                    'axisLine':{lineStyle:{color: 'rgba(255,255,255,0.35)', width: 1, type: 'solid'}},
                     'axisLabel':{'textStyle':{color: '#E2F3F6'}},
                     'nameTextStyle':{color: '#E2F3F6'}
                 }],
@@ -121,6 +121,30 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                                 }]
                             ]
                         }
+                    }, {
+                        name: 'Related',
+                        type: 'pie',
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: '{a} <br/>{b} : {c} ({d}%)'
+                        },
+                        center: ['80%', 170],
+                        radius: [0, 50],
+                        itemStyle: 　{
+                            normal: {
+                                label: {
+                                    //position : 'inner'
+                                    //formatter : function(a,b,c,d) {return (d - 0).toFixed(0) + '%' + b }
+                                    'textStyle':{color: '#E2F3F6',fontSize:14},
+                                    formatter: "{b}\n"
+                                },
+                                labelLine: {
+                                    length: 5,
+                                    lineStyle:{color: 'rgba(255,255,255,0.35)', width: 1, type: 'solid'}
+                                }
+                            }
+                        },
+                        data: []
                     }
                 ]
             };
@@ -134,7 +158,8 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
             option.series[2].name = mydata.series_bar_3.name;
             option.series[2].data = mydata.series_bar_3.data;
             option.series[3].name = mydata.series_line_1.name;
-            option.series[3].data = mydata.series_line_1.data;    
+            option.series[3].data = mydata.series_line_1.data;   
+            option.series[4].data = mydata.series_pie_1; 
             this.option = option;
             this.loadStatus = true;
             return option;
@@ -150,10 +175,10 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                 series_bar_3:{name:'Close',data:[5, 6, 4, 3, 4, 1.5, 5, 5, 6, 4, 3, 4, 1.5, 5, 5, 6, 4, 3, 4, 1.5, 5]},
                 series_line_1:{name:'IRCT',data:[12, 7, 8, 10, 6, 14, 12, 12, 7, 8, 10, 6, 14, 12, 12, 7, 8, 10, 6, 14, 12]},
                 series_pie_1:[
-                    {name: 'Design',value: 15},
-                    {name: 'Supplier',value: 30},
-                    {name: 'MFG',value: 32},
-                    {name: 'Engineering',value: 25}
+                    {name: 'Design related',value: 15},
+                    {name: 'Supplier related',value: 30},
+                    {name: 'MFG related',value: 32},
+                    {name: 'Engineering related',value: 25}
                 ],
                 target_value:8
             };

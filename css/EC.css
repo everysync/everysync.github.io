@@ -1,0 +1,234 @@
+@charset "utf-8";
+
+.ECBlck{
+	height:100%;
+	width:100%;
+	background-image: -webkit-linear-gradient(60deg, rgb(45,68,64) 0%, rgb(110,176,160) 75%);
+	background-image: -moz-linear-gradient(60deg, rgb(45,68,64) 0%, rgb(110,176,160) 75%);
+	background-image: -o-linear-gradient(60deg, rgb(45,68,64) 0%, rgb(110,176,160) 75%);
+	background-image: linear-gradient(60deg, rgb(45,68,64) 0%, rgb(110,176,160) 75%);
+}
+
+
+/*以下是EC样式*/
+.Topblck{
+	margin:45px 8px;
+	height:230px;
+	border-radius:4px;
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	display:-webkit-flex;
+	display:-ms-flex;
+	display:flex;	
+}
+.EcBg{
+	background:rgba(0, 0, 0, 0.4);
+}
+.coL-5{
+	height:100%;
+	-webkit-flex:1;
+	-ms-flex:1;
+	flex:1;
+	float:left\9;
+	width:50%\9;
+}
+.layCenter{
+	text-align:center;
+}
+.mRL60{
+	margin:0 6.4%;
+	height:100%;
+	display:-webkit-flex;
+	display:-ms-flex;
+	display:flex;
+	-webkit-align-items: flex-end;
+	-ms-align-items: flex-end; 
+	float:left\9;
+	width:94%\9;
+	padding-top:48px\9;
+	height:80%\9;
+}
+.diamTit{
+	font-size:30px;
+	color:#fff;
+	height:132px;
+	-webkit-flex:2;
+	-ms-flex:2;
+	flex:2;
+	-webkit-align-self: center;
+	-ms-align-self: center;
+	align-self: center;	
+	float:left\9;
+	width:17%\9;
+}
+
+.dTicon1,
+.dTicon2{
+	width:100%;
+	display:block;
+	height:46px;
+	margin:20px 0;
+}
+.dTicon1{
+	background:url(../images/EcIcon/Ec_icon01.png) no-repeat center 0;
+}
+.dTicon2{
+	background:url(../images/EcIcon/Ec_icon02.png) no-repeat center 0;
+}
+.diamonds-1{
+	width:145px;
+	height:152px;
+	border-radius:8px;
+	-webkit-border-radius:8px;
+	-moz-border-radius:8px;
+	margin:0 2%;
+	flex:4;
+	-webkit-flex:4;
+	-webkit-align-self: center;
+	align-self: center;	
+	float:left\9;
+	width:34.5%\9;
+	border-top-left-radius:9px;
+	border-top-right-radius:9px;
+	-webkit-border-top-left-radius:9px;
+	-webkit-border-top-right-radius:9px;
+}
+.diabg1{
+	background:#3c625a;
+}
+.diabg2{
+	background:#3c625a;
+}
+.diabg3{
+	background:#456d64;
+}.diabg3 span{
+	color:#fff;	
+}
+.diabg4{
+	background:#456d64;
+}
+.diaNumTit{
+	font-size:14px;
+	color:#fff;
+	height:37px;
+	line-height:37px;
+	text-align:center;
+	margin-top:-1px;
+	border-top-left-radius:8px;
+	border-top-right-radius:8px;
+	-webkit-border-top-left-radius:8px;
+	-webkit-border-top-right-radius:8px;
+}
+.diabg1 .diaNumTit{
+	background:#7d92fe;
+}
+.diabg2 .diaNumTit{
+	background:#328cc5;
+}
+.diabg3 .diaNumTit{
+	background:#09bdbe;
+}
+.diabg4 .diaNumTit{
+	background:#74bbd4;
+}
+.diamonds-1 span{
+	font-size:40px;
+	display:block;
+	line-height:114px;
+	color:#fff;
+}
+.diabg1 span{
+	/* color:#7e9b9c;	 */
+}
+.ecPageTab{
+	margin:0 8px;
+}
+.ecPageTab table{
+	border-collapse:collapse;
+	width:100%;
+}
+.ecPageTab th{
+	font-size:14px;
+	line-height:42px;
+	text-align:center;
+	color:rgba(255, 255, 255, 0.85);
+	background:rgba(0, 0, 0, 0.35);	
+}
+.ecPageTab th:first-child{
+	border-top-left-radius:4px;
+	-webkit-border-top-left-radius:4px
+}
+.ecPageTab th:last-child{
+	border-top-right-radius:4px;
+	-webkit-border-top-right-radius:4px
+}
+.ecPageTab td{
+	font-size:12px;
+	color:#fff;
+	line-height:20px;
+	text-align:center;
+	padding:15px 0;
+}
+.ecPageTab td.textWordWrap{
+	word-wrap:break-word;
+}
+.ecPageTab td.textL{
+	text-align:left;
+}
+.ecPageTab tr:nth-child(even){
+	background:rgba(0, 0, 0, 0.15);
+}
+
+.EC_Dialog{
+	position:absolute;
+	top:80px;
+	left:0;
+	bottom:0;
+	right:0;
+	background:rgba(0, 0, 0, 0.7);
+	width:100%;
+	z-index:9;
+}
+.EcR-box{
+	width:384px;
+	height:100%;
+	float:right;
+	background:rgba(0, 0, 0, 0.78);
+}
+.dialogTit{
+	font-size:16px;
+	color:#00bfb7;
+	line-height:45px;
+	width:100%;
+	height:45px;
+	text-align:center;
+	background:rgba(255, 255, 255, 0.1);
+}
+.EcdialogCon{
+	width:100%;
+	padding:20px 0;
+}
+.EcdialogCon p{
+	width:100%;
+	display:table-row;
+}
+.EcdialogCon .EcDiaTit{
+	font-size:14px;
+	color:#fff;
+	line-height:26px;
+	width:34%;
+	display:table-cell;
+	text-align:right;
+	padding-right:10px;
+	vertical-align:top;
+}
+.EcdialogCon .EcDiaInfo{
+	font-size:14px;
+	color:rgba(255, 255, 255, 0.5);
+	line-height:26px;
+	display:table-cell;
+	padding-right:15px;
+}
+.EcdialogCon .EcDiaInfo img{
+	margin-top:10px;
+}

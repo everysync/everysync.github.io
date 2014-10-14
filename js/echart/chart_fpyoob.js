@@ -4,11 +4,21 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
             echarts:ec,
             ecConfig:require('echarts/config')
         };
-        function LvFpyOob(container){
+        function LvFpyOob(container,chartType){
             MyChart.call(this, lvChart.echarts, lvChart.ecConfig, container, {}, 0, 0);
+            this.chartType = chartType;
             this.getChartData(0);
         }
         iheritPrototype(LvFpyOob, MyChart);
+        LvFpyOob.prototype.getChartData = function(drawFlag){
+            switch(this.chartType){
+                case "timeLine":
+                    this.getChartDataTimeLine(drawFlag);break;
+                case "line":
+                    this.getChartDataLine(drawFlag); break;
+                default:break;
+            }
+        };
         LvFpyOob.prototype._setOptionTimeLine = function(mydata){
             var option = {
                 timeline:{
@@ -85,7 +95,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                         xAxis : [{
                             'type':'category',
                             'axisLabel':{'interval':0,'rotate':-45,'textStyle':{color: '#E2F3F6'}},
-                            'axisLine':{lineStyle:{color: '#076377', width: 1, type: 'solid'}},
+                            'axisLine':{show : false,lineStyle:{color: '#076377', width: 1, type: 'solid'}},
                             'axisTick':{show : true,lineStyle:{color: '#076377', width: 1, type: 'solid'}},
                             'splitLine':{show : false},
                             'data':mydata.xAxis
@@ -94,7 +104,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                             {
                                 'type':'value',
                                 'splitLine':{show : false},
-                                'axisTick':{show : true,lineStyle:{color: '#076377', width: 1, type: 'solid'}},
+                                'axisTick':{show : true,inside:true,lineStyle:{color: '#076377', width: 1, type: 'solid'}},
                                 'axisLine':{lineStyle:{color: '#076377', width: 1, type: 'solid'}},
                                 'axisLabel':{'textStyle':{color: '#E2F3F6'}},
                                 'name':'FPY（%）',
@@ -103,7 +113,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                             {
                                 'type':'value',
                                 'splitLine':{show : false},
-                                'axisTick':{show : true,lineStyle:{color: '#076377', width: 1, type: 'solid'}},
+                                'axisTick':{show : true,inside:true,lineStyle:{color: '#076377', width: 1, type: 'solid'}},
                                 'axisLine':{lineStyle:{color: '#076377', width: 1, type: 'solid'}},
                                 'axisLabel':{'textStyle':{color: '#E2F3F6'}},
                                 'name':'OOB（%）',
@@ -177,7 +187,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
             this.loadStatus = true;
             return option;
         };
-        LvFpyOob.prototype.getChartData = function(drawFlag){
+        LvFpyOob.prototype.getChartDataTimeLine = function(drawFlag){
             var self = this;
             var mydata = {
               legend:['FPY','OOB','FPY Target','OOB Target'],
@@ -198,6 +208,109 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                 mydata.series_line_1.data.push(newLineArr);
             };
             self._setOptionTimeLine(mydata);
+            drawFlag&&self.resetOption();
+        };
+        LvFpyOob.prototype._setOptionLine = function(mydata){
+            var option = {
+                color:["#fff"],
+                title : {
+                    text: '',
+                    subtext: ''
+                },
+                tooltip : {
+                    trigger: 'axis',
+                    axisPointer:{
+                        type : 'line',
+                        lineStyle : {
+                          color: '#fff',
+                          width: 2,
+                          type: 'solid'
+                        },
+                        crossStyle : {
+                          color: '#fff',
+                          width: 2,
+                          type: 'solid'
+                        }
+                    }
+                },
+                legend: {
+                    y:-300,
+                    data:mydata.legend
+                },
+                toolbox: {
+                    show : false,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                animation: false,
+                calculable : false,
+                grid : {
+                    'x':70,
+                    'x2':30,
+                    'y':180,
+                    'y2':70,
+                    borderWidth:0
+                },
+                xAxis : [
+                    {
+                        'type':'category',
+                        boundaryGap : false,
+                        'axisLabel':{show : false,'interval':0,'textStyle':{color: '#E2F3F6'}},
+                        'axisLine':{lineStyle:{color: '#076377', width: 1, type: 'solid'}},
+                        'axisTick':{show : true,inside:true,length:10,lineStyle:{color: 'rgba(255,255,255,0.4)', width: 1, type: 'solid'}},
+                        'splitLine':{show : false},
+                        data : mydata.xAxis
+                    }
+                ],
+                yAxis : [
+                    {
+                        min:0,
+                        max:100,
+                        'type':'value',
+                        'splitLine':{show : false},
+                        'axisTick':{show : true,inside:true,lineStyle:{color: '#076377', width: 1, type: 'solid'}},
+                        'axisLine':{lineStyle:{color: '#076377', width: 1, type: 'solid'}},
+                        'axisLabel':{'textStyle':{color: '#E2F3F6'}},
+                        'nameTextStyle':{color: '#E2F3F6'}
+                    }
+                ],
+                series : [
+                    {
+                        name:'Ramp',
+                        type:'line',
+                        'smooth':true,
+                        'symbol':'none',
+                        itemStyle: {normal: {areaStyle: {
+                                // 区域图，纵向渐变填充
+                                color : (function (){
+                                    var zrColor = require('zrender/tool/color');
+                                    return zrColor.getLinearGradient(
+                                        0, 200, 0, 400,
+                                        [[0, 'rgba(255,255,255,0.2)'],[0.8, 'rgba(255,255,255,0.1)']]
+                                    )
+                                })()
+                            }}},
+                        data:mydata.data
+                    }
+                ]
+            };    
+            this.option = option;
+            this.loadStatus = true;
+            return option;
+        };
+        LvFpyOob.prototype.getChartDataLine = function(drawFlag){
+            var self = this;
+            var mydata = {
+                legend:["Ramp"],
+                xAxis:['周一','周二','周三','周四','周五','周六','周日','周一','周二','周三','周四','周五','周六','周日','周一','周二','周三','周四','周五','周六','周日'], 
+                data:[10, 12, 21, 30, 35, 33, 30,20,30,40,50,60,70,80,60,30,40,50,65,75,88]
+            };
+            self._setOptionLine(mydata);
             drawFlag&&self.resetOption();
         };
         return LvFpyOob;
