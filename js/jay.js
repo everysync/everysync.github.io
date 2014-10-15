@@ -138,114 +138,7 @@ function sidebaract(obj,options) {
 }
 
 
-//第一页的所有 Function TO: PAGE_1FN
-function page_1fn() {
-	$(".mapSideBot").on("flick.diswheel mousewheel.diswheel DOMMouseScroll.diswheel touchmove.diswheel", function(e) {
-		e.stopPropagation();
-		return false;
-	});
-	var page_1_content = $(".demopagec-1");
-	var $mslistwrap    = $(".mslist");
-	var liTempWrap     = $("<div>").attr("id","wpt");
-	var liTemplate     = 
-			'<div class="mapDataDetail">'+
-			'	<h2 class="mdh2">'+
-			'		<span class="mdh2_1">标题:</span>'+
-			'		<span class="mdh2_2">标题名</span>'+
-			'	</h2>'+
-			'	<ul class="mdhlist">'+
-			'		<li class="mdhli">'+
-			'			<span class="mli_l">名字</span>'+
-			'			<span class="mli_r">数据</span>'+
-			'		</li>'+
-			'	</ul>'+
-			'</div>';
-	$.ajax({
-		type: "get",
-		url: "jsonpcallback/jsonpcallback.js",
-		dataType: "jsonp",
-		jsonpCallback:"mapListData"
-	}).done(function(data){
-		var MapArry = data["mapListData"];
-		var MapArrylength = MapArry.length;
-		var $a = $(liTemplate);
-		for (var i=0; i<MapArrylength; i++) {
-			var $kt = $(liTemplate);
-			var $ktlist = $kt.find(".mdhlist");
-			$kt.find(".mdh2_1").html(MapArry[i]["listTitle"]+":");
-			$kt.find(".mdh2_2").html(MapArry[i]["listName"]);
-			$ktlist.html("");
-			$.each(MapArry[i]["listdata"], function(i,d) {
-				$ktlist.append(
-					$("<li>").addClass("mdhli").html(
-						'<span class="mli_l">'+ d[0] +'</span>'+' <span class="mli_r">'+ d[1] +'</span>'
-					)
-				);
-			});
-			liTempWrap.append( $('<li class="msEachlist swiper-slide"></li>').append($kt) );
-		}
-		$mslistwrap.html( liTempWrap.html() );
-		
-		//init swiper
-		var $swiperTarget = $(".mapSideBot");
-		var page_1_swiper = $swiperTarget.swiper({
-			mode:'vertical',
-			initialSlide:1,
-			slidesPerView:'auto',
-			visibilityFullFit:true,
-			mousewheelControl:true,
-			calculateHeight:true,
-			slidesPerViewFit:true,
-			centeredSlides:true,
-			onSlideClick:function(sw) {
-				page_1_swiper.swipeTo(page_1_swiper.clickedSlideIndex);
-				var $sides = $(page_1_swiper.clickedSlide);
-				$sides
-					.addClass("swiper-slide-click-active")
-					.siblings()
-					.removeClass("swiper-slide-click-active");
-			}
-		});
-		$swiperTarget.on("transitionend.swiper webkitTransitionEnd.swiper oTransitionEnd.swiper", function(e) {
-			e.stopPropagation();
-		});
-		//clean
-		$mslistwrap   =null;
-		liTempWrap    =null;
-		liTemplate    =null;
-		MapArry       =null;
-		MapArrylength =null;
-		$a            =null;
-		
-	}).error(function(a){
-		window.console?console.log("Fail to load data!"):'';
-		//do something
-	}).always(function(data) {
-	});	
-	
-	//place your code here, the scripts are all loaded
-	require(['home_chart_control']);
-	//Switching
-	/*var $p1c_innerWrap = $(".first_page_swicher_wrap");
-	page_1_content.on("tap",".mapswipebtn",function() {
-		var $this = $(this);
-		$this.addClass("cur").siblings().removeClass("cur");
-		page_1_content.trigger("Switch_" + $this.index() );
-	}).on("Switch_0", function() {
-		page_1_content.addClass("switch_1").removeClass("switch_2");
-		$p1c_innerWrap.one("transitionend.switch webkitTransitionEnd.switch oTransitionEnd.switch", function(e) {
-			e.stopPropagation();
-			page_1_content.trigger("Switch_0_ani_end");
-		});
-	}).on("Switch_1", function() {
-		page_1_content.addClass("switch_2").removeClass("switch_1");
-		$p1c_innerWrap.one("transitionend.switch webkitTransitionEnd.switch oTransitionEnd.switch", function(e) {
-			e.stopPropagation();
-			page_1_content.trigger("Switch_1_ani_end");
-		});
-	});*/
-	//testing
-}
+
 
 //TO:SWITCH
 function eachblock_Switcher(obj,options) {
@@ -264,7 +157,7 @@ function eachblock_Switcher(obj,options) {
 			var cacheIndex   = "";
 			$el.on("tap", opts.switchBtn, function() {
 				var $this = $(this);
-				cacheIndex = $this.index()
+				cacheIndex = $this.index();
 				//console.log(cacheIndex)
 				$this.addClass("cur").siblings().removeClass("cur");
 				$el.trigger("Switch_" + cacheIndex );
@@ -341,13 +234,13 @@ function home_aduit(target) {
 		});
 	}
 	function splitjson() {
-		var json_blue = new Array,
-			json_yellow = new Array,
-			json_red = new Array;
+		var json_blue = new Array(),
+			json_yellow = new Array(),
+			json_red = new Array();
 		$.each(jsonpCache, function(i,d) {
-			d["score"] >= 95 ? json_blue= json_blue.concat(d):"";
-			d["score"] < 95 && d["score"] >= 85 ? json_yellow = json_yellow.concat(d):"";
-			d["score"] < 85 ? json_red = json_red.concat(d):"";
+			d['score'] >= 95 ? json_blue= json_blue.concat(d):"";
+			d['score'] < 95 && d["score"] >= 85 ? json_yellow = json_yellow.concat(d):"";
+			d['score'] < 85 ? json_red = json_red.concat(d):"";
 		});
 		//console.log(json_blue);
 		//console.log(json_yellow);
@@ -394,24 +287,109 @@ function home_aduit(target) {
 				$targey.html("");
 			});
 		}
-	})
+	});
 }
 
-//Load_Modules
+//Load_Modules TO:PAGE_LOAD
 var page_modules = {
-	
-	initListLinks: function(target,url,selector) {
+	$siderEl:"",
+	$page_show_content:"",
+	$page_show_wrap:"",
+	showpage:function(_this) {
+		var $psc = page_modules.$page_show_content;
+		var contantState = $psc.data("hasShowed");
+		var linkURL = _this.data("url");
+
+		if (contantState!==true && linkURL) {
+			//showing
+			$psc.addClass(_this.data("wrapclass"));
+			$psc.addClass("page_showing");
+			$psc.data({
+				"hasShowed":true,
+				"prevClass":_this.data("wrapclass")
+			});
+			$psc.on("transitionend.pshow webkitTransitionEnd.pshow oTransitionEnd.pshow", function(e) {
+				$psc.addClass("page_showed").removeClass("page_showing");
+				$psc.triggerHandler("page_showed");
+				$psc.off(".pshow");
+			});
+		} else if (contantState === true && linkURL) {
+			//showed
+			$psc
+				.removeClass( $psc.data("prevClass") )
+				.addClass(_this.data("wrapclass"))
+				.data("prevClass",_this.data("wrapclass"))
+				.triggerHandler("page_showed");
+		}
+
+	},
+	hidepage:function(_this) {
+		var $psc = page_modules.$page_show_content;
+		$psc.addClass("page_hidding");
+		$psc.on("transitionend.phide webkitTransitionEnd.phide oTransitionEnd.phide", function(e) {
+			$psc.removeClass($psc.data("prevClass"));
+			$psc.removeClass("page_hidding page_showed");
+			$psc.triggerHandler("page_hided");
+			$psc.data("hasShowed",false);
+			page_modules.$page_show_wrap.children().remove();
+			$psc.off(".phide");
+		});
+	},
+
+
+	init_modules_action:function(time) {
+		page_modules.applyTolinks();
+		page_modules.$siderEl = $("#sidebar");
+		page_modules.$page_show_content = $(".app-init-page");
+		page_modules.$page_show_wrap = page_modules.$page_show_content.children(".app-init-page-pd");
+		var $psc = page_modules.$page_show_content;
+		var _time = time || 600;
+		var setTranTime = 
+			"-webkit-transition-duration:"+_time+"ms;" +
+			"-moz-transition-duration:"+_time+"ms;" +
+			"-ms-transition-duration:"+_time+"ms;" +
+			"-o-transition-duration:"+_time+"ms;" +
+			"transition-duration:"+_time+"ms;";
+		$psc.attr("style", setTranTime);
+		
+		
+		page_modules.$siderEl.on("tap", ".fslinks", function(e) {
+			e.stopPropagation();
+			var _this = $(this);
+			if (!_this.data("url")){return ;};
+			$psc.on("page_showed.loadpage", function() {
+				var loads = _this.data("url") + " " + _this.data("selector");
+				page_modules.$page_show_wrap.load(loads,function() {
+					require( [_this.data("requirejs")],function(page){
+						page&&page.init();
+					});
+					console.log("pageLoaded");
+				});
+				$psc.off(".loadpage");
+			});
+			page_modules.showpage(_this);
+		});
+		
+		$("#app-load-back").on("tap", function(e) {
+			e.stopPropagation();
+			var _this = $(this);
+			page_modules.hidepage(_this);
+		});
+	},
+	initListLinks: function(target,url,selector,wrapclass,requirejs) {
 		$(target).data({
 			"url":url,
-			"selector":selector
+			"selector":selector,
+			"wrapclass":wrapclass,
+			"requirejs":requirejs
 		});
 	},
 	applyTolinks:function() {
-		page_modules.initListLinks("#qstop", "worldmap.html", "svg");
-		page_modules.initListLinks("#qstop2", "formPage.html", ".formContent");
-		//console.log($("#qstop").data())
-	},
-	loadmodules: function($cont,loadsurl) {
+		page_modules.initListLinks("#qstop","worldmap.html","svg","demopagec-3");
+		//page_modules.initListLinks("#qstop2","formPage.html",".formContent","demopagec-2");
+		page_modules.initListLinks("#qstop2","moduleHtml/Audit_Odm.html",".AuditBlck","demopagec-2","audit_odm_control");
+	}
+	/*loadmodules: function($cont,loadsurl) {
 		//监听事件
 		var $loadcontent = $cont;
 		var $loadcontInner = $(".app-init-page-pd");
@@ -453,7 +431,7 @@ var page_modules = {
 				page_modules.loadmodules($(".app-init-page"),loads);
 			}
 		})
-	}
+	}*/
 };
 
 
@@ -471,26 +449,23 @@ function jayfunction() {
 	//AJAX_DATA
 	//ajaxLoadData("http://127.0.0.1/jsonpcallback/jsonpcallback.js", "mydata");
 	//PAGESCROLL
-	pagescroll(".container",".eachBlck");
+	var pageIndex = $('.app_container').data("page");
+	if(pageIndex == "index"){
+		pagescroll(".container",".eachBlck");
+		//PAGE_1FN
+		require(['home_chart_control']);
+		//INIT_WORLD_MAP
+		initworldmap("#svgwrap");
+		//HOME_AUDIT
+		home_aduit(".eb_audit_inner");
+	}else if(pageIndex == "audit_odm"){
+		require(['audit_odm_control']);
+	}else if(pageIndex == "fai_odm"){
+		require(['fai_odm_control']);
+	}
 	//SIDEBAR_ACTION
 	sidebaract("#sidebar");
-	//PAGE_1FN
-	page_1fn();
-	//INIT_WORLD_MAP
-	initworldmap("#svgwrap");
-	//HOME_AUDIT
-	home_aduit(".eb_audit_inner");
 	
-	
-	page_modules.applyTolinks();
-	page_modules.elementEvent();
-	/*$("#qstop").on("tap", function(e) {
-		console.log("clicked")
-		var $contk = $(".app-init-page");
-		var cbk = function() {
-			console.log("showed")
-		}
-		page_modules.loadmodules($contk,cbk());
-
-	});*/
+	//PAGE_LOAD
+	page_modules.init_modules_action();
 }

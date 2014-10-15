@@ -314,8 +314,8 @@ html.onepage-scroll body {
 }
 .app-init-page {
 	position: absolute;
-	left:100%;
-	top: 0;
+	right:100%;
+	top: 0 !important;
 	width: 100%;
 	height: 100%;
 	z-index: 6;
@@ -352,20 +352,57 @@ html.onepage-scroll body {
 	-o-transition-timing-function: cubic-bezier(0, 1, 0, 1);
 	transition-timing-function:cubic-bezier(0, 1, 0, 1);
 	
-	-webkit-transform: translateX(-100%);
-	-moz-transform: translateX(-100%);
-	-ms-transform: translateX(-100%);
-	-o-transform: translateX(-100%);
-	transform:translateX(-100%);
+	-webkit-transform: translateX(100%) translateZ(0);
+	-moz-transform: translateX(100%) translateZ(0);
+	-ms-transform: translateX(100%) translateZ(0);
+	-o-transform: translateX(100%) translateZ(0);
+	transform:translateX(100%) translateZ(0);
 }
 .app-init-page.page_showed {
-	-webkit-transform: translateX(-100%);
-	-moz-transform: translateX(-100%);
-	-ms-transform: translateX(-100%);
-	-o-transform: translateX(-100%);
-	transform:translateX(-100%);
+	-webkit-transition: none;
+	-moz-transition: none;
+	-ms-transition: none;
+	-o-transition: none;
+	transition: none;
+	-webkit-transform: none;
+	-moz-transform: none;
+	-ms-transform: none;
+	-o-transform: none;
+	transform:none;
+	right:auto;
+	left: 0;
 }
-
+.app-init-page.page_hidding {
+	-webkit-transition: transform;
+	-moz-transition: transform;
+	-ms-transition: transform;
+	-o-transition: transform;
+	transition: transform;
+	
+	-webkit-transition-timing-function: cubic-bezier(0, 1, 0, 1);
+	-o-transition-timing-function: cubic-bezier(0, 1, 0, 1);
+	transition-timing-function:cubic-bezier(0, 1, 0, 1);
+	
+	-webkit-transform: translateX(-100%) translateZ(0);
+	-moz-transform: translateX(-100%) translateZ(0);
+	-ms-transform: translateX(-100%) translateZ(0);
+	-o-transform: translateX(-100%) translateZ(0);
+	transform:translateX(-100%) translateZ(0);
+}
+.app-init-page.page_hided {
+	-webkit-transition: none;
+	-moz-transition: none;
+	-ms-transition: none;
+	-o-transition: none;
+	transition: none;	
+	-webkit-transform: none;
+	-moz-transform: none;
+	-ms-transform: none;
+	-o-transform: none;
+	transform: none;
+	left:auto;
+	right:100%;
+}
 .nosvg .app_header {
 	background-image: url(../images/bitmap/logo.png);
 }
@@ -442,7 +479,6 @@ html.onepage-scroll body {
 .ebtd_table .cell-th {display: table-cell;text-align: right;padding-right: 8px;}
 .ebtd_table .cell-th:after {display:inline;content:":";}
 .ebtd_table .cell-td {display: table-cell;text-align: left;}
-
 .page_swicher_wrap,
 .first_page_swicher_wrap {
 	width: 100%;
@@ -846,6 +882,7 @@ html.onepage-scroll body {
 }
 
 .map_tips{
+	display: none;
 	position:absolute;
 	z-index:10;
 	top:50px;
@@ -858,6 +895,10 @@ html.onepage-scroll body {
 	padding:5px;
 }
 
+.map_tips.active{
+	display: block;
+}
+
 #chart_home_bar {
 	height: 90%;
 	width:100%;
@@ -868,10 +909,22 @@ html.onepage-scroll body {
 	width: 100%;
 }
 
+#fpy_module_name{
+	position:absolute;
+	top:36%;
+	width: 100%;
+	text-align: center;
+	font-size: 240px;
+	color: rgba(255,255,255,0.1);
+	z-index: 0;
+}
+
 #chart_fpy_Line{
 	width:100%;
 	height: 100%;
+	line-height: 100%;
 	float:left;
+	z-index: 2;
 }
 
 #chart_audit_gauge {
@@ -897,14 +950,14 @@ html.onepage-scroll body {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	width: 38% !important;
-	height: 100% !important;
+	width: 38%;
+	height: 100%;
 	float: left;
 }
 
 #chart_fai_bar{
-	height: 100% !important;
-	width: 58% !important;
+	height: 100%;
+	width: 58%;
 	float: right;
 }
 .botChartContainer {
@@ -1055,9 +1108,52 @@ html.onepage-scroll body {
 .eb_audit_items.red_3 {background-color:rgba(253,143,117,1.00)}
 .eb_audit_items.red_4 {background-color:rgba(254,155,128,1.00)}
 .eb_audit_items.red_5 {background-color:rgba(255,172,142,1.00)}
-
-
-
+.chartFilter {
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 50px;
+	height: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	overflow:visible;
+	z-index: 5;
+}
+.ccs {
+	position: relative;
+	text-align: center;
+	color:#fff;
+	font-size: 14px;
+	height: 3.85%;
+	cursor: pointer;
+}
+.ccs:after {
+	height: 100%;
+	display: inline-block;
+	width: 0;
+	vertical-align: middle;
+	margin-top:3px;
+	content: '';
+}
+.ccs.cur {
+	color:#00C5E5;
+}
+.ccs.cur:before {
+	z-index: -1;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin:-12px 0 0 -12px;
+	display: inline-block;
+	border-radius:50px;
+	content: '';
+	width: 24px;
+	height: 24px;
+	background:rgba(255,255,255,0.75);
+}
 /*20141014 paul add*/
 /*==============表单元素样式style=======================*/
 .form_title{
@@ -1086,6 +1182,9 @@ html.onepage-scroll body {
 .form_txt_style{
     padding: 0;
     padding-left: 3px;
+    width: 100%;
+    min-width: 160px;
+    height: 33px;
     border: 1px solid rgba(0,0,0,0.01);
     border-radius: 3px;
     background-color: rgba(0,0,0,0.36);
@@ -1093,19 +1192,14 @@ html.onepage-scroll body {
     color: #fff;
     font-size: 15px;
     font-family: "Helvetica Neue",\5FAE\8F6F\96C5\9ED1,Tohoma;
-    line-height: 30px\0;
-}
-.form_inp01{
-    height: 30px;
-    width: 237px;
-}
-.form_inp02{
-    height: 30px;
-    width: 872px;
+    line-height: 33px\0;
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 .form_area{
-    height: 152px;
-    width: 383px;
+    height: 154px;
+    min-width: 400px;
     font-size: 15px;
     font-family: "Helvetica Neue",\5FAE\8F6F\96C5\9ED1,Tohoma;
     resize: none;
@@ -1118,6 +1212,7 @@ html.onepage-scroll body {
     word-wrap: break-word;
     overflow-x: hidden;
     overflow-y: auto;
+    height: auto;
     line-height: 22px\0;
 }
 .form_area_box p{margin: 0;}
@@ -1138,13 +1233,11 @@ html.onepage-scroll body {
     -moz-appearance: none;
     text-indent: 0.01px;
     text-overflow: '';
-    background: url(../images/down-bg.png) 202px 4px no-repeat rgba(0,0,0,0.36); 
+    background: url(../images/down-bg.png) right 4px no-repeat rgba(0,0,0,0.36); 
+    background-size: 37px 22px;
     cursor: pointer; 
     color: rgba(255,255,255,0.61);
     height: 32px;
-}
-.form_select02{
-    background-position: 80px 4px;
 }
 .form_select option{
     line-height: 30px;
@@ -1172,8 +1265,8 @@ html.onepage-scroll body {
 .form_date{
     background-image: url(../images/calendar-ico.png);
     background-repeat: no-repeat;
-    background-position: 210px 4px;
-    background-size: 20px auto;
+    background-position: right 6px;
+    background-size: 28px 19px;
     cursor: pointer;
 }
 .form_btn{
@@ -1191,7 +1284,77 @@ html.onepage-scroll body {
     width: 146px;
     background-color: #24aa98;
 }
-
+.form_add_btn{
+	height: 38px;
+	/*width: 135px;*/
+	padding-left: 35px;
+	padding-right: 20px;
+	font-size: 15px;
+	color: #1f3037;
+	background: url(../images/add-ico.png) 7px center no-repeat #fff;
+	background-size: 20px 20px;
+}
+.fileWrap{
+	width: 100%;
+    height: 33px;
+    position: relative;
+}
+.fileWrap .form_txt_style{
+	width: 70%;
+	margin-right: 25px;
+}
+.form_file_btn{
+    width: 24%;
+    min-width: 145px;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 10;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+.fileShade{
+    width: 20%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 9;
+    border-radius: 3px;
+    text-align: center;
+    line-height: 32px;
+    cursor: pointer;
+    background: url(../images/file-ico.png) 10px center no-repeat #fff;
+}
+.fileWrap02 .form_txt_style{
+    float: right;
+    margin-right: 0;
+    width: 75%;
+}
+.fileWrap02 .form_file_btn,.fileWrap02 .fileShade{
+    left: 0;
+    top: 0;
+    right: auto;
+}
+.fileWrap02 .fileShade{
+    background-image: none;
+}
+.tableEditIco{
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background: url(../images/edit-ico.png) center center no-repeat;
+    background-size: 20px 21px;
+    margin-right: 10px;
+}
+.tableDelIco{
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background: url(../images/del-ico.png) center bottom no-repeat;
+    background-size: 20px 20px;
+}
 /* HiDPI support */
 
 /* 视网膜显示屏CSS */
@@ -1201,5 +1364,10 @@ only screen and (-moz-min-device-pixel-ratio: 2),
 only screen and (-o-min-device-pixel-ratio: 2/1),
 only screen and (min-device-pixel-ratio: 1.5),
 only screen and (min-device-pixel-ratio: 2) {
+    .form_date{ background-image: url(../images/calendar-ico@2x.png);}
     .form_select{ background-image: url(../images/down-bg@2x.png);}
+    .tableEditIco{ background-image: url(../images/edit-ico@2x.png);}
+    .tableDelIco{ background-image: url(../images/del-ico@2x.png);}
+    .fileShade{ background-image: url(../images/file-ico@2x.png);}
+    .form_add_btn{ background-image: url(../images/add-ico@2x.png);}
 }

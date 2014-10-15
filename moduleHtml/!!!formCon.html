@@ -11,17 +11,17 @@
 	<meta name="format-detection" content="telephone=no">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="mobile-web-app-capable" content="yes"> 
-	<script src="js/jquery-2.1.1.min.js"></script>
-	<script src="js/icheck.min.js"></script>
+	<script src="../js/jquery-2.1.1.min.js"></script>
+	<script src="../js/icheck.min.js"></script>
 	
-	<script src="js/mobiscroll/mobiscroll.core.js"></script>								<!-- 日期插件 JS -->
-    <script src="js/mobiscroll/mobiscroll.scroller.js" type="text/javascript"></script>	<!-- 日期插件 JS -->
-    <script src="js/mobiscroll/mobiscroll.datetime.js" type="text/javascript"></script>	<!-- 日期插件 JS -->
-    <script src="js/mobiscroll/mobiscroll.select.js" type="text/javascript"></script>		<!-- 日期插件 JS -->
+	<script src="../js/mobiscroll/mobiscroll.core.js"></script>								<!-- 日期插件 JS -->
+    <script src="../js/mobiscroll/mobiscroll.scroller.js" type="text/javascript"></script>	<!-- 日期插件 JS -->
+    <script src="../js/mobiscroll/mobiscroll.datetime.js" type="text/javascript"></script>	<!-- 日期插件 JS -->
+    <script src="../js/mobiscroll/mobiscroll.select.js" type="text/javascript"></script>		<!-- 日期插件 JS -->
 	
-	<link rel="stylesheet" href="css/mobiscroll.scroller.css">
-	<link rel="stylesheet" href="css/flat.css">
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="../css/mobiscroll.scroller.css">
+	<link rel="stylesheet" href="../css/flat.css">
+	<link rel="stylesheet" href="../css/style.css">
 	<style type="text/css">
 		html,body {
             min-height: 100%;
@@ -154,16 +154,16 @@
 <div class="formWrap">
    <ul>
         <li>
-            <span class="form_title form_title_1">EMEAEMEA</span><input type="text" class="form_txt_style form_inp01">
+            <span class="form_title form_title_1">EMEAEMEA</span><input type="text" class="form_txt_style">
         </li>
         <li>
-            <span class="form_title form_title_1">EMEA</span><input type="text" class="form_txt_style form_inp01">
+            <span class="form_title form_title_1">EMEA</span><input type="text" class="form_txt_style">
         </li>
         <li>
-            <span class="form_title form_title_1">AG</span><input type="text" class="form_txt_style form_inp01">
+            <span class="form_title form_title_1">AG</span><input type="text" class="form_txt_style">
         </li>
         <li>
-            <span class="form_title form_title_1">AG</span><input type="text" class="form_txt_style form_inp01">
+            <span class="form_title form_title_1">AG</span><input type="text" class="form_txt_style">
         </li>
         <li>
            <p class="form_title form_title_2">Issue Description<b class="form_tips"></b></p>
@@ -180,7 +180,7 @@
         </li>
         <li>
            <p class="form_title form_title_2">City<b class="form_tips"></b></p>
-            <select name="" id="" class="form_select form_txt_style form_inp01">
+            <select name="" id="" class="form_select form_txt_style">
                 <option value="--Please Select--" selected>--Please Select--</option>
                 <option value="ShangHai">ShangHai</option>
                 <option value="Beijing">Beijing</option>
@@ -189,7 +189,7 @@
         </li>
         <li>
            <p class="form_title form_title_2">Type<b class="form_tips"></b></p>
-            <select name="" id="" class="form_select form_txt_style form_inp01">
+            <select name="" id="" class="form_select form_txt_style">
                 <option value="--Please Select--" selected>--Please Select--</option>
                 <option value="ITU_BR_NB">ITU_BR_NB</option>
                 <option value="ITU_BR_DT">ITU_BR_DT</option>
@@ -198,11 +198,11 @@
         </li>
         <li>
             <p class="form_title form_title_2">Creator<b class="form_tips"></b></p>
-            <input type="text" class="form_txt_style form_inp01">
+            <input type="text" class="form_txt_style">
         </li>
         <li>
             <p class="form_title form_title_2">Issue Owner<b class="form_tips"></b></p>
-            <input type="text" class="form_txt_style form_inp01">
+            <input type="text" class="form_txt_style">
         </li>
         <li style="width:100%;">
            <span class="form_title form_title_3">GEO<b class="form_tips"></b></span>
@@ -219,7 +219,7 @@
         </li>
         <li style="width:30%;">
            <p class="form_title form_title_2">changeType<b class="form_tips"></b></p>
-            <select name="" id="changeType" class="form_select form_txt_style form_inp01 form_select02" style="width:auto; padding-right:40px;">
+            <select name="" id="changeType" class="form_select form_txt_style " style="width:auto; padding-right:40px;">
                 <option value="date" selected>date</option>
                 <option value="month" >month</option>
                 <option value="year" >year</option>
@@ -229,14 +229,31 @@
         </li>
         <li style="width:30%;">
             <p class="form_title form_title_2">MFGNameCn<b class="form_tips"></b></p>
-            <input type="text" class="form_txt_style form_inp01 form_date" readonly>
+            <input type="text" class="form_txt_style  form_date" readonly>
         </li>
         <li style="width:30%;">
             <p class="form_title form_title_2">MFGName<b class="form_tips"></b></p>
-            <input type="text" class="form_txt_style form_inp01 form_date" readonly>
+            <input type="text" class="form_txt_style  form_date" readonly>
         </li>
         <li style="width:100%">
             <input type="submit" class="form_btn form_sub_btn" value="Submit">
+        </li>
+        <li style="width:100%">
+            <input type="button" class="form_btn form_add_btn" value="Add Product">
+        </li>
+        <li style="width:100%">
+            <div class="fileWrap">
+                <input type="text" class="form_txt_style" readonly>
+                <input type="file" class="form_btn form_file_btn">
+                <span class="fileShade">选择文件</span>
+            </div>
+        </li>
+        <li style="width:100%">
+            <div class="fileWrap fileWrap02">
+                <input type="file" class="form_btn form_file_btn">
+                <span class="fileShade">选择文件</span>
+                <input type="text" class="form_txt_style" readonly>
+            </div>
         </li>
    </ul>
     

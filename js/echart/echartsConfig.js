@@ -15,7 +15,6 @@ function MyChart(myEcharts, ecConfig, dom_id, option, flag, initFlag) {
     this.loading_flag = flag; //显示过渡效果标志 --0:不显示, 1:显示
     this.chart = '';
     this.loadStatus = false;//是否根据新数据重置了option
-    this.init();
 }
 
 MyChart.prototype.init = function () {
@@ -27,10 +26,13 @@ MyChart.prototype.resetOption = function () {
     if(!this.loadStatus){
         this.getChartData(1);
     }
-    console.log('resetOption');
-    //this.chart = this.myEcharts.init(document.getElementById(this.dom_id));
+    this.chart = this.myEcharts.init(document.getElementById(this.dom_id));
     this.chart.setOption(this.option);
     this.bindEvents();
+}
+
+MyChart.prototype.dispose = function () {
+    this.chart.dispose();
 }
 
 MyChart.prototype.bindEvents = function () {//绑定相关事件

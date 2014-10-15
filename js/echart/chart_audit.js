@@ -1,4 +1,4 @@
-define(['echarts','echarts/chart/gauge','echarts/chart/bar'],
+define(['echarts','echarts/chart/gauge','echarts/chart/bar','echarts/chart/line'],
     function(ec){
         var lvChart = {
             echarts:ec,

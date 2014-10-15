@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- ------------------------------------------------------------------
+***********************************************************************
+开发人员书写规范:
+1.所有缩进都用 TAB， 而不是空格。
+2.非必要，禁止用行内样式例如 <div style="display:block"> 
+
+浏览器兼容：
+	IE10+
+	FireFox
+	Webkit内核浏览器:
+		Chrome,
+		Opear(WebKit版),
+		360浏览器(7.0+),
+		360急速浏览器,
+		搜狗浏览器,
+		115浏览器,
+		UC桌面浏览器,
+		枫树浏览器,
+		Safari 5.1+
+		Safari 7+ (Mac OS)
+注:由于国内IE6-7份额已经非常低，基本是测试人员跟一些非常旧的政府机构，所以不做兼容。
+***********************************************************************
+---------------------------------------------------------------------- -->
+	<!-- Basic Page Needs
+	================================================== -->
+	<meta charset="utf-8">
+	<title>EverySync</title>
+	<meta name="description" content="">
+	<meta name="author" content="JayChen">
+	<!-- 让IE浏览器用最高级内核渲染页面 还有用 Chrome 框架的页面用webkit 内核
+	================================================== -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<script src="../js/modernizr.custom.js"></script>
+	<script>
+		!Modernizr.csstransitions?window.location.href="np.html":'';
+		if (!Modernizr.svg) {alert("\u5bf9\u4e0d\u8d77\uff0c\u60a8\u7684\u6d4f\u89c8\u5668\u4e0d\u652f\u6301\u0053\u0056\u0047\u683c\u5f0f\u56fe\u50cf\uff0c\u8bf7\u5347\u7ea7\u7248\u672c\uff0c\u5982\u679c\u8fd8\u662f\u51fa\u73b0\u8fd9\u4e2a\u63d0\u793a\uff0c\u90a3\u4e48\u8bf7\u6362\u4e2a\u6d4f\u89c8\u5668\uff0c\u5bf9\u60a8\u9020\u6210\u4e0d\u4fbf\u8bf7\u8c05\u89e3\u3002")}
+	</script>
+	<!-- IOS6全屏 Chrome高版本全屏
+	================================================== -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes"> 
+	<!-- 让360双核浏览器用webkit内核渲染页面
+	================================================== -->
+	<meta name="renderer" content="webkit">
+	<!-- Mobile Specific Metas
+	================================================== -->
+	<!-- !!!注意 minimal-ui 是IOS7.1的新属性，最小化浏览器UI，但是在iOS8.1突然被取消 -->
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- CSS
+	================================================== -->
+	<link href="../css/reset.css" rel="stylesheet" type="text/css">
+	<link href="../css/Bina.css" rel="stylesheet" type="text/css">
+	<link href="../css/style.css" rel="stylesheet" type="text/css">
+    <link href="../css/EC.css" rel="stylesheet" type="text/css">
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="favicon.ico" >
+	<!-- Android 主屏图标
+	================================================== -->	
+	<link rel="icon" sizes="196x196" href="touch-icon.png">
+	<!-- IOS 主屏图标
+	================================================== -->
+	<link rel="apple-touch-icon" href="touch-icon-iphone.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+	<script src="../js/jquery-2.1.1.min.js"></script>
+	<style>
+		.emaillist{padding:0 10px 15px; margin-bottom:15px; border-bottom:1px solid #3d4548; font-size:14px; color:rgba(255,255,255,0.5);}
+		.emailcon{float:left; width:335px; cursor:pointer;}
+		.emailcon-text{line-height:20px;}
+		.emailcon-name{float:left; font-size:16px; color:#fff;}
+		.emailcon-time{float:right;}
+		.marB10{margin-bottom:10px;}
+		.commenticon{float:left; margin-top:5px; margin-right:15px; cursor:pointer;}
+		.commentcon{width:310px;}
+		.dialogSeacher{position:absolute; bottom:0; right:0; width:364px; height:35px; padding:8px 10px; background:#b8babc; overflow:hidden;}
+		.btinpwrap {display: table; width: 100%;}
+		.btinpT {display: table-cell;width: auto;}
+		.btinpB {display: table-cell;width: 85px;}
+		.btinpT input,
+		.btinpB input {
+			margin:0;padding:0;border:none;width:100%;height:100%;
+			vertical-align:top;
+			-webkit-appearance:none; /* for safari 6 */
+			-webkit-border-radius:0; /* for safari 6 */			
+		}
+		.btinpB input{height:35px; cursor:pointer; background:center center no-repeat #24aa98;	}
+		.btinpB input.upf{color:#fff;}
+		.btinpB input.send{background: url(../images/addfilegry.gif) center center no-repeat #e7e7e7;}
+		.btinpT input {
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			border:solid 1px #e3e3e3; border-right:none; height:35px; background:#fff; color:#000; padding:0 10px;
+		}
+	</style>
+</head>
+<body>
+<div class="app_header">
+	<div class="sideBtn">
+		<div class="side_show_btn ficon-icon-6"></div>
+		<div class="side_hide_btn ficon-icon-7"></div>
+	</div>
+	<div class="ctrBtns">
+		<div class="ctr_1 ficon-icon-1"></div>
+		<div class="ctr_2 ficon-icon-2"></div>
+		<div class="ctr_3 ficon-icon-3"></div>
+        <div class="ctr_2 ficon-icon-4"></div>
+		<div class="ctr_3 ficon-icon-5"></div>
+	</div>
+</div>
+<div class="h_auto demopagec-1">
+	<div class="ecPageTab">
+		<table cellpadding="0" cellspacing="0" border="0" width="100%">
+			<thead>
+				<tr>
+					<th width="8%">Status</th>
+					<th>IRCT</th>
+					<th>ODM</th>
+					<th>Product</th>
+					<th>Q Hold</th>
+					<th width="40%">Issue description</th>
+                    <th>Operating</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="textWordWrap">Montior</td>
+					<td>8Day</td>
+					<td>LCFC_HFNB</td>
+					<td>Yoga3 Pro</td>
+					<td>FGs:0 <br/>WIP:0</td>
+                    <td>Yoga3 Bach found 19ocs LCD flicker fail at OOB inspection station,FR id=s19/2000=0.95%</td>
+					<td><a href=""><img src="../images/EcIcon/link_01.png" alt="" /></a></td>
+				</tr>
+				<tr>
+					<td class="textWordWrap">Montior</td>
+					<td>8Day</td>
+					<td>LCFC_HFNB</td>
+					<td>Yoga3 Pro</td>
+					<td>FGs:0 <br/>WIP:0</td>
+                    <td>Yoga3 Bach found 19ocs LCD flicker fail at OOB inspection station,FR id=s19/2000=0.95%</td>
+					<td><a href=""><img src="../images/EcIcon/link_01.png" alt="" /></a></td>
+				</tr>
+				<tr>
+					<td class="textWordWrap">Montior</td>
+					<td>8Day</td>
+					<td>LCFC_HFNB</td>
+					<td>Yoga3 Pro</td>
+					<td>FGs:0 <br/>WIP:0</td>
+                    <td>Yoga3 Bach found 19ocs LCD flicker fail at OOB inspection station,FR id=s19/2000=0.95%</td>
+					<td><a href=""><img src="../images/EcIcon/link_01.png" alt="" /></a></td>
+				</tr>
+				<tr>
+					<td class="textWordWrap">Montior</td>
+					<td>8Day</td>
+					<td>LCFC_HFNB</td>
+					<td>Yoga3 Pro</td>
+					<td>FGs:0 <br/>WIP:0</td>
+                    <td>Yoga3 Bach found 19ocs LCD flicker fail at OOB inspection station,FR id=s19/2000=0.95%</td>
+					<td><a href=""><img src="../images/EcIcon/link_01.png" alt="" /></a></td>
+				</tr>
+                <tr>
+					<td class="textWordWrap">Montior</td>
+					<td>8Day</td>
+					<td>LCFC_HFNB</td>
+					<td>Yoga3 Pro</td>
+					<td>FGs:0 <br/>WIP:0</td>
+                    <td>Yoga3 Bach found 19ocs LCD flicker fail at OOB inspection station,FR id=s19/2000=0.95%</td>
+					<td><a href=""><img src="../images/EcIcon/link_01.png" alt="" /></a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</div>
+
+<div class="sidebar_wrap">
+	<div class="sidebar" id="sidebar">
+		<div class="sideItems">
+			<div class="silinks">
+			<span>HOME</span></div>
+		</div>
+		<div class="sideItems">
+			<div class="silinks">
+				<span>Q-STOP</span>
+				<div class="silinksSec"><span class="skInner">Create</span></div>
+				<div class="silinksSec"><span class="skInner">Managment</span></div>
+				<div class="silinksSec"><span class="skInner">ODM Status</span></div>
+				<div class="silinksSec"><span class="skInner">Search</span></div>
+			</div>
+		</div>
+		<div class="sideItems">
+			<div class="silinks">
+				<span>FPY/OOB</span>
+				<div class="silinksSec"><span class="skInner">Create</span></div>
+				<div class="silinksSec"><span class="skInner">Create2</span></div>
+				<div class="silinksSec"><span class="skInner">Create3</span></div>
+			</div>
+		</div>
+		<div class="sideItems">
+			<div class="silinks">
+				<span>AUDIT</span>
+				<div class="silinksSec"><span class="skInner">Create</span></div>
+			</div>
+		</div>
+		<div class="sideItems">
+			<div class="silinks">
+				<span>FAI</span>
+				<div class="silinksSec"><span class="skInner">Create</span></div>
+			</div>
+		</div>
+		<div class="sideItems">
+			<div class="silinks">
+				<span>EC</span>
+				<div class="silinksSec"><span class="skInner">Create</span></div>
+			</div>
+		</div>	
+	</div>
+</div>
+<!-- EC Dialog -->
+<div class="EC_Dialog">
+	<div class="EcR-box">
+		<div class="dialogTit">Bulletin Board</div>
+		<div class="EcdialogCon clearfix">
+			<div class="emaillist clearfix">
+				<span class="commenticon"><img src="../images/EcIcon/comment-icon.png" alt=""></span>	
+				<div class="emailcon commentcon">
+					<div class="marB10 clearfix">
+						<span class="emailcon-name">Lebo_Zhang</span>
+						<span class="emailcon-time">2014-09-04 00:51:21</span>
+					</div>
+					<div class="emailcon-text">Last week MWDC have notupload in webdisc,speed up.</div> 
+				</div>							
+			</div>
+			<div class="emaillist clearfix">
+				<span class="commenticon"><img src="../images/EcIcon/comment-icon.png" alt=""></span>	
+				<div class="emailcon commentcon">
+					<div class="marB10 clearfix">
+						<span class="emailcon-name">Partick_Zhao</span>
+						<span class="emailcon-time">2014-09-04 00:51:21</span>
+					</div>
+					<div class="emailcon-text">MP of in house/ODM/ FPY/OOB uncompleted, speed up. </div> 
+				</div>						
+			</div>
+			<div class="emaillist clearfix">
+				<span class="commenticon"><img src="../images/EcIcon/comment-icon.png" alt=""></span>	
+				<div class="emailcon commentcon">
+					<div class="marB10 clearfix">
+						<span class="emailcon-name">Songtao_Qu</span>
+						<span class="emailcon-time">2014-09-04 00:51:21</span>
+					</div>
+					<div class="emailcon-text">Bach’s MQE,and Horizon2s’s MQE:why i can  not see any Yield rat</div> 
+				</div>							
+			</div>
+			<div class="emaillist clearfix">
+				<span class="commenticon"><img src="../images/EcIcon/comment-icon.png" alt=""></span>	
+				<div class="emailcon commentcon">
+					<div class="marB10 clearfix">
+						<span class="emailcon-name">Jason_Zhao</span>
+						<span class="emailcon-time">2014-09-04 00:51:21</span>
+					</div>
+					<div class="emailcon-text">Great job!Brothers! </div> 
+				</div>							
+			</div>
+			<div class="emaillist clearfix">
+				<span class="commenticon"><img src="../images/EcIcon/comment-icon.png" alt=""></span>	
+				<div class="emailcon commentcon">
+					<div class="marB10 clearfix">
+						<span class="emailcon-name">Guangsong_Xu</span>
+						<span class="emailcon-time">2014-09-04 00:51:21</span>
+					</div>
+					<div class="emailcon-text">确认Quanta FAI有触屏测试，打开画图进行全屏测试。 Quanta OOB有触屏测试但没有FAI测试的全面，现在 一样求</div> 
+				</div>				
+			</div></div>
+		<div class="dialogSeacher">
+			<div class="btinpwrap">
+	                <div class="btinpT">
+	                    <input type="text" placeholder="Say something.">
+	                </div>
+	                <div id="btnUpload_Box" class="btinpB">
+	                    <input id="btnUpload" type="button" class="send" value=" " style="width: 35px; height:35px;"
+						><input id="btnsend" type="submit" class="upf" value="Send" style="width: 50px; height:35px;"
+	                    ><input id="fileupload" type="file" value=" " style=" visibility:hidden; width:0; height:0; position:absolute;" multiple>	                  
+	            </div>	                
+	        </div>
+		</div>
+	</div>
+</div>
+<!-- Javascript with AMD 
+================================================== -->
+<script src="../js/require.js" data-main="../js/main" ></script>
+</body>
+</html>

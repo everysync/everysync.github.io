@@ -21,7 +21,9 @@ require.config({
 		"chart_audit"	:"echart/chart_audit",
 		"chart_fai"	:"echart/chart_fai",
 		"home_chart_control"	:"echart/home_chart_control",
-		"jay"				:"jay"
+		"audit_odm_control"	:"echart/audit_odm_control",
+		"fai_odm_control"	:"echart/fai_odm_control",
+		"jay"				: "jay"
 	},
 	shim: {//模块依赖关系
 		jquery			: {exports: '$'},
@@ -33,7 +35,7 @@ require.config({
 		'chart_fpyoob'	: {deps: ['echartsConfig']},
 		'chart_fpyoob_ramp'	: {deps: ['echartsConfig']},
 		'chart_audit'	: {deps: ['echartsConfig']},
-		'chart_fai'	: {deps: ['echartsConfig']},
+		'chart_fai'		: {deps: ['echartsConfig']},
 		'jay'  			: {deps: ['jquery','utf','onepageScroll','scalcheight','swiper']}
 	}
 });

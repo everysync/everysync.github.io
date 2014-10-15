@@ -62,7 +62,7 @@ define(function(){
 			// var img = new Image();
    //    img.src = v.chart.getDataURL();
    //    $("#"+v.dom_id).html(img);
-			v.chart.clear();
+			v.dispose();
 		});
 	}
 	function resetOptionChart(index){//绘制chart
@@ -72,6 +72,7 @@ define(function(){
 			//console.log('p'+index);
 		});
 	}
+
 
 	window.onresize = function(){
 		$.each(chartObj['p'+currIdx],function(k,v){

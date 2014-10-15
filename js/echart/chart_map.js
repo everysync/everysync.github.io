@@ -8,11 +8,10 @@ define(['echarts','echarts/chart/map'],
         function LvMap(container){
             MyChart.call(this, lvChart.echarts, lvChart.ecConfig, container, {}, 0, 0);
             this.getChartData(1);
+            this.shapeList = null;
+            this.tip_idx = 1;
         }
         iheritPrototype(LvMap, MyChart);
-        LvMap.prototype.tipCallback = function(){
-            console.log(444);
-        }
         LvMap.prototype._setOption = function(mydata){
             var self = this;
             var option = {
@@ -20,6 +19,7 @@ define(['echarts','echarts/chart/map'],
                 animationDuration:600,
                 backgroundColor:"rgba(0,0,0,0)",
                 tooltip : {
+                    show:false,
                     trigger: 'item',
                     backgroundColor:'#00FFB7',
                     borderRadius: 3,
@@ -41,24 +41,24 @@ define(['echarts','echarts/chart/map'],
                         //console.log(callback);
                         //$(".map_tips").html(params[5].name+':'+params[5].value);
                         var result = params[5].name+':'+params[5].value;
-                        //self.tipCallback();
                         return result;
                     }
                 },
                 // roamController: {
                 //     show: false,
                 //     x: 'right',
-                //     y:0,
                 //     mapTypeControl: {
                 //         'china': true
                 //     }
                 // },
                 series: [
                     {
-                        name: 'city',
+                        tooltip : {
+                            show:false
+                        },
+                        name: 'Top',
                         type: 'map',
                         mapType: 'china',
-                        clickable:false,
                         itemStyle:{
                             normal:{
                                 borderColor:'rgba(46, 67, 79,1)',
@@ -68,6 +68,71 @@ define(['echarts','echarts/chart/map'],
                                 }
                             }
                         },
+                        mapLocation: {
+                            x:'center',
+                            //x: '5%',
+                            y: 'center',
+                            width: '90%',
+                            height: '80%'
+                        },
+                        selectedMode: null,
+                        hoverable: false,
+                        clickable:false,
+                        roam: false,
+                        data: [], 
+                        geoCoord: {
+                            india:[81.18,16.54],
+                            southAmerica:[92.18,16.54]
+                        },
+                        markPoint: {
+                            clickable:false,
+                            itemStyle: {
+                                normal: {
+                                    label: {
+                                        show: false
+                                    },
+                                    labelLine: {
+                                        show: false
+                                    }
+                                },
+                                emphasis: {
+                                    color:"#000",
+                                    areaStyle:{},
+                                    label: {
+                                        show: false,
+                                        position: 'outer'
+                                    },
+                                    labelLine: {
+                                        show: false,
+                                        lineStyle: {
+                                            color: 'red'
+                                        }
+                                    }
+                                }
+                            },
+                            data: [
+                                {
+                                    geoCoord : [81.18,16.54],
+                                    name:'india',
+                                    value: 'india',
+                                    symbolSize: 40,
+                                    symbol: 'image://images/india.png'
+                                },
+                                {
+                                    geoCoord : [92.18,16.54],
+                                    value: 'southAmerica',
+                                    name:'southAmerica',
+                                    symbolSize: 40,
+                                    symbol: 'image://images/southAmerica.png'
+                                }
+                            ]
+                        }
+                    }, {
+                        hoverable: false,
+                        name: 'city',
+                        type: 'map',
+                        mapType: 'china',
+                        roam: false,
                         geoCoord: {
                         },
                         mapLocation: {
@@ -77,47 +142,11 @@ define(['echarts','echarts/chart/map'],
                             width: '90%',
                             height: '80%'
                         },
-                        selectedMode: null,
-                        hoverable: false,
-                        roam: false,
-                        data: [{name: '北京', selected: false ,tooltip: {show: false} }, {name: '天津', selected: false ,tooltip: {show: false} }, {name: '上海', selected: false ,tooltip: {show: false} }, {name: '重庆', selected: false ,tooltip: {show: false} }, {name: '河北', selected: false ,tooltip: {show: false} }, {name: '河南', selected: false ,tooltip: {show: false} }, {name: '云南', selected: false ,tooltip: {show: false} }, {name: '辽宁', selected: false ,tooltip: {show: false} }, {name: '黑龙江', selected: false ,tooltip: {show: false} }, {name: '湖南', selected: false ,tooltip: {show: false} }, {name: '安徽', selected: false ,tooltip: {show: false} }, {name: '山东', selected: false ,tooltip: {show: false} }, {name: '新疆', selected: false ,tooltip: {show: false} }, {name: '江苏', selected: false ,tooltip: {show: false} }, {name: '浙江', selected: false ,tooltip: {show: false} }, {name: '江西', selected: false ,tooltip: {show: false} }, {name: '湖北', selected: false ,tooltip: {show: false} }, {name: '广西', selected: false ,tooltip: {show: false} }, {name: '甘肃', selected: false ,tooltip: {show: false} }, {name: '山西', selected: false ,tooltip: {show: false} }, {name: '内蒙古', selected: false ,tooltip: {show: false} }, {name: '陕西', selected: false ,tooltip: {show: false} }, {name: '吉林', selected: false ,tooltip: {show: false} }, {name: '福建', selected: false ,tooltip: {show: false} }, {name: '贵州', selected: false ,tooltip: {show: false} }, {name: '广东', selected: false ,tooltip: {show: false} }, {name: '青海', selected: false ,tooltip: {show: false} }, {name: '西藏', selected: false ,tooltip: {show: false} }, {name: '四川', selected: false ,tooltip: {show: false} }, {name: '宁夏', selected: false ,tooltip: {show: false} }, {name: '海南', selected: false ,tooltip: {show: false} }, {name: '台湾', selected: false ,tooltip: {show: false} }, {name: '香港', selected: false ,tooltip: {show: false} }, {name: '澳门', selected: false ,tooltip: {show: false} }],
+                        data: [],
                         markPoint: {
                             symbol: 'circle',
                             symbolSize: 6,
                             data: []
-                        }
-                    },{
-                        name:'',
-                        type:'pie',
-                        clickable:false,
-                        hoverable: false,
-                        data:[],
-                        markPoint: {
-                            symbol: 'circle',
-                            symbolSize: 6,
-                            data: [
-                                {
-                                    x: '25%',
-                                    y: '90%',
-                                    name:'india',
-                                    value: 'india',
-                                    symbolSize: 40,
-                                    symbol: 'image://images/india.png',
-                                    clickable:false,
-                                    tooltip : {show:false},
-                                    itemStyle: {normal: {label: {show: false }, labelLine: {show: false } }, emphasis: {color:"#000", areaStyle:{}, label: {show: false, position: 'outer'}, labelLine: {show: false, lineStyle: {color: 'red'} } } } 
-                                },{
-                                    x: '38%',
-                                    y: '92%',
-                                    value: 'southAmerica',
-                                    name:'southAmerica',
-                                    symbolSize: 40,
-                                    symbol: 'image://images/southAmerica.png',
-                                    tooltip : {show:false},
-                                    clickable:false,
-                                    itemStyle: {normal: {label: {show: false }, labelLine: {show: false } }, emphasis: {color:"#000", areaStyle:{}, label: {show: false, position: 'outer'}, labelLine: {show: false, lineStyle: {color: 'red'} } } } 
-                                }
-                            ]
                         }
                     }
                 ]      
@@ -149,34 +178,50 @@ define(['echarts','echarts/chart/map'],
             };
             var geoCoord = {},
                 dataMark = [];
-            // 地图-海外 点名称 
-            var Overseas = {"Pondicherry_IN_NB":{x:'25%',y:'90%'},"ITU_BR_NB":{x:'40%',y:'90%'},"Newsan_AR_NB":{x:'37%',y:'92%'}};
             for (var i = 0; i < mydata.length; i++) {
                 var v = mydata[i];
-                if(!Overseas.hasOwnProperty(v['listName'])){
-                    geoCoord[v['listName']] = v['geo'];
-                    dataMark.push({name: v['listName'], value: v['valu'], itemStyle: itemStyle[v.color]});
-                }else{
-                    option.series[1].markPoint.data.push({name: v['listName'], x: Overseas[v['listName']].x,
-                                    y: Overseas[v['listName']].y,value: v['valu'], itemStyle: itemStyle[v.color]});
-                }
+                geoCoord[v['listName']] = v['geo'];
+                dataMark.push({name: v['listName'], value: v['valu'], itemStyle: itemStyle[v.color]});
             }
             option.series[0].geoCoord = geoCoord;
-            option.series[0].markPoint.data = dataMark;
+            option.series[1].markPoint.data = dataMark;
             this.option = option;
             this.loadStatus = true;
             return option;
         };
-        LvMap.prototype.bindEvents = function () {
-            this.chart.on(lvChart.ecConfig.EVENT.CLICK, function(param){
-                console.log(param);
-                if(param.seriesIndex >= 0){
-                    alert(param.name);
+        LvMap.prototype.showTip = function(currname){//显示提示框
+            $.each(this.shapeList,function(k,v){
+                if(v.name == currname){
+                    $(".map_tips").animate({'top':v.pos.y-35+'px','left':v.pos.x+'px'}, 200, function() {
+                        $(".map_tips").show();
+                    });
+                    $(".map_tips").html(v.name);
+                    return false;
                 }
             });
-            this.chart.component.tooltip.showTip({seriesIndex: "0", seriesName:'city', name:'Wistron_CD_NB'});
         };
-        LvMap.prototype.getChartData = function(drawFlag){
+        LvMap.prototype.dispose = function(){//显示提示框
+            this.chart.dispose();
+            $(".map_tips").hide();
+        };
+        LvMap.prototype.bindEvents = function () {//绑定相关事件
+            var self = this;
+            this.chart.on(lvChart.ecConfig.EVENT.CLICK, function(param){
+                if(param.seriesIndex > 0){
+                    $(".mapDataDetail").filter('[data-cname="'+param.name+'"]').trigger('click');//模拟右侧列表相应项被点击了
+                }
+            });
+            self.shapeList = [];
+            setTimeout(function(){//获取地图上标注点的坐标，延时执行时因为直接执行shapeList为空，与页面执行速度有问题
+                $.each(self.chart._chartList[1].shapeList,function(k,v){
+                    if(v.clickable){
+                        self.shapeList.push({name:v._echartsData._name,pos:{x:v.style.x + v.position[0],y:v.style.y + v.position[1]}});
+                    }
+                });
+                $(".mapDataDetail").eq(self.tip_idx).trigger('click');//模拟
+            },200);
+        };
+        LvMap.prototype.getChartData = function(drawFlag){//获取数据
             var self = this;
             $.ajax({
                 type: "get",
@@ -184,11 +229,85 @@ define(['echarts','echarts/chart/map'],
                 dataType: "jsonp",
                 jsonpCallback:"mapListData"
             }).done(function(data) {
+                self._setRightList(data.mapListData);
                 self._setOption(data.mapListData);
                 drawFlag&&self.resetOption();
             });
         };
-
+        LvMap.prototype._setRightList = function(MapArry) {//设置右侧列表
+            var self = this;
+            $(".mapSideBot").on("flick.diswheel mousewheel.diswheel DOMMouseScroll.diswheel touchmove.diswheel", function(e) {
+                e.stopPropagation();
+                return false;
+            });
+            var page_1_content = $(".demopagec-1");
+            var $mslistwrap    = $(".mslist");
+            var liTempWrap     = $("<div>").attr("id","wpt");
+            var liTemplate     = 
+                    '<div class="mapDataDetail">'+
+                    '   <h2 class="mdh2">'+
+                    '       <span class="mdh2_1">标题:</span>'+
+                    '       <span class="mdh2_2">标题名</span>'+
+                    '   </h2>'+
+                    '   <ul class="mdhlist">'+
+                    '       <li class="mdhli">'+
+                    '           <span class="mli_l">名字</span>'+
+                    '           <span class="mli_r">数据</span>'+
+                    '       </li>'+
+                    '   </ul>'+
+                    '</div>';
+            var MapArrylength = MapArry.length;
+            var $a = $(liTemplate);
+            for (var i=0; i<MapArrylength; i++) {
+                var $kt = $(liTemplate);
+                var $ktlist = $kt.find(".mdhlist");
+                $kt.find(".mdh2_1").html(MapArry[i]['listTitle']+":");
+                $kt.find(".mdh2_2").html(MapArry[i]['listName']);
+                $kt.attr('data-cname',MapArry[i]['listName']);
+                $ktlist.html("");
+                $.each(MapArry[i]['listdata'], function(i,d) {
+                    $ktlist.append(
+                        $("<li>").addClass("mdhli").html(
+                            '<span class="mli_l">'+ d[0] +'</span>'+' <span class="mli_r">'+ d[1] +'</span>'
+                        )
+                    );
+                });
+                liTempWrap.append( $('<li class="msEachlist swiper-slide"></li>').append($kt) );
+            }
+            $mslistwrap.html( liTempWrap.html() );
+                
+            //init swiper
+            var $swiperTarget = $(".mapSideBot");
+            var page_1_swiper = $swiperTarget.swiper({
+                mode:'vertical',
+                initialSlide:1,
+                slidesPerView:'auto',
+                visibilityFullFit:true,
+                mousewheelControl:true,
+                calculateHeight:true,
+                slidesPerViewFit:true,
+                centeredSlides:true,
+                onSlideClick:function(sw) {
+                    page_1_swiper.swipeTo(page_1_swiper.clickedSlideIndex);
+                    var $sides = $(page_1_swiper.clickedSlide);
+                    $sides
+                        .addClass("swiper-slide-click-active")
+                        .siblings()
+                        .removeClass("swiper-slide-click-active");
+                    self.tip_idx = page_1_swiper.clickedSlideIndex;
+                    self.showTip($sides.find(".mdh2_2").text());
+                }
+            });
+            $swiperTarget.on("transitionend.swiper webkitTransitionEnd.swiper oTransitionEnd.swiper", function(e) {
+                e.stopPropagation();
+            });
+            //clean
+            $mslistwrap   =null;
+            liTempWrap    =null;
+            liTemplate    =null;
+            MapArrylength =null;
+            $a            =null;
+        };
         return LvMap;
     }
 );

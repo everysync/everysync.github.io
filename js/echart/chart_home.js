@@ -103,6 +103,9 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                             itemStyle: {
                                 normal: {
                                     color: '#F97360',
+                                    lineStyle: { // 系列级个性化折线样式
+                                        type:'dotted'
+                                    }, 
                                     label: {
                                         show: false
                                     }
