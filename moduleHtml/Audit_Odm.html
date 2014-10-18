@@ -69,9 +69,13 @@
 	<link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
 	<link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
 	<script src="../js/prefixfree.min.js"></script>
-	
+	<style>
+		html,body {
+			height: 100%;
+		}
+	</style>
 </head>
-<body>
+<body class="pagebgc-3">
 <div class="app_header">
 	<div class="sideBtn">
 		<div class="side_show_btn ficon-icon-6"></div>
@@ -142,16 +146,17 @@
 ================================================== -->
 <script src="../js/require.js" data-main="../js/main" ></script>
 <script src="../js/jquery-2.1.1.min.js"></script>
-<script src="../js/icheck.min.js"></script>
-<script type="text/javascript">
+	<script src="../js/tab_pick.js"></script>
+
+    <script type="text/javascript">
 	$(function() {
-        //单选\复选框定制js
-        $('.form_radio,.form_check').iCheck({
-            checkboxClass: 'icheckbox_flat',
-            radioClass: 'iradio_flat',
-            increaseArea: '20%' // optional
-        });
+		require(["page_audit"], function(page) {
+			//require(["tab_pick"]),function( tab_pick) {
+				page.init();
+			//}
+	
+		});
 	});
-</script>
+	</script>
 </body>
 </html>

@@ -72,13 +72,13 @@ define(function(){
 			//console.log('p'+index);
 		});
 	}
-
-
-	window.onresize = function(){
+	$(window).off(".index");
+	$(window).on('resize.index',function() {
 		$.each(chartObj['p'+currIdx],function(k,v){
 			v.chart.resize();
+			v.bindEvents();
 		});
-	}
+	});
 
 	$(document).on({
 		"pagein_1":function(){

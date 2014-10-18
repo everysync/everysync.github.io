@@ -8,15 +8,16 @@ define(['echarts','echarts/chart/map'],
         function LvMap(container){
             MyChart.call(this, lvChart.echarts, lvChart.ecConfig, container, {}, 0, 0);
             this.getChartData(1);
-            this.shapeList = null;
-            this.tip_idx = 1;
+            this.shapeListData = null;
+            this.tip_idx = -1;
         }
         iheritPrototype(LvMap, MyChart);
         LvMap.prototype._setOption = function(mydata){
             var self = this;
+            self.shapeListData = mydata;
             var option = {
                 animation:true,
-                animationDuration:600,
+                animationDuration:200,
                 backgroundColor:"rgba(0,0,0,0)",
                 tooltip : {
                     show:false,
@@ -178,10 +179,12 @@ define(['echarts','echarts/chart/map'],
             };
             var geoCoord = {},
                 dataMark = [];
+            this.shapeListData = {};
             for (var i = 0; i < mydata.length; i++) {
                 var v = mydata[i];
                 geoCoord[v['listName']] = v['geo'];
                 dataMark.push({name: v['listName'], value: v['valu'], itemStyle: itemStyle[v.color]});
+                this.shapeListData[v['listName']]= {data:v,pos:{}};
             }
             option.series[0].geoCoord = geoCoord;
             option.series[1].markPoint.data = dataMark;
@@ -190,15 +193,48 @@ define(['echarts','echarts/chart/map'],
             return option;
         };
         LvMap.prototype.showTip = function(currname){//显示提示框
-            $.each(this.shapeList,function(k,v){
-                if(v.name == currname){
-                    $(".map_tips").animate({'top':v.pos.y-35+'px','left':v.pos.x+'px'}, 200, function() {
-                        $(".map_tips").show();
-                    });
-                    $(".map_tips").html(v.name);
-                    return false;
-                }
+            var v = this.shapeListData[currname];
+            if(v.data.color == 's1'){
+                $(".map_tips").html(
+                    '<h2 class="mtt">'+v.data.listName+'</h2>'+
+                    '<div class="mtc">'+
+                    '   <span>03</span>'+
+                    '   <p>DAY</p>'+
+                    '   <p>8Hours</p>'+
+                    '</div>'+
+                    '<div class="maptiptable">'+
+                    '   <div class="row">'+
+                    '       <div class="cell">Stop:</div>'+
+                    '       <div class="cell">03-24 18:05:30</div>'+
+                    '   </div>'+
+                    '   <div class="row">'+
+                    '       <div class="cell">Recovery:</div>'+
+                    '       <div class="cell">03-24 18:05:30</div>'+
+                    '   </div>'+
+                    '</div>'+
+                    '<div class="maptiptable2">'+
+                    '   <div class="row">'+
+                    '       <div class="cell">-FGs:1</div>'+
+                    '       <div class="cell">-WIP:4</div>'+
+                    '       <div class="cell">-ONS:6</div>'+
+                    '       <div class="cell">-Category:design</div>'+
+                    '   </div>'+
+                    '</div>'+
+                    '<div class="mtb">'+
+                    '   <h3>STOP WIRE PRODUCTS STOP WIRE PRODUCTS</h3>'+
+                    '   <p>H520s Enginneering related yuanjqH520s</p>'+
+                    '   <p>related Enginneering related related</p>'+
+                    '</div>').attr('class','map_tips map_tips_red');
+            }else if(v.data.color == 's2'){
+                $(".map_tips").html(v.data.listName+" : "+v.data.valu).attr('class','map_tips map_tips_yellow');
+            }else{
+                $(".map_tips").html(v.data.listName+" : "+v.data.valu).attr('class','map_tips map_tips');
+            }
+            $(".map_tips").animate({'top':v.pos.y-$(".map_tips").outerHeight()-10+'px','left':v.pos.x-parseInt($(".map_tips").outerWidth()/2)+46+'px'}, 120, function() {
+                $(".map_tips").show();
             });
+            v = null;
+            return false;
         };
         LvMap.prototype.dispose = function(){//显示提示框
             this.chart.dispose();
@@ -211,15 +247,18 @@ define(['echarts','echarts/chart/map'],
                     $(".mapDataDetail").filter('[data-cname="'+param.name+'"]').trigger('click');//模拟右侧列表相应项被点击了
                 }
             });
-            self.shapeList = [];
             setTimeout(function(){//获取地图上标注点的坐标，延时执行时因为直接执行shapeList为空，与页面执行速度有问题
                 $.each(self.chart._chartList[1].shapeList,function(k,v){
                     if(v.clickable){
-                        self.shapeList.push({name:v._echartsData._name,pos:{x:v.style.x + v.position[0],y:v.style.y + v.position[1]}});
+                        self.shapeListData[v._echartsData._name]['pos'] = 
+                            { 
+                                x:v.style.x + v.position[0],
+                                y:v.style.y + v.position[1]
+                            };
                     }
                 });
                 $(".mapDataDetail").eq(self.tip_idx).trigger('click');//模拟
-            },200);
+            },500);
         };
         LvMap.prototype.getChartData = function(drawFlag){//获取数据
             var self = this;
@@ -273,6 +312,9 @@ define(['echarts','echarts/chart/map'],
                     );
                 });
                 liTempWrap.append( $('<li class="msEachlist swiper-slide"></li>').append($kt) );
+                if(MapArry[i]['color'] == "s1" && self.tip_idx < 0){//初始化tip索引值，设置为第一个红色
+                    self.tip_idx = i;
+                }
             }
             $mslistwrap.html( liTempWrap.html() );
                 

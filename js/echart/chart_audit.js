@@ -452,6 +452,134 @@ define(['echarts','echarts/chart/gauge','echarts/chart/bar','echarts/chart/line'
             self._setOptionTimeLine(mydata);
             drawFlag&&self.resetOption();
         };
+        LvAudit.prototype._setOptionLine = function(mydata){
+            var option = {
+                title : {
+                    'text':'',
+                    x:40,
+                    y:20,
+                    textStyle:{
+                        fontSize: 24, 
+                        fontWeight: 'normal',
+                        color: '#fff'
+                    }
+                },
+                tooltip : {'trigger':'axis'},
+                color:["#FFF"],
+                legend : {
+                    x:'right',
+                    y:-300,
+                    padding:25,
+                    itemGap:25,
+                    textStyle:{color: '#B7E1EA',fontSize:14},
+                    'data':mydata.legend
+                },
+                toolbox : {
+                    'show':false, 
+                    orient : 'vertical',
+                    x: 'right', 
+                    y: 'center',
+                    'feature':{
+                        'mark':{'show':true},
+                        'dataView':{'show':true,'readOnly':false},
+                        'magicType':{'show':true,'type':['line','bar','stack','tiled']},
+                        'restore':{'show':true},
+                        'saveAsImage':{'show':true}
+                    }
+                },
+                calculable : false,
+                animation:true,
+                animationDuration:600,
+                grid : {
+                    'x':70,
+                    'y':10,
+                    'x2':50,
+                    'y2':70,
+                    borderWidth:0
+                },
+                xAxis : [{
+                    'type':'category',
+                    'axisLabel':{'interval':0,'rotate':-45,'textStyle':{color: 'rgba(255,255,255,0.65)'}},
+                    'axisLine':{lineStyle:{color: 'rgba(255,255,255,0.1)', width: 1, type: 'solid'}},
+                    'axisTick':{show : true,lineStyle:{color: 'rgba(255,255,255,0.5)', width: 1.5, type: 'solid'}},
+                    'splitLine':{show : false},
+                    'data':mydata.series_line_1.data[0].xAxis
+                }],
+                yAxis : [
+                    {
+                        'type':'value',
+                        'splitLine':{show : true,lineStyle:{color: 'rgba(255,255,255,0.15)', width: 1, type: 'solid'}},
+                        'axisTick':{show : false,lineStyle:{color: '#076377', width: 1, type: 'solid'}},
+                        'axisLine':{show : false,lineStyle:{color: '#076377', width: 1, type: 'solid'}},
+                        'axisLabel':{'textStyle':{color: '#E2F3F6'}},
+                        'nameTextStyle':{color: '#E2F3F6'}
+                    }
+                ],
+                series : [
+                    {
+                        'name':'OOB',
+                        'yAxisIndex':0,
+                        'xAxisIndex':0,
+                        'type':'line',
+                        'itemStyle': {
+                            'normal': {
+                                lineStyle: { // 系列级个性化折线样式
+                                    width: 4
+                                }
+                            }
+                        },
+                        'data': mydata.series_line_1.data[0].data
+                    }
+                ]
+            };
+            this.option = option;
+            this.loadStatus = true;
+            return option;
+        };
+        LvAudit.prototype.getChartDataTimeLine = function(drawFlag){
+            var self = this;
+            var mydata = {
+              legend:['OOB'],
+              series_line_1:{name:'OOB',data:[]}
+            };
+            for (var i = 1; i <= 12; i++) {
+                var newLineArr = [],
+                    monthArr = [],
+                    len = new Date(2014,i,0).getDate();//获取某年某月的天数
+                for (var j = 1; j <= len; j++) {
+                    monthArr.push(i+'.'+j);
+                    newLineArr.push(Math.floor(Math.random()*100));
+                };
+                for (var k = len; k <= 30; k++) {//如果当月天数小于31天，需要补全
+                    monthArr.push('-.-');
+                    newLineArr.push('-');
+                };
+                mydata.series_line_1.data.push({'data':newLineArr,'xAxis':monthArr});
+            };
+            self._setOptionTimeLine(mydata);
+            drawFlag&&self.resetOption();
+        };
+        LvAudit.prototype.getChartDataLine = function(drawFlag){
+            var self = this;
+            var mydata = {
+              legend:['OOB'],
+              series_line_1:{name:'OOB',data:[]}
+            };
+            var newLineArr = [],
+                monthArr = [],
+                len = new Date(2014,10,0).getDate();//获取某年某月的天数
+            for (var j = 1; j <= len; j++) {
+                monthArr.push(10+'.'+j);
+                newLineArr.push(Math.floor(Math.random()*100));
+            };
+            for (var k = len; k <= 30; k++) {//如果当月天数小于31天，需要补全
+                monthArr.push('-.-');
+                newLineArr.push('-');
+            };
+            mydata.series_line_1.data.push({'data':newLineArr,'xAxis':monthArr});
+            self._setOptionLine(mydata);
+            drawFlag&&self.resetOption();
+        };
         LvAudit.prototype.getChartData = function(drawFlag){
             switch(this.chartType){
                 case "gauge":
@@ -461,7 +589,9 @@ define(['echarts','echarts/chart/gauge','echarts/chart/bar','echarts/chart/line'
                 case "bar2":
                     this.getChartDataBar2(drawFlag);break;
                 case "timeLine":
-                    this.getChartDataTimeLine(drawFlag);break;    
+                    this.getChartDataTimeLine(drawFlag);break;
+                case "line":
+                    this.getChartDataLine(drawFlag);break;    
                 default:break;
             }
         };

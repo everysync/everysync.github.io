@@ -59,7 +59,7 @@
 	box-align: center;
 }
 .ub-f1 {
-	width:42%;
+	width:44.7%;
 	display:inline-block;
 	padding-bottom: 10px;
 	margin-right:10%;
@@ -130,8 +130,13 @@
 	text-align:center;
 }
 .h_auto .ecPageTab {
-	margin-top:10px;
+	margin-top:30px;
 	margin-bottom:10px;
+}
+.ecPageTab table .showBox {
+	font-size: 32px;
+	color:#fff;
+	cursor: pointer;
 }
 .search_center{
    width: 100%;
@@ -183,9 +188,6 @@
     width: 19%;
     margin-right: 0;
     margin-bottom: 20px;
-}
-.table_blackBg{
-    background-color: rgba(0,0,0,0.2);
 }
 .h_auto.demopagec-3 {
 	top:0;
@@ -498,11 +500,6 @@
 	only screen and (-moz-min-device-pixel-ratio: 2), 
 	only screen and (-o-min-device-pixel-ratio: 2/1), 
 	only screen and (min-device-pixel-ratio: 2) {
-.icheckbox_flat,  .iradio_flat {
-	background-image: url(../images/flat@2x.png);
-	-webkit-background-size: 176px 22px;
-	background-size: 176px 22px;
-}
 	.iradio_esqs {
 		background-image: url(../images/exckb_1@2X.png) no-repeat;
 		-webkit-background-size:51px 11px;

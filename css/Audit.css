@@ -3,10 +3,6 @@
 .AuditBlck{
 	height:100%;
 	width:100%;
-	background-image: -webkit-linear-gradient(60deg, #2d2f44 0%, #6e73b0 100%);
-	background-image: -moz-linear-gradient(60deg, #2d2f44 0%, #6e73b0 100%);
-	background-image: -o-linear-gradient(60deg, #2d2f44 0%, #6e73b0 100%);
-	background-image: linear-gradient(60deg, #2d2f44 0%, #6e73b0 100%);
 	overflow-x:auto;
 }
 
@@ -22,6 +18,10 @@
 }
 
 #chart_auditOdm_timeLine{
+	width:99%;
+	height:50%;
+}
+#chart_audit_result{
 	width:99%;
 	height:50%;
 }

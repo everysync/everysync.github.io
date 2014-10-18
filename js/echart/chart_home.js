@@ -16,12 +16,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                 backgroundColor:"rgba(0,0,0,0)",
                 color: ['#FF9080','#00BFB7', '#FFBB59', '#FFF100','#00BFB7','#FF9080','#2290B3','#C680C2'],
                 title : {
-                    text: '',
-                    x:'right',
-                    padding:60,
-                    y:23,
-                    subtext: 'IRCT',
-                    subtextStyle :{color: '#E2F3F6'}
+                    text: ''
                 },
                 tooltip:{
                     show: true,
@@ -41,14 +36,14 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                 },
                 grid: {
                     'x':70,
-                    'y':220,
+                    'y':110,
                     'x2':70,
                     'y2':80,
                     borderWidth:0
                 },
                 legend: {
                     x: 72,
-                    y: 72,
+                    y: 5,
                     textStyle:{color: '#B7E1EA',fontSize:14},
                     data: []
                 },
@@ -131,15 +126,13 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                             trigger: 'item',
                             formatter: '{a} <br/>{b} : {c} ({d}%)'
                         },
-                        center: ['80%', 170],
+                        center: ['80%', 75],
                         radius: [0, 50],
                         itemStyle: 　{
                             normal: {
                                 label: {
-                                    //position : 'inner'
-                                    //formatter : function(a,b,c,d) {return (d - 0).toFixed(0) + '%' + b }
                                     'textStyle':{color: '#E2F3F6',fontSize:14},
-                                    formatter: "{b}\n"
+                                    formatter: function(a,b,c,d) {return b+'\n'+(d - 0).toFixed(0) + '%'}
                                 },
                                 labelLine: {
                                     length: 5,

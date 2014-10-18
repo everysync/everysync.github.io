@@ -77,6 +77,11 @@
     <script src="../js/mobiscroll/mobiscroll.scroller.js" type="text/javascript"></script>	<!-- 日期插件 JS -->
     <script src="../js/mobiscroll/mobiscroll.datetime.js" type="text/javascript"></script>	<!-- 日期插件 JS -->
     <script src="../js/mobiscroll/mobiscroll.select.js" type="text/javascript"></script>		<!-- 日期插件 JS -->
+	<style>
+		html,body {
+			height: 100%;
+		}
+	</style>
     
     <script>
 	$(function() {
@@ -197,10 +202,9 @@
 		.create_3 .ub-f1:nth-child(2n){ margin-right: 0;}
 		.create_tabmenu_Warp{margin:19px 62px; position:relative;}
 		.create_tabmenu_Warp .tabstyle_1 .iTab{float:right; width: 12.666667%;}
-
 	</style>
 </head>
-<body>
+<body class="pagebgc-2">
 <div class="app_header">
 	<div class="sideBtn">
 		<div class="side_show_btn ficon-icon-6"></div>
@@ -216,141 +220,16 @@
 </div>
 
 <!-- EC_Search-PAGE -->
-<div class="eachBlck FPYOOBcreateBg">
-	<div class="EcScroll">	
-		<!-- Search nav -->
-		<div class="create_tabmenu_Warp">
-			<ul class="es_tabwrap_tab tabstyle_1 clearfix">				
-				<li class="iTab">
-					<span class="auditBor">Pamp</span>
-				</li>
-				<li class="iTab  cur">
-					<span class="auditBor">Qualify</span>
-				</li>
-			</ul>
-		</div>
-
-			
-		<!-- Search Content -->
-		<div class="UserCenBox w1000">
-				<ul class="create create_3">
-					<li>
-						<div class="ui_box ub-f1 ub_ac">
-							<div class="textfield">Date<b class="form_tips"></b></div>
-							<div><input type="text" class="form_txt_style  form_date" readonly=""></div>
-						</div>
-						<div class="ui_box ub-f1 ub_ac">
-							<div class="textfield">ODM<b class="form_tips"></b></div>
-							<div><select name="" id="" class="form_select form_txt_style">
-									<option value="--Please Select--" selected>--Please Select--</option>
-									<option value="1">test</option>
-									<option value="2">testtest</option>
-									<option value="3">testtesttest</option>
-								</select>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="ui_box ub-f1 ub-f2 ub_ac">
-							<div class="textfield">Product<b class="form_tips"></b></div>
-							<div><select name="" id="" class="form_select form_txt_style">
-									<option value="--Please Select--" selected>--Please Select--</option>
-									<option value="1">test</option>
-									<option value="2">testtest</option>
-									<option value="3">testtesttest</option>
-								</select>
-							</div>							
-						</div>
-						<input type="button" class="addBtn" value="Add Product" style="float:none" onclick="addNew(this)">
-					</li>
-					<li>						
-						<div class="ui_box ub-f1 ub_ac">
-							<div class="textfield">Phase<b class="form_tips"></b></div>
-							<div><select name="" id="" class="form_select form_txt_style">
-									<option value="--Please Select--" selected>--Please Select--</option>
-									<option value="1">test</option>
-									<option value="2">testtest</option>
-									<option value="3">testtesttest</option>
-								</select>
-							</div>
-						</div>
-						<div class="ui_box ub-f1 ub_ac">
-							<div class="textfield">FPY Input<b class="form_tips"></b>&nbsp;</div>
-							<div ><input type="text" class="form_txt_style"></div>
-						</div>
-					</li>
-
-					<li>						
-						<div class="ui_box ub-f1 ub_ac">
-							<div class="textfield">FPY Defect<b class="form_tips"></b>&nbsp;</div>
-							<div ><input type="text" class="form_txt_style"></div>
-						</div>
-						<div class="ui_box ub-f1 ub_ac">
-							<div class="textfield">F/R<b class="form_tips"></b>&nbsp;</div>
-							<div ><input type="text" class="form_txt_style"></div>
-						</div>
-					</li>
-
-					<li>						
-						<div class="ui_box ub_ac">
-							<div class="textfield">FPY Over Target Analysis<b class="form_tips"></b>&nbsp;</div>
-							<div ><input type="text" class="form_txt_style"></div>
-						</div>
-					</li>
-
-					<li>						
-						<div class="ui_box ub-f1 ub_ac">
-							<div class="textfield">FPY Category<b class="form_tips"></b></div>
-							<div><select name="" id="" class="form_select form_txt_style">
-									<option value="--Please Select--" selected>--Please Select--</option>
-									<option value="1">test</option>
-									<option value="2">testtest</option>
-									<option value="3">testtesttest</option>
-								</select>
-							</div>
-						</div>
-						<div class="ui_box ub-f1 ub_ac">
-							<div class="textfield">OOB Input<b class="form_tips"></b>&nbsp;</div>
-							<div ><input type="text" class="form_txt_style"></div>
-						</div>
-					</li>
-
-					<li>						
-						<div class="ui_box ub-f1 ub_ac">
-							<div class="textfield">OOB Defect<b class="form_tips"></b>&nbsp;</div>
-							<div ><input type="text" class="form_txt_style"></div>
-						</div>
-						<div class="ui_box ub-f1 ub_ac">
-							<div class="textfield">DPPM<b class="form_tips"></b>&nbsp;</div>
-							<div ><input type="text" class="form_txt_style"></div>
-						</div>
-					</li>
-
-					<li>						
-						<div class="ui_box ub_ac">
-							<div class="textfield">OOB Over Target Analysis<b class="form_tips"></b>&nbsp;</div>
-							<div ><input type="text" class="form_txt_style"></div>
-						</div>
-					</li>
-
-					<li>						
-						<div class="ui_box ub-f1 ub_ac">
-							<div class="textfield">OOB Defect<b class="form_tips"></b></div>
-							<div><select name="" id="" class="form_select form_txt_style">
-									<option value="--Please Select--" selected>--Please Select--</option>
-									<option value="1">test</option>
-									<option value="2">testtest</option>
-									<option value="3">testtesttest</option>
-								</select>
-							</div>
-						</div>
-					</li>
-
-
-
-				</ul>
-				<div class="btDiv"><input type="submit" class="form_btn form_sub_btn" value="Search"></div>
-			</div>
+<div class="eachBlck">
+	<div class="page_swicher_wrap">
+    	<div class="Oob_in">
+        <select class="form_select form_txt_style form_select02" id="changeType" name="">
+                <option selected="" value="Traditional NB">Traditional NB</option>
+                <option value="Lenovo">Lenovo</option>
+            </select>
+            </div>
+            <div class="clear"></div>
+		<div id="chart_fpy_timeLine2"><img src="../images/temp/charts08.png" ></div>
 	</div>
 </div>
 
@@ -400,17 +279,5 @@
 <!-- Javascript with AMD 
 ================================================== -->
 <script src="../js/require.js" data-main="../js/main" ></script>
-<script src="../js/jquery-2.1.1.min.js"></script>
-<script src="../js/icheck.min.js"></script>
-<script type="text/javascript">
-	$(function() {
-        //单选\复选框定制js
-        $('.form_radio,.form_check').iCheck({
-            checkboxClass: 'icheckbox_flat',
-            radioClass: 'iradio_flat',
-            increaseArea: '20%' // optional
-        });
-	});
-</script>
 </body>
 </html>

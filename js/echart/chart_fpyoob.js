@@ -21,6 +21,19 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                 default:break;
             }
         };
+        LvFpyOob.prototype.bindEvents = function () {//绑定相关事件
+            var self = this;
+            switch(this.chartType){
+                case "timeLine":
+                    this.chart.on(lvChart.ecConfig.EVENT.CLICK, function(param){
+                        page_modules.loadinto("moduleHtml/FPY_OOB_In.html", ".eachBlck" ,"demopagec-2 switch_2","fpyoob_in");
+                    }); 
+                    break;
+                default:break;
+            }
+            var self = this;
+            
+        };
         LvFpyOob.prototype._setOptionTimeLine = function(mydata){
             var option = {
                 timeline:{
@@ -449,7 +462,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                 grid : {
                     'x':70,
                     'x2':30,
-                    'y':180,
+                    'y':30,
                     'y2':70,
                     borderWidth:0
                 },

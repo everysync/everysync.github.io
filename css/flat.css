@@ -12,11 +12,11 @@
 	background: url(../images/flat.png) no-repeat;
 	border: none;
 	cursor: pointer;
-    -webkit-background-size: 176px 22px;
-        background-size: 176px 22px;
+    -webkit-background-size: 300px 27px;
+        background-size: 200px 27px;
 }
-.form_check02 .icheckbox_flat,.form_check02 .iradio_flat{
-    background-image: url(../images/flat.png);
+.form_check02 .icheckbox_flat,.form_radio02 .iradio_flat{
+    background-image: url(../images/flatLog.png);
 }
 .icheckbox_flat { background-position: 0 0; }
 .icheckbox_flat.checked { background-position: -151px 0; }
@@ -43,10 +43,7 @@
     .icheckbox_flat,  .iradio_flat {
         background-image: url(../images/flat@2x.png);
     }
-    .icheckbox_flat,  .iradio_flat {
-        background-image: url(../images/flat@2x.png);
-    }
-    .form_check02 .icheckbox_flat,.form_check02 .iradio_flat.iradio_flat_other {
-        background-image: url(../images/flat@2x.png);
+    .form_check02 .icheckbox_flat,.form_radio02 .iradio_flat {
+        background-image: url(../images/flatLog@2x.png);
     }
 }

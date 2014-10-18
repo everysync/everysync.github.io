@@ -1,5 +1,13 @@
 //var window=window,$=$,console=window.console,alert=window.alert;
 var $win,$doc,$body,$html;
+//ventor transitionend event
+var transEnd = function(namespace) {
+	return "transitionend."+namespace+" webkitTransitionEnd."+namespace+" oTransitionEnd."+namespace;
+};
+//ventor animationend event
+var animateEnd = function(namespace) {
+	return "webkitAnimationEnd."+namespace+" animationend."+namespace;
+};
 //TO: AJAX_DATA
 function ajaxLoadData(URL,DATA) {
 	$.ajax({
@@ -117,6 +125,7 @@ function sidebaract(obj,options) {
 	var $sideBtnWrap = $(".sideBtn");
 	$sideBtnWrap.on("tap", ".side_show_btn",function(e) {
 		$sideBtnWrap.addClass("hide").removeClass("show");
+		$("#sidebar").removeClass("sidebar_close");
 		/*$(this).one("webkitAnimationEnd oAnimationEnd msAnimationEnd animationend", function() {
 			$sideBtnWrap.addClass("hided");
 			$sideBtnWrap.removeClass("show hide");
@@ -166,7 +175,7 @@ function eachblock_Switcher(obj,options) {
 					var class_1 = opts.switchClass[cacheIndex];
 					var class_2 = opts.switchClass[(cacheIndex+1)];
 					$el.addClass(class_1).removeClass(class_2);
-					$switchWrap.one("transitionend.switch webkitTransitionEnd.switch oTransitionEnd.switch", function(e) {
+					$switchWrap.one(transEnd("switch"), function(e) {
 						e.stopPropagation();
 						$el.trigger("Switch_"+cacheIndex+"_ani_end");
 						$switchWrap.off(".switch");
@@ -176,7 +185,7 @@ function eachblock_Switcher(obj,options) {
 					var class_1 = opts.switchClass[cacheIndex];
 					var class_2 = opts.switchClass[(cacheIndex-1)];
 					$el.addClass(class_1).removeClass(class_2);
-					$switchWrap.one("transitionend.switch webkitTransitionEnd.switch oTransitionEnd.switch", function(e) {
+					$switchWrap.one(transEnd("switch"), function(e) {
 						e.stopPropagation();
 						$el.trigger("Switch_"+cacheIndex+"_ani_end");
 						$switchWrap.off(".switch");
@@ -295,12 +304,17 @@ var page_modules = {
 	$siderEl:"",
 	$page_show_content:"",
 	$page_show_wrap:"",
-	showpage:function(_this) {
+	showpage:function(_this,directRun) {
 		var $psc = page_modules.$page_show_content;
 		var contantState = $psc.data("hasShowed");
 		var linkURL = _this.data("url");
-
-		if (contantState!==true && linkURL) {
+		var dr = directRun;
+		var afterEvent = function() {
+			$("#sidebar").addClass("sidebar_close");
+			$(".side_hide_btn").trigger("tap");
+			$psc.triggerHandler("page_showed");
+		};
+		if ((contantState!==true&&linkURL)||(contantState!==true&&dr===true)) {
 			//showing
 			$psc.addClass(_this.data("wrapclass"));
 			$psc.addClass("page_showing");
@@ -308,29 +322,32 @@ var page_modules = {
 				"hasShowed":true,
 				"prevClass":_this.data("wrapclass")
 			});
-			$psc.on("transitionend.pshow webkitTransitionEnd.pshow oTransitionEnd.pshow", function(e) {
+			
+			$(".container").data("onepage_scroll").unbindEvents();
+			$psc.on(transEnd("pshow"), function(e) {
 				$psc.addClass("page_showed").removeClass("page_showing");
-				$psc.triggerHandler("page_showed");
+				afterEvent();
 				$psc.off(".pshow");
 			});
-		} else if (contantState === true && linkURL) {
+		} else if ((contantState===true&&linkURL)||(contantState===true&&dr===true)) {
 			//showed
 			$psc
 				.removeClass( $psc.data("prevClass") )
 				.addClass(_this.data("wrapclass"))
-				.data("prevClass",_this.data("wrapclass"))
-				.triggerHandler("page_showed");
+				.data("prevClass",_this.data("wrapclass"));
+			afterEvent();
 		}
 
 	},
 	hidepage:function(_this) {
 		var $psc = page_modules.$page_show_content;
 		$psc.addClass("page_hidding");
-		$psc.on("transitionend.phide webkitTransitionEnd.phide oTransitionEnd.phide", function(e) {
+		$psc.on(transEnd("phide"), function(e) {
 			$psc.removeClass($psc.data("prevClass"));
 			$psc.removeClass("page_hidding page_showed");
 			$psc.triggerHandler("page_hided");
 			$psc.data("hasShowed",false);
+			$(".container").data("onepage_scroll").bindEvents();
 			page_modules.$page_show_wrap.children().remove();
 			$psc.off(".phide");
 		});
@@ -360,8 +377,9 @@ var page_modules = {
 			$psc.on("page_showed.loadpage", function() {
 				var loads = _this.data("url") + " " + _this.data("selector");
 				page_modules.$page_show_wrap.load(loads,function() {
-					require( [_this.data("requirejs")],function(page){
-						page&&page.init();
+					require( ['page_control'],function(page){
+						page&&page.init(_this.data("requirejs"));
+						page = null;
 					});
 					console.log("pageLoaded");
 				});
@@ -385,57 +403,68 @@ var page_modules = {
 		});
 	},
 	applyTolinks:function() {
-		page_modules.initListLinks("#qstop","worldmap.html","svg","demopagec-3");
-		//page_modules.initListLinks("#qstop2","formPage.html",".formContent","demopagec-2");
-		page_modules.initListLinks("#qstop2","moduleHtml/Audit_Odm.html",".AuditBlck","demopagec-2","audit_odm_control");
-	}
-	/*loadmodules: function($cont,loadsurl) {
-		//监听事件
-		var $loadcontent = $cont;
-		var $loadcontInner = $(".app-init-page-pd");
-		var animateTime = 600;
+		//Qstop
+		page_modules.initListLinks("#qstop_create","moduleHtml/Qstop_Create.html",".eachBlck","demopagec-1","page_audit");
+		page_modules.initListLinks("#qstop_operating","moduleHtml/Qstop_Operating.html",".eachBlck","demopagec-1","page_audit");
+		page_modules.initListLinks("#qstop_search","moduleHtml/Qstop_Search.html",".eachBlck","demopagec-1","page_audit");
 
-		var time = 
-				"-webkit-transition-duration:"+animateTime+"ms;" +
-				"-moz-transition-duration:"+animateTime+"ms;" +
-				"-ms-transition-duration:"+animateTime+"ms;" +
-				"-o-transition-duration:"+animateTime+"ms;" +
-				"transition-duration:"+animateTime+"ms;";
-		//console.log(time);
-		$cont.attr("style", time);
-		
-		$loadcontent.on("page_animateEnd", function() {
-			$loadcontInner.load(loadsurl);
-			$(".container").data("onepage_scroll").unbindEvents();
-			$loadcontent.off("page_animateEnd");
-		});
-		
-		if ($loadcontent.data("hasShowed") !== true ) {
-			if (triggerEvent) {clearTimeout(triggerEvent)};
-			$loadcontent.addClass("page_showing");
-			var triggerEvent = setTimeout(function() {
-				$loadcontent.triggerHandler("page_animateEnd");
-				$loadcontent.data("hasShowed",true);
-				$loadcontent.addClass("page_showed").removeClass("page_showing");
-			}, animateTime);
-		} else  if ($loadcontent.data("hasShowed") === true ) {
-			$loadcontent.triggerHandler("page_animateEnd");
-		}	
+		//Fpyoob
+		page_modules.initListLinks("#fpyoob_create","moduleHtml/FPY_OOB_Create.html",".eachBlck","demopagec-2","page_audit");
+		page_modules.initListLinks("#fpyoob_search","moduleHtml/FPY_OOB_Search.html",".eachBlck","demopagec-1","page_audit");
+
+		//Audit
+		page_modules.initListLinks("#audit_create","moduleHtml/Audit_Create.html",".eachBlck","demopagec-3","page_audit");
+		page_modules.initListLinks("#audit_odm","moduleHtml/Audit_Odm.html",".eachBlck","demopagec-3","audit_odm");
+		page_modules.initListLinks("#audit_search","moduleHtml/Audit_Search.html",".eachBlck","demopagec-1","page_audit");
+
+		//fai
+		page_modules.initListLinks("#fai_create","moduleHtml/FAI_CreateMQE.html",".eachBlck","demopagec-4","page_audit");
+		page_modules.initListLinks("#fai_odm","moduleHtml/FAI_Odm.html",".eachBlck","demopagec-4","fai_odm","page_audit");
+		page_modules.initListLinks("#fai_search","moduleHtml/FAI_Search.html",".eachBlck","demopagec-1","page_audit");
+
+		//ec
+		page_modules.initListLinks("#ec_home","moduleHtml/EC.html",".eachBlck","demopagec-4");
+		page_modules.initListLinks("#ec_create","moduleHtml/EC_Create.html",".eachBlck","demopagec-4","page_audit");
+		page_modules.initListLinks("#ec_search","moduleHtml/EC_Search.html",".eachBlck","demopagec-1","page_audit");
 	},
-	elementEvent:function() {
-		$("#sidebar").on("tap",".fslinks", function(e) {
-			e.stopPropagation();
-			var _this = $(this);
-			if (_this.data("url")) {
-				var loads = _this.data("url") + " " + _this.data("selector");
-				page_modules.loadmodules($(".app-init-page"),loads);
-			}
-		})
-	}*/
+	loadinto:function(url,selector,backgroundcss,requirejs) {
+		var $psc = page_modules.$page_show_content;
+		var megerURL = url + " " + selector;
+		var loadjs = requirejs;
+		var tempData = $("<div>").data({
+			"url":url,
+			"selector":selector,
+			"wrapclass":backgroundcss,
+			"requirejs":loadjs
+		});
+		$psc.on("page_showed.loadpage", function() {
+			page_modules.$page_show_wrap.load(megerURL,function() {
+				require( ['page_control'],function(page){
+					page&&page.init(loadjs);
+				});
+			});
+			$psc.off(".loadpage");
+		});
+		page_modules.showpage(tempData,true);
+	},
+	loadforside:function(options) {
+		var opts = $.extend({
+			target:"",
+			loadurl:"",
+			loadseletor:"",
+			addBgClass:"",
+			requirejs:"",
+			callback:function(){}
+		},options);
+		
+	}
 };
 
-
-
+function testload() {
+	//这个是测试直接加载页面的demo
+	page_modules.loadinto("moduleHtml/Audit_Odm.html", ".AuditBlck" ,"demopagec-2","audit_odm")
+}
+ 
 //INIT FUNCTIONS
 function jayfunction() {
 	$win =$(window);
@@ -449,23 +478,15 @@ function jayfunction() {
 	//AJAX_DATA
 	//ajaxLoadData("http://127.0.0.1/jsonpcallback/jsonpcallback.js", "mydata");
 	//PAGESCROLL
-	var pageIndex = $('.app_container').data("page");
-	if(pageIndex == "index"){
-		pagescroll(".container",".eachBlck");
-		//PAGE_1FN
-		require(['home_chart_control']);
-		//INIT_WORLD_MAP
-		initworldmap("#svgwrap");
-		//HOME_AUDIT
-		home_aduit(".eb_audit_inner");
-	}else if(pageIndex == "audit_odm"){
-		require(['audit_odm_control']);
-	}else if(pageIndex == "fai_odm"){
-		require(['fai_odm_control']);
-	}
+	pagescroll(".container",".eachBlck");
+	//PAGE_1FN
+	require(['home_chart_control']);
+	//INIT_WORLD_MAP
+	initworldmap("#svgwrap");
+	//HOME_AUDIT
+	home_aduit(".eb_audit_inner");
 	//SIDEBAR_ACTION
 	sidebaract("#sidebar");
-	
 	//PAGE_LOAD
 	page_modules.init_modules_action();
 }

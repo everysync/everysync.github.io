@@ -15,7 +15,7 @@ define(['echarts','echarts/chart/pie','echarts/chart/bar'],
             var option = {
                 animation:true,
                 animationDuration:600,
-                backgroundColor:"#6D5842",
+                backgroundColor:"rgba(0,0,0,0.05)",
                 tooltip : {
                     trigger: 'item',
                     formatter: "{a} <br/>{b} : {c} ({d}%)"
@@ -101,7 +101,7 @@ define(['echarts','echarts/chart/pie','echarts/chart/bar'],
                     data: ['Approved', 'Failed','Name']
                 },
                 grid:{
-                    x:100,
+                    x:60,
                     y:10,
                     x2:30,
                     y2:60,
@@ -335,9 +335,9 @@ define(['echarts','echarts/chart/pie','echarts/chart/bar'],
                     data: ['Approved', 'Failed', 'Name']
                 },
                 grid: {
-                    x: 100,
+                    x: 60,
                     y: 20,
-                    x2: 30,
+                    x2: 60,
                     y2: 40,
                     borderWidth: 0
                     //backgroundColor:'rgba(200,200,200,0.2)'

@@ -56,8 +56,13 @@
 	
 	<link rel="stylesheet" href="css/mobiscroll.scroller.css" type="text/css">
 	<link rel="stylesheet" href="css/flat.css" type="text/css">
-	<link href="css/Audit.css" rel="stylesheet" type="text/css">
+
 	<link href="css/style.css" rel="stylesheet" type="text/css">
+	<link href="css/Audit.css" rel="stylesheet" type="text/css">
+	<link href="css/Bina.css" rel="stylesheet" type="text/css">
+	<link href="css/EC.css" rel="stylesheet" type="text/css">
+	<link href="css/Fai.css" rel="stylesheet" type="text/css">
+
 	<!-- Favicons
 	================================================== -->
 	<link rel="shortcut icon" href="favicon.ico" >
@@ -121,9 +126,43 @@
 					<div class="map_tips">
 						
 					</div>
-				</div>
+					
+					<!-- <div class="map_tips_red">
+						<h2 class="mtt">SHP_SH_DTA</h2>
+						<div class="mtc">
+							<span>03</span>
+							<p>DAY</p>
+							<p>8Hours</p>
+						</div>
+						<div class="maptiptable">
+							<div class="row">
+								<div class="cell">Stop:</div>
+								<div class="cell">03-24 18:05:30</div>
+							</div>
+							<div class="row">
+								<div class="cell">Recovery:</div>
+								<div class="cell">03-24 18:05:30</div>
+							</div>
+						</div>
+						<div class="maptiptable2">
+							<div class="row">
+								<div class="cell">-FGs:1</div>
+								<div class="cell">-WIP:4</div>
+								<div class="cell">-ONS:6</div>
+								<div class="cell">-Category:design</div>
+							</div>
+						</div>
+						<div class="mtb">
+							<h3>STOP WIRE PRODUCTS STOP WIRE PRODUCTS</h3>
+							<p>H520s Enginneering related yuanjqH520s</p>
+							<p>related Enginneering related related</p>
+						</div>
+					</div>-->
+				</div> 
 				<div class="page_swicher_2">
-					<div id="chart_home_bar"></div>
+					<div class="chwrap">
+						<div id="chart_home_bar"></div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -164,9 +203,11 @@
 						</div>
 					</div>
 				</div>
-				<div id="fpy_module_name">SVT</div>
 				<div class="first_page_swicher_1">
-					<div id="chart_fpy_Line"></div>
+					<div class="chwrap2">
+						<div id="fpy_module_name">SVT</div>
+						<div id="chart_fpy_Line"></div>
+					</div>
 				</div>
 				<div class="page_swicher_2">
 					<div id="chart_fpy_timeLine"></div>
@@ -197,7 +238,7 @@
 					<div class="ccs">W</div>
 					<div class="ccs">X</div>
 					<div class="ccs">Y</div>
-					<div class="ccs">Z</div>
+					<div class="ccs" onclick="testload()" >Z</div>
 				</div>
 			</div>
 			
@@ -239,41 +280,46 @@
 <div class="sidebar_wrap">
 	<div class="sidebar" id="sidebar">
 		<div class="sideItems">
-			<div class="silinks">
-			<span>HOME</span></div>
+			<div class="silinks" id="home">
+				<span>HOME</span>
+			</div>
 		</div>
 		<div class="sideItems">
-			<div class="silinks fslinks" id="qstop">
+			<div class="silinks fslinks" id="qstop_home">
 				<span>Q-STOP</span>
-				<div class="silinksSec fslinks" id="qstop2"><span class="skInner">Create</span></div>
-				<div class="silinksSec fslinks"><span class="skInner">Managment</span></div>
-				<div class="silinksSec fslinks"><span class="skInner">ODM Status</span></div>
+				<div class="silinksSec fslinks" id="qstop_create"><span class="skInner">Create</span></div>
+				<div class="silinksSec fslinks" id="qstop_operating"><span class="skInner">Managment</span></div>
+				<div class="silinksSec fslinks" id="qstop_search"><span class="skInner">Search</span></div>
 			</div>
 		</div>
 		<div class="sideItems">
-			<div class="silinks fslinks">
+			<div class="silinks fslinks" id="fpyoob_home">
 				<span>FPY/OOB</span>
-				<div class="silinksSec fslinks"><span class="skInner">Create</span></div>
-				<div class="silinksSec fslinks"><span class="skInner">Create2</span></div>
-				<div class="silinksSec fslinks"><span class="skInner">Create3</span></div>
+				<div class="silinksSec fslinks" id="fpyoob_create"><span class="skInner">Create</span></div>
+				<div class="silinksSec fslinks" id="fpyoob_search"><span class="skInner">Search</span></div>
 			</div>
 		</div>
 		<div class="sideItems">
-			<div class="silinks fslinks">
+			<div class="silinks fslinks" id="audit_home">
 				<span>AUDIT</span>
-				<div class="silinksSec fslinks"><span class="skInner">Create</span></div>
+				<div class="silinksSec fslinks" id="audit_create"><span class="skInner">Create</span></div>
+				<div class="silinksSec fslinks" id="audit_odm"><span class="skInner">ODM Status</span></div>
+				<div class="silinksSec fslinks" id="audit_search"><span class="skInner">Search</span></div>
 			</div>
 		</div>
 		<div class="sideItems">
-			<div class="silinks fslinks">
+			<div class="silinks fslinks" id="fai_home">
 				<span>FAI</span>
-				<div class="silinksSec fslinks"><span class="skInner">Create</span></div>
+				<div class="silinksSec fslinks" id="fai_create"><span class="skInner">Create</span></div>
+				<div class="silinksSec fslinks" id="fai_odm"><span class="skInner">ODM Status</span></div>
+				<div class="silinksSec fslinks" id="fai_search"><span class="skInner">Search</span></div>
 			</div>
 		</div>
 		<div class="sideItems">
-			<div class="silinks fslinks">
+			<div class="silinks fslinks" id="ec_home">
 				<span>EC</span>
-				<div class="silinksSec fslinks"><span class="skInner">Create</span></div>
+				<div class="silinksSec fslinks" id="ec_create"><span class="skInner">Create</span></div>
+				<div class="silinksSec fslinks" id="ec_search"><span class="skInner">Search</span></div>
 			</div>
 		</div>	
 	</div>

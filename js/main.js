@@ -14,14 +14,16 @@ require.config({
 		'echarts/chart/map' : 'echart/echarts-map',
 		'echarts/chart/gauge' : 'echart/echarts-map',  
 		"echartsConfig"	:"echart/echartsConfig",
+		'everysync':"isk/isk_EverySync_LPL_Function",
 		"chart_map"	:"echart/chart_map",
 		"chart_home"	:"echart/chart_home",
 		"chart_fpyoob"	:"echart/chart_fpyoob",
-		"chart_fpyoob_ramp"	:"echart/chart_fpyoob_ramp",
 		"chart_audit"	:"echart/chart_audit",
 		"chart_fai"	:"echart/chart_fai",
 		"home_chart_control"	:"echart/home_chart_control",
-		"audit_odm_control"	:"echart/audit_odm_control",
+		"page_chart_control"	:"echart/page_chart_control",
+		"page_audit"	:"page_control",
+		"page_fai"	:"page_control",
 		"fai_odm_control"	:"echart/fai_odm_control",
 		"jay"				: "jay"
 	},
@@ -29,8 +31,10 @@ require.config({
 		jquery			: {exports: '$'},
 		'finger'		: {deps: ['jquery']},
 		'swiper'		: {deps: ['jquery']},
+		'tab_pick'		: {deps: ['jquery']},
+		'page_control': {deps: ['jquery']},
 		'onepageScroll'	: {deps: ['jquery',"finger"]},
-		'chart_map'	: {deps: ['echartsConfig']},
+		'chart_map'		: {deps: ['echartsConfig']},
 		'chart_home'	: {deps: ['echartsConfig']},
 		'chart_fpyoob'	: {deps: ['echartsConfig']},
 		'chart_fpyoob_ramp'	: {deps: ['echartsConfig']},
@@ -39,7 +43,7 @@ require.config({
 		'jay'  			: {deps: ['jquery','utf','onepageScroll','scalcheight','swiper']}
 	}
 });
-require(['jquery','onepageScroll','finger','jay'], function($) {
+require(['jquery','onepageScroll','finger','tab_pick','jay'], function($) {
 	$(function() {
 		jayfunction();
 	});

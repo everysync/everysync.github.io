@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- ------------------------------------------------------------------
+***********************************************************************
+开发人员书写规范:
+1.所有缩进都用 TAB， 而不是空格。
+2.非必要，禁止用行内样式例如 <div style="display:block"> 
+
+浏览器兼容：
+	IE10+
+	FireFox
+	Webkit内核浏览器:
+		Chrome,
+		Opear(WebKit版),
+		360浏览器(7.0+),
+		360急速浏览器,
+		搜狗浏览器,
+		115浏览器,
+		UC桌面浏览器,
+		枫树浏览器,
+		Safari 5.1+
+		Safari 7+ (Mac OS)
+注:由于国内IE6-7份额已经非常低，基本是测试人员跟一些非常旧的政府机构，所以不做兼容。
+***********************************************************************
+---------------------------------------------------------------------- -->
+	<!-- Basic Page Needs
+	================================================== -->
+	<meta charset="utf-8">
+	<title>EverySync</title>
+	<meta name="description" content="">
+	<meta name="author" content="JayChen">
+	<!-- 让IE浏览器用最高级内核渲染页面 还有用 Chrome 框架的页面用webkit 内核
+	================================================== -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<script src="../js/modernizr.custom.js"></script>
+	<script>
+		!Modernizr.csstransitions?window.location.href="../np.html":'';
+		if (!Modernizr.svg) {alert("\u5bf9\u4e0d\u8d77\uff0c\u60a8\u7684\u6d4f\u89c8\u5668\u4e0d\u652f\u6301\u0053\u0056\u0047\u683c\u5f0f\u56fe\u50cf\uff0c\u8bf7\u5347\u7ea7\u7248\u672c\uff0c\u5982\u679c\u8fd8\u662f\u51fa\u73b0\u8fd9\u4e2a\u63d0\u793a\uff0c\u90a3\u4e48\u8bf7\u6362\u4e2a\u6d4f\u89c8\u5668\uff0c\u5bf9\u60a8\u9020\u6210\u4e0d\u4fbf\u8bf7\u8c05\u89e3\u3002")}
+	</script>
+	<!-- IOS6全屏 Chrome高版本全屏
+	================================================== -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes"> 
+	<!-- 让360双核浏览器用webkit内核渲染页面
+	================================================== -->
+	<meta name="renderer" content="webkit">
+	<!-- Mobile Specific Metas
+	================================================== -->
+	<!-- !!!注意 minimal-ui 是IOS7.1的新属性，最小化浏览器UI，但是在iOS8.1突然被取消 -->
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- CSS
+	================================================== -->
+	<link href="../css/reset.css" rel="stylesheet" type="text/css">
+	<link href="../css/onepage-scroll.css" rel="stylesheet" type="text/css">
+	<link href="../css/style.css" rel="stylesheet" type="text/css">
+	<link href="../css/Bina.css" rel="stylesheet" type="text/css">
+	<link href="../css/EC.css" rel="stylesheet" type="text/css">
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="favicon.ico" >
+	<!-- Android 主屏图标
+	================================================== -->	
+	<link rel="icon" sizes="196x196" href="touch-icon.png">
+	<!-- IOS 主屏图标
+	================================================== -->
+	<link rel="apple-touch-icon" href="touch-icon-iphone.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+	<script src="../js/prefixfree.min.js"></script>
+	<style>
+		html,body {
+			height: 100%;
+		}
+	</style>
+</head>
+<body  class="pagebgc-2">
+<div class="app_header">
+	<div class="sideBtn">
+		<div class="side_show_btn ficon-icon-6"></div>
+		<div class="side_hide_btn ficon-icon-7"></div>
+	</div>
+	<div class="ctrBtns">
+		<div class="ctr_1 ficon-icon-1"></div>
+		<div class="ctr_2 ficon-icon-2"></div>
+		<div class="ctr_3 ficon-icon-3"></div>
+		<div class="ctr_4 ficon-icon-4"></div>
+		<div class="ctr_5 ficon-icon-5"></div>
+	</div>
+</div>
+
+<!-- EC-PAGE -->
+<div class="eachBlck" style="top:0px;">
+	<div class="EcScroll">
+		<div class="DateSearchTable">
+			<div class="dateRow">
+				<div class="dateCell-th">Date</div>
+				<div class="dateCell-td">2013-10-14——2014-10-14</div>
+				<div class="dateCell-th">ODM</div>
+				<div class="dateCell-td">All</div>
+			</div>
+			<div class="dateRow">
+				<div class="dateCell-th">Phrase</div>
+				<div class="dateCell-td">Ramp Up</div>
+                <div class="dateCell-th">Product</div>
+				<div class="dateCell-td">All</div>
+			</div>
+		</div>
+		<div class="oobSR">
+			<div class="chartHide">
+	    	<div class="eachBlockTitle_dt">
+				<h2 class="oobEb_h2"><span>PRODUCT: </span>H520S、H510S、H510T、H530S、H530S、H580S、G880L、H520s、H520S、H520s、H520S、H510S、H510T、H530S、H530S、</h2>
+				<h3 class="oobEb_h3">
+					<span class="ebtd_down"><i class="ficon-icon_arrow_down"></i><em>92</em><b>%FPY</b></span>
+					<span class="ebtd_up"><i class="ficon-icon_arrow_up"></i></i><em>97</em><b>%OOB</b></span>
+				</h3>
+					<div class="ebtd_table">
+						<div class="row">
+							<div class="cell-th">Mfg</div>
+							<div class="cell-td">Compal Brazil</div>
+						</div>
+						<div class="row">
+							<div class="cell-th">Input NO.</div>
+							<div class="cell-td">2014-09-16</div>
+						</div>
+						<div class="row">
+							<div class="cell-th">Category</div>
+							<div class="cell-td">Data from your mouse/finger</div>
+						</div>
+						<div class="row">
+							<div class="cell-th">SVT Exit</div>
+							<div class="cell-td">2014-08-12</div>
+						</div>
+						<div class="row">
+							<div class="cell-th">SS</div>
+							<div class="cell-td">2014-09-03</div>
+						</div>
+					</div>
+				</div>
+				<div class="chartConRel">
+					<div id="fpy_module_name">SVT</div>
+					<div class="chartHalfH" id="chart_fpy_result_line"></div>
+				</div>
+			</div>
+			<div class="fai_charts chartHalfH chartHide" id="chart_fpy_result_timeLine"><img src="../images/temp/charts06.png" ></div>
+		</div>
+		<div class="ecPageTab">
+			<table cellpadding="0" cellspacing="0" border="0" width="100%">
+				<thead>
+					<tr>
+						<th width="8%">Product</th>
+						<th>Phase</th>
+						<th>FPY input</th>
+						<th>FPY defect</th>
+						<th>FPY Category</th>
+						<th>OOB input</th>
+                        <th>OOB defect</th>
+                        <th>OOB Category</th>
+                        <th>Operating</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>G40-30</td>
+						<td>SVT</td>
+						<td>80</td>
+						<td>7</td>
+						<td>&nbsp;</td>
+                        <td>80</td>
+                        <td>0</td>
+                        <td>&nbsp;</td>
+						<td><span class="showBox ficon-icon-eye"></span></td>
+					</tr>
+					<tr>
+						<td>G40-30</td>
+						<td>SVT</td>
+						<td>80</td>
+						<td>7</td>
+						<td>&nbsp;</td>
+                        <td>80</td>
+                        <td>0</td>
+                        <td>&nbsp;</td>
+						<td><span class="showBox ficon-icon-eye"></span></td>
+					</tr>
+					<tr>
+						<td>G40-30</td>
+						<td>SVT</td>
+						<td>80</td>
+						<td>7</td>
+						<td>&nbsp;</td>
+                        <td>80</td>
+                        <td>0</td>
+                        <td>&nbsp;</td>
+						<td><span class="showBox ficon-icon-eye"></span></td>
+					</tr>
+					<tr>
+						<td>G40-30</td>
+						<td>SVT</td>
+						<td>80</td>
+						<td>7</td>
+						<td>&nbsp;</td>
+                        <td>80</td>
+                        <td>0</td>
+                        <td>&nbsp;</td>
+						<td><span class="showBox ficon-icon-eye"></span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+        
+	</div>
+</div>
+
+<div class="sidebar_wrap">
+	<div class="sidebar" id="sidebar">
+		<div class="sideItems">
+			<div class="silinks">
+			<span>HOME</span></div>
+		</div>
+		<div class="sideItems">
+			<div class="silinks">
+				<span>Q-STOP</span>
+				<div class="silinksSec"><span class="skInner">Create</span></div>
+				<div class="silinksSec"><span class="skInner">Managment</span></div>
+				<div class="silinksSec"><span class="skInner">ODM Status</span></div>
+				<div class="silinksSec"><span class="skInner">Search</span></div>
+			</div>
+		</div>
+		<div class="sideItems">
+			<div class="silinks">
+				<span>FPY/OOB</span>
+				<div class="silinksSec"><span class="skInner">Create</span></div>
+				<div class="silinksSec"><span class="skInner">Create2</span></div>
+				<div class="silinksSec"><span class="skInner">Create3</span></div>
+			</div>
+		</div>
+		<div class="sideItems">
+			<div class="silinks">
+				<span>AUDIT</span>
+				<div class="silinksSec"><span class="skInner">Create</span></div>
+			</div>
+		</div>
+		<div class="sideItems">
+			<div class="silinks">
+				<span>FAI</span>
+				<div class="silinksSec"><span class="skInner">Create</span></div>
+			</div>
+		</div>
+		<div class="sideItems">
+			<div class="silinks">
+				<span>EC</span>
+				<div class="silinksSec"><span class="skInner">Create</span></div>
+			</div>
+		</div>	
+	</div>
+</div>
+<!-- Javascript with AMD 
+================================================== -->
+<script src="../js/require.js" data-main="../js/main" ></script>
+</body>
+</html>
