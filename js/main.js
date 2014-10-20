@@ -14,7 +14,6 @@ require.config({
 		'echarts/chart/map' : 'echart/echarts-map',
 		'echarts/chart/gauge' : 'echart/echarts-map',  
 		"echartsConfig"	:"echart/echartsConfig",
-		'everysync':"isk/isk_EverySync_LPL_Function",
 		"chart_map"	:"echart/chart_map",
 		"chart_home"	:"echart/chart_home",
 		"chart_fpyoob"	:"echart/chart_fpyoob",
@@ -27,6 +26,7 @@ require.config({
 		"fai_odm_control"	:"echart/fai_odm_control",
 		"jay"				: "jay"
 	},
+	waitSeconds:30,
 	shim: {//模块依赖关系
 		jquery			: {exports: '$'},
 		'finger'		: {deps: ['jquery']},

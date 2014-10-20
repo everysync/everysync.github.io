@@ -56,27 +56,50 @@
         };
 
         function _loadUI() {
-            var ss = '';
-            ss += "<li class=\"datas\"><input type=\"checkbox\" class=\"dckb togAll\"><span class=\"dckl\">ALL</span></li>";
+            var liTempWrap = $("<div>");
+            var liTemplate ='<div class="proLabel">'+
+                            '    <label class="form_check form_check_style">'+
+                            '        <input type="checkbox" class="dckb" checked="checked" data-id="All" value="All"><span>All</span>'+
+                            '    </label>'+
+                            '</div>';
+            $tp = $(liTemplate);
+            liTempWrap.append($tp);
+            $tp.find("input").attr('class','togAll');
             $.each(thisLevel1,function(key,item){
-                ss += "<li class=\"datas\"><input type=\"checkbox\" class=\"dckb\" data-id=\"" + item.split("||")[0] + "\" value=\"" + item.split("||")[0] + "\"><span class=\"dckl\">" + item.split("||")[1] + "</span></li>";
+                $tp = $(liTemplate);
+                $tp.find("span").html(item.split("||")[1]);
+                $tp.find("input").attr('data-id',item.split("||")[0]);
+                $tp.find("input").attr('value',item.split("||")[0]);
+                liTempWrap.append($tp);
             });
-            $("#dl_level1").append(ss);
-            ss = '';
+            $("#dl_level1").html(liTempWrap.html());
+            liTempWrap.html("");
             $.each(thisLevel2,function(key,item){
-                ss += "<li class=\"datas\"><input type=\"checkbox\" class=\"dckb\" data-id=\"" + item.split("||")[0] + "\" value=\"" + item.split("||")[0] + "\"><span class=\"dckl\">" + item.split("||")[1] + "</span></li>";
+                $tp = $(liTemplate);
+                $tp.find("span").html(item.split("||")[1]);
+                $tp.find("input").attr('data-id',item.split("||")[0]);
+                $tp.find("input").attr('value',item.split("||")[0]);
+                liTempWrap.append($tp);
             });
-            $("#dl_level2").append(ss);
-            ss = '';
+            $("#dl_level2").html(liTempWrap.html());
+            liTempWrap.html("");
             $.each(thisLevel3,function(key,item){
-                ss += "<li class=\"datas\"><input type=\"checkbox\" class=\"dckb\" data-id=\"" + item.split("||")[0] + "\" value=\"" + item.split("||")[0] + "\"><span class=\"dckl\">" + item.split("||")[1] + "</span></li>";
+                $tp = $(liTemplate);
+                $tp.find("span").html(item.split("||")[1]);
+                $tp.find("input").attr('data-id',item.split("||")[0]);
+                $tp.find("input").attr('value',item.split("||")[0]);
+                liTempWrap.append($tp);
             });
-            $("#dl_level3").append(ss);
-            ss = '';
+            $("#dl_level3").html(liTempWrap.html());
+            liTempWrap.html("");
             $.each(thisLevel4,function(key,item){
-                ss += "<li class=\"datas\"><input type=\"checkbox\" class=\"dckb\" data-id=\"" + item.split("||")[0] + "\" value=\"" + item.split("||")[0] + "\"><span class=\"dckl\">" + item.split("||")[1] + "</span></li>";
+                $tp = $(liTemplate);
+                $tp.find("span").html(item.split("||")[1]);
+                $tp.find("input").attr('data-id',item.split("||")[0]);
+                $tp.find("input").attr('value',item.split("||")[0]);
+                liTempWrap.append($tp);
             });
-            $("#dl_level4").append(ss);
+            $("#dl_level4").html(liTempWrap.html());
         };
 
 

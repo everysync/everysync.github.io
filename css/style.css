@@ -27,6 +27,15 @@
 
 
 ********************************************************************************************  */
+::-webkit-scrollbar              { /* 1 */  width:9px; background-color:#23333b;}
+::-webkit-scrollbar-button       { /* 2 */ }
+::-webkit-scrollbar-track        { /* 3 */ }
+::-webkit-scrollbar-track-piece  { /* 4 */ }
+::-webkit-scrollbar-thumb        { /* 5 */ border:solid 2px #23333b; width:5px;  border-radius:4px; background-color:#859ba4;}
+::-webkit-scrollbar-corner       { /* 6 */ background-color:#23333b;}
+::-webkit-resizer                { /* 7 */ }
+::-webkit-scrollbar:horizontal   { height:9px;}
+
 @font-face {
 	font-family: 'lsicons';
 	src:url('../fonts/lsicons.eot?-fzdzn4');
@@ -231,6 +240,9 @@ html.onepage-scroll body {
 	overflow: hidden;
 	height: 100%;
 	width: 100%;
+}
+.app_container.hide {
+	display: none;
 }
 .container {
 	width: 100%;
@@ -887,7 +899,7 @@ html.onepage-scroll body {
 	float: right;
 	color: #ffe900;
 }
-.mapswipebtn {
+.mapswipebtn,.pageswipebtn {
 	height: 56px;
 	line-height: 56px;
 	padding: 0 52px;
@@ -900,7 +912,7 @@ html.onepage-scroll body {
 	cursor: pointer;
 	margin-right: 10px;
 }
-.mapswipebtn.cur {
+.mapswipebtn.cur,.pageswipebtn.cur {
 	background-color: #fff;
 	color: #0093ba;
 }
@@ -989,6 +1001,14 @@ html.onepage-scroll body {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+}
+
+.chwrap3 {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top:0;
+	left:0;
 }
 #chart_fpy_timeLine,#chart_fpy_timeLine2 {
 	height: 100%;
@@ -1326,7 +1346,8 @@ html.onepage-scroll body {
     color: rgba(255,255,255,0.61);
     height: 32px;
 }
-.form_select02{
+.form_select02{ width: 49%;}
+.form_select03{
     background: url(../images/down-bg02.png) right 15px rgba(255,255,255,1) no-repeat;
     background-size: 24px 8px;
     color: #07a1c3;
@@ -1477,7 +1498,7 @@ html.onepage-scroll body {
 
 .chartHalfH{
 	width:99.5%;
-	height:500px;
+	height:400px;
 }
 
 .chartConRel{
@@ -1486,6 +1507,22 @@ html.onepage-scroll body {
 
 .chartBorder{
 	border:1px rgba(255,255,255,0.25) solid;
+}
+
+.pop_mask {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.45);
+	z-index: 9;
+}
+.app_blur_filter {
+	filter: blur(3px);
+	-ms-filter: blur(3px);
+	-moz-filter: blur(3px);
+	-webkit-filter: blur(3px);
 }
 
 @media only screen and (max-width:1280px){
@@ -1518,7 +1555,7 @@ only screen and (min-device-pixel-ratio: 1.5),
 only screen and (min-device-pixel-ratio: 2) {
     .form_date{ background-image: url(../images/calendar-ico@2x.png);}
     .form_select{ background-image: url(../images/down-bg@2x.png);}
-    .form_select02{ background-image: url(../images/down-bg02@2x.png);}
+    .form_select03{ background-image: url(../images/down-bg02@2x.png);}
     .tableEditIco{ background-image: url(../images/edit-ico@2x.png);}
     .tableDelIco{ background-image: url(../images/del-ico@2x.png);}
     .fileShade{ background-image: url(../images/file-ico@2x.png);}

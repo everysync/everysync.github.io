@@ -290,9 +290,9 @@ function home_aduit(target) {
 		renderLayoutCache = null;
 	}
 	$doc.on({
-		"pagein_3.getAudit":function(){
+		"pagein_4.getAudit":function(){
 			getJsonp(jsonpURL);
-			$doc.one("pagein_1 pagein_2 pagein_4", function() {
+			$doc.one("pagein_1 pagein_2 pagein_3 pagein_5", function() {
 				$targey.html("");
 			});
 		}
@@ -328,6 +328,7 @@ var page_modules = {
 				$psc.addClass("page_showed").removeClass("page_showing");
 				afterEvent();
 				$psc.off(".pshow");
+				$(".app_container").addClass("hide");
 			});
 		} else if ((contantState===true&&linkURL)||(contantState===true&&dr===true)) {
 			//showed
@@ -341,6 +342,7 @@ var page_modules = {
 	},
 	hidepage:function(_this) {
 		var $psc = page_modules.$page_show_content;
+		$(".app_container").removeClass("hide");
 		$psc.addClass("page_hidding");
 		$psc.on(transEnd("phide"), function(e) {
 			$psc.removeClass($psc.data("prevClass"));
@@ -373,7 +375,7 @@ var page_modules = {
 		page_modules.$siderEl.on("tap", ".fslinks", function(e) {
 			e.stopPropagation();
 			var _this = $(this);
-			if (!_this.data("url")){return ;};
+			if (!_this.data("url")){return ;}
 			$psc.on("page_showed.loadpage", function() {
 				var loads = _this.data("url") + " " + _this.data("selector");
 				page_modules.$page_show_wrap.load(loads,function() {
@@ -404,28 +406,28 @@ var page_modules = {
 	},
 	applyTolinks:function() {
 		//Qstop
-		page_modules.initListLinks("#qstop_create","moduleHtml/Qstop_Create.html",".eachBlck","demopagec-1","page_audit");
-		page_modules.initListLinks("#qstop_operating","moduleHtml/Qstop_Operating.html",".eachBlck","demopagec-1","page_audit");
-		page_modules.initListLinks("#qstop_search","moduleHtml/Qstop_Search.html",".eachBlck","demopagec-1","page_audit");
+		page_modules.initListLinks("#qstop_create","moduleHtml/Qstop_Create.html",".eachBlck","pagebgc-1","page_audit");
+		page_modules.initListLinks("#qstop_operating","moduleHtml/Qstop_Operating.html",".eachBlck","pagebgc-1","page_audit");
+		page_modules.initListLinks("#qstop_search","moduleHtml/Qstop_Search.html",".eachBlck","pagebgc-1","page_audit");
 
 		//Fpyoob
-		page_modules.initListLinks("#fpyoob_create","moduleHtml/FPY_OOB_Create.html",".eachBlck","demopagec-2","page_audit");
-		page_modules.initListLinks("#fpyoob_search","moduleHtml/FPY_OOB_Search.html",".eachBlck","demopagec-1","page_audit");
+		page_modules.initListLinks("#fpyoob_create","moduleHtml/FPY_OOB_Create.html",".eachBlck","pagebgc-2","page_audit");
+		page_modules.initListLinks("#fpyoob_search","moduleHtml/FPY_OOB_Search.html",".eachBlck","pagebgc-1","page_audit");
 
 		//Audit
-		page_modules.initListLinks("#audit_create","moduleHtml/Audit_Create.html",".eachBlck","demopagec-3","page_audit");
-		page_modules.initListLinks("#audit_odm","moduleHtml/Audit_Odm.html",".eachBlck","demopagec-3","audit_odm");
-		page_modules.initListLinks("#audit_search","moduleHtml/Audit_Search.html",".eachBlck","demopagec-1","page_audit");
+		page_modules.initListLinks("#audit_create","moduleHtml/Audit_Create.html",".eachBlck","pagebgc-3","page_audit");
+		page_modules.initListLinks("#audit_odm","moduleHtml/Audit_Odm.html",".eachBlck","pagebgc-3","audit_odm");
+		page_modules.initListLinks("#audit_search","moduleHtml/Audit_Search.html",".eachBlck","pagebgc-1","page_audit");
 
 		//fai
-		page_modules.initListLinks("#fai_create","moduleHtml/FAI_CreateMQE.html",".eachBlck","demopagec-4","page_audit");
-		page_modules.initListLinks("#fai_odm","moduleHtml/FAI_Odm.html",".eachBlck","demopagec-4","fai_odm","page_audit");
-		page_modules.initListLinks("#fai_search","moduleHtml/FAI_Search.html",".eachBlck","demopagec-1","page_audit");
+		page_modules.initListLinks("#fai_create","moduleHtml/FAI_CreateMQE.html",".eachBlck","pagebgc-4","page_audit");
+		page_modules.initListLinks("#fai_odm","moduleHtml/FAI_Odm.html",".eachBlck","pagebgc-4","fai_odm","page_audit");
+		page_modules.initListLinks("#fai_search","moduleHtml/FAI_Search.html",".eachBlck","pagebgc-1","page_audit");
 
 		//ec
-		page_modules.initListLinks("#ec_home","moduleHtml/EC.html",".eachBlck","demopagec-4");
-		page_modules.initListLinks("#ec_create","moduleHtml/EC_Create.html",".eachBlck","demopagec-4","page_audit");
-		page_modules.initListLinks("#ec_search","moduleHtml/EC_Search.html",".eachBlck","demopagec-1","page_audit");
+		page_modules.initListLinks("#ec_home","moduleHtml/EC.html",".eachBlck","pagebgc-5");
+		page_modules.initListLinks("#ec_create","moduleHtml/EC_Create.html",".eachBlck","pagebgc-4","page_audit");
+		page_modules.initListLinks("#ec_search","moduleHtml/EC_Search.html",".eachBlck","pagebgc-1","page_audit");
 	},
 	loadinto:function(url,selector,backgroundcss,requirejs) {
 		var $psc = page_modules.$page_show_content;
@@ -447,22 +449,37 @@ var page_modules = {
 		});
 		page_modules.showpage(tempData,true);
 	},
-	loadforside:function(options) {
+	loadforsideCacheHTML:function(options) {
 		var opts = $.extend({
-			target:"",
-			loadurl:"",
-			loadseletor:"",
-			addBgClass:"",
-			requirejs:"",
-			callback:function(){}
+			loadCacheHTML:"",
+			loadCacheJS:""
 		},options);
-		
-	}
+		var cachehtml = $("<div>");
+		var cacheinner = "";
+		cachehtml.load(opts.loadCacheHTML,function() {
+			cacheinner  = $(cachehtml.html());
+			opts.loadCacheJS?opts.loadCacheJS(cacheinner):"";
+		});
+	},
+
 };
+
+var popLayoutfns = {
+	$filterClassBlur:".app_blur_filter",
+	$popmask:$(".popmask"),
+	$pop_dir_right:$(""),
+	$pop_dir_top:$(""),
+	pposhow:function(options) {
+		var opts = $.extend({
+			direction:"right"	// can be "right" or "top"
+			
+		},options);
+	}
+}
 
 function testload() {
 	//这个是测试直接加载页面的demo
-	page_modules.loadinto("moduleHtml/Audit_Odm.html", ".AuditBlck" ,"demopagec-2","audit_odm")
+	page_modules.loadinto("moduleHtml/Audit_Odm.html", ".AuditBlck" ,"pagebgc-2","audit_odm")
 }
  
 //INIT FUNCTIONS
@@ -489,4 +506,29 @@ function jayfunction() {
 	sidebaract("#sidebar");
 	//PAGE_LOAD
 	page_modules.init_modules_action();
+	//init pageside cache html
+		
+	
+	$(".ctrBtns").on("tap",".ctr_3", function() {
+		var $psc = page_modules.$page_show_content;
+		page_modules.loadforsideCacheHTML({
+			loadCacheHTML:"moduleHtml/UserCenter_basemerge.html .h_auto",
+			loadCacheJS:function(cacheinner) {
+				var tempData = $("<div>").data({"wrapclass":"pagebgc-1"});
+				$psc.on("page_showed.loadpage", function() {
+					page_modules.$page_show_wrap.children().remove();
+					page_modules.$page_show_wrap.append(cacheinner);
+					require(["icheck.min"],function() {
+						require(["userPerCenter"], function(page) {
+							page.init();
+						});
+					});
+					$psc.off(".loadpage");
+				});
+				page_modules.showpage(tempData,true);
+			}
+		});			
+	});
+	
+	
 }

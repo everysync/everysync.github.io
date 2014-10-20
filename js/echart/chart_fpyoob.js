@@ -7,6 +7,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
         function LvFpyOob(container,chartType){
             MyChart.call(this, lvChart.echarts, lvChart.ecConfig, container, {}, 0, 0);
             this.chartType = chartType;
+            this.factoryName = 'LENOVO';
             this.getChartData(0);
         }
         iheritPrototype(LvFpyOob, MyChart);
@@ -200,7 +201,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
             option.options[0].series[3].data = target2;  
             this.option = option;
             this.loadStatus = true;
-            return option;
+            option = null;
         };
         LvFpyOob.prototype.getChartDataTimeLine = function(drawFlag){
             var self = this;
@@ -393,7 +394,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
             option.options[0].series[3].data = target2;  
             this.option = option;
             this.loadStatus = true;
-            return option;
+            option = null;
         };
         LvFpyOob.prototype.getChartDataTimeLine_2 = function(drawFlag){
             var self = this;
@@ -418,7 +419,6 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
             self._setOptionTimeLine_2(mydata);
             drawFlag&&self.resetOption();
         };
-
 
         LvFpyOob.prototype._setOptionLine = function(mydata){
             var option = {

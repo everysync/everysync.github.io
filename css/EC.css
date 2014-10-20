@@ -437,6 +437,8 @@
 	height:355px;
 	padding:20px 0;
 	border-right:1px solid #7997a0;
+	overflow-y:auto; 
+	-webkit-overflow-scrolling: touch;
 }
 .ProEachdata .proLabel{
 	padding:0 0 26px 23px;
@@ -513,6 +515,9 @@
 	box-sizing:border-box;
 	padding-top:40px;
 	margin-left:285px;
+}
+.CreateMain.hide {
+	display: none;
 }
 .UserCenBox{
 	padding:2% 6% 0 4%;
@@ -933,9 +938,13 @@
 	float:left;
 }
 .Oob_in {
-	width:156px;
-	margin:20px;
-	float:right;
+	position: absolute;
+	width: 156px;
+	margin: 20px;
+	float: right;
+	z-index: 100;
+	top: 0;
+	right: 0;
 }
 	
 

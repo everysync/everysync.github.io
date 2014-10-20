@@ -1,13 +1,13 @@
 define(function(){
+	
 	var chartObj = {
 		p1:[],
 		p2:[],
 		p3:[],
 		p4:[],
+		p5:[],
 		home_map:[],
-		home_bar:[],
-		fpyOob_ramp:[],
-		fpyOob_mass:[]
+		home_bar:[]
 	};
 	var currIdx = 1;
 	require(["chart_map"],function(LvMap){//首页地图页
@@ -19,26 +19,29 @@ define(function(){
 		var bar = new LvHome('chart_home_bar');
 		chartObj['home_bar'].push(bar);
 	});
-	require(["chart_fpyoob"],function(LvFpyOob){//FPY/OOB Mass Production
-		var line = new LvFpyOob('chart_fpy_timeLine','timeLine');
-		chartObj['fpyOob_mass'].push(line);
-	});
 	require(["chart_fpyoob"],function(LvFpyOob){//FPY/OOB Ramp
 		var line = new LvFpyOob('chart_fpy_Line','line');
-		chartObj['fpyOob_ramp'].push(line);
-		chartObj['p2'] = chartObj['fpyOob_ramp'];
+		chartObj['p2'].push(line);
+		$(".ramp_switch").on('tap','.pageswipebtn:not(.cur)',function(){//切换工厂后执行刷新图表
+			$(this).addClass("cur").siblings().removeClass('cur');
+			line.factoryName = $(this).text();
+			line.getChartData(1);
+		});
 	});
-	require(["chart_audit"],function(LvAudit){ //AUDIT
-		// var gauge = new LvAudit('chart_audit_gauge','gauge'),
-		// 		bar = new LvAudit('chart_audit_bar','bar');
-		// var gauge = new LvAudit('chart_audit_gauge','bar2'),
-		// 		bar = new LvAudit('chart_audit_bar','timeLine');
-		// chartObj['p3'].push(gauge, bar);
+	require(["chart_fpyoob"],function(LvFpyOob){//FPY/OOB Mass Production
+		var line = new LvFpyOob('chart_fpy_timeLine','timeLine');
+		chartObj['p3'].push(line);
+		$(".mass_switch").on('tap','.pageswipebtn:not(.cur)',function(){//切换工厂后执行刷新图表
+			$(this).addClass("cur").siblings().removeClass('cur');
+			line.factoryName = $(this).text();
+			line.getChartData(1);
+		});
 	});
+
 	require(["chart_fai"],function(LvFai){//FAI
 		var pie = new LvFai('chart_fai_pie','pie'),
 				bar = new LvFai('chart_fai_bar','bar');
-		chartObj['p4'].push(pie, bar);
+		chartObj['p5'].push(pie, bar);
 		var $maptar = $("#worldmapsvg");
     function refreshData(areaName){//切换区域后执行刷新图表
     	if(pie.areaName == areaName){
@@ -59,9 +62,9 @@ define(function(){
 	});
 	function disposeChart(index){//清除chart实例，减小内存使用
 		$.each(chartObj['p'+index],function(k,v){
-			// var img = new Image();
-   //    img.src = v.chart.getDataURL();
-   //    $("#"+v.dom_id).html(img);
+		// var img = new Image();
+    // img.src = v.chart.getDataURL();
+    // $("#"+v.dom_id).html(img);
 			v.dispose();
 		});
 	}
@@ -104,6 +107,12 @@ define(function(){
 		},
 		"pageout_4":function(){
 			disposeChart(4);
+		},
+		"pagein_5":function(){
+			resetOptionChart(5);
+		},
+		"pageout_5":function(){
+			disposeChart(5);
 		}
 	});
 	$(".demopagec-1").on({
@@ -117,18 +126,6 @@ define(function(){
 			disposeChart(1);
 			chartObj['p1'] = chartObj['home_bar'];
 			resetOptionChart(1);
-		}
-	});
-	$(".demopagec-2").on({
-		'Switch_0_ani_end':function() {
-			disposeChart(2);
-			chartObj['p2'] = chartObj['fpyOob_ramp'];
-			resetOptionChart(2);
-		},
-		'Switch_1_ani_end':function() { 
-			disposeChart(2);
-			chartObj['p2'] = chartObj['fpyOob_mass'];
-			resetOptionChart(2);
 		}
 	});
 });

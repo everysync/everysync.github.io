@@ -78,8 +78,7 @@ define('page_audit',[],function() {
 					var _inps = _self.find("input[type=radio]");
 					_inps.filter(":odd").addClass("qsno");
 					_inps.filter(":even").addClass("qsyes");
-					_inps.attr("name", _name);
-					
+					_inps.attr("name", _name);		
 				});
 				
 				allradio.iCheck({
@@ -133,7 +132,6 @@ define('page_audit',[],function() {
 					}
 				});
 				
-				
 				//上传Files
 				$(".syimg").each(function(index, element) {
 					element.onchange =function(e) {
@@ -179,19 +177,15 @@ define('page_audit',[],function() {
 					var ckiput = alliput.filter(":checked");
 					alltabs.eq(_this.index()).find("span.count").html(alliput.length/2 - ckiput.length);
 				});
-							
 				$('.form_radio,.form_check').iCheck({
 					checkboxClass: 'icheckbox_flat',
 					radioClass: 'iradio_flat',
 					increaseArea: '20%' // optional
 				});
 		});
-		require(["everysync"],function() {
-			require(["isk/isk_EverySync_LPL_Data"],function() {
-				var incData = new isk_EverySync_Data();
-		  	var incFunct = new isk_EverySync_LPL(incData.thisVer, incData.thisData);
-	    	incFunct.load();
-	    });
+		//加载product
+		require(["isk_LPL"],function(isk){
+			isk.init&&isk.init();
     });
 		$('#audit_search_btn').on("tap.audser",function(){
 			page_modules.loadinto("moduleHtml/Audit_SearchResult.html", ".eachBlck" ,"pagebgc-3","audit_result");
@@ -212,7 +206,6 @@ define('page_audit',[],function() {
 			page_modules.loadinto("moduleHtml/Qstop_SearchResult.html", ".eachBlck" ,"pagebgc-1","qstop_result");
 		});
 	}
-	
 	return {init:init};
 });
 
@@ -221,4 +214,98 @@ define('page_fai',[],function() {
 		alert('fai');
 	}
 	return {init:init};
+});
+
+
+define('isk_LPL',["isk/isk_LPL_Data","isk/isk_LPL_Function","icheck.min"],function(){
+	var thisClass = new Object;
+	var chkinput = null;
+	thisClass.init = function(){
+		//加载product，如果本地存储已经有了且没有过期就读取本地存储
+		var incData = new isk_EverySync_Data();
+		var incFunct = new isk_EverySync_LPL(incData.thisVer, incData.thisData);
+		incFunct.load();
+		$('.form_radio,.form_check').iCheck({
+			checkboxClass: 'icheckbox_flat',
+			radioClass: 'iradio_flat',
+			increaseArea: '20%' // optional
+		});
+		//product多选框
+		var $schDetail = $(".productList");
+		chkinput =  $schDetail.find("input");
+		chkinput.iCheck('check');
+
+		var notStep1 = $("#dl_level2,#dl_level3,#dl_level4").find("input.dckb");
+		chkinput.filter(".togAll").on('ifClicked', function(e){
+		  if($(this).parent().hasClass('checked')){
+		      $("#dl_level1").find("input.dckb").not('.togAll').iCheck('uncheck');
+		      notStep1.closest('.proLabel').css('display','none');
+		      notStep1.parent().removeClass('checked');
+		  }else{
+		      $("#dl_level1").find("input.dckb").not('.togAll').iCheck('check');
+		      notStep1.closest('.proLabel').css('display','block');
+		      notStep1.parent().addClass('checked');
+		  }
+		  setTimeout(setSteps,0);
+		});
+		setTimeout(setSteps,0);
+
+		var dckb_chkinput = $schDetail.find("input.dckb").not('.togAll');
+		dckb_chkinput.on('ifClicked', function(e){
+		  if($(this).parent().hasClass('checked')){
+		    showInput(this,'uncheck','none');
+				chkinput.filter(".togAll").iCheck('uncheck');
+		  }else{
+		    showInput(this,'check','block');
+		  }
+		  setTimeout(setSteps,0);
+		});
+	}
+
+	function setStep(lv_id,step_id,allFlag){
+    var span_text = '',
+        input_id = '';
+    var dl_level = $(lv_id).find("input.dckb").not('.togAll');
+    var checked = $(lv_id).find(".checked input.dckb").not('.togAll');
+    if(checked.length > 0){
+      if(checked.length == dl_level.length && allFlag){
+        span_text = 'All  ';
+        input_id = 'All  ';
+      }else{
+        $.each(checked, function( key, item ) {
+          span_text += $(item).parents('.proLabel').find('span').html()+', ';
+          input_id += $(item).attr('data-id').split("|")[2]+',';
+        });
+      }
+    }
+    span_text = span_text.substring(0,span_text.length-2);
+    input_id = input_id.substring(0,input_id.length-1);
+    $(step_id).parent().attr('data-text',span_text);
+    $(step_id).parent().find('.pst_d').html(span_text);
+    $(step_id).val(input_id);
+	}
+	
+	//设置steps
+  function setSteps(){
+    setStep("#dl_level1",'#first_step_type',0);
+    setStep("#dl_level2",'#second_step_type',0);
+    setStep("#dl_level3",'#thrid_step_type',0);
+    setStep("#dl_level4",'#fourth_step_type',1);
+  }
+    
+  function showInput(item,opt,display){
+		var data_id = $(item).attr('data-id').split("|");
+		var level = parseInt(data_id[0])+1;
+		var last_step = parseInt(data_id[1]);
+		var next_step = parseInt(data_id[2]);
+		if(level < 4){
+			var qz = level+'|'+next_step+'|';
+			var curr = chkinput.filter('input[data-id^="'+qz+'"]');
+			curr.iCheck(opt).closest('.proLabel').css('display',display);
+			curr.each(function(){
+			    showInput(this,opt,display);
+			});
+		}
+	}
+	return thisClass;
 });

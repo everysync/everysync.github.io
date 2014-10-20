@@ -296,7 +296,6 @@ define(['echarts','echarts/chart/pie','echarts/chart/bar'],
             self._setOptionBar(mydata);
             drawFlag&&self.resetOption();
         };
-
         //Bar_2测试
         LvFai.prototype._setOptionBar_2 = function (mydata) {
             var option = {
