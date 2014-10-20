@@ -429,29 +429,6 @@ define(['echarts','echarts/chart/gauge','echarts/chart/bar','echarts/chart/line'
             this.loadStatus = true;
             return option;
         };
-        LvAudit.prototype.getChartDataTimeLine = function(drawFlag){
-            var self = this;
-            var mydata = {
-              legend:['OOB'],
-              series_line_1:{name:'OOB',data:[]}
-            };
-            for (var i = 1; i <= 12; i++) {
-                var newLineArr = [],
-                    monthArr = [],
-                    len = new Date(2014,i,0).getDate();//获取某年某月的天数
-                for (var j = 1; j <= len; j++) {
-                    monthArr.push(i+'.'+j);
-                    newLineArr.push(Math.floor(Math.random()*100));
-                };
-                for (var k = len; k <= 30; k++) {//如果当月天数小于31天，需要补全
-                    monthArr.push('-.-');
-                    newLineArr.push('-');
-                };
-                mydata.series_line_1.data.push({'data':newLineArr,'xAxis':monthArr});
-            };
-            self._setOptionTimeLine(mydata);
-            drawFlag&&self.resetOption();
-        };
         LvAudit.prototype._setOptionLine = function(mydata){
             var option = {
                 title : {
@@ -536,6 +513,21 @@ define(['echarts','echarts/chart/gauge','echarts/chart/bar','echarts/chart/line'
             this.loadStatus = true;
             return option;
         };
+        LvAudit.prototype.getChartData = function(drawFlag){
+            switch(this.chartType){
+                case "gauge":
+                    this.getChartDataGauge(drawFlag);break;
+                case "bar":
+                    this.getChartDataBar(drawFlag);break;
+                case "bar2":
+                    this.getChartDataBar2(drawFlag);break;
+                case "timeLine":
+                    this.getChartDataTimeLine(drawFlag);break;
+                case "line":
+                    this.getChartDataLine(drawFlag);break;    
+                default:break;
+            }
+        };
         LvAudit.prototype.getChartDataTimeLine = function(drawFlag){
             var self = this;
             var mydata = {
@@ -579,21 +571,6 @@ define(['echarts','echarts/chart/gauge','echarts/chart/bar','echarts/chart/line'
             mydata.series_line_1.data.push({'data':newLineArr,'xAxis':monthArr});
             self._setOptionLine(mydata);
             drawFlag&&self.resetOption();
-        };
-        LvAudit.prototype.getChartData = function(drawFlag){
-            switch(this.chartType){
-                case "gauge":
-                    this.getChartDataGauge(drawFlag);break;
-                case "bar":
-                    this.getChartDataBar(drawFlag);break;
-                case "bar2":
-                    this.getChartDataBar2(drawFlag);break;
-                case "timeLine":
-                    this.getChartDataTimeLine(drawFlag);break;
-                case "line":
-                    this.getChartDataLine(drawFlag);break;    
-                default:break;
-            }
         };
         LvAudit.prototype.getChartDataGauge = function(drawFlag){
             var self = this;

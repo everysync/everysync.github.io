@@ -8,6 +8,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
             MyChart.call(this, lvChart.echarts, lvChart.ecConfig, container, {}, 0, 0);
             this.chartType = chartType;
             this.factoryName = 'LENOVO';
+            this.letter = 'A';
             this.getChartData(0);
         }
         iheritPrototype(LvFpyOob, MyChart);

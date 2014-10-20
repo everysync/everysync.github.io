@@ -32,7 +32,7 @@ MyChart.prototype.resetOption = function () {
 }
 
 MyChart.prototype.dispose = function () {
-    this.chart.dispose();
+    this.chart&&this.chart.dispose();
 }
 
 MyChart.prototype.bindEvents = function () {//绑定相关事件

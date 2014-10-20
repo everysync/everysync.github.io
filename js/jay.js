@@ -425,8 +425,7 @@ var page_modules = {
 		page_modules.initListLinks("#fai_search","moduleHtml/FAI_Search.html",".eachBlck","pagebgc-1","page_audit");
 
 		//ec
-		page_modules.initListLinks("#ec_home","moduleHtml/EC.html",".eachBlck","pagebgc-5");
-		page_modules.initListLinks("#ec_create","moduleHtml/EC_Create.html",".eachBlck","pagebgc-4","page_audit");
+		page_modules.initListLinks("#ec_create","moduleHtml/EC_Create.html",".eachBlck","pagebgc-5","page_audit");
 		page_modules.initListLinks("#ec_search","moduleHtml/EC_Search.html",".eachBlck","pagebgc-1","page_audit");
 	},
 	loadinto:function(url,selector,backgroundcss,requirejs) {

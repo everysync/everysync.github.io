@@ -202,6 +202,8 @@ define('page_audit',[],function() {
 			page_modules.loadinto("moduleHtml/FPY_OOBSearchResult.html", ".eachBlck" ,"pagebgc-2","fpyoob_result");
 		});
 		$('#qstop_search_btn').on("tap.qstopser",function(){
+			var str = $("#searchForm").serialize();
+			console.log(str);
 			page_modules.params = {type:4};
 			page_modules.loadinto("moduleHtml/Qstop_SearchResult.html", ".eachBlck" ,"pagebgc-1","qstop_result");
 		});
