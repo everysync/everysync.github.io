@@ -1518,6 +1518,7 @@ html.onepage-scroll body {
 }
 
 .pop_mask {
+	display: none;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -1526,11 +1527,75 @@ html.onepage-scroll body {
 	background: rgba(0, 0, 0, 0.45);
 	z-index: 9;
 }
+.pop_right_element{
+	display:none;
+	position:absolute;
+	width: 384px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	border-left:solid 1px #000;
+	top: 79px;
+	right: 0;
+	bottom: 0;
+	z-index: 9;
+	background: rgba(0, 0, 0, 0.55);
+	overflow-y: auto;
+}
+
+@keyframes popshowing {
+	from { transform:translateX(384px) translateZ(0)}
+	to { transform:translateX(0) translateZ(0)}
+}
+@keyframes pop_maskshowing {
+	from { transform: translateZ(0); opacity:0}
+	to { transform:translateZ(0); opacity:1}
+}
+
+@keyframes pophidding {
+	from { transform:translateX(0) translateZ(0)}
+	to { transform:translateX(384px) translateZ(0)}
+}
+@keyframes pop_maskhidding {
+	from { transform: translateZ(0); opacity:1}
+	to { transform:translateZ(0); opacity:0}
+}
+.pop_mask.showing {
+	display: block;
+	animation:pop_maskshowing 1s linear;
+}
+.pop_mask.hidding {
+	display: block;
+	animation:pop_maskhidding 1s linear;
+}
+
+.pop_mask.showed {
+	display: block;	
+}
+.pop_right_element.showing {
+	display: block;
+	animation:popshowing .5s cubic-bezier(0, 1, .1, 1) both;
+}
+.pop_right_element.hidding {
+	display: block;
+	animation:pophidding .5s cubic-bezier(0, 1, .1, 1) both;
+}
+
+.pop_right_element.showed {
+	display:block;
+}
 .app_blur_filter {
-	filter: blur(3px);
-	-ms-filter: blur(3px);
-	-moz-filter: blur(3px);
-	-webkit-filter: blur(3px);
+	filter: blur(2px);
+	-ms-filter: blur(2px);
+	-moz-filter: blur(2px);
+	-webkit-filter: blur(2px);
+}
+
+#pt_inner,
+#pr_inner {
+	width: 100%;
+	height: 100%;
+	-webkit-overflow-scrolling: touch;
 }
 
 @media only screen and (max-width:1280px){

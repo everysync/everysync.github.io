@@ -464,15 +464,85 @@ var page_modules = {
 };
 
 var popLayoutfns = {
-	$filterClassBlur:".app_blur_filter",
-	$popmask:$(".popmask"),
-	$pop_dir_right:$(""),
-	$pop_dir_top:$(""),
-	pposhow:function(options) {
+	$selectors:{
+		popmask			:$(".pop_mask"),
+		pop_dir_right	:$(".pop_right_element"),
+		pop_dir_top		:$(".pop_top_element")
+	},
+	popOptions:function(options) {
 		var opts = $.extend({
-			direction:"right"	// can be "right" or "top"
-			
+			filterClassBlur		:".app_blur_filter",
+			helpClass_showing	:"showing",
+			helpClass_showed	:"showed",
+			helpClass_hidding	:"hidding",
+			helpClass_hidden	:"hidden",
+			direction			:"right",	//"right" or "top"
+			blur				:false		//Add blur filter when showed
 		},options);
+		return opts;
+	},
+	popshow:function(opt) {
+		var default_opt = popLayoutfns.popOptions();
+		var opts = $.extend({},default_opt,opt);
+		var $mask = popLayoutfns.$selectors.popmask;
+		var $target;
+		var $blurTarget =$(".app_container").add( page_modules.$page_show_wrap );
+		if (opts.direction == "right") {
+			$target=popLayoutfns.$selectors.pop_dir_right;
+		} else if (opts.direction=="top") {
+			$target=popLayoutfns.$selectors.pop_dir_top;
+		}
+		
+		if ($target.data("states") == "show") {
+			//如果pop层是显示状态，那么触发已经显示的事件，然后不执行后面的动画动作。
+			$target.trigger("side_showe");
+			return ;
+		}
+		page_modules.$page_show_content.on("page_showed.popEventListener", function(e) {
+			popLayoutfns.pophide();
+		});
+		
+		$target.addClass(opts.helpClass_showing).on(animateEnd("sidepop"),function(e) {
+			//fn
+			$target.trigger("side_showe").data("states","show");
+			if(opts.blur===true) {$blurTarget.addClass(opts.filterClassBlur.replace(".",""));}
+			$mask.addClass(opts.helpClass_showing).on(animateEnd("popmask"), function() {
+				$mask.removeClass(opts.helpClass_showing).addClass(opts.helpClass_showed).off(".popmask");
+			});
+			$target.removeClass(opts.helpClass_showing).addClass(opts.helpClass_showed).off(".sidepop");
+		});
+		
+	},
+	pophide:function(opt) {
+		var default_opt = popLayoutfns.popOptions();
+		var opts = $.extend({},default_opt,opt);
+		var $mask = popLayoutfns.$selectors.popmask;
+		var $target;
+		var $targetInnerDOM;
+		var $blurTarget =$(".app_container").add( page_modules.$page_show_wrap );
+		if (opts.direction == "right") {
+			$target=popLayoutfns.$selectors.pop_dir_right;
+			$targetInnerDOM = $("#pr_inner");
+		} else if (opts.direction=="top") {
+			$target=popLayoutfns.$selectors.pop_dir_top;
+			$targetInnerDOM = $("#pt_inner");
+		}
+		if ($target.data("states") == "hide") {
+			//如果pop层是隐藏状态，那么不执行任何动作
+			return ;
+		}
+		page_modules.$page_show_content.off(".popEventListener");
+		$target.addClass(opts.helpClass_hidding).on(animateEnd("sidepophide"),function(e) {
+			//fn
+			$target.trigger("side_hidden").data("states","hide");
+			$targetInnerDOM.children().remove();
+			if(opts.blur===true) {$blurTarget.removeClass(opts.filterClassBlur.replace(".",""))}
+			$mask.addClass(opts.helpClass_hidding).on(animateEnd("popmask"), function() {
+				$mask.removeClass(opts.helpClass_showed + " " +opts.helpClass_hidding).off(".popmask");
+			});
+			$target.removeClass(opts.helpClass_showed + " " +opts.helpClass_hidding).off(".sidepophide");
+		});
+		
 	}
 }
 
@@ -530,4 +600,10 @@ function jayfunction() {
 	});
 	
 	
+	
+	$(".ctrBtns").on("tap",".ctr_1", function() {
+		popLayoutfns.popshow();
+	}).on("tap", ".ctr_2",function() {
+		popLayoutfns.pophide();
+	})
 }
