@@ -252,6 +252,17 @@ define(['echarts','echarts/chart/pie','echarts/chart/bar'],
             this.loadStatus = true;
             return option;
         };
+        LvFai.prototype.bindEvents = function () {//绑定相关事件
+            var self = this;
+            switch(this.chartType){
+                case "bar":
+                    this.chart.on(lvChart.ecConfig.EVENT.CLICK, function(param){
+                        page_modules.loadinto("moduleHtml/FAI_Odm.html",".eachBlck","pagebgc-4","fai_odm","page_audit");
+                    }); 
+                    break;
+                default:break;
+            }
+        };
         LvFai.prototype.getChartData = function(drawFlag){
             switch(this.chartType){
                 case "pie":

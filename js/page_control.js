@@ -39,6 +39,7 @@ define('page_control',[],function(){
 			case "audit_odm":
 			case "fai_odm":
 			case "fpyoob_in":
+			case "qstop_in":
 			case "audit_result":
 			case "fai_result":
 			case "fpyoob_result":
@@ -232,6 +233,22 @@ define('isk_LPL',["isk/isk_LPL_Data","isk/isk_LPL_Function","icheck.min"],functi
 			radioClass: 'iradio_flat',
 			increaseArea: '20%' // optional
 		});
+
+		var $odmDetail = $(".odmList");
+		var odminput =  $odmDetail.find("input[type='checkbox']");
+		odminput.filter(".togAll").on('ifClicked', function(e){
+		  if($(this).parent().hasClass('checked')){
+		      odminput.not('.togAll').iCheck('uncheck');
+		  }else{
+		      odminput.not('.togAll').iCheck('check');
+		  }
+		});
+		odminput.not('.togAll').on("ifToggled",function(e) {
+			if($(this).parent().hasClass('checked')){
+				odminput.filter(".togAll").iCheck('uncheck');
+		  }
+		});
+
 		//product多选框
 		var $schDetail = $(".productList");
 		chkinput =  $schDetail.find("input");
@@ -308,6 +325,14 @@ define('isk_LPL',["isk/isk_LPL_Data","isk/isk_LPL_Function","icheck.min"],functi
 			    showInput(this,opt,display);
 			});
 		}
+	}
+	return thisClass;
+});
+
+define('isk_LPL_odm',[],function(){
+	var thisClass = new Object;
+	thisClass.init = function(){
+		
 	}
 	return thisClass;
 });

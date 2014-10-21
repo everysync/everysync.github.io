@@ -298,6 +298,9 @@ function home_aduit(target) {
 		if (y.length) {render(y.length,y,"yellow");}
 		if (r.length) {render(r.length,r,"red");}
 		$targey.html( renderLayoutCache.html());
+		$targey.on('click','.eb_audit_items',function(){
+			page_modules.loadinto("moduleHtml/Audit_Odm.html", ".eachBlck","pagebgc-3","audit_odm");
+		});
 		json_blue = null;
 		json_yellow = null;
 		json_red = null;
@@ -422,26 +425,23 @@ var page_modules = {
 	applyTolinks:function() {
 		//Qstop
 		page_modules.initListLinks("#qstop_create","moduleHtml/Qstop_Create.html",".eachBlck","pagebgc-1","page_audit");
-		page_modules.initListLinks("#qstop_operating","moduleHtml/Qstop_Operating.html",".eachBlck","pagebgc-1","page_audit");
-		page_modules.initListLinks("#qstop_search","moduleHtml/Qstop_Search.html",".eachBlck","pagebgc-1","page_audit");
+		page_modules.initListLinks("#qstop_managment","moduleHtml/Qstop_Managment.html",".eachBlck","pagebgc-1");
 
 		//Fpyoob
 		page_modules.initListLinks("#fpyoob_create","moduleHtml/FPY_OOB_Create.html",".eachBlck","pagebgc-2","page_audit");
-		page_modules.initListLinks("#fpyoob_search","moduleHtml/FPY_OOB_Search.html",".eachBlck","pagebgc-1","page_audit");
+		page_modules.initListLinks("#fpyoob_managment","moduleHtml/FPY_OOB_Managment.html",".eachBlck","pagebgc-2");
 
 		//Audit
 		page_modules.initListLinks("#audit_create","moduleHtml/Audit_Create.html",".eachBlck","pagebgc-3","page_audit");
-		page_modules.initListLinks("#audit_odm","moduleHtml/Audit_Odm.html",".eachBlck","pagebgc-3","audit_odm");
-		page_modules.initListLinks("#audit_search","moduleHtml/Audit_Search.html",".eachBlck","pagebgc-1","page_audit");
+		page_modules.initListLinks("#audit_managment","moduleHtml/Audit_Managment.html",".eachBlck","pagebgc-3");
 
 		//fai
 		page_modules.initListLinks("#fai_create","moduleHtml/FAI_CreateMQE.html",".eachBlck","pagebgc-4","page_audit");
-		page_modules.initListLinks("#fai_odm","moduleHtml/FAI_Odm.html",".eachBlck","pagebgc-4","fai_odm","page_audit");
-		page_modules.initListLinks("#fai_search","moduleHtml/FAI_Search.html",".eachBlck","pagebgc-1","page_audit");
+		page_modules.initListLinks("#fai_managment","moduleHtml/FAI_Managment.html",".eachBlck","pagebgc-4");
 
 		//ec
 		page_modules.initListLinks("#ec_create","moduleHtml/EC_Create.html",".eachBlck","pagebgc-5","page_audit");
-		page_modules.initListLinks("#ec_search","moduleHtml/EC_Search.html",".eachBlck","pagebgc-1","page_audit");
+		page_modules.initListLinks("#ec_managment","moduleHtml/EC_Managment.html",".eachBlck","pagebgc-5");
 	},
 	loadinto:function(url,selector,backgroundcss,requirejs) {
 		var $psc = page_modules.$page_show_content;
@@ -666,9 +666,9 @@ function jayfunction() {
 				page_modules.showpage(tempData,true);
 			}
 		});			
+	}).on("tap","#qstop_search", function() {
+		page_modules.loadinto("moduleHtml/Qstop_Search.html",".eachBlck","pagebgc-1","page_audit");
 	});
-	
-	
 	
 	$(".ctrBtns").on("tap",".ctr_1", function() {
 		popLayoutfns.popshow();

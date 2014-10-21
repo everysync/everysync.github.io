@@ -24,6 +24,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
             }
         };
         LvFpyOob.prototype.bindEvents = function () {//绑定相关事件
+            console.log(this.chart);
             var self = this;
             switch(this.chartType){
                 case "timeLine":
@@ -33,8 +34,6 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                     break;
                 default:break;
             }
-            var self = this;
-            
         };
         LvFpyOob.prototype._setOptionTimeLine = function(mydata){
             var option = {
@@ -273,7 +272,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                         color:['#B7E1EA','#FFF100','#E2F3F6','rgba(255,255,255,0.3)'],
                         legend : {
                             x:'right',
-                            y:120,
+                            y:100,
                             padding:25,
                             itemGap:25,
                             textStyle:{color: '#B7E1EA',fontSize:14},
@@ -297,7 +296,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                         animationDuration:600,
                         grid : {
                             'x':70,
-                            'y':180,
+                            'y':150,
                             'x2':70,
                             'y2':130,
                             borderWidth:0
@@ -442,6 +441,22 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                           width: 2,
                           type: 'solid'
                         }
+                    },
+                    position : function(p) {
+                        // 位置回调
+                        console.log && console.log(p);
+                        //$(".map_tips").animate({'top':p[1]-20+'px','left':p[0]-50+'px'}, 200);
+                        //$("#tip_l").css({'top':p[1]+'px','left':p[0]-50+'px'});
+                        //return [p[0]-50, p[1]-20];
+                    },
+                    //{Function}，传递参数列表如下：
+                    //<Array> params : 数组内容同模板变量，[[a, b, c, d], [a1, b1, c1, d1], ...]
+                    //<String> ticket : 异步回调标识
+                    //<Function> callback : 异步回调，回调时需要两个参数，第一个为前面提到的ticket，第二个为填充内容html
+                    formatter:function(params,ticket,callback){
+                        console.log(params);
+                        //$(".map_tips").html(params[5].name+':'+params[5].value);
+                        return ticket;
                     }
                 },
                 legend: {

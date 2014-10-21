@@ -16,7 +16,7 @@ define(function(){
 		chartObj['p1'] = chartObj['home_map'];
 	});
 	require(["chart_home"],function(LvHome){//首页chart页
-		var bar = new LvHome('chart_home_bar');
+		var bar = new LvHome('chart_home_bar','dataZoom');
 		chartObj['home_bar'].push(bar);
 	});
 	require(["chart_fpyoob"],function(LvFpyOob){//FPY/OOB Ramp

@@ -147,6 +147,16 @@ define(['echarts','echarts/chart/map'],
                         markPoint: {
                             symbol: 'circle',
                             symbolSize: 6,
+                            //large: true,
+                            // effect: {
+                            //     show: true,
+                            //     loop: true, 
+                            //     period: 15, 
+                            //     scaleSize : 1, 
+                            //     color : 'rgba(0,0,255,0.1)',
+                            //     shadowColor : null, 
+                            //     shadowBlur : 0  
+                            // },
                             data: []
                         }
                     }
@@ -194,7 +204,7 @@ define(['echarts','echarts/chart/map'],
         };
         LvMap.prototype.showTip = function(currname){//显示提示框
             var v = this.shapeListData[currname];
-            if(v.data.color == 's1'){
+            if(v.data.color == 's1' || v.data.color == 's2'){
                 $(".map_tips").html(
                     '<h2 class="mtt">'+v.data.listName+'</h2>'+
                     '<div class="mtc">'+
@@ -225,10 +235,11 @@ define(['echarts','echarts/chart/map'],
                     '   <p>H520s Enginneering related yuanjqH520s</p>'+
                     '   <p>related Enginneering related related</p>'+
                     '</div>').attr('class','map_tips map_tips_red');
-            }else if(v.data.color == 's2'){
-                $(".map_tips").html(v.data.listName+" : "+v.data.valu).attr('class','map_tips map_tips_yellow');
             }else{
-                $(".map_tips").html(v.data.listName+" : "+v.data.valu).attr('class','map_tips map_tips');
+                $(".map_tips").html(v.data.listName).attr('class','map_tips map_tips');
+            }
+            if(v.data.color == 's2'){
+                $(".map_tips").attr('class','map_tips map_tips_yellow');
             }
             $(".map_tips").animate({'top':v.pos.y-$(".map_tips").outerHeight()-10+'px','left':v.pos.x-parseInt($(".map_tips").outerWidth()/2)+46+'px'}, 120, function() {
                 $(".map_tips").show();

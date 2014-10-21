@@ -22,6 +22,13 @@ define(function(){
 					LvPage.resetOptionChart();
 				});
 				break;
+			case "qstop_in":
+				require(["chart_home"],function(LvHome){//首页chart页
+					var bar = new LvHome('chart_qstop_in','dataZoom_2');
+					LvPage.chartArr.push(bar);
+					LvPage.resetOptionChart();
+				});
+				break;
 			case "fpyoob_in":
 				require(["chart_fpyoob"],function(LvFpyOob){ //AUDIT
 					var timeLine = new LvFpyOob('chart_fpy_timeLine2','timeLine_2');
@@ -80,7 +87,7 @@ define(function(){
 				break;
 			case "qstop_result":
 				require(["chart_home"],function(LvHome){ //QSTOP
-					var bar = new LvHome('chart_qstop_result');
+					var bar = new LvHome('chart_qstop_result','dataZoom_2');
 					LvPage.chartArr.push(bar);
 					LvPage.resetOptionChart();
 				});

@@ -115,7 +115,6 @@
 </div>
 <div class="h_auto eachBlck">
 	<div class="EcScroll">
-		<form id="searchForm">
 		<div class="searchTopWarp">
 			<ul class="seaSideNav clearfix">
 				<li class="current"><span><em>Q-STOP</em></span><div class="searLine"></div></li>
@@ -126,10 +125,11 @@
 			</ul>
 		</div>
 		<div class="seaCont">
+			<form id="searchForm">
 			<div class="searTimer">
-				<span class="DateLay"><em class="dateTit">Start Time</em><input type="" class="form_txt_style form_date" /></span>
+				<span class="DateLay"><em class="dateTit">Start Time</em><input type="" name="beginDate" class="form_txt_style form_date" /></span>
 				<span class="DateLine">—</span>
-				<span class="DateLay"><em class="dateTit">End Time</em><input type="" class="form_txt_style form_date" /></span>
+				<span class="DateLay"><em class="dateTit">End Time</em><input type="" name="endDate" class="form_txt_style form_date" /></span>
 			</div>
 			<div class="productList">
 				<h3 class="icheckTit">Product:</h3>
@@ -137,7 +137,7 @@
 					<ul class="produtable">
 						<li>
 							<div class="produTit">Type<button class="Picon_01 Pbtns"></button><button class="Picon_02 Pbtns"></button></div>
-							<input id="first_step_type" style="display:none" type="text">
+							<input id="first_step_type" name="first_step_type" style="display:none" type="text">
 							<div class="ProEachdata proBg-1" id="dl_level1">
 								<div class="proLabel"><label class="form_check form_check_style" for="pro1-1"><input type="checkbox" id="pro1-1" checked="checked" value=""><span>All</span></label></div>
 								<div class="proLabel"><label class="form_check form_check_style" for="pro1-2"><input type="checkbox" id="pro1-2" checked="checked" value=""><span>DT</span></label></div>
@@ -146,7 +146,7 @@
 						</li>
 						<li>
 							<div class="produTit">Family<button class="Picon_01 Pbtns"></button><button class="Picon_02 Pbtns"></button></div>
-							<input id="second_step_type" style="display:none" type="text">
+							<input id="second_step_type" name="second_step_type" style="display:none" type="text">
 							<div class="ProEachdata proBg-2" id="dl_level2">
 							<div class="proLabel"><label class="form_check form_check_style" for="pro2-1"><input type="checkbox" id="pro2-1" checked="checked" value=""><span>TDT</span></label></div>
 							<div class="proLabel"><label class="form_check form_check_style" for="pro2-2"><input type="checkbox" id="pro2-2" checked="checked" value=""><span>AIO</span></label></div>
@@ -157,7 +157,7 @@
 						</li>
 						<li>
 							<div class="produTit">Series<button class="Picon_01 Pbtns"></button><button class="Picon_02 Pbtns"></button></div>
-							<input id="third_step_type" style="display:none" type="text">
+							<input id="third_step_type" name="third_step_type" style="display:none" type="text">
 							<div class="ProEachdata proBg-3" id="dl_level3">
 							<div class="proLabel"><label class="form_check form_check_style" for="pro3-1"><input type="checkbox" id="pro3-1" value=""><span>H Series</span></label></div>
 							<div class="proLabel"><label class="form_check form_check_style" for="pro3-2"><input type="checkbox" id="pro3-2" value=""><span>D Series</span></label></div>
@@ -169,7 +169,7 @@
 						</li>
 						<li>
 							<div class="produTit">Product<button class="Picon_01 Pbtns"></button><button class="Picon_02 Pbtns"></button></div>
-							<input id="fourth_step_type" style="display:none" type="text">
+							<input id="fourth_step_type" name="fourth_step_type" style="display:none" type="text">
 							<div class="ProEachdata proBg-4" id="dl_level4">
 							<div class="proLabel"><label class="form_check form_check_style" for="pro4-1"><input type="checkbox" id="pro4-1" value=""><span>H520s</span></label></div>
 							<div class="proLabel"><label class="form_check form_check_style" for="pro4-2"><input type="checkbox" id="pro4-2" value=""><span>H525s</span></label></div>
@@ -182,11 +182,12 @@
 					</ul>
 				</div>
 			</div>
-			<div class="icheckForm">
+			<div class="icheckForm odmList">
 				<h3 class="icheckTit">ODM:</h3>
+				<input id="odmList" name="odmList" style="display:none" type="text">
 				<div class="icheckWarp">
 					<ul class="icheckList clearfix">
-						<li><label class="form_check form_check_style" for="omd-1"><input type="checkbox" id="omd-1" value="">All</label></li>
+						<li><label class="form_check form_check_style" for="omd-1"><input type="checkbox" id="omd-1" class="togAll" value="">All</label></li>
 						<li><label class="form_check form_check_style" for="omd-2"><input type="checkbox" id="omd-2" value="">T&I_SH_DT</label></li>
 						<li><label class="form_check form_check_style" for="omd-3"><input type="checkbox" id="omd-3" value="">Compal_KS_NB</label></li>
 						<li><label class="form_check form_check_style" for="omd-4"><input type="checkbox" id="omd-4" value="">Compal_KS_DT</label></li>
@@ -280,8 +281,8 @@
 				</div>
 			</div>
 			<p class="serBtn"><input type="submit" class="form_btn form_sub_btn" id="qstop_search_btn" value="Search"></p>
-		</div>
 		</form>
+		</div>
 	</div>
 </div>
 <div class="sidebar_wrap">
