@@ -1,19 +1,37 @@
 {
 	"metadata": {
 		"name": "lenovoSync 1",
-		"lastOpened": 1413181832248,
+		"lastOpened": 1413191182343,
 		"created": 1412558409454
 	},
 	"iconSets": [
 		{
 			"selection": [
 				{
+					"order": 11,
+					"id": 10,
+					"prevSize": 64,
+					"code": 58890,
+					"name": "icon-search",
+					"tempChar": "",
+					"ligatures": ""
+				},
+				{
+					"order": 10,
+					"id": 9,
+					"prevSize": 64,
+					"code": 58889,
+					"name": "icon-eye",
+					"tempChar": "",
+					"ligatures": ""
+				},
+				{
 					"order": 8,
 					"id": 8,
 					"prevSize": 64,
 					"code": 58887,
 					"name": "icon_arrow_up",
-					"tempChar": "",
+					"tempChar": "",
 					"ligatures": ""
 				},
 				{
@@ -22,7 +40,7 @@
 					"prevSize": 64,
 					"code": 58888,
 					"name": "icon_arrow_down",
-					"tempChar": "",
+					"tempChar": "",
 					"ligatures": ""
 				},
 				{
@@ -31,7 +49,7 @@
 					"prevSize": 64,
 					"code": 58886,
 					"name": "icon-7",
-					"tempChar": "",
+					"tempChar": "",
 					"ligatures": ""
 				},
 				{
@@ -40,7 +58,7 @@
 					"prevSize": 64,
 					"code": 58880,
 					"name": "icon-1",
-					"tempChar": "",
+					"tempChar": "",
 					"ligatures": ""
 				},
 				{
@@ -49,7 +67,7 @@
 					"prevSize": 64,
 					"code": 58881,
 					"name": "icon-2",
-					"tempChar": "",
+					"tempChar": "",
 					"ligatures": ""
 				},
 				{
@@ -58,7 +76,7 @@
 					"prevSize": 64,
 					"code": 58882,
 					"name": "icon-3",
-					"tempChar": "",
+					"tempChar": "",
 					"ligatures": ""
 				},
 				{
@@ -67,7 +85,7 @@
 					"prevSize": 64,
 					"code": 58883,
 					"name": "icon-4",
-					"tempChar": "",
+					"tempChar": "",
 					"ligatures": ""
 				},
 				{
@@ -76,7 +94,7 @@
 					"prevSize": 64,
 					"code": 58884,
 					"name": "icon-5",
-					"tempChar": "",
+					"tempChar": "",
 					"ligatures": ""
 				},
 				{
@@ -85,7 +103,7 @@
 					"prevSize": 64,
 					"code": 58885,
 					"name": "icon-6",
-					"tempChar": "",
+					"tempChar": "",
 					"ligatures": ""
 				}
 			],
@@ -96,6 +114,38 @@
 			"height": 1024,
 			"prevSize": 64,
 			"icons": [
+				{
+					"id": 10,
+					"paths": [
+						"M864 846.4l-33.6 33.6-201.6-201.6c-48 35.2-108.8 56-172.8 56-163.2 1.6-296-131.2-296-294.4s132.8-296 296-296 296 132.8 296 296c0 81.6-32 155.2-86.4 208l198.4 198.4zM456 192c-137.6 0-248 110.4-248 248s110.4 248 248 248 248-112 248-248-112-248-248-248z"
+					],
+					"attrs": [
+						{
+							"opacity": 1,
+							"visibility": false
+						}
+					],
+					"grid": 0,
+					"tags": [
+						"icon-search"
+					]
+				},
+				{
+					"id": 9,
+					"paths": [
+						"M512 760c-185.6 0-291.2-116.8-416-248 145.6-153.6 264-248 416-248 184 0 320 136 416 251.2-94.4 96-230.4 244.8-416 244.8zM512 291.2c-136 0-243.2 80-377.6 220.8 113.6 118.4 212.8 220.8 377.6 220.8 163.2 0 286.4-123.2 379.2-219.2-94.4-107.2-219.2-222.4-379.2-222.4zM512 676.8c-91.2 0-166.4-73.6-166.4-164.8s75.2-164.8 166.4-164.8c91.2 0 166.4 73.6 166.4 164.8s-75.2 164.8-166.4 164.8zM512 374.4c-76.8 0-139.2 62.4-139.2 137.6s62.4 137.6 139.2 137.6c76.8 0 139.2-62.4 139.2-137.6s-62.4-137.6-139.2-137.6zM512 622.4c-60.8 0-112-49.6-112-110.4s49.6-110.4 112-110.4c60.8 0 112 49.6 112 110.4s-51.2 110.4-112 110.4zM512 428.8c-46.4 0-83.2 36.8-83.2 83.2s36.8 83.2 83.2 83.2c46.4 0 83.2-36.8 83.2-83.2s-36.8-83.2-83.2-83.2z"
+					],
+					"attrs": [
+						{
+							"opacity": 1,
+							"visibility": false
+						}
+					],
+					"grid": 0,
+					"tags": [
+						"icon-eye"
+					]
+				},
 				{
 					"id": 8,
 					"paths": [
@@ -263,7 +313,8 @@
 		"imagePref": {},
 		"historySize": 100,
 		"showCodes": true,
-		"search": ""
+		"search": "",
+		"showSVGs": true
 	},
 	"externalSets": []
 }

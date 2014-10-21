@@ -60,6 +60,9 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.ficon-icon-search:before {
+	content: "\e60a";
+}
 .ficon-icon-eye:before {
 	content: "\e609";
 }
@@ -89,9 +92,6 @@
 }
 .ficon-icon-6:before {
 	content: "\e605";
-}
-.ficon-icon-search:before {
-	content: "\e603";
 }
 
 /*SVG World map CSS*/
@@ -269,6 +269,7 @@ html.onepage-scroll body {
 .ctrBtns .ctr_2,
 .ctrBtns .ctr_3,
 .ctrBtns .ctr_4,
+.ctrBtns .ctr_6,
 .ctrBtns .ctr_5 {
 	float: left;
 	width: 64px;
@@ -1656,6 +1657,7 @@ html.onepage-scroll body {
 .ctrBtns .ctr_2,
 .ctrBtns .ctr_3,
 .ctrBtns .ctr_4,
+.ctrBtns .ctr_6,
 .ctrBtns .ctr_5 {
 	line-height: 64px;
 	font-size: 32px;
