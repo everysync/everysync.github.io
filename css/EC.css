@@ -617,17 +617,26 @@
 	position:relative;
 	color:#fff;
 	text-align:center;
-	margin-top:80px;
 	padding:10px 0 30px;
-	background-color:rgba(0, 0, 0, 0.95);
+	background-color:#000;
 	min-height:100px;
+	overflow: hidden;
+}
+.userDialog .userMsg {
+	margin-top: 80px;
 }
 .UserSideTop{
 	position:absolute;
 	top:20px;
 	right:40px;
 	width:180px;
+	z-index: 1;
 }
+.userMsg .page_swicher_1,
+.userMsg .page_swicher_2{height: auto;}
+.userMsg .userCon {
+}
+
 .infoIcon_Basic,
 .infoIcon_Change
 {
@@ -715,6 +724,10 @@
 	padding-top:40px;
 	width:540px;
 	padding-right:10%;
+}
+.userinfo_1.hide,
+.userinfo_2.hide {
+	display: none;
 }
 .infoList{
 	display:table-row;

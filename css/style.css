@@ -433,13 +433,16 @@ html.onepage-scroll body {
 	position: absolute;
 }
 .eachBlck.active {}
-.eachBlck.switch_1 .page_swicher_wrap,
-.eachBlck.switch_1 .first_page_swicher_wrap{
+.transHeight {
+	transition-property:transform,height !important;
+}
+.switch_1 .page_swicher_wrap,
+.switch_1 .first_page_swicher_wrap{
 	transition: transform .5s cubic-bezier(0, .84, .13, .96);
 	transform: translateX(0);
 }
-.eachBlck.switch_2 .page_swicher_wrap,
-.eachBlck.switch_2 .first_page_swicher_wrap{
+.switch_2 .page_swicher_wrap,
+.switch_2 .first_page_swicher_wrap{
 	transition: transform .5s cubic-bezier(0, .84, .13, .96);
 	transform: translateX(-100%) translateZ(0);
 }
@@ -1542,7 +1545,20 @@ html.onepage-scroll body {
 	background: rgba(0, 0, 0, 0.55);
 	overflow-y: auto;
 }
-
+.pop_top_element {
+	display:none;
+	position:absolute;
+	top:80px;
+	left:0;
+	width: 100%;
+	min-height:48px;
+	height:auto;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	background: rgba(0, 0, 0, 0.55);
+	z-index: 9;
+}
 @keyframes popshowing {
 	from { transform:translateX(384px) translateZ(0)}
 	to { transform:translateX(0) translateZ(0)}
@@ -1551,7 +1567,6 @@ html.onepage-scroll body {
 	from { transform: translateZ(0); opacity:0}
 	to { transform:translateZ(0); opacity:1}
 }
-
 @keyframes pophidding {
 	from { transform:translateX(0) translateZ(0)}
 	to { transform:translateX(384px) translateZ(0)}
@@ -1560,13 +1575,22 @@ html.onepage-scroll body {
 	from { transform: translateZ(0); opacity:1}
 	to { transform:translateZ(0); opacity:0}
 }
+
+@keyframes poptopshowing {
+	from { transform:translateY(-384px) translateZ(0); opacity:0;}
+	to { transform:translateY(0) translateZ(0); opacity:1;}
+}
+@keyframes poptophidding {
+	from { transform:translateY(0) translateZ(0); opacity:1}
+	to { transform:translateY(-384px) translateZ(0); opacity:0;}
+}
 .pop_mask.showing {
 	display: block;
-	animation:pop_maskshowing 1s linear;
+	animation:pop_maskshowing 0.2s linear;
 }
 .pop_mask.hidding {
 	display: block;
-	animation:pop_maskhidding 1s linear;
+	animation:pop_maskhidding 0.2s linear;
 }
 
 .pop_mask.showed {
@@ -1580,10 +1604,21 @@ html.onepage-scroll body {
 	display: block;
 	animation:pophidding .5s cubic-bezier(0, 1, .1, 1) both;
 }
-
 .pop_right_element.showed {
 	display:block;
 }
+.pop_top_element.showing {
+	display: block;
+	animation:poptopshowing .5s cubic-bezier(0, 1, .1, 1) both;
+}
+.pop_top_element.hidding {
+	display: block;
+	animation:poptophidding 1s cubic-bezier(0, 1, .1, 1) both;
+}
+.pop_top_element.showed {
+	display: block;
+}
+
 .app_blur_filter {
 	filter: blur(2px);
 	-ms-filter: blur(2px);

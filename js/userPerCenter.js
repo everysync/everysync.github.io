@@ -36,9 +36,26 @@ define([""],function() {
 		});
 	}
 	
+	function userInfo() {
+		var tar = ".userMsg";
+		var $tar = $(tar);
+		var firstCurrent =$tar.find(".infomation").filter(".cur");
+		var firstIndex =  firstCurrent.index();
+		$tar.find(".page_swicher_wrap").animate({"height":$tar.find(".page_swicher_1")[0].scrollHeight},120)
+		var tarimg = $tar.find("img").attr("src");
+		$tar.find("img").attr("src", tarimg.replace("../",""))
+		//console.log(tarimg)
+		eachblock_Switcher(tar,{
+			switchBtn:".infomation",
+			autoHeight:true,
+		})
+		
+		//$tar.find(".infomation").filter(".cur").trigger("tap")
+	}
+	
 	function init() {
 		addtab();
 	}
 	
-	return {init:init};
+	return {init:init,userInfo:userInfo};
 });

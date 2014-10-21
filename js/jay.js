@@ -155,9 +155,17 @@ function eachblock_Switcher(obj,options) {
 		switchClass:["switch_1","switch_2"],
 		switchWrapper:".page_swicher_wrap",
 		switchBtn:".mapswipebtn",
+		autoHeight:false,
 		switchBtnCurMark:"cur"
 	},options);
 	var $objs = $(obj);
+	var autoheight = function(wrapper,index) {
+		if (opts.autoHeight === true) {
+			var eachel = wrapper.children().eq(index);
+			wrapper.height(eachel[0].scrollHeight)
+			//console.log(eachel)
+		}	
+	};
 	if ($objs.length) {
 		$objs.each(function(i,el) {
 			var $el          = $(el);
@@ -175,9 +183,13 @@ function eachblock_Switcher(obj,options) {
 					var class_1 = opts.switchClass[cacheIndex];
 					var class_2 = opts.switchClass[(cacheIndex+1)];
 					$el.addClass(class_1).removeClass(class_2);
+					if (opts.autoHeight===true) {
+						autoheight($switchWrap,cacheIndex);
+					}
 					$switchWrap.one(transEnd("switch"), function(e) {
 						e.stopPropagation();
 						$el.trigger("Switch_"+cacheIndex+"_ani_end");
+						
 						$switchWrap.off(".switch");
 					});
 				},
@@ -185,6 +197,9 @@ function eachblock_Switcher(obj,options) {
 					var class_1 = opts.switchClass[cacheIndex];
 					var class_2 = opts.switchClass[(cacheIndex-1)];
 					$el.addClass(class_1).removeClass(class_2);
+					if (opts.autoHeight===true) {
+						autoheight($switchWrap,cacheIndex);
+					}
 					$switchWrap.one(transEnd("switch"), function(e) {
 						e.stopPropagation();
 						$el.trigger("Switch_"+cacheIndex+"_ani_end");
@@ -465,9 +480,11 @@ var page_modules = {
 
 var popLayoutfns = {
 	$selectors:{
-		popmask			:$(".pop_mask"),
-		pop_dir_right	:$(".pop_right_element"),
-		pop_dir_top		:$(".pop_top_element")
+		popmask				:$(".pop_mask"),
+		pop_dir_right		:$(".pop_right_element"),
+		pop_dir_top			:$(".pop_top_element"),
+		pop_top_innerDOM	:$("#pt_inner"),
+		pop_right_innerDOM	:$("#pr_inner")
 	},
 	popOptions:function(options) {
 		var opts = $.extend({
@@ -477,7 +494,9 @@ var popLayoutfns = {
 			helpClass_hidding	:"hidding",
 			helpClass_hidden	:"hidden",
 			direction			:"right",	//"right" or "top"
-			blur				:false		//Add blur filter when showed
+			blur				:false,		//Add blur filter when showed
+			hideAll				:false,
+			hideMask			:true
 		},options);
 		return opts;
 	},
@@ -486,29 +505,56 @@ var popLayoutfns = {
 		var opts = $.extend({},default_opt,opt);
 		var $mask = popLayoutfns.$selectors.popmask;
 		var $target;
+		var $otherTarget;
+		var $targetInnerDOM;
+		var $othertargetInnerDOM;
 		var $blurTarget =$(".app_container").add( page_modules.$page_show_wrap );
 		if (opts.direction == "right") {
-			$target=popLayoutfns.$selectors.pop_dir_right;
+			$target				=popLayoutfns.$selectors.pop_dir_right;
+			$otherTarget		=popLayoutfns.$selectors.pop_dir_top;
+			$othertargetInnerDOM=popLayoutfns.$selectors.pop_top_innerDOM;
+			$targetInnerDOM		=popLayoutfns.$selectors.pop_right_innerDOM;
 		} else if (opts.direction=="top") {
-			$target=popLayoutfns.$selectors.pop_dir_top;
+			$target				=popLayoutfns.$selectors.pop_dir_top;
+			$otherTarget		=popLayoutfns.$selectors.pop_dir_right;
+			$othertargetInnerDOM=popLayoutfns.$selectors.pop_right_innerDOM;
+			$targetInnerDOM		=popLayoutfns.$selectors.pop_top_innerDOM;
 		}
 		
 		if ($target.data("states") == "show") {
 			//如果pop层是显示状态，那么触发已经显示的事件，然后不执行后面的动画动作。
-			$target.trigger("side_showe");
+			$target.trigger("side_showe",[opts.direction,$targetInnerDOM]);
 			return ;
 		}
+		if ($otherTarget.data("states") == "show") {
+			popLayoutfns.pophide({
+				hideMask:false,
+				direction:(function() {
+					if (opts.direction=="right") {
+						return "top";
+					} else if (opts.direction == "top") {
+						return "right";
+					}
+				})()
+			})
+		}
+		
 		page_modules.$page_show_content.on("page_showed.popEventListener", function(e) {
-			popLayoutfns.pophide();
+			popLayoutfns.pophide({hideAll:true,hideMask:true});
 		});
 		
 		$target.addClass(opts.helpClass_showing).on(animateEnd("sidepop"),function(e) {
 			//fn
-			$target.trigger("side_showe").data("states","show");
+			$target.trigger("side_showe",[opts.direction,$targetInnerDOM]).data("states","show");
 			if(opts.blur===true) {$blurTarget.addClass(opts.filterClassBlur.replace(".",""));}
-			$mask.addClass(opts.helpClass_showing).on(animateEnd("popmask"), function() {
-				$mask.removeClass(opts.helpClass_showing).addClass(opts.helpClass_showed).off(".popmask");
-			});
+			
+			if ($mask.data("states") != "show") {
+				$mask.addClass(opts.helpClass_showing).on(animateEnd("popmask"), function() {
+					$mask.data("states","show");
+					$mask.removeClass(opts.helpClass_showing).addClass(opts.helpClass_showed).off(".popmask");
+				});	
+			}
+			
 			$target.removeClass(opts.helpClass_showing).addClass(opts.helpClass_showed).off(".sidepop");
 		});
 		
@@ -518,28 +564,51 @@ var popLayoutfns = {
 		var opts = $.extend({},default_opt,opt);
 		var $mask = popLayoutfns.$selectors.popmask;
 		var $target;
+		var $otherTarget;
 		var $targetInnerDOM;
+		var $othertargetInnerDOM;
 		var $blurTarget =$(".app_container").add( page_modules.$page_show_wrap );
 		if (opts.direction == "right") {
-			$target=popLayoutfns.$selectors.pop_dir_right;
-			$targetInnerDOM = $("#pr_inner");
+			$target				=popLayoutfns.$selectors.pop_dir_right;
+			$otherTarget		=popLayoutfns.$selectors.pop_dir_top;
+			$othertargetInnerDOM=popLayoutfns.$selectors.pop_top_innerDOM;
+			$targetInnerDOM		=popLayoutfns.$selectors.pop_right_innerDOM;
 		} else if (opts.direction=="top") {
-			$target=popLayoutfns.$selectors.pop_dir_top;
-			$targetInnerDOM = $("#pt_inner");
+			$target				=popLayoutfns.$selectors.pop_dir_top;
+			$otherTarget		=popLayoutfns.$selectors.pop_dir_right;
+			$othertargetInnerDOM=popLayoutfns.$selectors.pop_right_innerDOM;
+			$targetInnerDOM		=popLayoutfns.$selectors.pop_top_innerDOM;
 		}
-		if ($target.data("states") == "hide") {
+		//console.log(opts.direction)
+		//console.log($target)
+		//如果是已经隐藏了，还被执行了隐藏动作，那么直接返回，如果包含"hideAll=true"参数则放行。
+		if ($target.data("states") == "hide" && opts.hideAll === false) {
 			//如果pop层是隐藏状态，那么不执行任何动作
 			return ;
 		}
-		page_modules.$page_show_content.off(".popEventListener");
+		//如果方法包含了"hideAll"参数
+		if (opts.hideAll === true) {
+			$target = $target.add($otherTarget).filter(function() {
+				if ($(this).data("states")=="show") {
+					return $(this)
+				}
+			})
+			//console.log($target)
+		}
+		//执行隐藏动作
 		$target.addClass(opts.helpClass_hidding).on(animateEnd("sidepophide"),function(e) {
 			//fn
-			$target.trigger("side_hidden").data("states","hide");
+			$target.trigger("side_hide",[opts.direction,$targetInnerDOM]).data("states","hide");
 			$targetInnerDOM.children().remove();
 			if(opts.blur===true) {$blurTarget.removeClass(opts.filterClassBlur.replace(".",""))}
-			$mask.addClass(opts.helpClass_hidding).on(animateEnd("popmask"), function() {
-				$mask.removeClass(opts.helpClass_showed + " " +opts.helpClass_hidding).off(".popmask");
-			});
+			
+			if (opts.hideMask === true) {
+				$mask.addClass(opts.helpClass_hidding).on(animateEnd("popmask"), function() {
+					$mask.data("states","hide");
+					$mask.removeClass(opts.helpClass_showed + " " +opts.helpClass_hidding).off(".popmask");
+				});	
+				page_modules.$page_show_content.off(".popEventListener");
+			}
 			$target.removeClass(opts.helpClass_showed + " " +opts.helpClass_hidding).off(".sidepophide");
 		});
 		
@@ -604,6 +673,35 @@ function jayfunction() {
 	$(".ctrBtns").on("tap",".ctr_1", function() {
 		popLayoutfns.popshow();
 	}).on("tap", ".ctr_2",function() {
-		popLayoutfns.pophide();
+		//---
+	}).on("tap", ".ctr_4",function() {
+		popLayoutfns.popshow({
+			direction:"top"
+		});
+		
+		$doc.on("side_showe.peo_4_s", function(e,k,tar) {
+			if (k == "top") {
+				//console.log(k,tar)
+				tar.load("moduleHtml/UserCenter-1.html .userMsg", function() {
+					require(["userPerCenter"], function(data) {
+						data.userInfo();
+					});
+				});
+			}
+			$doc.off(".peo_4_s");
+		}).on("side_hide.peo_4_h", function(e,k,tar) {
+			popLayoutfns.$selectors.pop_top_innerDOM.children().remove();
+			$doc.off(".peo_4_h");
+		});
+		
+		
 	})
+	
+	$(".pop_mask").on("tap", function() {
+		popLayoutfns.pophide({
+			hideAll:true
+		});
+	})
+	
+	
 }
