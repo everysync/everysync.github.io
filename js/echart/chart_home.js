@@ -173,7 +173,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                     'x':70,
                     'y':110,
                     'x2':70,
-                    'y2':80,
+                    'y2':100,
                     borderWidth:0
                 },
                 legend: {
@@ -353,7 +353,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
             var self = this;
             var mydata =  {
                 legend:['Design related', 'Supplier related', 'MFG related','Engineering related'],
-                xAxis:['TNID', 'CKSN', 'CKSD', 'WZSD', 'QSJD', 'BLDN', 'BJPD','SHPN', 'SHPD', 'HYPD', 'CDPD', 'WKSN', 'LCFC', 'PEGN','CCDN', 'WCDN', 'IUTN', 'INNB', 'WRGN', 'ITUD', 'BLDD'],
+                xAxis:['2014-10-01', '2014-10-02', '2014-10-03', '2014-10-04', '2014-10-05', '2014-10-06', '2014-10-07','2014-10-08', '2014-10-09', '2014-10-10', '2014-10-11', '2014-10-12', '2014-10-13', '2014-10-14','2014-10-15', '2014-10-16', '2014-10-17', '2014-10-18', '2014-10-19', '2014-10-20', '2014-10-21'],
                 other_parm_data:['TNID1', 'CKSN2', 'CKSD3', 'WZSD4', 'QSJD5', 'BLDN6', 'BJPD7','SHPN8', 'SHPD9', 'HYPD10', 'CDPD11', 'WKSN12', 'LCFC13', 'PEGN14','CCDN15', 'WCDN16', 'IUTN17', 'INNB18', 'WRGN19', 'ITUD20', 'BLDD21'],//其他不可见参数
                 series_bar_1:{name:'Design related',data:[1, 0, 0, 0, 0, 2, 2, 1, 0, 0, 0, 0, 0, 2, 1, 0, 0, 0, 0, 0, 2]},
                 series_bar_2:{name:'Supplier related',data:[1, 0, 0, 2, 0, 0, 2, 1, 0, 0, 2, 0, 0, 2, 1, 0, 0, 2, 0, 0, 2]},

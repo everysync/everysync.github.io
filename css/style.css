@@ -176,7 +176,14 @@ Basic Swiper Styles
 	transition-duration: 0s;
 	transform: translate3d(0px, 0, 0);
 	transition-timing-function: ease;
+	/*swiper-wrapper-custom-easing*/
+	-webkit-transition-timing-function: linear;
+	-moz-transition-timing-function: linear;
+	-ms-transition-timing-function: linear;
+	-o-transition-timing-function: linear;
+	transition-timing-function:linear;
 }
+
 .swiper-free-mode > .swiper-wrapper {
 	-webkit-transition-timing-function: ease-out;
 	-moz-transition-timing-function: ease-out;
@@ -862,12 +869,13 @@ html.onepage-scroll body {
 
 #mapSide {
 	float: right;
-	width: 222px;
-	margin-left: -222px;
+	width: 256px;
+	margin-left: -256px;
 	height: 100%;
 }
 .mslist {
 	color: #fff;
+	height: 100%;
 }
 .mslist .msEachlist{
 	width:100%;
@@ -947,7 +955,7 @@ html.onepage-scroll body {
 }
 #mapWrap {
 	height: 100%;
-	margin-right: 222px;
+	margin-right: 256px;
 	margin-left: 40px;
 	/*background: #000;*/
 }
@@ -1243,12 +1251,19 @@ html.onepage-scroll body {
 .eb_audit_items:nth-of-type(5) {-webkit-animation-delay:0.4s;animation-delay:0.4s}
 .eb_audit_items:nth-of-type(6) {-webkit-animation-delay:0.5s;animation-delay:0.5s}
 
-.eb_audit_items.blue_0 {background-color:rgba(0,159,233,1.00)}
+/*.eb_audit_items.blue_0 {background-color:rgba(0,159,233,1.00)}
 .eb_audit_items.blue_1 {background-color:rgba(13,175,239,1.00)}
 .eb_audit_items.blue_2 {background-color:rgba(20,183,242,1.00)}
 .eb_audit_items.blue_3 {background-color:rgba(27,192,246,1.00)}
 .eb_audit_items.blue_4 {background-color:rgba(36,203,250,1.00)}
-.eb_audit_items.blue_5 {background-color:rgba(46,216,255,1.00)}
+.eb_audit_items.blue_5 {background-color:rgba(46,216,255,1.00)}*/
+
+.eb_audit_items.blue_0 { background-color: #2ACBB6 }
+.eb_audit_items.blue_1 { background-color: #2CD2BC }
+.eb_audit_items.blue_2 { background-color: #57DAC8 }
+.eb_audit_items.blue_3 { background-color: #81E3D6 }
+.eb_audit_items.blue_4 { background-color: #ABECE2 }
+.eb_audit_items.blue_5 { background-color: #C0F1E9 }
 
 .eb_audit_items.yellow_0 {background-color:rgba(250,173,25,1.00)}
 .eb_audit_items.yellow_1 {background-color:rgba(251,182,38,1.00)}
@@ -1684,7 +1699,7 @@ html.onepage-scroll body {
 	right: -12px;
 	width: 24px;
 	height: 24px;
-	background: #000;
+	background: #2e434f;
 	font-family: 'lsicons';
 	font-size: 16px;
 	line-height: 24px;

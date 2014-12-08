@@ -245,6 +245,10 @@ define(['echarts','echarts/chart/map'],
             $(".map_tips").animate({'top':v.pos.y-$(".map_tips").outerHeight()-10+'px','left':v.pos.x-parseInt($(".map_tips").outerWidth()/2)+46+'px'}, 120, function() {
                 $(".map_tips").show();
             });
+			$(".map_tips").on("click.cltbtn", ".map_dialog_cls_btn", function(e) {
+				$(".map_tips").hide();
+				$(".swiper-slide-click-active").removeClass("swiper-slide-click-active");
+			});
             v = null;
             return false;
         };
@@ -287,7 +291,8 @@ define(['echarts','echarts/chart/map'],
         };
         LvMap.prototype._setRightList = function(MapArry) {//设置右侧列表
             var self = this;
-            $(".mapSideBot").on("flick.diswheel mousewheel.diswheel DOMMouseScroll.diswheel touchmove.diswheel", function(e) {
+            $("#mapSide").on("flick.diswheel mousewheel.diswheel DOMMouseScroll.diswheel touchmove.diswheel", function(e) {
+//            $(".mapSideBot").on("flick.diswheel mousewheel.diswheel DOMMouseScroll.diswheel touchmove.diswheel", function(e) {
                 e.stopPropagation();
                 return false;
             });
@@ -331,6 +336,18 @@ define(['echarts','echarts/chart/map'],
             $mslistwrap.html( liTempWrap.html() );
                 
             //init swiper
+			
+			/*$('.mslist').slick({
+				slidesToShow:3,
+				vertical:true,
+				infinite: true,
+				speed: 300,	
+				slide:"li",
+				autoplay:true
+			});*/
+      
+			
+			var swipetimeout = null;
             var $swiperTarget = $(".mapSideBot");
             var page_1_swiper = $swiperTarget.swiper({
                 mode:'vertical',
@@ -341,9 +358,11 @@ define(['echarts','echarts/chart/map'],
                 calculateHeight:true,
                 slidesPerViewFit:true,
                 centeredSlides:true,
+//				loop:true,
+				autoplayDisableOnInteraction:false,
                 // Autoplay
-                autoplay: 5000,
-                speed: 300,
+                autoplay: 100,
+                speed: 1000,
                 // onSlideChangeStart: function(sw){
                 //     var $sides = $(page_1_swiper.activeSlide());
                 //     $sides
@@ -355,7 +374,14 @@ define(['echarts','echarts/chart/map'],
                 //     sw.startAutoplay();
                 // },
                 onSlideClick:function(sw) {
-                    page_1_swiper.swipeTo(page_1_swiper.clickedSlideIndex);
+					/*page_1_swiper.stopAutoplay();
+					page_1_swiper.params.speed=300;*/
+					clearTimeout(swipetimeout);
+					page_1_swiper.stopAutoplay();
+					swipetimeout = setTimeout(function() {
+						page_1_swiper.startAutoplay();
+					} ,900)
+                    page_1_swiper.swipeTo(page_1_swiper.clickedSlideIndex,300);
                     var $sides = $(page_1_swiper.clickedSlide);
                     $sides
                         .addClass("swiper-slide-click-active")

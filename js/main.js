@@ -30,11 +30,13 @@ require.config({
 		"page_audit"		:"page_control",
 		"page_fai"			:"page_control",
 		"fai_odm_control"	:"echart/fai_odm_control",
+		"slick"				:"slick/slick",
 		"jay"				: "jay"
 	},
 	waitSeconds:30,
 	shim: {//模块依赖关系
 		jquery			: {exports: '$'},
+		'slick'			: {deps: ['jquery']},
 		'finger'		: {deps: ['jquery']},
 		'swiper'		: {deps: ['jquery']},
 		'tab_pick'		: {deps: ['jquery']},
@@ -46,7 +48,7 @@ require.config({
 		'chart_fpyoob_ramp'	: {deps: ['echartsConfig']},
 		'chart_audit'	: {deps: ['echartsConfig']},
 		'chart_fai'		: {deps: ['echartsConfig']},
-		'jay'  			: {deps: ['jquery','utf','onepageScroll','fastclick','scalcheight','swiper']}
+		'jay'  			: {deps: ['jquery','utf','onepageScroll','fastclick','scalcheight','swiper','slick']}
 	}
 });
 //加载CSS
@@ -56,7 +58,8 @@ require([
 	"css!../css/Audit",
 	"css!../css/Bina",
 	"css!../css/EC",
-	"css!../css/Fai"
+	"css!../css/Fai",
+	"css!../css/slick"
 ]);
 
 //document.addEventListener('deviceready', function() {

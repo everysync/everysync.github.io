@@ -37,6 +37,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
         };
         LvFpyOob.prototype._setOptionTimeLine = function(mydata){
             var option = {
+                color: ["#B7E1EA", '#3FF1F7'],
                 timeline:{
                     y2:30,
                     data:['1','2','3','4','5','6', '7','8','9','10','11','12'], 
@@ -119,6 +120,8 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                         yAxis : [
                             {
                                 'type':'value',
+                                'min':85,
+                                'max':100,
                                 'splitLine':{show : false},
                                 'axisTick':{show : true,inside:true,lineStyle:{color: '#076377', width: 1, type: 'solid'}},
                                 'axisLine':{lineStyle:{color: '#076377', width: 1, type: 'solid'}},
@@ -128,6 +131,8 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                             },
                             {
                                 'type':'value',
+                                'min':0,
+                                'max':3,
                                 'splitLine':{show : false},
                                 'axisTick':{show : true,inside:true,lineStyle:{color: '#076377', width: 1, type: 'solid'}},
                                 'axisLine':{lineStyle:{color: '#076377', width: 1, type: 'solid'}},
@@ -141,7 +146,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                                 'name':'FPY',
                                 'type':'bar',
                                 'barCategoryGap':'40%',
-                                'data': mydata.series_bar_1.data[0]
+                                'data': []
                             }, 
                             {
                                 'name':'OOB',
@@ -152,7 +157,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                                 'itemStyle': {
                                     'normal': {
                                         lineStyle: { // 系列级个性化折线样式
-                                            width: 4
+                                            width: 2
                                         }
                                     }
                                 },
@@ -183,7 +188,49 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                     }
                 ]
             };
+            for(var i=0,len=mydata.series_bar_1.data[0].length; i<len; i++){
+                if(mydata.series_bar_1.data[0][i] > mydata.series_bar_target){
+                    option.options[0].series[0].data.push({
+                            value: mydata.series_bar_1.data[0][i],
+                            itemStyle : { 
+                                normal: {
+                                    color:option.color[1]
+                                }
+                            }
+                        });
+                }else{
+                    option.options[0].series[0].data.push({
+                        value: mydata.series_bar_1.data[0][i],
+                        itemStyle : { 
+                            normal: {
+                                color:option.color[0]
+                            }
+                        }
+                    });
+                }
+            }
             for (var i = 1; i < 12; i++) {
+                for(var j=0,len=mydata.series_bar_1.data[i].length; j<len; j++){
+                    if(mydata.series_bar_1.data[i][j] > mydata.series_bar_target){
+                        mydata.series_bar_1.data[i][j]={
+                                value: mydata.series_bar_1.data[i][j],
+                                itemStyle : { 
+                                    normal: {
+                                        color:option.color[1]
+                                    }
+                                }
+                            };
+                    }else{
+                        mydata.series_bar_1.data[i][j]={
+                            value: mydata.series_bar_1.data[i][j],
+                            itemStyle : { 
+                                normal: {
+                                    color:option.color[0]
+                                }
+                            }
+                        };
+                    }
+                }
                 option.options.push({
                     series : [
                         {'data': mydata.series_bar_1.data[i]},
@@ -210,15 +257,15 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
               xAxis:['TNID', 'CKSN', 'CKSD', 'WZSD', 'QSJD', 'BLDN', 'BJPD','SHPN', 'SHPD', 'HYPD', 'CDPD', 'WKSN', 'LCFC', 'PEGN','CCDN', 'WCDN', 'IUTN', 'INNB', 'WRGN', 'ITUD', 'BLDD'],
               series_bar_1:{name:'FPY',data:[]},
               series_line_1:{name:'OOB',data:[]},
-              series_bar_target:25,
-              series_line_target:30
+              series_bar_target:92,
+              series_line_target:1.5
             };
             for (var i = 12; i >= 0; i--) {
                 var newBarArr = [],
                     newLineArr = [];
                 for (var j = mydata.xAxis.length; j >= 0; j--) {
-                    newBarArr.push(Math.floor(Math.random()*100));
-                    newLineArr.push(Math.floor(Math.random()*100));
+                    newBarArr.push(85+Math.floor(Math.random()*15));
+                    newLineArr.push(Math.floor(Math.random()*3));
                 };
                 mydata.series_bar_1.data.push(newBarArr);
                 mydata.series_line_1.data.push(newLineArr);
@@ -230,6 +277,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
         //_setOptionTimeLine_2
         LvFpyOob.prototype._setOptionTimeLine_2 = function(mydata){
             var option = {
+                color: ["#B7E1EA", '#3FF1F7'],
                 timeline:{
                     y2:30,
                     data:['1','2','3','4','5','6', '7','8','9','10','11','12'], 
@@ -239,7 +287,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                             color: 'rgba(255,255,255,0.65)'
                         },
                         formatter : function(s) {
-                            var month = ['', 'CKSN','QSJN.','BLDN','SHPN','WKS','LCFC', 'PEG','CCD','WCD','ITUN','PON','ARG'];
+                            var month = ['', 'Jay.','Feb.','Mar.','Apr.','May.','Jun.', 'Jul.','Aug.','Sept.','Oct.','Nov.','Dec.'];
                             return month[s];
                         }
                     },
@@ -307,11 +355,13 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                             'axisLine':{show : false,lineStyle:{color: '#076377', width: 1, type: 'solid'}},
                             'axisTick':{show : true,lineStyle:{color: '#076377', width: 1, type: 'solid'}},
                             'splitLine':{show : false},
-                            'data':mydata.xAxis
+                            'data':mydata.series_bar_1.data[0].xAxis
                         }],
                         yAxis : [
                             {
                                 'type':'value',
+                                'min':85,
+                                'max':100,
                                 'splitLine':{show : false},
                                 'axisTick':{show : true,inside:true,lineStyle:{color: '#076377', width: 1, type: 'solid'}},
                                 'axisLine':{lineStyle:{color: '#076377', width: 1, type: 'solid'}},
@@ -321,6 +371,8 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                             },
                             {
                                 'type':'value',
+                                'min':0,
+                                'max':3,
                                 'splitLine':{show : false},
                                 'axisTick':{show : true,inside:true,lineStyle:{color: '#076377', width: 1, type: 'solid'}},
                                 'axisLine':{lineStyle:{color: '#076377', width: 1, type: 'solid'}},
@@ -334,7 +386,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                                 'name':'FPY',
                                 'type':'bar',
                                 'barCategoryGap':'40%',
-                                'data': mydata.series_bar_1.data[0]
+                                'data': []
                             }, 
                             {
                                 'name':'OOB',
@@ -345,11 +397,11 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                                 'itemStyle': {
                                     'normal': {
                                         lineStyle: { // 系列级个性化折线样式
-                                            width: 4
+                                            width: 2
                                         }
                                     }
                                 },
-                                'data': mydata.series_line_1.data[0]
+                                'data': mydata.series_line_1.data[0].data
                             },
                             {
                                 'name':'FPY Target',
@@ -376,22 +428,63 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                     }
                 ]
             };
-            for (var i = 1; i < 12; i++) {
-                option.options.push({
-                    series : [
-                        {'data': mydata.series_bar_1.data[i]},
-                        {'data': mydata.series_line_1.data[i]}
-                    ]
-                })
-            };
             var target1 = [],
                 target2 = [];
-            for (var i = 0; i < mydata.xAxis.length; i++) {
+            for(var i=0,len=mydata.series_bar_1.data[0].data.length; i<len; i++){
+                if(mydata.series_bar_1.data[0].data[i] > mydata.series_bar_target){
+                    option.options[0].series[0].data.push({
+                            value: mydata.series_bar_1.data[0].data[i],
+                            itemStyle : { 
+                                normal: {
+                                    color:option.color[1]
+                                }
+                            }
+                        });
+                }else{
+                    option.options[0].series[0].data.push({
+                        value: mydata.series_bar_1.data[0].data[i],
+                        itemStyle : { 
+                            normal: {
+                                color:option.color[0]
+                            }
+                        }
+                    });
+                }
                 target1.push(mydata.series_bar_target);
                 target2.push(mydata.series_line_target);
             }
+            for (var i = 1; i < 12; i++) {
+                for(var j=0,len=mydata.series_bar_1.data[i].data.length; j<len; j++){
+                    if(mydata.series_bar_1.data[i].data[j] <= mydata.series_bar_target || mydata.series_bar_1.data[i].data[j] == '-'){
+                        mydata.series_bar_1.data[i].data[j]={
+                            value: mydata.series_bar_1.data[i].data[j],
+                            itemStyle : { 
+                                normal: {
+                                    color:option.color[0]
+                                }
+                            }
+                        };
+                    }else{
+                        mydata.series_bar_1.data[i].data[j]={
+                            value: mydata.series_bar_1.data[i].data[j],
+                            itemStyle : { 
+                                normal: {
+                                    color:option.color[1]
+                                }
+                            }
+                        };
+                    }
+                }
+                option.options.push({
+                    'xAxis': [{'data':mydata.series_bar_1.data[i].xAxis}],
+                    series : [
+                        {'data': mydata.series_bar_1.data[i].data},
+                        {'data': mydata.series_line_1.data[i].data}
+                    ]
+                })
+            };
             option.options[0].series[2].data = target1;
-            option.options[0].series[3].data = target2;  
+            option.options[0].series[3].data = target2; 
             this.option = option;
             this.loadStatus = true;
             option = null;
@@ -403,19 +496,37 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
               xAxis: ['wk41', 'wk40', 'wk39', 'wk38', 'wk37', 'wk36', 'wk35', 'wk34', 'wk33', 'wk32', 'wk31', 'wk30', 'wk29', 'wk28', 'wk27', 'wk26', 'wk25', 'wk24', 'wk23', 'wk22', 'wk21'],
               series_bar_1:{name:'FPY',data:[]},
               series_line_1:{name:'OOB',data:[]},
-              series_bar_target:25,
-              series_line_target:30
+              series_bar_target:92,
+              series_line_target:1.5
             };
-            for (var i = 12; i >= 0; i--) {
+            for (var i = 1; i <= 12; i++) {
+                var newLineArr = [],
+                    newBarArr = [],
+                    monthArr = [],
+                    len = new Date(2014,i,0).getDate();//获取某年某月的天数
+                for (var j = 1; j <= len; j++) {
+                    monthArr.push(i+'.'+j);
+                    newBarArr.push(85+Math.floor(Math.random()*15));
+                    newLineArr.push(Math.floor(Math.random()*3));
+                };
+                for (var k = len; k <= 30; k++) {//如果当月天数小于31天，需要补全
+                    monthArr.push('-.-');
+                    newBarArr.push('-');
+                    newLineArr.push('-');
+                };
+                mydata.series_bar_1.data.push({'data':newBarArr,'xAxis':monthArr});
+                mydata.series_line_1.data.push({'data':newLineArr,'xAxis':monthArr});
+            };
+            /*for (var i = 12; i >= 0; i--) {
                 var newBarArr = [],
                     newLineArr = [];
                 for (var j = mydata.xAxis.length; j >= 0; j--) {
-                    newBarArr.push(Math.floor(Math.random()*100));
-                    newLineArr.push(Math.floor(Math.random()*100));
+                    newBarArr.push(85+Math.floor(Math.random()*15));
+                    newLineArr.push(Math.floor(Math.random()*3));
                 };
                 mydata.series_bar_1.data.push(newBarArr);
                 mydata.series_line_1.data.push(newLineArr);
-            };
+            };*/
             self._setOptionTimeLine_2(mydata);
             drawFlag&&self.resetOption();
         };
