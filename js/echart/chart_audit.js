@@ -15,7 +15,10 @@ define(['echarts','echarts/chart/gauge','echarts/chart/bar','echarts/chart/line'
                 animation:true,
                 animationDuration:600,
                 tooltip : {
-                    formatter: "{a} <br/>{b} : {c}"
+                    formatter: "{a} <br/>{b} : {c}",
+                    axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                        type: 'none' // 默认为直线，可选为：'line' | 'shadow'
+                    }
                 },
                 title : {
                     'text':'',
@@ -155,7 +158,7 @@ define(['echarts','echarts/chart/gauge','echarts/chart/bar','echarts/chart/line'
                     },
                     //'{b}'+'<br>{a}：'+'{c}'+'<br>{a1}：'+'{c1}',
                     axisPointer: { // 坐标轴指示器，坐标轴触发有效
-                        type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                        type: 'none' // 默认为直线，可选为：'line' | 'shadow'
                     }
                 },
                 legend: {
@@ -237,7 +240,7 @@ define(['echarts','echarts/chart/gauge','echarts/chart/bar','echarts/chart/line'
                 tooltip : {
                     trigger: 'axis',
                     axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        type : 'none'        // 默认为直线，可选为：'line' | 'shadow'
                     }
                 },
                 legend: {
@@ -345,7 +348,7 @@ define(['echarts','echarts/chart/gauge','echarts/chart/bar','echarts/chart/line'
                                 color: '#fff'
                             }
                         },
-                        tooltip : {'trigger':'axis'},
+                        tooltip : {'trigger':'axis',axisPointer: {type: 'none'}},
                         color:["#FFF"],
                         legend : {
                             x:'right',
@@ -441,7 +444,7 @@ define(['echarts','echarts/chart/gauge','echarts/chart/bar','echarts/chart/line'
                         color: '#fff'
                     }
                 },
-                tooltip : {'trigger':'axis'},
+                tooltip : {'trigger':'axis',axisPointer: {type: 'none'}},
                 color:["#FFF"],
                 legend : {
                     x:'right',

@@ -254,7 +254,7 @@ html.onepage-scroll body {
 }
 .app_header {
 	z-index: 10;
-	height: 80px;
+	height: 40px;
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -263,6 +263,8 @@ html.onepage-scroll body {
 	background-color: rgba(0, 0, 0, 0.2);
 	-webkit-box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.2);
 	box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.2);
+	-webkit-background-size: auto 21px;
+	background-size: auto 21px;
 }
 .ctrBtns {float: right;}
 .ctrBtns .ctr_1,
@@ -272,25 +274,25 @@ html.onepage-scroll body {
 .ctrBtns .ctr_6,
 .ctrBtns .ctr_5 {
 	float: left;
-	width: 64px;
-	height: 64px;
-	margin: 8px;
+	width: 32px;
+	height: 32px;
+	margin: 4px;
 	cursor: pointer;
 	color: #fff;
-	font-size: 64px;
+	font-size: 32px;
 }
 .mapSideTop {
 	overflow: hidden;
 	height: auto;
-	padding: 32px 0;
+	padding: 16px 0;
 	padding-right: 32px;
 	position: absolute;
 	right: 0;
-	top: 80px;
+	top: 40px;
 	z-index: 1;
 }
 .mapSideBot {
-	margin-top: 124px;
+	margin-top: 62px;
 	/*如果有生之年能看到这个样式被其它浏览器支持，请Mail告诉我*/
 	mask-image:url(../images/bitmap/mapsidemask.png);
 	mask-size:100% 100%;
@@ -340,7 +342,7 @@ html.onepage-scroll body {
 	overflow: auto;
 }
 .app-init-page-pd>div:first-child {
-	padding-top: 80px;
+	padding-top: 40px;
 	min-height: 100%;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -428,7 +430,7 @@ html.onepage-scroll body {
 	background-image: url(../images/bitmap/logo.png);
 }
 .eachBlck {
-	padding-top: 80px;
+	padding-top: 40px;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -453,7 +455,7 @@ html.onepage-scroll body {
 .eachBlockTitle {
 	position: absolute;
 	z-index: 1;
-	top: 80px;
+	top: 40px;
 	line-height: 56px;
 	height: 56px;
 	left: 72px;
@@ -611,7 +613,7 @@ html.onepage-scroll body {
 
 .sidebar_wrap {
 	position: absolute;
-	top: 80px;
+	top: 40px;
 	left: 0;
 	width: 238px;
 	bottom: 0;
@@ -619,7 +621,7 @@ html.onepage-scroll body {
 	-webkit-transform: translateX(-238px);
 	-ms-transform: translateX(-238px);
 	transform: translateX(-238px);
-	height: calc(100% - 80px);
+	height: calc(100% - 40px);
 }
 .sidebar_wrap.show {
 	-webkit-transition: transform .3s linear;
@@ -804,7 +806,7 @@ html.onepage-scroll body {
 
 .sideBtn {
 	float: left;
-	height: 80px;
+	height: 40px;
 	width: 238px;
 	-webkit-transition:background-color 1s linear;
 	transition:background-color 1s linear;
@@ -813,10 +815,10 @@ html.onepage-scroll body {
 .side_show_btn {
 	cursor: pointer;
 	float: left;
-	width: 64px;
-	height: 64px;
-	padding: 8px;
-	font-size: 64px;
+	width: 32px;
+	height: 32px;
+	padding: 4px;
+	font-size: 32px;
 	text-align: center;
 	color: #fff;
 }
@@ -860,8 +862,8 @@ html.onepage-scroll body {
 
 #mapSide {
 	float: right;
-	width: 444px;
-	margin-left: -444px;
+	width: 222px;
+	margin-left: -222px;
 	height: 100%;
 }
 .mslist {
@@ -893,8 +895,8 @@ html.onepage-scroll body {
 	box-shadow: 0 0 10px rgba(0,0,0,.2);
 }
 .mdh2 {
-	line-height: 56px;
-	font-size: 30px;
+	line-height: 28px;
+	font-size: 14px;
 	color: #fff;
 	border-bottom: solid 1px rgba(255, 255, 255, 0.3);
 	font-weight: normal;
@@ -905,17 +907,17 @@ html.onepage-scroll body {
 .mdh2 .mdh2_2{
 	display: inline-block;
 	width: 100%;
-	font-size: 32px;
+	font-size: 14px;
 	text-align: center;
 }
 
 .mdhlist {
-	
+	padding-top: 4px;
 }
 .mdhlist .mdhli{
 	overflow: hidden;
-	line-height: 30px;
-	font-size: 18px;
+	line-height: 20px;
+	font-size: 12px;
 }
 
 .mdhli .mli_l {
@@ -926,12 +928,12 @@ html.onepage-scroll body {
 	color: #ffe900;
 }
 .mapswipebtn,.pageswipebtn {
-	height: 56px;
-	line-height: 56px;
-	width: 200px;
+	height: 28px;
+	line-height: 28px;
+	min-width: 100px;
 	text-align: center;
-	border: solid 2px #fff;
-	font-size: 24px;
+	border: solid 1px #fff;
+	font-size: 12px;
 	color: #fff;
 	float: left;
 	display: block;
@@ -945,7 +947,7 @@ html.onepage-scroll body {
 }
 #mapWrap {
 	height: 100%;
-	margin-right: 444px;
+	margin-right: 222px;
 	margin-left: 40px;
 	/*background: #000;*/
 }
@@ -1582,7 +1584,7 @@ html.onepage-scroll body {
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	border-left:solid 1px #000;
-	top: 79px;
+	top: 39px;
 	right: 0;
 	bottom: 0;
 	z-index: 9;
@@ -1592,7 +1594,7 @@ html.onepage-scroll body {
 .pop_top_element {
 	display:none;
 	position:absolute;
-	top:80px;
+	top:40px;
 	left:0;
 	width: 100%;
 	min-height:48px;
@@ -1676,6 +1678,21 @@ html.onepage-scroll body {
 	height: 100%;
 	-webkit-overflow-scrolling: touch;
 }
+.map_dialog_cls_btn {
+	position: absolute;
+	top: -12px;
+	right: -12px;
+	width: 24px;
+	height: 24px;
+	background: #000;
+	font-family: 'lsicons';
+	font-size: 16px;
+	line-height: 24px;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 50px;
+	color: #fff !important;
+}
 
 @media only screen and (max-width:1280px){
 .ctrBtns .ctr_1,
@@ -1684,13 +1701,13 @@ html.onepage-scroll body {
 .ctrBtns .ctr_4,
 .ctrBtns .ctr_6,
 .ctrBtns .ctr_5 {
-	line-height: 64px;
+	line-height: 32px;
 	font-size: 32px;
 	width: 32px;
 }
 .side_hide_btn,
 .side_show_btn {
-	line-height: 64px;
+	line-height: 32px;
 	font-size: 32px;
 }
 

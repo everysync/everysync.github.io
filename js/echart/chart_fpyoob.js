@@ -75,7 +75,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                                 color: '#fff'
                             }
                         },
-                        tooltip : {'trigger':'axis'},
+                        tooltip : {'trigger':'axis','axisPointer':{'type':'none'}},
                         color:['#B7E1EA','#FFF100','#E2F3F6','rgba(255,255,255,0.3)'],
                         legend : {
                             x:'right',
@@ -268,7 +268,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                                 color: '#fff'
                             }
                         },
-                        tooltip : {'trigger':'axis'},
+                        tooltip : {'trigger':'axis','axisPointer':{'type':'none'}},
                         color:['#B7E1EA','#FFF100','#E2F3F6','rgba(255,255,255,0.3)'],
                         legend : {
                             x:'right',

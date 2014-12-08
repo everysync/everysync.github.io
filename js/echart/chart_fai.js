@@ -18,7 +18,8 @@ define(['echarts','echarts/chart/pie','echarts/chart/bar'],
                 backgroundColor:"rgba(0,0,0,0.05)",
                 tooltip : {
                     trigger: 'item',
-                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    formatter: "{a} <br/>{b} : {c} ({d}%)",
+                    'axisPointer':{'type':'none'}
                 },
                 title:{
                     text:'',
@@ -93,7 +94,7 @@ define(['echarts','echarts/chart/pie','echarts/chart/bar'],
                     },
                     //'{b}'+'<br>{a}：'+'{c}'+'<br>{a1}：'+'{c1}',
                     axisPointer: { // 坐标轴指示器，坐标轴触发有效
-                        type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                        type: 'none' // 默认为直线，可选为：'line' | 'shadow'
                     }
                 },
                 legend: {

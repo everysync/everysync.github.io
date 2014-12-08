@@ -21,7 +21,10 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                 },
                 tooltip:{
                     show: true,
-                    'trigger':'axis'
+                    'trigger':'axis',
+                    axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                        type: 'none' // 默认为直线，可选为：'line' | 'shadow'
+                    }
                 },
                 dataZoom: {
                     show: true,
@@ -149,7 +152,10 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                 },
                 tooltip:{
                     show: true,
-                    'trigger':'axis'
+                    'trigger':'axis',
+                     axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                        type: 'none' // 默认为直线，可选为：'line' | 'shadow'
+                    }
                 },
                 dataZoom: {
                     show: true,
@@ -261,7 +267,10 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                         type: 'pie',
                         tooltip: {
                             trigger: 'item',
-                            formatter: '{a} <br/>{b} : {c} ({d}%)'
+                            formatter: '{a} <br/>{b} : {c} ({d}%)',
+                            axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                                type: 'none' // 默认为直线，可选为：'line' | 'shadow'
+                            }
                         },
                         center: ['80%', 75],
                         radius: [0, 50],

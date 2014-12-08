@@ -234,9 +234,10 @@ define(['echarts','echarts/chart/map'],
                     '   <h3>STOP WIRE PRODUCTS STOP WIRE PRODUCTS</h3>'+
                     '   <p>H520s Enginneering related yuanjqH520s</p>'+
                     '   <p>related Enginneering related related</p>'+
-                    '</div>').attr('class','map_tips map_tips_red');
+                    '</div>'+
+					'<div class="map_dialog_cls_btn"></div>').attr('class','map_tips map_tips_red');
             }else{
-                $(".map_tips").html(v.data.listName).attr('class','map_tips');
+                $(".map_tips").html(v.data.listName+'<div class="map_dialog_cls_btn"></div>').attr('class','map_tips');
             }
             if(v.data.color == 's2'){
                 $(".map_tips").attr('class','map_tips map_tips_red map_tips_yellow');

@@ -654,14 +654,14 @@
 	content: "\e601";
 }
 .infomation{
-	font-size:14px;
+	font-size:12px;
 	display:block;
 	width:170px;
-	height:42px;
+	height:28px;
 	padding-left:10px;
-	line-height:42px;
+	line-height:28px;
 	text-align:left;
-	border:2px solid #fff;
+	border:1px solid #fff;
 	margin-bottom:13px;
 	-webkit-border-radius:50px;
 	-moz-border-radius:50px;
