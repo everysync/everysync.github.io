@@ -260,18 +260,21 @@ function home_aduit(target) {
 	function splitjson() {
 		var json_blue = new Array(),
 			json_yellow = new Array(),
-			json_red = new Array();
+			json_red = new Array(),
+			json_na = new Array();
 		$.each(jsonpCache, function(i,d) {
 			d['score'] >= 95 ? json_blue= json_blue.concat(d):"";
 			d['score'] < 95 && d["score"] >= 85 ? json_yellow = json_yellow.concat(d):"";
-			d['score'] < 85 ? json_red = json_red.concat(d):"";
+			d['score'] < 85 && d["score"] > 0 ? json_red = json_red.concat(d):"";
+			d['score'] == 0 ? json_na = json_na.concat(d):"";
 		});
 		//console.log(json_blue);
 		//console.log(json_yellow);
 		//console.log(json_red);
-		renderLayout(json_blue,json_yellow,json_red);
+		//console.log(json_na);
+		renderLayout(json_blue,json_yellow,json_red,json_na);
 	}
-	function renderLayout(b,y,r) {
+	function renderLayout(b,y,r,n) {
 		renderLayoutCache = $("<div>");
 		var template = 
 			'<div class="eb_audit_items">'+
@@ -285,6 +288,7 @@ function home_aduit(target) {
 		function render(k,d,c) {
 			for (var i = 0; i< k; i ++) {
 				var $tp = $(template);
+				if (d[i]["score"] == 0) {d[i]["score"] = "N/A"}
 				$tp.addClass(c+"_"+i);
 				$tp.find(".eai_logo").css("background-image","url('"+ d[i]["logoURL"]  +"')");
 				$tp.find(".eai_score").html(d[i]["score"]);
@@ -297,6 +301,7 @@ function home_aduit(target) {
 		if (b.length) {render(b.length,b,"blue");}
 		if (y.length) {render(y.length,y,"yellow");}
 		if (r.length) {render(r.length,r,"red");}
+		if (n.length) {render(n.length,n,"na");}
 		$targey.html( renderLayoutCache.html());
 		$targey.on('click','.eb_audit_items',function(){
 			page_modules.loadinto("moduleHtml/Audit_Odm.html", ".eachBlck","pagebgc-3","audit_odm");
@@ -305,6 +310,7 @@ function home_aduit(target) {
 		json_yellow = null;
 		json_red = null;
 		jsonpCache = null;
+		json_na = null;
 		renderLayoutCache = null;
 	}
 	$doc.on({
@@ -681,7 +687,7 @@ function jayfunction() {
 		
 		$doc.on("side_showe.peo_4_s", function(e,k,tar) {
 			if (k == "top") {
-				//console.log(k,tar)
+				console.log(k,tar)
 				tar.load("moduleHtml/UserCenter-1.html .userMsg", function() {
 					require(["userPerCenter"], function(data) {
 						data.userInfo();

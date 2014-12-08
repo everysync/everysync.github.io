@@ -236,10 +236,10 @@ define(['echarts','echarts/chart/map'],
                     '   <p>related Enginneering related related</p>'+
                     '</div>').attr('class','map_tips map_tips_red');
             }else{
-                $(".map_tips").html(v.data.listName).attr('class','map_tips map_tips');
+                $(".map_tips").html(v.data.listName).attr('class','map_tips');
             }
             if(v.data.color == 's2'){
-                $(".map_tips").attr('class','map_tips map_tips_yellow');
+                $(".map_tips").attr('class','map_tips map_tips_red map_tips_yellow');
             }
             $(".map_tips").animate({'top':v.pos.y-$(".map_tips").outerHeight()-10+'px','left':v.pos.x-parseInt($(".map_tips").outerWidth()/2)+46+'px'}, 120, function() {
                 $(".map_tips").show();
@@ -296,7 +296,7 @@ define(['echarts','echarts/chart/map'],
             var liTemplate     = 
                     '<div class="mapDataDetail">'+
                     '   <h2 class="mdh2">'+
-                    '       <span class="mdh2_1">标题:</span>'+
+                    //'       <span class="mdh2_1">标题:</span>'+
                     '       <span class="mdh2_2">标题名</span>'+
                     '   </h2>'+
                     '   <ul class="mdhlist">'+
@@ -311,7 +311,7 @@ define(['echarts','echarts/chart/map'],
             for (var i=0; i<MapArrylength; i++) {
                 var $kt = $(liTemplate);
                 var $ktlist = $kt.find(".mdhlist");
-                $kt.find(".mdh2_1").html(MapArry[i]['listTitle']+":");
+                //$kt.find(".mdh2_1").html("");
                 $kt.find(".mdh2_2").html(MapArry[i]['listName']);
                 $kt.attr('data-cname',MapArry[i]['listName']);
                 $ktlist.html("");
@@ -340,6 +340,19 @@ define(['echarts','echarts/chart/map'],
                 calculateHeight:true,
                 slidesPerViewFit:true,
                 centeredSlides:true,
+                // Autoplay
+                autoplay: 5000,
+                speed: 300,
+                // onSlideChangeStart: function(sw){
+                //     var $sides = $(page_1_swiper.activeSlide());
+                //     $sides
+                //         .addClass("swiper-slide-click-active")
+                //         .siblings()
+                //         .removeClass("swiper-slide-click-active");
+                //     self.tip_idx = page_1_swiper.activeIndex;
+                //     self.showTip($sides.find(".mdh2_2").text());
+                //     sw.startAutoplay();
+                // },
                 onSlideClick:function(sw) {
                     page_1_swiper.swipeTo(page_1_swiper.clickedSlideIndex);
                     var $sides = $(page_1_swiper.clickedSlide);

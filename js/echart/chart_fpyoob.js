@@ -29,7 +29,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
             switch(this.chartType){
                 case "timeLine":
                     this.chart.on(lvChart.ecConfig.EVENT.CLICK, function(param){
-                        page_modules.loadinto("moduleHtml/FPY_OOB_In.html", ".eachBlck" ,"demopagec-2 switch_2","fpyoob_in");
+                        page_modules.loadinto("moduleHtml/FPY_OOB_In.html", ".eachBlck" ,"demopagec-2-2","fpyoob_in");
                     }); 
                     break;
                 default:break;
@@ -442,9 +442,9 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                           type: 'solid'
                         }
                     },
+                    //showDelay:'300',
                     position : function(p) {
                         // 位置回调
-                        console.log && console.log(p);
                         //$(".map_tips").animate({'top':p[1]-20+'px','left':p[0]-50+'px'}, 200);
                         //$("#tip_l").css({'top':p[1]+'px','left':p[0]-50+'px'});
                         //return [p[0]-50, p[1]-20];
@@ -454,7 +454,6 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                     //<String> ticket : 异步回调标识
                     //<Function> callback : 异步回调，回调时需要两个参数，第一个为前面提到的ticket，第二个为填充内容html
                     formatter:function(params,ticket,callback){
-                        console.log(params);
                         //$(".map_tips").html(params[5].name+':'+params[5].value);
                         return ticket;
                     }

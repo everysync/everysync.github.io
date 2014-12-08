@@ -12,7 +12,7 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="mobile-web-app-capable" content="yes"> 
 	<script src="../js/jquery-2.1.1.min.js"></script>
-	<script src="../js/icheck.min.js"></script>
+<!--	<script src="../js/icheck.min.js"></script>-->
 	
 	<script src="../js/mobiscroll/mobiscroll.core.js"></script>								<!-- 日期插件 JS -->
     <script src="../js/mobiscroll/mobiscroll.scroller.js" type="text/javascript"></script>	<!-- 日期插件 JS -->
@@ -20,7 +20,7 @@
     <script src="../js/mobiscroll/mobiscroll.select.js" type="text/javascript"></script>		<!-- 日期插件 JS -->
 	
 	<link rel="stylesheet" href="../css/mobiscroll.scroller.css">
-	<link rel="stylesheet" href="../css/flat.css">
+<!--	<link rel="stylesheet" href="../css/flat.css">-->
 	<link rel="stylesheet" href="../css/style.css">
 	<style type="text/css">
 		html,body {
@@ -51,11 +51,11 @@
 	<script>
 	$(function() {
         //单选\复选框定制js
-        $('.form_radio,.form_check').iCheck({
-            checkboxClass: 'icheckbox_flat',
-            radioClass: 'iradio_flat',
-            increaseArea: '20%' // optional
-        });
+//        $('.form_radio,.form_check').iCheck({
+//            checkboxClass: 'icheckbox_flat',
+//            radioClass: 'iradio_flat',
+//            increaseArea: '20%' // optional
+//        });
         //datapicker fn
 	    var datapickCache = $("input.form_date");
         var curr = new Date().getFullYear();
@@ -154,7 +154,7 @@
 <div class="formWrap">
    <ul>
         <li>
-            <span class="form_title form_title_1">EMEAEMEA</span><input type="text" class="form_txt_style">
+            <span class="form_title form_title_1">EMEA</span><input type="text" class="form_txt_style">
         </li>
         <li>
             <span class="form_title form_title_1">EMEA</span><input type="text" class="form_txt_style">
@@ -206,16 +206,41 @@
         </li>
         <li style="width:100%;">
            <span class="form_title form_title_3">GEO<b class="form_tips"></b></span>
-           <label class="form_check form_check_style" for="checkbox-1"><input type="checkbox" id="checkbox-1" value="Yes">EMEA</label>
-           <label class="form_check form_check_style" for="checkbox-2"><input type="checkbox" id="checkbox-2" value="Yes">AG</label>
-           <label class="form_check form_check_style" for="checkbox-3"><input type="checkbox" id="checkbox-3" value="Yes">PRC</label>
-           <label class="form_check form_check_style" for="checkbox-4"><input type="checkbox" id="checkbox-4" value="Yes">EAP</label>
-           <label class="form_check form_check_style" for="checkbox-5"><input type="checkbox" id="checkbox-5" value="Yes">MAP</label>
+                <!-- .form_check -->
+                <div class="form_check">
+                  <input type="checkbox" value="" id="checkbox-1" name="check" checked />
+                  <label for="checkbox-1">EMEA</label>
+                </div>
+                <div class="form_check">
+                  <input type="checkbox" value="" id="checkbox-2" name="check" />
+                  <label for="checkbox-2">AG</label>
+                </div>
+                <div class="form_check">
+                  <input type="checkbox" value="" id="checkbox-3" name="check" checked />
+                  <label for="checkbox-3">PRC</label>
+                </div>
+                <div class="form_check">
+                  <input type="checkbox" value="" id="checkbox-4" name="check" />
+                  <label for="checkbox-4">EAP</label>
+                </div>
+                <div class="form_check">
+                  <input type="checkbox" value="" id="checkbox-5" name="check" checked />
+                  <label for="checkbox-5">MAP</label>
+                </div>
+                <!-- end .form_check -->
         </li>
         <li style="width:100%;">
-           <span class="form_title form_title_3">GEO<b class="form_tips"></b></span>
-           <label class="form_radio form_radio_style" for="radio-1"><input type="radio" id="radio-1" name="geo" value="Yes">Yes</label>
-           <label class="form_radio form_radio_style" for="radio-2"><input type="radio" id="radio-2" name="geo" value="No">No</label>
+            <!-- .form_radio -->
+            <span class="form_title form_title_3">GEO<b class="form_tips"></b></span>
+            <div class="form_radio">
+              <input type="radio" value="yes" id="radio-1" name="geo" checked />
+              <label for="radio-1">Yes</label>
+            </div>
+            <div class="form_radio">
+              <input type="radio" value="no" id="radio-2" name="geo" />
+              <label for="radio-2">No</label>
+            </div>
+            <!-- end .form_radio -->
         </li>
         <li style="width:30%;">
            <p class="form_title form_title_2">changeType<b class="form_tips"></b></p>

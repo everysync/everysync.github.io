@@ -102,9 +102,9 @@ define(['echarts','echarts/chart/pie','echarts/chart/bar'],
                 },
                 grid:{
                     x:60,
-                    y:10,
+                    y:60,
                     x2:30,
-                    y2:60,
+                    y2:50,
                     borderWidth:0
                     //backgroundColor:'rgba(200,200,200,0.2)'
                 },
@@ -209,35 +209,34 @@ define(['echarts','echarts/chart/pie','echarts/chart/bar'],
                             }
                         }
                     },
-                    data: []
-                    // markPoint: {
-                    //         symbol: 'circle',
-                    //         symbolSize: 6,
-                    //         data: [
-                    //             {
-                    //                 x: '65%',
-                    //                 y: '12%',
-                    //                 name:'india',
-                    //                 value: 'india',
-                    //                 symbolSize: 20,
-                    //                 symbol: 'image://svg/icon-right.svg',
-                    //                 clickable:false,
-                    //                 tooltip : {show:false},
-                    //                 itemStyle: {normal: {label: {show: false }, labelLine: {show: false } }, emphasis: {color:"#000", areaStyle:{}, label: {show: false, position: 'outer'}, labelLine: {show: false, lineStyle: {color: 'red'} } } } 
-                    //             },{
-                    //                 x: '78%',
-                    //                 y: '12%',
-                    //                 value: 'southAmerica',
-                    //                 name:'southAmerica',
-                    //                 symbolSize: 20,
-                    //                 symbol: 'image://svg/icon-fail.svg',
-                                    
-                    //                 tooltip : {show:false},
-                    //                 clickable:false,
-                    //                 itemStyle: {normal: {label: {show: false }, labelLine: {show: false } }, emphasis: {color:"#000", areaStyle:{}, label: {show: false, position: 'outer'}, labelLine: {show: false, lineStyle: {color: 'red'} } } } 
-                    //             }
-                    //         ]
-                    //     }
+                    data: [],
+                    markPoint: {
+                            symbol: 'circle',
+                            symbolSize: 6,
+                            data: [
+                                {
+                                    x: '55%',
+                                    y: '35',
+                                    name:'Approved',
+                                    value: '906',
+                                    symbolSize: 20,
+                                    symbol: 'image://svg/icon-right.svg',
+                                    clickable:false,
+                                    tooltip : {show:false},
+                                    itemStyle: {normal: {label: {show: true ,position:'right',textStyle:{color:'rgba(255,255,255,0.8)',fontSize:22}}, labelLine: {show: false } }, emphasis: {color:"#000", areaStyle:{}, label: {show: false, position: 'outer'}, labelLine: {show: false, lineStyle: {color: 'red'} } } } 
+                                },{
+                                    x: '78%',
+                                    y: '35',
+                                    value: '15',
+                                    name:'Failed',
+                                    symbolSize: 20,
+                                    symbol: 'image://svg/icon-fail.svg',
+                                    tooltip : {show:false},
+                                    clickable:false,
+                                    itemStyle: {normal: {label: {show: true ,position:'right',textStyle:{color:'rgba(255,255,255,0.8)',fontSize:22}}, labelLine: {show: false } }, emphasis: {color:"#000", areaStyle:{}, label: {show: false, position: 'outer'}, labelLine: {show: false, lineStyle: {color: 'red'} } } } 
+                                }
+                            ]
+                        }
                 }]
             };
             option.xAxis[0].data = mydata.xAxis;

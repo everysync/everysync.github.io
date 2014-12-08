@@ -55,7 +55,6 @@
 	<link href="../css/Bina.css" rel="stylesheet" type="text/css">
 	<link href="../css/style.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="../css/mobiscroll.scroller.css">
-	<link rel="stylesheet" href="../css/flat.css">
 	<link rel="stylesheet" href="../css/EC.css">
 	<!-- Favicons
 	================================================== -->
@@ -70,7 +69,6 @@
 	<link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
 	<link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
 	<script src="../js/jquery-2.1.1.min.js"></script>
-	<script src="../js/icheck.min.js"></script>
     
     <script src="../js/mobiscroll/mobiscroll.core.js"></script>								<!-- 日期插件 JS -->
     <script src="../js/mobiscroll/mobiscroll.scroller.js" type="text/javascript"></script>	<!-- 日期插件 JS -->
@@ -79,13 +77,7 @@
     
     <script>
 	$(function() {
-        //单选\复选框定制js
-		$('.form_radio,.form_check').iCheck({
-            checkboxClass: 'icheckbox_flat',
-            radioClass: 'iradio_flat',
-            increaseArea: '20%' // optional
-        });
-        //datapicker fn
+    //datapicker fn
 	var datapickCache = $("input.form_date");
 	 var curr = new Date().getFullYear();
 		var opt = {
@@ -412,8 +404,24 @@
 					<dl class="infoList">
 						<dt class="infoTit infosex">Sex</dt>
 						<dd>
+						    <div class="form_radio form_radio_02">
+                                <input type="radio" value="1" id="radio-1" name="sex" checked />
+                                <label for="radio-1"><em class="iconSex01">&nbsp;</em></label>
+                            </div>
+                            <div class="form_radio form_radio_02">
+                                <input type="radio" value="0" id="radio-2" name="sex" />
+                                <label for="radio-2"><em class="iconSex02">&nbsp;</em></label>
+                                
+                            </div>
+						
+						
+						
+						
+						
+<!--
 							<label class="form_radio form_radio_style form_radio02" for="radio-1"><input type="radio" id="radio-1" name="geo" value=""><em class="iconSex01">&nbsp;</em></label>
 							<label class="form_radio form_radio_style form_radio02" for="radio-2"><input type="radio" id="radio-2" name="geo" value=""><em class="iconSex02">&nbsp;</em></label>
+-->
 						</dd>					
 					</dl>
 					<dl class="infoList">
@@ -455,13 +463,6 @@
 <script src="../js/icheck.min.js"></script>
 <script type="text/javascript">
 	$(function() {
-        //单选\复选框定制js
-        $('.form_radio,.form_check').iCheck({
-            checkboxClass: 'icheckbox_flat',
-            radioClass: 'iradio_flat',
-            increaseArea: '20%' // optional
-        });
-		
 		require(["jay"], function() {
 			
 			eachblock_Switcher(".userMsg",{

@@ -53,15 +53,7 @@
 	================================================== -->
 	<link href="css/reset.css" rel="stylesheet" type="text/css">
 	<link href="css/onepage-scroll.css" rel="stylesheet" type="text/css">
-	
-	<link rel="stylesheet" href="css/mobiscroll.scroller.css" type="text/css">
-	<link rel="stylesheet" href="css/flat.css" type="text/css">
-
 	<link href="css/style.css" rel="stylesheet" type="text/css">
-	<link href="css/Audit.css" rel="stylesheet" type="text/css">
-	<link href="css/Bina.css" rel="stylesheet" type="text/css">
-	<link href="css/EC.css" rel="stylesheet" type="text/css">
-	<link href="css/Fai.css" rel="stylesheet" type="text/css">
 
 	<!-- Favicons
 	================================================== -->
@@ -75,6 +67,7 @@
 	<link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
 	<link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
 	<link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+	<script type="text/javascript" src="cordova.js"></script>
 	<script src="js/prefixfree.min.js"></script>
 </head>
 <body>
@@ -98,7 +91,7 @@
 		<div class="eachBlck demopagec-1">
 			<h2 class="eachBlockTitle">MFG-OPS</h2>
 			<div class="mapSideTop">
-				<span class="mapswipebtn cur">MAP</span>
+				<span class="mapswipebtn cur">SNAP SHOT</span>
 				<span class="mapswipebtn">CHARTS</span>
 			</div>
 			<div class="page_swicher_wrap">
@@ -109,7 +102,7 @@
 								<li class="msEachlist swiper-slide">
 									<div class="mapDataDetail">
 										<h2 class="mdh2">
-											<span class="mdh2_1">ODM Name:</span>
+											<!-- <span class="mdh2_1">ODM Name:</span> -->
 											<span class="mdh2_2">SHP_SH_DTA</span>
 										</h2>
 										<ul class="mdhlist">
@@ -243,16 +236,14 @@
 			
 		</div>
 		<!--eachBlck-->
-		<div class="eachBlck demopagec-2 switch_2">
+		<div class="eachBlck demopagec-2-2">
 			<h2 class="eachBlockTitle">FPY/OOB <span class="tiny">Mass Production</span></h2>
 			<div class="mapSideTop mass_switch">
 				<span class="pageswipebtn cur">LENOVO</span>
 				<span class="pageswipebtn">THINK</span>
 			</div>
 			<div class="page_swicher_wrap">
-				<div class="page_swicher_2">
-					<div id="chart_fpy_timeLine"></div>
-				</div>
+				<div id="chart_fpy_timeLine"></div>
 			</div>
 		</div>
 		<!--eachBlck-->
@@ -272,10 +263,10 @@
 		<!--eachBlck-->
 		<div class="eachBlck demopagec-4">
 			<h2 class="eachBlockTitle">FAI</h2>
-			<div class="topChartContainer">
+			<div class="topChartContainer home">
 				<div id="chart_fai_pie"></div>
-				<div id="chart_fai_bar"></div>
 			</div>
+			<div id="chart_fai_bar"></div>
 			<div class="botChartContainer">
 				<div class="botChartContainerInner" id="svgwrap">
 					
