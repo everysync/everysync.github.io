@@ -37,7 +37,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
         };
         LvFpyOob.prototype._setOptionTimeLine = function(mydata){
             var option = {
-                color: ["#B7E1EA", '#3FF1F7'],
+                color: ["rgba(64,241,248,1)", 'rgba(64,241,248,0.5)'],
                 timeline:{
                     y2:30,
                     data:['1','2','3','4','5','6', '7','8','9','10','11','12'], 
@@ -277,7 +277,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
         //_setOptionTimeLine_2
         LvFpyOob.prototype._setOptionTimeLine_2 = function(mydata){
             var option = {
-                color: ["#B7E1EA", '#3FF1F7'],
+                color: ["rgba(64,241,248,1)", 'rgba(64,241,248,0.5)'],
                 timeline:{
                     y2:30,
                     data:['1','2','3','4','5','6', '7','8','9','10','11','12'], 

@@ -273,7 +273,7 @@ define(['echarts','echarts/chart/map'],
                             };
                     }
                 });
-                $(".mapDataDetail").eq(self.tip_idx).trigger('click');//模拟
+//                $(".mapDataDetail").eq(self.tip_idx).trigger('click');//模拟
             },500);
         };
         LvMap.prototype.getChartData = function(drawFlag){//获取数据

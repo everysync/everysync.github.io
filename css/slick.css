@@ -24,7 +24,7 @@
   .slick-list:focus {
     outline: none; }
   .slick-loading .slick-list {
-    background: #fff url("./ajax-loader.gif") center center no-repeat; }
+    background: #fff url(../images/ajax-loader.gif) center center no-repeat; }
   .slick-list.dragging {
     cursor: pointer;
     cursor: hand; }

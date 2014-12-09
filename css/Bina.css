@@ -67,7 +67,7 @@
 }
 .h_auto {
 	height:100%;
-	padding-top: 80px;
+	padding-top: 40px;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -210,7 +210,7 @@
 	padding-right:40px;
 }
 .audit_bt {
-	width:114px;
+	min-width:114px;
 	height:42px;
 	font-weight:normal;
 	font-size:22px;
@@ -224,6 +224,8 @@
 	border:none;
 	margin-top:3px;
 	cursor:pointer;
+	padding-left: 20px;
+	padding-right: 20px;
 	float:right;
 }
 .es_tabwrap {
@@ -242,7 +244,7 @@
 .tabstyle_1 .auditBor {
 	height:38px;
 	line-height:38px;
-	border:2px solid #fff;
+	border:1px solid #fff;
 	border-radius:22px;
 	margin:0 3.4%;
 	overflow:hidden;
@@ -428,9 +430,10 @@
 	opacity:1;
 }
 .score_con {
+	margin-top: -82px;
 	height:82px;
 	padding-left:60px;
-	background:#000;
+	background: rgba(0, 0, 0, 0.85);
 	position:relative;
 }
 .score_con .red_score{

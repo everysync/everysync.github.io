@@ -71,13 +71,15 @@
 	<link rel="apple-touch-icon" sizes="152x152" href="../touch-icon-ipad-retina.png">
 	<script src="../js/jquery-2.1.1.min.js"></script>
 	<script src="../js/tab_pick.js"></script>
-	<script src="../js/page_control_Audit_Create_demo.js"></script>
     <script type="text/javascript">
-	//$(function() {
-//		require(["page_audit"], function(page) {
-//				page.init();
-//		});
-//	});
+	$(function() {
+		require(["page_audit"], function(page) {
+			//require(["tab_pick"]),function( tab_pick) {
+				page.init();
+			//}
+	
+		});
+	});
 	</script>
 	<style>
 		html,body {
@@ -100,40 +102,37 @@
 	</div>
 </div>
 <div class="h_auto eachBlck">
-	<div class="EcScroll has-score-foot">
+	<div class="EcScroll">
         <div class="audit_create es_tabwraps">
-			<div class="audit_search"><input type="button" value="Create" class="audit_bt"><input type="button" value="+ Add new" style="margin-right: 10px;" class="audit_bt">Shift: <i>Night</i>ODM: <i>Wistron_KS</i></div>
-			<div class="es_tabwrap font_14 iscrollelem">
+            <div class="audit_search"><input type="button" value="Create" class="audit_bt">Shift: <i>Night</i>ODM: <i>Wistron_KS</i></div>
+            <div class="es_tabwrap font_14 iscrollelem">
 				<ul class="es_tabwrap_tab tabstyle_1 clearfix">
 					<li class="iTab">
-						<span class="count"></span>
 						<span class="auditBor">OP QUALIFY</span>
 					</li>
 					<li class="iTab cur">
-						<span class="count"></span>
+						<span class="count">2</span>
 						<span class="auditBor">MACHINE&amp;FIXTURE</span>
 					</li>
 					<li class="iTab">
-						<span class="count"></span>
+						<span class="count">2</span>
 						<span class="auditBor">SOP EXECUTION</span>
 					</li>
 					<li class="iTab">
-						<span class="count"></span>
+						<span class="count">2</span>
 						<span class="auditBor">EC PC AUDIT</span>
 					</li>
 					<li class="iTab">
-						<span class="count"></span>
 						<span class="auditBor">QUALITY INSPECTION</span>
 					</li>
-					<li class="iTab">
-						<span class="count"></span>
+                    <li class="iTab">
 						<span class="auditBor">LESSON LEARN</span>
 					</li>
 				</ul>
-				<div class="es_tabwrap_tabbox clearfix audit_creat_jay">
+				<div class="es_tabwrap_tabbox clearfix">
 					<div class="layoutst_1 stopHide">
-						<div class="Qualify_flex">
-							<article class="qsitem_block">
+                    	<div class="Qualify_flex">
+                        	<article class="qsitem_block">
 								<div class="qsitem_t clearfix">
 									<span class="qsitem_ckb">
 										<input type="radio">
@@ -277,11 +276,11 @@
 									</div>
 								</div>
 							</article>
-						</div>
-					</div>
+                        </div>
+                    </div>
 					<div class="layoutst_1">
 						<div class="Qualify_flex">
-							<article class="qsitem_block">
+                        	<article class="qsitem_block">
 								<div class="qsitem_t clearfix">
 									<span class="qsitem_ckb">
 										<input type="radio">
@@ -291,7 +290,7 @@
 								</div>
 								<div class="qsitem_qus_wrap_slide">
 									<div class="qsitem_qus_wrap clearfix">
-										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+                                    	<textarea name="" cols="" rows="" class="setYourWords"></textarea>
 										<div class="uploadimg clearfix">
 											<span><i>+</i> Images</span>
 											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
@@ -353,11 +352,11 @@
 									</div>
 								</div>
 							</article>
-						</div>
+                        </div>
 					</div>
 					<div class="layoutst_1 stopHide">
 						<div class="Qualify_flex">
-							<article class="qsitem_block">
+                        	<article class="qsitem_block">
 								<div class="qsitem_t clearfix">
 									<span class="qsitem_ckb">
 										<input type="radio">
@@ -762,7 +761,7 @@
 					</div>
 					<div class="layoutst_1 stopHide">
 						<div class="Qualify_flex">
-							<article class="qsitem_block">
+                        	<article class="qsitem_block">
 								<div class="qsitem_t clearfix">
 									<span class="qsitem_ckb">
 										<input type="radio">
@@ -1017,9 +1016,9 @@
 							
 						</div>
 					</div>
-					<div class="layoutst_1 stopHide">
+                    <div class="layoutst_1 stopHide">
 						<div class="Qualify_flex">
-							<article class="qsitem_block">
+                        	<article class="qsitem_block">
 								<div class="qsitem_t clearfix">
 									<span class="qsitem_ckb">
 										<input type="radio">
@@ -1204,14 +1203,14 @@
 				</div>
 				<div class="txa_c"><input name="" type="button" class="audit_bt score_btn" value="Save"></div>
 			</div>
-		</div>
+            </div>
+            
+            <div class="score_con">
+					<div class="red_score"><span id="nonono">0</span><em>Lose Score</em></div>
+					<div class="green_score"><span id="yesyesye">0</span><em>Score</em></div>
+                    <input type="button" class="audit_bt yesBtn" value="Submit">
+				</div>
     </div>
-	<div class="score_con">
-		<div class="red_score"><span id="nonono">0</span><em>Lose Score</em></div>
-		<div class="green_score"><span id="yesyesye">0</span><em>Score</em></div>
-		<input type="button" class="audit_bt yesBtn" value="Submit">
-	</div>
-	
 </div>
 <div class="sidebar_wrap">
 	<div class="sidebar" id="sidebar">
@@ -1257,7 +1256,7 @@
 	</div>
 </div>
 <!-- Javascript with AMD 
-================================================== 
-<script src="../js/require.js" data-main="../js/main" ></script>-->
+================================================== -->
+<script src="../js/require.js" data-main="../js/main" ></script>
 </body>
 </html>

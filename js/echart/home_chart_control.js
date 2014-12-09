@@ -23,9 +23,15 @@ define(function(){
 		var line = new LvFpyOob('chart_fpy_Line','line');
 		chartObj['p2'].push(line);
 		$(".ramp_switch").on('tap','.pageswipebtn:not(.cur)',function(){//切换工厂后执行刷新图表
-			$(this).addClass("cur").siblings().removeClass('cur');
+			var $this = $(this);
+			var $center = $('.center-nav');
+			$this.addClass("cur").siblings().removeClass('cur');
 			line.factoryName = $(this).text();
 			line.getChartData(1);
+			//切换中间center-nav
+			$center.removeClass("show-1 show-2");
+			console.log('show-'+Number($this.index()+1))
+			$center.addClass( 'show-'+Number($this.index()+1) );
 		});
 		$(".chartFilter").on('tap','.ccs:not(.cur)',function(){//切换字母后执行刷新图表
 			$(this).addClass("cur").siblings().removeClass('cur');
