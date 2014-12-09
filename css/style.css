@@ -94,6 +94,14 @@
 	content: "\e605";
 }
 
+.ficon-icon-chart {
+	font-size: 22px !important;
+	line-height: 32px !important;
+}
+.ficon-icon-chart:before {
+	content: "\e049";
+}
+
 /*SVG World map CSS*/
 .st1,
 .st2,
@@ -279,6 +287,7 @@ html.onepage-scroll body {
 .ctrBtns .ctr_3,
 .ctrBtns .ctr_4,
 .ctrBtns .ctr_6,
+.ctrBtns .ctr_7,
 .ctrBtns .ctr_5 {
 	float: left;
 	width: 32px;

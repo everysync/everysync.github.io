@@ -148,15 +148,15 @@ define(['echarts','echarts/chart/map'],
                             symbol: 'circle',
                             symbolSize: 6,
                             //large: true,
-                            // effect: {
-                            //     show: true,
-                            //     loop: true, 
-                            //     period: 15, 
-                            //     scaleSize : 1, 
-                            //     color : 'rgba(0,0,255,0.1)',
-                            //     shadowColor : null, 
-                            //     shadowBlur : 0  
-                            // },
+							/*effect: {
+								show: true,
+								loop: true, 
+								period: 15, 
+								scaleSize : 1, 
+								color : 'rgba(0,0,255,0.1)',
+								shadowColor : null, 
+								shadowBlur : 0  
+							},*/
                             data: []
                         }
                     }
