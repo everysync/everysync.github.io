@@ -24,7 +24,7 @@ define(function(){
 		chartObj['p2'].push(line);
 		$(".ramp_switch").on('tap','.pageswipebtn:not(.cur)',function(){//切换工厂后执行刷新图表
 			var $this = $(this);
-			var $center = $('.center-nav');
+			var $center = $('#center-nav-1');
 			$this.addClass("cur").siblings().removeClass('cur');
 			line.factoryName = $(this).text();
 			line.getChartData(1);
@@ -46,6 +46,14 @@ define(function(){
 			$(this).addClass("cur").siblings().removeClass('cur');
 			line.factoryName = $(this).text();
 			line.getChartData(1);
+			var $this = $(this);
+			var $center = $('#center-nav-2');
+			//切换中间center-nav
+			$center.removeClass("show-1 show-2");
+			console.log('show-'+Number($this.index()+1))
+			$center.addClass( 'show-'+Number($this.index()+1) );
+			
+			
 		});
 	});
 	require(["chart_fai"],function(LvFai){//FAI
