@@ -121,9 +121,10 @@ define('page_audit',[],function() {
 				$(document).trigger("chenklist",tempObj)
 			})
 			//初始化
-			function cuntNumInit() {
+			window.cuntNumInit = function() {
 				var eachlayout = $(".layoutst_1");
 				var tabs = $(".es_tabwrap_tab").find(".iTab");
+				console.log(eachlayout,tabs)
 				eachlayout.each(function(i,el) {
 					var $this = $(this);
 					var index = $this.index();
@@ -141,8 +142,8 @@ define('page_audit',[],function() {
 
 				});	
 			}
-			window.wincunt = cuntNumInit();
 			cuntNumInit();
+			//cuntNumInit();
 			//触发的事件监听
 			/*$(document).on("chenklist", function(e,d) {
 				console.log(d)
@@ -156,7 +157,7 @@ define('page_audit',[],function() {
 			var num =Math.floor((1-d.nobtnlength/d.alllist)*100);
 			$("#yesyesye").html(num);
 			$("#nonono").html( 100-num);
-			wincunt;
+			cuntNumInit();
 		});
 		
 		//上传Files

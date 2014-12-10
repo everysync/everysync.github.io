@@ -146,13 +146,13 @@ define(['echarts','echarts/chart/map'],
                         data: [],
                         markPoint: {
                             symbol: 'circle',
-                            symbolSize: 9.5,
+                            symbolSize: 10,
                             effect: {
                                 show: true,
-                                period: 40, 
-                                scaleSize: 1,
-                                color : 'rgba(231,43,14, 0.51)',
-                                shadowColor : 'rgba(255,255,252, 0.2)', 
+                                period: 15, 
+                                scaleSize:  window.devicePixelRatio > 1?2:1,
+                                color : 'rgba(255, 147, 147, 0.51)',
+                                shadowColor : 'rgba(255,255,252, 0.35)', 
                                 shadowBlur : 4  
                             },
                             data: []
@@ -175,13 +175,13 @@ define(['echarts','echarts/chart/map'],
                         data: [],
                         markPoint: {
                             symbol: 'circle',
-                            symbolSize: 9.5,
+                            symbolSize: 10,
                             effect: {
                                 show: true,
-                                period: 20, 
-                                scaleSize: 1,
+                                period: 15, 
+                                scaleSize:  window.devicePixelRatio > 1?2:1,
                                 color : 'rgba(255, 233, 0, 0.51)',
-                                shadowColor : 'rgba(255,255,252, 0.2)', 
+                                shadowColor : 'rgba(255,255,252, 0.35)', 
                                 shadowBlur : 4  
                             },
                             data: []
@@ -204,13 +204,13 @@ define(['echarts','echarts/chart/map'],
                         data: [],
                         markPoint: {
                             symbol: 'circle',
-                            symbolSize: 9.5,
+                            symbolSize: 10,
 							effect: {
 								show: true,
-								period: 20, 
-								scaleSize: 1,
+								period: 15, 
+								scaleSize: window.devicePixelRatio > 1?2:1,
 								color : 'rgba(0, 251, 174, 0.51)',
-								shadowColor : 'rgba(255,255,252, 0.2)', 
+								shadowColor : 'rgba(255,255,252, 0.35)', 
 								shadowBlur : 4  
 							},
                             data: []
@@ -252,25 +252,25 @@ define(['echarts','echarts/chart/map'],
             var itemStyle = {};
             itemStyle.s1 = {
                 normal: {
-                    borderWidth: 2,
-                    color: 'rgba(231,43,14,1)',
-                    borderColor: 'rgba(255,255,255,1)',
+                    borderWidth: 3,
+                    color: 'rgba(255, 147, 147,1)',
+                    borderColor: 'rgba(231,43,14,1)',
                     label: { show: false, formatter:' '}
                 }
             };
             itemStyle.s2 = {
                 normal: {
-                    borderWidth: 2,
+                    borderWidth: 3,
                     color: 'rgba(255, 233, 0,1)',
-                    borderColor: 'rgba(255, 149, 79,1)',
+                    borderColor: 'rgba(236, 136, 36,1)',
                     label: { show: false, formatter:' '}
                 }
             };
             itemStyle.s3 = {
                 normal: {
-                    borderWidth: 2,
+                    borderWidth: 3,
                     color: 'rgba(0, 251, 174,1)',
-                    borderColor: 'rgba(255,255,255,1)',
+                    borderColor: 'rgba(4, 162, 114,1)',
                     label: { show: false, formatter:' '}
                 }
             };

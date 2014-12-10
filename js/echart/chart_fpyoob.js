@@ -532,6 +532,12 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
         };
 
         LvFpyOob.prototype._setOptionLine = function(mydata){
+            var line;   
+            var self = this;
+            require(["chart_line"],function(chartline){            
+                   self.line = chartline;                  
+                   self.line.init();
+            });
             var option = {
                 color:["#fff"],
                 title : {
@@ -540,8 +546,9 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                 },
                 tooltip : {
                     trigger: 'axis',
+                    backgroundColor:'rgba(0,0,0,0)',
                     axisPointer:{
-                        type : 'line',
+                        type : 'none',
                         lineStyle : {
                           color: '#fff',
                           width: 2,
@@ -553,20 +560,20 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                           type: 'solid'
                         }
                     },
-                    //showDelay:'300',
+                    showDelay:'0',
                     position : function(p) {
                         // 位置回调
-                        //$(".map_tips").animate({'top':p[1]-20+'px','left':p[0]-50+'px'}, 200);
-                        //$("#tip_l").css({'top':p[1]+'px','left':p[0]-50+'px'});
-                        //return [p[0]-50, p[1]-20];
+                        
                     },
-                    //{Function}，传递参数列表如下：
-                    //<Array> params : 数组内容同模板变量，[[a, b, c, d], [a1, b1, c1, d1], ...]
-                    //<String> ticket : 异步回调标识
-                    //<Function> callback : 异步回调，回调时需要两个参数，第一个为前面提到的ticket，第二个为填充内容html
                     formatter:function(params,ticket,callback){
+                       // console.log(params);
+                       // console.log(self.chart.component.xAxis.getAxis(0).getCoord(params[0][1]));
+                        //console.log(self.chart.component.yAxis.getAxis(0).getCoord(params[0][2]));
                         //$(".map_tips").html(params[5].name+':'+params[5].value);
-                        return ticket;
+                        // console.log(self.line);
+                        var h = $('#chart_fpy_Line').height()-self.chart.component.yAxis.getAxis(0).getCoord(params[0][2]);
+                        self.line.draw(self.chart.component.xAxis.getAxis(0).getCoord(params[0][1]),self.chart.component.yAxis.getAxis(0).getCoord(params[0][2]), h)
+                        return '';
                     }
                 },
                 legend: {
@@ -589,7 +596,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                     'x':70,
                     'x2':30,
                     'y':30,
-                    'y2':70,
+                    'y2':0,
                     borderWidth:0
                 },
                 xAxis : [
@@ -641,7 +648,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
             var self = this;
             var mydata = {
                 legend:["Ramp"],
-                xAxis:['周一','周二','周三','周四','周五','周六','周日','周一','周二','周三','周四','周五','周六','周日','周一','周二','周三','周四','周五','周六','周日'], 
+                xAxis:['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21'], 
                 data:[10, 12, 21, 30, 35, 33, 30,28,30,35,40,43,47,50,46,44,46,50,55,60,57]
             };
             self._setOptionLine(mydata);

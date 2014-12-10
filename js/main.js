@@ -25,12 +25,14 @@ require.config({
 		"chart_fpyoob"		:"echart/chart_fpyoob",
 		"chart_audit"		:"echart/chart_audit",
 		"chart_fai"			:"echart/chart_fai",
+		"chart_line"		:"echart/chart_line",
 		"home_chart_control":"echart/home_chart_control",
 		"page_chart_control":"echart/page_chart_control",
 		"page_audit"		:"page_control",
 		"page_fai"			:"page_control",
 		"fai_odm_control"	:"echart/fai_odm_control",
 		"slick"				:"slick/slick",
+		'createjs'			:'easeljs.min',
 		"jay"				: "jay"
 	},
 	waitSeconds:30,
@@ -48,6 +50,7 @@ require.config({
 		'chart_fpyoob_ramp'	: {deps: ['echartsConfig']},
 		'chart_audit'	: {deps: ['echartsConfig']},
 		'chart_fai'		: {deps: ['echartsConfig']},
+		'chart_line'		: {deps: ['createjs']},
 		'jay'  			: {deps: ['jquery','utf','onepageScroll','fastclick','scalcheight','swiper','slick']}
 	}
 });
