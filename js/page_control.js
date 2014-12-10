@@ -74,7 +74,7 @@ define('page_audit',[],function() {
 			});	
 
 			allinputWrap.each(function(index,element) {
-				if ($(this).data("created") === 'true') {return;}
+				if ($(this).data("created") === true) {return;}
 				this.setAttribute("id", "inputWrap"+index);
 				allinputWrap.find('input:eq(0)').attr("qusType","yes");
 				allinputWrap.find('input:eq(1)').attr("qusType","no");
@@ -83,7 +83,7 @@ define('page_audit',[],function() {
 
 			allinput.each(function(index,element) {
 				var $this = $(this);
-				if ($this.data("created") === 'true' ) {return;}
+				if ($this.data("created") === true) {return;}
 				var $parent = $this.parent();
 				var attrName = $parent[0].getAttribute('id');
 				this.setAttribute("name",attrName);
@@ -124,7 +124,7 @@ define('page_audit',[],function() {
 			window.cuntNumInit = function() {
 				var eachlayout = $(".layoutst_1");
 				var tabs = $(".es_tabwrap_tab").find(".iTab");
-				console.log(eachlayout,tabs)
+//				console.log(eachlayout,tabs)
 				eachlayout.each(function(i,el) {
 					var $this = $(this);
 					var index = $this.index();
@@ -134,16 +134,16 @@ define('page_audit',[],function() {
 							return $(this)
 						}
 					}).length;
-					if (tabs.eq(index).find(".count").length < 0 ) {
-						tabs.eq(index).prepend('<span class="count">'+isnoChecked+'</span>')
+					
+//					console.log(isnoChecked)
+					if (isnoChecked==0) {
+						tabs.eq(index).find(".count").remove();
 					} else {
 						tabs.eq(index).find(".count").html(isnoChecked)
 					}
-
 				});	
 			}
 			cuntNumInit();
-			//cuntNumInit();
 			//触发的事件监听
 			/*$(document).on("chenklist", function(e,d) {
 				console.log(d)
@@ -160,28 +160,67 @@ define('page_audit',[],function() {
 			cuntNumInit();
 		});
 		
+		var createdbtn = function() {
+			$("#addnewss").on("click", function(e) {
+				$(".layoutst_1").eq(0).find(".Qualify_flex").append(qustemplate);
+				audit_create();
+				cuntNumInit();
+				flieUploadsmode();
+			})
+		};
+		createdbtn();
+		
+		var qustemplate = 
+			'<article class="qsitem_block">'+
+			'	<div class="qsitem_t clearfix">'+
+			'		<span class="qsitem_ckb">'+
+			'			<input type="radio">'+
+			'			<input type="radio">'+
+			'		</span>'+
+			'		<span class="qsitem_ckf">问题问题问题</span>'+
+			'	</div>'+
+			'	<div class="qsitem_qus_wrap_slide">'+
+			'		<div class="qsitem_qus_wrap clearfix">'+
+			'			<textarea name="" cols="" rows="" class="setYourWords"></textarea>'+
+			'			<div class="uploadimg clearfix">'+
+			'				<span><i>+</i> Images</span>'+
+			'				<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>'+
+			'			</div>'+
+			'		</div>'+
+			'	</div>'+
+			'</article>';	
+		
+		var $qustemplate = $(qustemplate);
+		
+		
+		
 		//上传Files
-		$(".syimg").each(function(index, element) {
-			element.onchange =function(e) {
-				var _objs = e.target.files;
-				if ( _objs.length > 0) {
-					$(e.target.files).each(function (i) {
-						var prew = $("<img>").attr('class','newAppendImg');
-						var imgobj = _objs[i];
-						var reader  = new FileReader();
-						reader.onloadend = function () {
-							prew.attr('src', reader.result);
-						};
-						reader.readAsDataURL(imgobj);
-						$(element).closest(".uploadimg").prepend(prew).addClass("hasUploadImages");
-					});
-				} else {
-					var wp = $(element).closest(".uploadimg");
-					wp.find("img").remove();
-					wp.removeClass("hasUploadImages");
-				}
-			};
-		});
+		window.flieUploadsmode = function() {
+			$(".syimg").each(function(index, element) {
+				if ($(element).data("mokeup") === true ) {return;}
+				$(element).data("mokeup",true);
+				element.onchange =function(e) {
+					var _objs = e.target.files;
+					if ( _objs.length > 0) {
+						$(e.target.files).each(function (i) {
+							var prew = $("<img>").attr('class','newAppendImg');
+							var imgobj = _objs[i];
+							var reader  = new FileReader();
+							reader.onloadend = function () {
+								prew.attr('src', reader.result);
+							};
+							reader.readAsDataURL(imgobj);
+							$(element).closest(".uploadimg").prepend(prew).addClass("hasUploadImages");
+						});
+					} else {
+						var wp = $(element).closest(".uploadimg");
+						wp.find("img").remove();
+						wp.removeClass("hasUploadImages");
+					}
+				};
+			});	
+		};
+		flieUploadsmode();
 
 		//加载product
 		require(["isk_LPL"],function(isk){

@@ -36,7 +36,8 @@ define(function(){
 		$(".chartFilter").on('tap','.ccs:not(.cur)',function(){//切换字母后执行刷新图表
 			$(this).addClass("cur").siblings().removeClass('cur');
 			line.letter = $(this).text();
-			line.getChartData(1);
+			//line.getChartData(1);
+			line.refreshChartMarkPoint();
 		});
 	});
 	require(["chart_fpyoob"],function(LvFpyOob){//FPY/OOB Mass Production

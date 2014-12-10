@@ -9,6 +9,8 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
             this.chartType = chartType;
             this.factoryName = 'LENOVO';
             this.letter = 'A';
+            this.chartMp = 0;
+            this.chartData = null;
             this.getChartData(0);
         }
         iheritPrototype(LvFpyOob, MyChart);
@@ -571,14 +573,14 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                         //console.log(self.chart.component.yAxis.getAxis(0).getCoord(params[0][2]));
                         //$(".map_tips").html(params[5].name+':'+params[5].value);
                         // console.log(self.line);
-                        var h = $('#chart_fpy_Line').height()-self.chart.component.yAxis.getAxis(0).getCoord(params[0][2]);
+                        var h = $('#chart_fpy_Line').height()-self.chart.component.yAxis.getAxis(0).getCoord(params[0][2])-30;
                         self.line.draw(self.chart.component.xAxis.getAxis(0).getCoord(params[0][1]),self.chart.component.yAxis.getAxis(0).getCoord(params[0][2]), h)
                         return '';
                     }
                 },
                 legend: {
                     y:-300,
-                    data:mydata.legend
+                    data:["Ramp"]
                 },
                 toolbox: {
                     show : false,
@@ -590,13 +592,13 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                         saveAsImage : {show: true}
                     }
                 },
-                animation: true,
+                animation: false,
                 calculable : false,
                 grid : {
                     'x':70,
                     'x2':30,
                     'y':30,
-                    'y2':0,
+                    'y2':30,
                     borderWidth:0
                 },
                 xAxis : [
@@ -607,7 +609,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                         'axisLine':{lineStyle:{color: '#076377', width: 1, type: 'solid'}},
                         'axisTick':{show : true,inside:true,length:10,lineStyle:{color: 'rgba(255,255,255,0.4)', width: 1, type: 'solid'}},
                         'splitLine':{show : false},
-                        data : mydata.xAxis
+                        data : []
                     }
                 ],
                 yAxis : [
@@ -636,23 +638,214 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                                     )
                                 })()
                             }}},
-                        data:mydata.data
+                        data:[],
+                        markPoint : {
+                            symbolSize: 6,
+                            data : []
+                        }
                     }
                 ]
-            };    
+            }; 
+            self.chartMp = 0;
+            for (var i = 0,len=mydata.length; i < len; i++) {
+                option.xAxis[0].data.push(mydata[i].ProductId);
+                option.series[0].data.push(mydata[i].fpyNumber);
+                if(mydata[i].ProductName.indexOf(self.letter) == 0){
+                    option.series[0].markPoint.data.push({name: '标注'+self.chartMp, xAxis: mydata[i].ProductId, yAxis: 0});
+                    self.chartMp++;
+                }
+            };   
             this.option = option;
             this.loadStatus = true;
             return option;
         };
         LvFpyOob.prototype.getChartDataLine = function(drawFlag){
             var self = this;
-            var mydata = {
-                legend:["Ramp"],
-                xAxis:['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21'], 
-                data:[10, 12, 21, 30, 35, 33, 30,28,30,35,40,43,47,50,46,44,46,50,55,60,57]
-            };
-            self._setOptionLine(mydata);
+            self.chartData = [
+                  {
+                     "ProductId": "10100122",
+                     "ProductName": "H520s",
+                     "Mfg": "Compal Brazil",
+                     "Phase": "2014-09-16",
+                     "SS": "2014-09-03",
+                     "InputQty": "2014-09-24",
+                     "TOP1": "90.2",
+                     "TOP2": "93.2",
+                     "fpystatus": "down",
+                     "fpyNumber": "47",
+                     "oobstatus": "up"
+                  },{
+                     "ProductId": "10100123",
+                     "ProductName": "A520s",
+                     "Mfg": "Compal Brazil",
+                     "Phase": "2014-09-16",
+                     "SS": "2014-09-03",
+                     "InputQty": "2014-09-24",
+                     "TOP1": "90.2",
+                     "TOP2": "93.2",
+                     "fpystatus": "down",
+                     "fpyNumber": "54",
+                     "oobstatus": "up"
+                  },{
+                     "ProductId": "1010012114",
+                     "ProductName": "H520s",
+                     "Mfg": "Compal Brazil",
+                     "Phase": "2014-09-16",
+                     "SS": "2014-09-03",
+                     "InputQty": "2014-09-24",
+                     "TOP1": "90.2",
+                     "TOP2": "93.2",
+                     "fpystatus": "down",
+                     "fpyNumber": "58",
+                     "oobstatus": "up"
+                  },{
+                     "ProductId": "10100125",
+                     "ProductName": "H520s",
+                     "Mfg": "Compal Brazil",
+                     "Phase": "2014-09-16",
+                     "SS": "2014-09-03",
+                     "InputQty": "2014-09-24",
+                     "TOP1": "90.2",
+                     "TOP2": "93.2",
+                     "fpystatus": "down",
+                     "fpyNumber": "92",
+                     "oobstatus": "up"
+                  },{
+                     "ProductId": "10100126",
+                     "ProductName": "H520s",
+                     "Mfg": "Compal Brazil",
+                     "Phase": "2014-09-16",
+                     "SS": "2014-09-03",
+                     "InputQty": "2014-09-24",
+                     "TOP1": "90.2",
+                     "TOP2": "93.2",
+                     "fpystatus": "down",
+                     "fpyNumber": "92",
+                     "oobstatus": "up"
+                  },{
+                     "ProductId": "10100127",
+                     "ProductName": "H520s",
+                     "Mfg": "Compal Brazil",
+                     "Phase": "2014-09-16",
+                     "SS": "2014-09-03",
+                     "InputQty": "2014-09-24",
+                     "TOP1": "90.2",
+                     "TOP2": "93.2",
+                     "fpystatus": "down",
+                     "fpyNumber": "95",
+                     "oobstatus": "up"
+                  },{
+                     "ProductId": "10100128",
+                     "ProductName": "H520s",
+                     "Mfg": "Compal Brazil",
+                     "Phase": "2014-09-16",
+                     "SS": "2014-09-03",
+                     "InputQty": "2014-09-24",
+                     "TOP1": "90.2",
+                     "TOP2": "93.2",
+                     "fpystatus": "down",
+                     "fpyNumber": "93",
+                     "oobstatus": "up"
+                  },{
+                     "ProductId": "10100129",
+                     "ProductName": "H520s",
+                     "Mfg": "Compal Brazil",
+                     "Phase": "2014-09-16",
+                     "SS": "2014-09-03",
+                     "InputQty": "2014-09-24",
+                     "TOP1": "90.2",
+                     "TOP2": "93.2",
+                     "fpystatus": "down",
+                     "fpyNumber": "90",
+                     "oobstatus": "up"
+                  },{
+                     "ProductId": "10100130",
+                     "ProductName": "H520s",
+                     "Mfg": "Compal Brazil",
+                     "Phase": "2014-09-16",
+                     "SS": "2014-09-03",
+                     "InputQty": "2014-09-24",
+                     "TOP1": "90.2",
+                     "TOP2": "93.2",
+                     "fpystatus": "down",
+                     "fpyNumber": "70",
+                     "oobstatus": "up"
+                  },{
+                     "ProductId": "10100131",
+                     "ProductName": "H520s",
+                     "Mfg": "Compal Brazil",
+                     "Phase": "2014-09-16",
+                     "SS": "2014-09-03",
+                     "InputQty": "2014-09-24",
+                     "TOP1": "90.2",
+                     "TOP2": "93.2",
+                     "fpystatus": "down",
+                     "fpyNumber": "68",
+                     "oobstatus": "up"
+                  },{
+                     "ProductId": "10100132",
+                     "ProductName": "H520s",
+                     "Mfg": "Compal Brazil",
+                     "Phase": "2014-09-16",
+                     "SS": "2014-09-03",
+                     "InputQty": "2014-09-24",
+                     "TOP1": "90.2",
+                     "TOP2": "93.2",
+                     "fpystatus": "down",
+                     "fpyNumber": "61",
+                     "oobstatus": "up"
+                  },{
+                     "ProductId": "10100133",
+                     "ProductName": "H520s",
+                     "Mfg": "Compal Brazil",
+                     "Phase": "2014-09-16",
+                     "SS": "2014-09-03",
+                     "InputQty": "2014-09-24",
+                     "TOP1": "90.2",
+                     "TOP2": "93.2",
+                     "fpystatus": "down",
+                     "fpyNumber": "58",
+                     "oobstatus": "up"
+                  },{
+                     "ProductId": "10100134",
+                     "ProductName": "Z520s",
+                     "Mfg": "Compal Brazil",
+                     "Phase": "2014-09-16",
+                     "SS": "2014-09-03",
+                     "InputQty": "2014-09-24",
+                     "TOP1": "90.2",
+                     "TOP2": "93.2",
+                     "fpystatus": "down",
+                     "fpyNumber": "52",
+                     "oobstatus": "up"
+                  }
+               ];
+            self._setOptionLine(self.chartData);
             drawFlag&&self.resetOption();
+        };
+        LvFpyOob.prototype.refreshChartMarkPoint = function(){
+            var self = this;
+            // self.chart.addData([[ 0,        // 系列索引
+            // Math.round(Math.random() * 1000), // 新增数据
+            // true,     // 新增数据是否从队列头部插入
+            // false]]);
+            //self.chart.addMarkPoint(0,);
+             console.log(self.chartMp);
+            for(var i=0;i<self.chartMp;i++){
+                self.chart.delMarkPoint(0,'标注'+i);
+            }
+            self.chartMp = 0;
+            var mdata = [];
+            for (var i = 0,len=self.chartData.length; i < len; i++) {
+                if(self.chartData[i].ProductName.indexOf(self.letter) == 0){
+                    mdata.push({name: '标注'+self.chartMp, xAxis: self.chartData[i].ProductId, yAxis: 0});
+                    self.chartMp++;
+                }
+            }; 
+            if(mdata.length > 0){
+                self.chart.addMarkPoint(0,{data :mdata});
+            }
+            console.log(self.chartMp);
         };
         return LvFpyOob;
     }
