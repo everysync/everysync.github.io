@@ -121,25 +121,28 @@ define('page_audit',[],function() {
 				$(document).trigger("chenklist",tempObj)
 			})
 			//初始化
-			var eachlayout = $(".layoutst_1");
-			var tabs = $(".es_tabwrap_tab").find(".iTab");
-			eachlayout.each(function(i,el) {
-				var $this = $(this);
-				var index = $this.index();
-				var $k = $(el).find(".qsitem_block");
-				var isnoChecked = $k.length - $k.filter(function() {
-					if (this.getAttribute("isChecked") == 'true') {
-						return $(this)
+			function cuntNumInit() {
+				var eachlayout = $(".layoutst_1");
+				var tabs = $(".es_tabwrap_tab").find(".iTab");
+				eachlayout.each(function(i,el) {
+					var $this = $(this);
+					var index = $this.index();
+					var $k = $(el).find(".qsitem_block");
+					var isnoChecked = $k.length - $k.filter(function() {
+						if (this.getAttribute("isChecked") == 'true') {
+							return $(this)
+						}
+					}).length;
+					if (tabs.eq(index).find(".count").length < 0 ) {
+						tabs.eq(index).prepend('<span class="count">'+isnoChecked+'</span>')
+					} else {
+						tabs.eq(index).find(".count").html(isnoChecked)
 					}
-				}).length;
-				if (tabs.eq(index).find(".count").length < 0 ) {
-					tabs.eq(index).prepend('<span class="count">'+isnoChecked+'</span>')
-				} else {
-					tabs.eq(index).find(".count").html(isnoChecked)
-				}
 
-			});
-
+				});	
+			}
+			window.wincunt = cuntNumInit();
+			cuntNumInit();
 			//触发的事件监听
 			/*$(document).on("chenklist", function(e,d) {
 				console.log(d)
@@ -153,6 +156,7 @@ define('page_audit',[],function() {
 			var num =Math.floor((1-d.nobtnlength/d.alllist)*100);
 			$("#yesyesye").html(num);
 			$("#nonono").html( 100-num);
+			wincunt;
 		});
 		
 		//上传Files

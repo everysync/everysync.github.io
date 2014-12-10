@@ -146,17 +146,104 @@ define(['echarts','echarts/chart/map'],
                         data: [],
                         markPoint: {
                             symbol: 'circle',
+                            symbolSize: 9.5,
+                            effect: {
+                                show: true,
+                                period: 40, 
+                                scaleSize: 1,
+                                color : 'rgba(231,43,14, 0.51)',
+                                shadowColor : 'rgba(255,255,252, 0.2)', 
+                                shadowBlur : 4  
+                            },
+                            data: []
+                        }
+                    }, {
+                        hoverable: false,
+                        name: 'city',
+                        type: 'map',
+                        mapType: 'china',
+                        roam: false,
+                        geoCoord: {
+                        },
+                        mapLocation: {
+                            x: 'center',
+                            //X: '5%',
+                            y: 'center',
+                            width: '90%',
+                            height: '80%'
+                        },
+                        data: [],
+                        markPoint: {
+                            symbol: 'circle',
+                            symbolSize: 9.5,
+                            effect: {
+                                show: true,
+                                period: 20, 
+                                scaleSize: 1,
+                                color : 'rgba(255, 233, 0, 0.51)',
+                                shadowColor : 'rgba(255,255,252, 0.2)', 
+                                shadowBlur : 4  
+                            },
+                            data: []
+                        }
+                    }, {
+                        hoverable: false,
+                        name: 'city',
+                        type: 'map',
+                        mapType: 'china',
+                        roam: false,
+                        geoCoord: {
+                        },
+                        mapLocation: {
+                            x: 'center',
+                            //X: '5%',
+                            y: 'center',
+                            width: '90%',
+                            height: '80%'
+                        },
+                        data: [],
+                        markPoint: {
+                            symbol: 'circle',
+                            symbolSize: 9.5,
+							effect: {
+								show: true,
+								period: 20, 
+								scaleSize: 1,
+								color : 'rgba(0, 251, 174, 0.51)',
+								shadowColor : 'rgba(255,255,252, 0.2)', 
+								shadowBlur : 4  
+							},
+                            data: []
+                        }
+                    }, {
+                        hoverable: false,
+                        name: 'city',
+                        type: 'map',
+                        mapType: 'china',
+                        roam: false,
+                        geoCoord: {
+                        },
+                        mapLocation: {
+                            x: 'center',
+                            //X: '5%',
+                            y: 'center',
+                            width: '90%',
+                            height: '80%'
+                        },
+                        data: [],
+                        markPoint: {
+                            symbol: 'circle',
                             symbolSize: 6,
                             //large: true,
-							/*effect: {
-								show: true,
-								loop: true, 
-								period: 15, 
-								scaleSize : 1, 
-								color : 'rgba(0,0,255,0.1)',
-								shadowColor : null, 
-								shadowBlur : 0  
-							},*/
+                            /*effect: {
+                                show: true,
+                                loop: true, 
+                                period: 15, 
+                                scaleSize : 1, 
+                                color : 'rgba(0,0,255,0.1)',
+                                shadowColor : null, 
+                                shadowBlur : 0  
+                            },*/
                             data: []
                         }
                     }
@@ -188,16 +275,31 @@ define(['echarts','echarts/chart/map'],
                 }
             };
             var geoCoord = {},
+                dataMarkS1 = [],
+                dataMarkS2 = [],
+                dataMarkS3 = [],
                 dataMark = [];
             this.shapeListData = {};
             for (var i = 0; i < mydata.length; i++) {
                 var v = mydata[i];
                 geoCoord[v['listName']] = v['geo'];
+                switch(v.color){
+                    case 's1':dataMarkS1.push({name: v['listName'], value: v['valu'], itemStyle: itemStyle[v.color]});
+                        break;
+                    case 's2':dataMarkS2.push({name: v['listName'], value: v['valu'], itemStyle: itemStyle[v.color]});
+                        break;
+                    case 's3':dataMarkS3.push({name: v['listName'], value: v['valu'], itemStyle: itemStyle[v.color]});
+                        break;
+                    default:break;
+                }
                 dataMark.push({name: v['listName'], value: v['valu'], itemStyle: itemStyle[v.color]});
                 this.shapeListData[v['listName']]= {data:v,pos:{}};
             }
             option.series[0].geoCoord = geoCoord;
-            option.series[1].markPoint.data = dataMark;
+            option.series[1].markPoint.data = dataMarkS1;
+            option.series[2].markPoint.data = dataMarkS2;
+            option.series[3].markPoint.data = dataMarkS3;
+            option.series[4].markPoint.data = dataMark;
             this.option = option;
             this.loadStatus = true;
             return option;

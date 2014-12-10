@@ -89,7 +89,7 @@ define(['echarts','echarts/chart/pie','echarts/chart/bar'],
                     formatter:function(params,ticket,callback){
                         var result = params[0][1]+'<br>';
                         result += params[2][0]+'：'+params[2][2]+'<br>';//第一个bar的数据
-                        result += params[1][0]+'：'+Math.abs(params[1][2])+'<br>';//第二个bar的数据
+                        result += params[1][0]+'：'+Math.abs(params[1][2]/10)+'<br>';//第二个bar的数据
                         return result;
                     },
                     //'{b}'+'<br>{a}：'+'{c}'+'<br>{a1}：'+'{c1}',
@@ -103,7 +103,7 @@ define(['echarts','echarts/chart/pie','echarts/chart/bar'],
                 },
                 grid:{
                     x:60,
-                    y:60,
+                    y:10,
                     x2:30,
                     y2:50,
                     borderWidth:0
@@ -157,10 +157,15 @@ define(['echarts','echarts/chart/pie','echarts/chart/bar'],
                         'splitLine':{show : false},
                         'axisTick':{show : true,length:3,inside:true,lineStyle:{color: 'rgba(255,255,255,0.35)', width: 1, type: 'solid'}},
                         'axisLine':{lineStyle:{color: 'rgba(255,255,255,0.35)', width: 1, type: 'solid'}},
-                        'axisLabel':{'textStyle':{color: 'rgba(255,255,255,0.6)'},'formatter':function (value){return Math.abs(value);}},
+                        'axisLabel':{'textStyle':{color: 'rgba(255,255,255,0.6)'},'formatter':function (value){
+                            var val = value;
+                            if(val<0){
+                                val = Math.abs(val/10);
+                            }
+                            return val;
+                        }},
                         'nameTextStyle':{color: '#E2F3F6'}
                     }
-
                 ],
                 series: [{
                     name: 'Approved',
@@ -190,7 +195,7 @@ define(['echarts','echarts/chart/pie','echarts/chart/bar'],
                             label: {
                                 show: false,
                                 position: 'bottom',
-                                formatter : function(a,b,c,d) {return Math.abs(c)>0?fmoney(Math.abs(c)):''; }
+                                formatter : function(a,b,c,d) {return Math.abs(c*10)>0?fmoney(Math.abs(c*10)):''; }
                             }
                         }
                     },
@@ -210,43 +215,17 @@ define(['echarts','echarts/chart/pie','echarts/chart/bar'],
                             }
                         }
                     },
-                    data: [],
-                    markPoint: {
-                            symbol: 'circle',
-                            symbolSize: 6,
-                            data: [
-                                {
-                                    x: '55%',
-                                    y: '35',
-                                    name:'Approved',
-                                    value: '906',
-                                    symbolSize: 20,
-                                    symbol: 'image://svg/icon-right.svg',
-                                    clickable:false,
-                                    tooltip : {show:false},
-                                    itemStyle: {normal: {label: {show: true ,position:'right',textStyle:{color:'rgba(255,255,255,0.8)',fontSize:22}}, labelLine: {show: false } }, emphasis: {color:"#000", areaStyle:{}, label: {show: false, position: 'outer'}, labelLine: {show: false, lineStyle: {color: 'red'} } } } 
-                                },{
-                                    x: '78%',
-                                    y: '35',
-                                    value: '15',
-                                    name:'Failed',
-                                    symbolSize: 20,
-                                    symbol: 'image://svg/icon-fail.svg',
-                                    tooltip : {show:false},
-                                    clickable:false,
-                                    itemStyle: {normal: {label: {show: true ,position:'right',textStyle:{color:'rgba(255,255,255,0.8)',fontSize:22}}, labelLine: {show: false } }, emphasis: {color:"#000", areaStyle:{}, label: {show: false, position: 'outer'}, labelLine: {show: false, lineStyle: {color: 'red'} } } } 
-                                }
-                            ]
-                        }
+                    data: []
                 }]
             };
             option.xAxis[0].data = mydata.xAxis;
             option.series[0].data = mydata.series_bar_1;
-            option.series[1].data = mydata.series_bar_2;
             var data_bar3 = [];
-            for (var i = 0, len = mydata.xAxis.length; i < len; i++) {
+            for (var i = 0, len = mydata.series_bar_2.length; i < len; i++) {
+                mydata.series_bar_2[i]=mydata.series_bar_2[i]*10;
                 data_bar3.push(0);//此bar数据只是为显示效果，设置为0即可
             }
+            option.series[1].data = mydata.series_bar_2;
             option.series[2].data = data_bar3;
             this.option = option;
             this.loadStatus = true;
@@ -296,7 +275,7 @@ define(['echarts','echarts/chart/pie','echarts/chart/bar'],
             axisData = ['BLDD', 'ITUD', 'ARGN', 'INNB', 'IUTN', 'WCDN', 'CCDN', 'PEGN', 'LCFC', 'WKSN', 'CDPD', 'HYPD', 'SHPD', 'SHPN','BLDD', 'ITUD', 'ARGN', 'INNB', 'IUTN', 'WCDN', 'CCDN', 'PEGN', 'LCFC', 'WKSN', 'CDPD', 'HYPD', 'SHPD', 'SHPN','BLDD', 'ITUD', 'ARGN', 'INNB', 'IUTN', 'WCDN', 'CCDN', 'PEGN', 'LCFC', 'WKSN', 'CDPD', 'HYPD', 'SHPD', 'SHPN'];
             for (var i = 0, len = axisData.length; i < len; i++) {
                 data_bar1.push(Math.floor(Math.random() * 700)+150);
-                data_bar2.push(-Math.floor(Math.random() * 400));
+                data_bar2.push(-Math.floor(Math.random() * 10));
             }
             //图表数据 
             var mydata = {
@@ -332,7 +311,7 @@ define(['echarts','echarts/chart/pie','echarts/chart/bar'],
                     formatter: function (params, ticket, callback) {
                         var result = params[0][1] + '<br>';
                         result += params[2][0] + '：' + params[2][2] + '<br>';//第一个bar的数据
-                        result += params[1][0] + '：' + Math.abs(params[1][2]) + '<br>';//第二个bar的数据
+                        result += params[1][0] + '：' + Math.abs(params[1][2]/10) + '<br>';//第二个bar的数据
                         return result;
                     },
                     //'{b}'+'<br>{a}：'+'{c}'+'<br>{a1}：'+'{c1}',
@@ -386,7 +365,13 @@ define(['echarts','echarts/chart/pie','echarts/chart/bar'],
                     type: 'value',
                     'axisTick': { show: true, length:3,inside:true,lineStyle:{color: 'rgba(255,255,255,0.35)', width: 1, type: 'solid' } },
                     'axisLine': { lineStyle: { color: 'rgba(255,255,255,0.35)', width: 1, type: 'solid' } },
-                    'axisLabel': { 'textStyle': { color: 'rgba(255,255,255,0.6)' }, 'formatter': function (value) { return Math.abs(value); } },
+                    'axisLabel': { 'textStyle': { color: 'rgba(255,255,255,0.6)' }, 'formatter': function (value) {
+                            var val = value;
+                            if(val<0){
+                                val = Math.abs(val/10);
+                            }
+                            return val;
+                        }},
                     'nameTextStyle': { color: '#E2F3F6' },
                     'splitLine': { lineStyle: { color: 'rgba(255,255,255,0.1)',type: 'dashed' } }
                 }
@@ -427,7 +412,7 @@ define(['echarts','echarts/chart/pie','echarts/chart/bar'],
                                     fontFamily: '微软雅黑',
                                     color: 'rgba(255,255,255,0.6)'
                                 },
-                                formatter: function (a, b, c, d) { return Math.abs(c) > 0 ? (Math.abs(c)) : ''; }
+                                formatter: function (a, b, c, d) { return Math.abs(c/10) > 0 ? (Math.abs(c/10)) : ''; }
                             }
                         }
                     },
@@ -452,11 +437,12 @@ define(['echarts','echarts/chart/pie','echarts/chart/bar'],
             };
             option.xAxis[0].data = mydata.xAxis;
             option.series[0].data = mydata.series_bar_1;
-            option.series[1].data = mydata.series_bar_2;
             var data_bar3 = [];
-            for (var i = 0, len = mydata.xAxis.length; i < len; i++) {
+            for (var i = 0, len = mydata.series_bar_2.length; i < len; i++) {
+                mydata.series_bar_2[i]=mydata.series_bar_2[i]*10;
                 data_bar3.push(0);//此bar数据只是为显示效果，设置为0即可
             }
+            option.series[1].data = mydata.series_bar_2;
             option.series[2].data = data_bar3;
             this.option = option;
             this.loadStatus = true;
@@ -470,7 +456,7 @@ define(['echarts','echarts/chart/pie','echarts/chart/bar'],
             axisData = ['08-29', '08-30', '08-31', '09-01', '09-02', '09-03', '09-04', '09-05', '09-06', '09-07', '09-08', '09-09', '09-10', '09-11', '09-12', '09-13', '09-14', '09-15', '09-16', '09-17', '09-18', '09-19', '09-20', '09-21', '09-22', '09-23', '09-24', '09-25', '09-26', '09-27', '09-28'];
             for (var i = 0, len = axisData.length; i < len; i++) {
                 data_bar1.push(Math.floor(Math.random() * 700) + 150);
-                data_bar2.push(-Math.floor(Math.random() * 400));
+                data_bar2.push(-Math.floor(Math.random() * 10));
             }
             //图表数据 
             var mydata = {

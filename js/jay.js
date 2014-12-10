@@ -529,7 +529,10 @@ var popLayoutfns = {
 		
 		if ($target.data("states") == "show") {
 			//如果pop层是显示状态，那么触发已经显示的事件，然后不执行后面的动画动作。
-			$target.trigger("side_showe",[opts.direction,$targetInnerDOM]);
+			var ifhasChat = $targetInnerDOM.find("#chats");
+			ifhasChat.appendTo("#chatTemplate");
+			
+			$target.trigger("side_showed",[opts.direction,$targetInnerDOM]);
 			return ;
 		}
 		if ($otherTarget.data("states") == "show") {
@@ -551,7 +554,9 @@ var popLayoutfns = {
 		
 		$target.addClass(opts.helpClass_showing).on(animateEnd("sidepop"),function(e) {
 			//fn
-			$target.trigger("side_showe",[opts.direction,$targetInnerDOM]).data("states","show");
+			
+			$(".container").data("onepage_scroll").unbindEvents();
+			$target.trigger("side_showed",[opts.direction,$targetInnerDOM]).data("states","show");
 			if(opts.blur===true) {$blurTarget.addClass(opts.filterClassBlur.replace(".",""));}
 			
 			if ($mask.data("states") != "show") {
@@ -604,6 +609,10 @@ var popLayoutfns = {
 		//执行隐藏动作
 		$target.addClass(opts.helpClass_hidding).on(animateEnd("sidepophide"),function(e) {
 			//fn
+			//是否包含Chat组件
+			var ifhasChat = $target.find("#chats");
+			if (ifhasChat.length) {ifhasChat.appendTo("#chatTemplate");}
+			
 			$target.trigger("side_hide",[opts.direction,$targetInnerDOM]).data("states","hide");
 			$targetInnerDOM.children().remove();
 			if(opts.blur===true) {$blurTarget.removeClass(opts.filterClassBlur.replace(".",""))}
@@ -618,6 +627,10 @@ var popLayoutfns = {
 			$target.removeClass(opts.helpClass_showed + " " +opts.helpClass_hidding).off(".sidepophide");
 		});
 		
+		//如果内容区域是显示的，那么重新绑定事件
+		if ( !($(".app_container").hasClass("hide")) ) {
+			$(".container").data("onepage_scroll").bindEvents();
+		}
 	}
 }
 
@@ -625,6 +638,12 @@ function testload() {
 	//这个是测试直接加载页面的demo
 	page_modules.loadinto("moduleHtml/Audit_Odm.html", ".AuditBlck" ,"pagebgc-2","audit_odm")
 }
+
+function initChat() {
+	$("#chats").load("moduleHtml/UserCenter-Comment.html .EcR-box")
+}
+
+
  
 //INIT FUNCTIONS
 function jayfunction() {
@@ -650,6 +669,8 @@ function jayfunction() {
 	sidebaract("#sidebar");
 	//PAGE_LOAD
 	page_modules.init_modules_action();
+	//加载Chat
+	initChat();
 	//init pageside cache html
 		
 	
@@ -678,14 +699,24 @@ function jayfunction() {
 	
 	$(".ctrBtns").on("tap",".ctr_1", function() {
 		popLayoutfns.popshow();
-	}).on("tap", ".ctr_2",function() {
+	}).on("tap", ".ctr_7",function() {
 		//---
+		/*var $this = $(this);
+		if ($this.data("chat") == "true") {return;}*/
+		$doc.on("side_showed.chat", function(e,k,tar) {
+			tar.append($("#chats"));
+			$doc.off(".chat")
+		});
+		popLayoutfns.popshow({
+			direction:"right"
+		});
+		
 	}).on("tap", ".ctr_4",function() {
 		popLayoutfns.popshow({
 			direction:"top"
 		});
 		
-		$doc.on("side_showe.peo_4_s", function(e,k,tar) {
+		$doc.on("side_showed.peo_4_s", function(e,k,tar) {
 			if (k == "top") {
 				console.log(k,tar)
 				tar.load("moduleHtml/UserCenter-1.html .userMsg", function() {

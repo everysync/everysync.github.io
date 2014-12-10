@@ -67,7 +67,6 @@
 	<link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
 	<link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
 	<link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
-	<script type="text/javascript" src="cordova.js"></script>
 	<script src="js/prefixfree.min.js"></script>
 </head>
 <body>
@@ -287,7 +286,13 @@
 			<div class="topChartContainer home">
 				<div id="chart_fai_pie"></div>
 			</div>
-			<div id="chart_fai_bar"></div>
+			<div class="topRChartContainer">
+				<div class="passFailResult chartSplit">
+		            <img src="svg/icon-right.svg"/><span>96</span>
+		            <img src="svg/icon-fail.svg"/><span>15</span>
+		        </div>
+				<div id="chart_fai_bar"></div>
+			</div>
 			<div class="botChartContainer">
 				<div class="botChartContainerInner" id="svgwrap">
 					
@@ -431,6 +436,9 @@
 	</div>
 </div>
 
+<!--chat element-->
+<div id="chatTemplate"><div id="chats"></div></div>
+<!--pop element-->
 <div class="pop_mask" data-states="hide"></div>
 <div class="pop_right_element" data-states="hide">
 	<div id="pr_inner"></div>

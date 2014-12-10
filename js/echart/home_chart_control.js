@@ -53,22 +53,24 @@ define(function(){
 				bar = new LvFai('chart_fai_bar','bar');
 		chartObj['p5'].push(pie, bar);
 		var $maptar = $("#worldmapsvg");
-    function refreshData(areaName){//切换区域后执行刷新图表
-    	if(pie.areaName == areaName){
-    		return false;
-    	}
-      pie.areaName = areaName;
-      pie.getChartData(1);
-      bar.areaName = areaName;
-      bar.getChartData(1);
-    }
-    $maptar.on({
-      "AG":function() {refreshData("AG");},
-      "EMEA":function() {refreshData("EMEA");},
-      "PRC":function() {refreshData("PRC");},
-      "EAP":function() {refreshData("EAP");},
-      "MAP":function() {refreshData("MAP");}
-    });
+	    $(".passFailResult span").eq(0).text(93);
+		$(".passFailResult span").eq(1).text(15);
+		function refreshData(areaName){//切换区域后执行刷新图表
+	    	if(bar.areaName == areaName){
+	    		return false;
+	    	}
+		    bar.areaName = areaName;
+		    //获取新的数据
+		    $(".passFailResult span").eq(0).text(85+Math.floor(Math.random()*15));
+			$(".passFailResult span").eq(1).text(Math.floor(Math.random()*15));
+	    }
+	    $maptar.on({
+	      "AG":function() {refreshData("AG");},
+	      "EMEA":function() {refreshData("EMEA");},
+	      "PRC":function() {refreshData("PRC");},
+	      "EAP":function() {refreshData("EAP");},
+	      "MAP":function() {refreshData("MAP");}
+	    });
 	});
 	
 	function disposeChart(index){//清除chart实例，减小内存使用
