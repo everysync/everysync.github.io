@@ -8,6 +8,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
             MyChart.call(this, lvChart.echarts, lvChart.ecConfig, container, {}, 0, 0);
             this.chartType = chartType;
             this.factoryName = 'LENOVO';
+            this.fbyType = 0;
             this.letter = 'A';
             this.chartMp = 0;
             this.chartData = null;
@@ -26,7 +27,6 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
             }
         };
         LvFpyOob.prototype.bindEvents = function () {//绑定相关事件
-            console.log(this.chart);
             var self = this;
             switch(this.chartType){
                 case "timeLine":
@@ -79,7 +79,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                             }
                         },
                         tooltip : {'trigger':'axis','axisPointer':{'type':'none'}},
-                        color:['#B7E1EA','#FFF100','#E2F3F6','rgba(255,255,255,0.3)'],
+                        color:["rgba(64,241,248,1)",'rgba(255, 241, 0, 1)','rgba(255,255,252,0.7)','rgba(255, 241, 0, 0.7)'],
                         legend : {
                             x:'right',
                             y:120,
@@ -319,7 +319,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                             }
                         },
                         tooltip : {'trigger':'axis','axisPointer':{'type':'none'}},
-                        color:['#B7E1EA','#FFF100','#E2F3F6','rgba(255,255,255,0.3)'],
+                        color:["rgba(64,241,248,1)",'rgba(255, 241, 0, 1)','rgba(255,255,252,0.7)','rgba(255, 241, 0, 0.7)'],
                         legend : {
                             x:'right',
                             y:100,
@@ -534,12 +534,11 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
         };
 
         LvFpyOob.prototype._setOptionLine = function(mydata){
-            var line;   
             var self = this;
-            require(["chart_line"],function(chartline){            
-                   self.line = chartline;                  
-                   self.line.init();
-            });
+            // require(["chart_line"],function(chartline){            
+            //        self.line = chartline;                  
+            //        self.line.init();
+            // });
             var option = {
                 color:["#fff"],
                 title : {
@@ -549,32 +548,19 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                 tooltip : {
                     trigger: 'axis',
                     backgroundColor:'rgba(0,0,0,0)',
-                    axisPointer:{
-                        type : 'none',
-                        lineStyle : {
-                          color: '#fff',
-                          width: 2,
-                          type: 'solid'
-                        },
-                        crossStyle : {
-                          color: '#fff',
-                          width: 2,
-                          type: 'solid'
-                        }
-                    },
-                    showDelay:'0',
+                    axisPointer:{type : 'none'},
+                    showContent:false,
+                    showDelay:20,
                     position : function(p) {
                         // 位置回调
-                        
                     },
                     formatter:function(params,ticket,callback){
-                       // console.log(params);
-                       // console.log(self.chart.component.xAxis.getAxis(0).getCoord(params[0][1]));
-                        //console.log(self.chart.component.yAxis.getAxis(0).getCoord(params[0][2]));
-                        //$(".map_tips").html(params[5].name+':'+params[5].value);
-                        // console.log(self.line);
-                        var h = $('#chart_fpy_Line').height()-self.chart.component.yAxis.getAxis(0).getCoord(params[0][2])-30;
-                        self.line.draw(self.chart.component.xAxis.getAxis(0).getCoord(params[0][1]),self.chart.component.yAxis.getAxis(0).getCoord(params[0][2]), h)
+                        self.refreshPointData(self.chart.component.xAxis.getAxis(0).getIndexByName(params[0][1]));
+                        self.chart.delMarkLine(0,'标线1');
+                        self.chart.addMarkLine(0,{data :[[{name: '标线1', xAxis: params[0][1], yAxis: 0}, 
+        {xAxis: params[0][1], yAxis: params[0][2]}]]});
+                        // var h = $('#chart_fpy_Line').height()-self.chart.component.yAxis.getAxis(0).getCoord(params[0][2])-60;
+                        // self.line.draw(self.chart.component.xAxis.getAxis(0).getCoord(params[0][1]),self.chart.component.yAxis.getAxis(0).getCoord(params[0][2]), h)
                         return '';
                     }
                 },
@@ -596,9 +582,9 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                 calculable : false,
                 grid : {
                     'x':70,
-                    'x2':30,
+                    'x2':50,
                     'y':30,
-                    'y2':30,
+                    'y2':60,
                     borderWidth:0
                 },
                 xAxis : [
@@ -607,7 +593,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                         boundaryGap : false,
                         'axisLabel':{show : false,'interval':0,'textStyle':{color: '#E2F3F6'}},
                         'axisLine':{lineStyle:{color: '#076377', width: 1, type: 'solid'}},
-                        'axisTick':{show : true,inside:true,length:10,lineStyle:{color: 'rgba(255,255,255,0.4)', width: 1, type: 'solid'}},
+                        'axisTick':{show : false,inside:true,length:10,lineStyle:{color: 'rgba(255,255,255,0.4)', width: 1, type: 'solid'}},
                         'splitLine':{show : false},
                         data : []
                     }
@@ -642,7 +628,26 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                         markPoint : {
                             symbolSize: 6,
                             data : []
-                        }
+                        },
+                        markLine : {
+                            symbol: ['none', 'circle'],
+                            symbolSize: [0, 6],
+                            itemStyle: 　{
+                                normal: {
+                                    label:{show:false},
+                                    lineStyle:{color: 'rgba(255,255,255,0.35)', width: 2, type: 'solid'},
+                                },
+                                emphasis: {
+                                    label:{show:false}
+                                }
+                            },
+                            data : [
+                                [
+                                    {name: '标线1', xAxis: mydata[1].ProductId, yAxis: 0}, 
+                                    {xAxis: mydata[1].ProductId, yAxis: mydata[1].fpyNumber}
+                                ]
+                            ]
+                        } 
                     }
                 ]
             }; 
@@ -650,6 +655,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
             for (var i = 0,len=mydata.length; i < len; i++) {
                 option.xAxis[0].data.push(mydata[i].ProductId);
                 option.series[0].data.push(mydata[i].fpyNumber);
+                //判断系列首字母
                 if(mydata[i].ProductName.indexOf(self.letter) == 0){
                     option.series[0].markPoint.data.push({name: '标注'+self.chartMp, xAxis: mydata[i].ProductId, yAxis: 0});
                     self.chartMp++;
@@ -657,180 +663,76 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
             };   
             this.option = option;
             this.loadStatus = true;
+            self.refreshPointData(1);
             return option;
         };
         LvFpyOob.prototype.getChartDataLine = function(drawFlag){
             var self = this;
-            self.chartData = [
-                  {
-                     "ProductId": "10100122",
-                     "ProductName": "H520s",
-                     "Mfg": "Compal Brazil",
-                     "Phase": "2014-09-16",
-                     "SS": "2014-09-03",
-                     "InputQty": "2014-09-24",
-                     "TOP1": "90.2",
-                     "TOP2": "93.2",
-                     "fpystatus": "down",
-                     "fpyNumber": "47",
-                     "oobstatus": "up"
-                  },{
-                     "ProductId": "10100123",
-                     "ProductName": "A520s",
-                     "Mfg": "Compal Brazil",
-                     "Phase": "2014-09-16",
-                     "SS": "2014-09-03",
-                     "InputQty": "2014-09-24",
-                     "TOP1": "90.2",
-                     "TOP2": "93.2",
-                     "fpystatus": "down",
-                     "fpyNumber": "54",
-                     "oobstatus": "up"
-                  },{
-                     "ProductId": "1010012114",
-                     "ProductName": "H520s",
-                     "Mfg": "Compal Brazil",
-                     "Phase": "2014-09-16",
-                     "SS": "2014-09-03",
-                     "InputQty": "2014-09-24",
-                     "TOP1": "90.2",
-                     "TOP2": "93.2",
-                     "fpystatus": "down",
-                     "fpyNumber": "58",
-                     "oobstatus": "up"
-                  },{
-                     "ProductId": "10100125",
-                     "ProductName": "H520s",
-                     "Mfg": "Compal Brazil",
-                     "Phase": "2014-09-16",
-                     "SS": "2014-09-03",
-                     "InputQty": "2014-09-24",
-                     "TOP1": "90.2",
-                     "TOP2": "93.2",
-                     "fpystatus": "down",
-                     "fpyNumber": "92",
-                     "oobstatus": "up"
-                  },{
-                     "ProductId": "10100126",
-                     "ProductName": "H520s",
-                     "Mfg": "Compal Brazil",
-                     "Phase": "2014-09-16",
-                     "SS": "2014-09-03",
-                     "InputQty": "2014-09-24",
-                     "TOP1": "90.2",
-                     "TOP2": "93.2",
-                     "fpystatus": "down",
-                     "fpyNumber": "92",
-                     "oobstatus": "up"
-                  },{
-                     "ProductId": "10100127",
-                     "ProductName": "H520s",
-                     "Mfg": "Compal Brazil",
-                     "Phase": "2014-09-16",
-                     "SS": "2014-09-03",
-                     "InputQty": "2014-09-24",
-                     "TOP1": "90.2",
-                     "TOP2": "93.2",
-                     "fpystatus": "down",
-                     "fpyNumber": "95",
-                     "oobstatus": "up"
-                  },{
-                     "ProductId": "10100128",
-                     "ProductName": "H520s",
-                     "Mfg": "Compal Brazil",
-                     "Phase": "2014-09-16",
-                     "SS": "2014-09-03",
-                     "InputQty": "2014-09-24",
-                     "TOP1": "90.2",
-                     "TOP2": "93.2",
-                     "fpystatus": "down",
-                     "fpyNumber": "93",
-                     "oobstatus": "up"
-                  },{
-                     "ProductId": "10100129",
-                     "ProductName": "H520s",
-                     "Mfg": "Compal Brazil",
-                     "Phase": "2014-09-16",
-                     "SS": "2014-09-03",
-                     "InputQty": "2014-09-24",
-                     "TOP1": "90.2",
-                     "TOP2": "93.2",
-                     "fpystatus": "down",
-                     "fpyNumber": "90",
-                     "oobstatus": "up"
-                  },{
-                     "ProductId": "10100130",
-                     "ProductName": "H520s",
-                     "Mfg": "Compal Brazil",
-                     "Phase": "2014-09-16",
-                     "SS": "2014-09-03",
-                     "InputQty": "2014-09-24",
-                     "TOP1": "90.2",
-                     "TOP2": "93.2",
-                     "fpystatus": "down",
-                     "fpyNumber": "70",
-                     "oobstatus": "up"
-                  },{
-                     "ProductId": "10100131",
-                     "ProductName": "H520s",
-                     "Mfg": "Compal Brazil",
-                     "Phase": "2014-09-16",
-                     "SS": "2014-09-03",
-                     "InputQty": "2014-09-24",
-                     "TOP1": "90.2",
-                     "TOP2": "93.2",
-                     "fpystatus": "down",
-                     "fpyNumber": "68",
-                     "oobstatus": "up"
-                  },{
-                     "ProductId": "10100132",
-                     "ProductName": "H520s",
-                     "Mfg": "Compal Brazil",
-                     "Phase": "2014-09-16",
-                     "SS": "2014-09-03",
-                     "InputQty": "2014-09-24",
-                     "TOP1": "90.2",
-                     "TOP2": "93.2",
-                     "fpystatus": "down",
-                     "fpyNumber": "61",
-                     "oobstatus": "up"
-                  },{
-                     "ProductId": "10100133",
-                     "ProductName": "H520s",
-                     "Mfg": "Compal Brazil",
-                     "Phase": "2014-09-16",
-                     "SS": "2014-09-03",
-                     "InputQty": "2014-09-24",
-                     "TOP1": "90.2",
-                     "TOP2": "93.2",
-                     "fpystatus": "down",
-                     "fpyNumber": "58",
-                     "oobstatus": "up"
-                  },{
-                     "ProductId": "10100134",
-                     "ProductName": "Z520s",
-                     "Mfg": "Compal Brazil",
-                     "Phase": "2014-09-16",
-                     "SS": "2014-09-03",
-                     "InputQty": "2014-09-24",
-                     "TOP1": "90.2",
-                     "TOP2": "93.2",
-                     "fpystatus": "down",
-                     "fpyNumber": "52",
-                     "oobstatus": "up"
-                  }
-               ];
+            console.log(self);
+            // $.ajax({
+            //     type: "get",
+            //     url: "jsonpcallback/jsonpcallback_fpyoob.js",
+            //     dataType: "jsonp",
+            //     jsonpCallback:"fpyoob"
+            // }).done(function(data) {
+            //     self.chartData = data;
+            //     self._setOptionLine(self.chartData);
+            //     drawFlag&&self.resetOption();
+            // });
+            var svt = [],
+                sovp = [],
+                ramp = [];
+            for (var i = 0; i < 30; i++) {
+                svt.push({
+                    "ProductId": 'P'+(10100+i),
+                    "ProductName": "C520s",
+                    "Mfg": "Compal Brazil",
+                    "Phase": "SVT",
+                    "SS": "2014-09-03",
+                    "InputQty": "2014-09-24",
+                    "TOP1": 80+Math.floor(Math.random()*18),
+                    "TOP2": 80+Math.floor(Math.random()*18),
+                    "fpystatus": "down",
+                    "fpyNumber": 50+Math.floor(Math.random()*10),
+                    "oobNumber": 50+Math.floor(Math.random()*10),
+                    "oobstatus": "up"
+                });
+                sovp.push({
+                    "ProductId": 'P'+(10130+i),
+                    "ProductName": "H520s",
+                    "Mfg": "Compal Brazil",
+                    "Phase": "SOVP",
+                    "SS": "2014-09-03",
+                    "InputQty": "2014-09-24",
+                    "TOP1": 80+Math.floor(Math.random()*18),
+                    "TOP2": 80+Math.floor(Math.random()*18),
+                    "fpystatus": "down",
+                    "fpyNumber": 80+Math.floor(Math.random()*18),
+                    "oobNumber": 80+Math.floor(Math.random()*18),
+                    "oobstatus": "up"
+                });
+                ramp.push({
+                    "ProductId":'P'+(10160+i),
+                    "ProductName": "Y520s",
+                    "Mfg": "Compal Brazil",
+                    "Phase": "RAMP",
+                    "SS": "2014-09-03",
+                    "InputQty": "2014-09-24",
+                    "TOP1": 80+Math.floor(Math.random()*18),
+                    "TOP2": 80+Math.floor(Math.random()*18),
+                    "fpystatus": "down",
+                    "fpyNumber": 50+Math.floor(Math.random()*10),
+                    "oobNumber": 50+Math.floor(Math.random()*10),
+                    "oobstatus": "up"
+                });
+            };
+            self.chartData = svt.concat(sovp,ramp);
             self._setOptionLine(self.chartData);
             drawFlag&&self.resetOption();
         };
+        //刷新图表底部的系列标记点
         LvFpyOob.prototype.refreshChartMarkPoint = function(){
             var self = this;
-            // self.chart.addData([[ 0,        // 系列索引
-            // Math.round(Math.random() * 1000), // 新增数据
-            // true,     // 新增数据是否从队列头部插入
-            // false]]);
-            //self.chart.addMarkPoint(0,);
-             console.log(self.chartMp);
             for(var i=0;i<self.chartMp;i++){
                 self.chart.delMarkPoint(0,'标注'+i);
             }
@@ -845,9 +747,47 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
             if(mdata.length > 0){
                 self.chart.addMarkPoint(0,{data :mdata});
             }
-            console.log(self.chartMp);
+        };
+        //刷新图表的标记线
+        LvFpyOob.prototype.refreshChartMarkLine = function(){
+            self.chart.delMarkLine(0,'标线1');
+            mdata.push({name: '标注'+self.chartMp, xAxis: self.chartData[i].ProductId, yAxis: 0});
+        };
+
+        //刷新上部的点的信息
+        LvFpyOob.prototype.refreshPointData = function(idx){
+            var self = this;
+            var colorCls = {SVT:'pagebgc-2',SOVP:'pagebgc-3',RAMP:'pagebgc-4'};
+            $('#fpyoob_proInfo').html(
+                '<h2 class="ebtd_h2">Product: <span>'+self.chartData[idx].ProductName+'</span></h2>'+
+                '<h3 class="ebtd_h3">'+
+                '    <span class="ebtd_down"><i class="ficon-icon_arrow_down"></i><em>'+self.chartData[idx].fpyNumber+'</em><b>%FPY</b></span>'+
+                '    <span class="ebtd_up"><i class="ficon-icon_arrow_up"></i><em>'+self.chartData[idx].oobNumber+'</em><b>%OOB</b></span>'+
+                '</h3>'+
+                '<div class="ebtd_table">'+
+                '    <div class="row">'+
+                '        <div class="cell-th">MFG</div><div class="cell-td">'+self.chartData[idx].Mfg+'</div>'+
+                '        <div class="cell-th">Phase</div><div class="cell-td">'+self.chartData[idx].Phase+'</div>'+
+                '    </div>'+
+                '    <div class="row">'+
+                '        <div class="cell-th">SS</div><div class="cell-td">'+self.chartData[idx].SS+'</div>'+
+                '        <div class="cell-th">Input Q\'ty</div><div class="cell-td">'+self.chartData[idx].InputQty+'</div>'+
+                '    </div>'+
+                '    <div class="row">'+
+                '        <div class="cell-th">TOP1</div><div class="cell-td" colspan="3">'+self.chartData[idx].TOP1+'</div>'+
+                '    </div>'+
+                '    <div class="row">'+
+                '        <div class="cell-th">TOP2</div><div class="cell-td" colspan="3">'+self.chartData[idx].TOP2+'</div>'+
+                '    </div>'+
+                '</div>'
+            );
+            if(self.chartData[idx].Phase != $("#fpy_module_name").text()){
+                $("#fpy_module_name").text(self.chartData[idx].Phase);
+            }
+            if(!$(".demopagec-2").hasClass(colorCls[self.chartData[idx].Phase])){
+                $(".demopagec-2").attr('class','eachBlck demopagec-2 '+colorCls[self.chartData[idx].Phase]+' section active');
+            }
         };
         return LvFpyOob;
     }
 );
-     

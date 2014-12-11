@@ -13,11 +13,11 @@ define(function() {
 
 		// var locx = randRange(50, 100);
 		var circle = new createjs.Shape();
-		circle.graphics.beginFill("white").drawCircle(0, 0, 3);
+		circle.graphics.beginFill("white").drawCircle(0, 0, 6);
 		//Set position of Shape instance.           
 		//Add Shape instance to stage display list.
 		var line = new createjs.Shape();
-		line.graphics.beginFill("white").rect(0, 0, 1, h);
+		line.graphics.beginFill("rgba(255,255,255,0.35)").rect(0, 0, 2, h);
 		// line.x = line.y = locx;
 		circle.x = line.x = locx;
 		circle.y = line.y = locy;

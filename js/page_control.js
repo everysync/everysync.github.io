@@ -57,7 +57,8 @@ define('page_control',[],function(){
 
 define('page_audit',[],function() {
 	function init() {
-		
+		var inputNumsK = 0;
+		var inputWrapK = 0;
 		var audit_create = function() {
 			var allinputWrap = $(".qsitem_ckb");
 			var allinput = allinputWrap.find("input");
@@ -75,7 +76,8 @@ define('page_audit',[],function() {
 
 			allinputWrap.each(function(index,element) {
 				if ($(this).data("created") === true) {return;}
-				this.setAttribute("id", "inputWrap"+index);
+				inputWrapK = inputWrapK +1
+				this.setAttribute("id", "inputWrap"+inputWrapK);
 				allinputWrap.find('input:eq(0)').attr("qusType","yes");
 				allinputWrap.find('input:eq(1)').attr("qusType","no");
 				$(this).data("created", true);
@@ -84,10 +86,11 @@ define('page_audit',[],function() {
 			allinput.each(function(index,element) {
 				var $this = $(this);
 				if ($this.data("created") === true) {return;}
+				inputNumsK = inputNumsK + 1
 				var $parent = $this.parent();
 				var attrName = $parent[0].getAttribute('id');
 				this.setAttribute("name",attrName);
-				this.setAttribute("id", "inputs"+index);
+				this.setAttribute("id", "inputs"+inputNumsK);
 				$this.wrap('<label for="'+$this[0].getAttribute("id")+'"></label>');
 				$this.after('<span class="radioBoxStates"></span>');
 				$this.data("created",true);

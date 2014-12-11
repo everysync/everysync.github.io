@@ -631,6 +631,26 @@ var popLayoutfns = {
 		if ( !($(".app_container").hasClass("hide")) ) {
 			$(".container").data("onepage_scroll").bindEvents();
 		}
+	},
+	maskhide:function(opt) {
+		var default_opt = popLayoutfns.popOptions();
+		var opts = $.extend({},default_opt,opt);
+		var $mask = popLayoutfns.$selectors.popmask;
+		$mask.addClass(opts.helpClass_hidding).on(animateEnd("popmask"), function() {
+			$mask.data("states","hide");
+			$mask.removeClass(opts.helpClass_showed + " " +opts.helpClass_hidding).off(".popmask");
+		});	
+	},
+	maskshow:function(opt) {
+		var default_opt = popLayoutfns.popOptions();
+		var opts = $.extend({},default_opt,opt);
+		var $mask = popLayoutfns.$selectors.popmask;
+		if ($mask.data("states") != "show") {
+			$mask.addClass(opts.helpClass_showing).on(animateEnd("popmask"), function() {
+				$mask.data("states","show");
+				$mask.removeClass(opts.helpClass_showing).addClass(opts.helpClass_showed).off(".popmask");
+			});	
+		}
 	}
 }
 
@@ -651,6 +671,8 @@ function jayfunction() {
 	$doc =$(document);
 	$body=$("body");
 	$html=$("html");
+	//push to window
+	window.w_popLayoutfns = popLayoutfns;
 	//Building_layouts
 	buildLayout();
 	//SWITCH

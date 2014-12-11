@@ -27,16 +27,32 @@ define(function(){
 			var $center = $('#center-nav-1');
 			$this.addClass("cur").siblings().removeClass('cur');
 			line.factoryName = $(this).text();
-			line.getChartData(1);
+			var tidx = Number($this.index()+1);
+			var ciiconCur = $('.center-nav .ci-'+tidx+' .ciicons.cur');
+			if(ciiconCur.length>0){
+				line.fbyType = ciiconCur.index()+1;
+			}else{
+				line.fbyType = 0;
+			}
 			//切换中间center-nav
 			$center.removeClass("show-1 show-2");
-			console.log('show-'+Number($this.index()+1))
-			$center.addClass( 'show-'+Number($this.index()+1) );
+			console.log('show-'+tidx)
+			$center.addClass( 'show-'+tidx);
+			line.getChartData(1);
+		});
+		$(".center-item").on('tap','.ciicons:not(.cur)',function(){//
+			var $this = $(this);
+			$this.addClass("cur").siblings().removeClass('cur');
+			line.fbyType = $(this).index()+1;
+			line.getChartData(1);
+		}).on('tap','.ciicons.cur',function(){//取消选择 
+			$(this).removeClass('cur');
+			line.fbyType = 0;
+			line.getChartData(1);
 		});
 		$(".chartFilter").on('tap','.ccs:not(.cur)',function(){//切换字母后执行刷新图表
 			$(this).addClass("cur").siblings().removeClass('cur');
 			line.letter = $(this).text();
-			//line.getChartData(1);
 			line.refreshChartMarkPoint();
 		});
 	});

@@ -337,9 +337,9 @@ define(['echarts','echarts/chart/map'],
                     '   <p>H520s Enginneering related yuanjqH520s</p>'+
                     '   <p>related Enginneering related related</p>'+
                     '</div>'+
-					'<div class="map_dialog_cls_btn"></div>').attr('class','map_tips map_tips_red');
+					'<div class="map_dialog_cls_btn"></div>').attr('class','map_tips map_tips_red').data('compname',currname);
             }else{
-                $(".map_tips").html(v.data.listName+'<div class="map_dialog_cls_btn"></div>').attr('class','map_tips');
+                $(".map_tips").html(v.data.listName+'<div class="map_dialog_cls_btn"></div>').attr('class','map_tips').data('compname',currname);
             }
             if(v.data.color == 's2'){
                 $(".map_tips").attr('class','map_tips map_tips_red map_tips_yellow');
@@ -347,10 +347,6 @@ define(['echarts','echarts/chart/map'],
             $(".map_tips").animate({'top':v.pos.y-$(".map_tips").outerHeight()-10+'px','left':v.pos.x-parseInt($(".map_tips").outerWidth()/2)+46+'px'}, 120, function() {
                 $(".map_tips").show();
             });
-			$(".map_tips").on("click.cltbtn", ".map_dialog_cls_btn", function(e) {
-				$(".map_tips").hide();
-				$(".swiper-slide-click-active").removeClass("swiper-slide-click-active");
-			});
             v = null;
             return false;
         };
@@ -360,6 +356,17 @@ define(['echarts','echarts/chart/map'],
         };
         LvMap.prototype.bindEvents = function () {//绑定相关事件
             var self = this;
+            $(".map_tips").on("tap.cltbtn", ".map_dialog_cls_btn", function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                $(".map_tips").hide();
+                $(".swiper-slide-click-active").removeClass("swiper-slide-click-active");
+            });
+            $(".map_tips").on("tap", function(e) {
+                page_modules.params = {compname:$(this).data('compname')};
+                console.log(page_modules.params);
+                page_modules.loadinto("moduleHtml/Qstop_In.html", ".eachBlck" ,"pagebgc-1","qstop_in");
+            });
             this.chart.on(lvChart.ecConfig.EVENT.CLICK, function(param){
                 if(param.seriesIndex > 0){
                     $(".mapDataDetail").filter('[data-cname="'+param.name+'"]').trigger('click');//模拟右侧列表相应项被点击了
