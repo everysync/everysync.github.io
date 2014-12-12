@@ -1,0 +1,163 @@
+var lvChart = {
+    echarts:null,
+    ecConfig:null
+};
+
+function drawChart_line(container,mydata){
+    var option = {
+        color: ['#FF9080','#00BFB7', '#FFBB59', '#FFF100'],
+        title : {
+            text: '',
+            x:'right',
+            padding:60,
+            y:23,
+            subtext: 'IRCT',
+            subtextStyle :{color: '#E2F3F6'}
+        },
+        tooltip:{
+            show: true,
+            trigger: 'item'
+        },
+        dataZoom: {
+            show: true,
+            realtime: true,
+            backgroundColor:'rgba(61, 72, 82,0.5)',
+            dataBackgroundColor: 'rgba(90, 99, 107,1)',            
+            fillerColor: 'rgba(156, 161, 166,0.5)',
+            handleColor: 'rgba(249, 115, 96, 1)',
+            start: 5,
+            end: 83
+        },
+        grid: {
+            y: 80,
+            y2: 90,
+            borderWidth:0
+        },
+        legend: {
+            x: 'left',
+            textStyle:{color: '#B7E1EA',fontSize:14},
+            data: []
+        },
+        xAxis: [{
+            type: 'category',
+            'axisLabel':{'interval':0,'rotate':-45,'textStyle':{color: '#E2F3F6'}},
+            'axisLine':{lineStyle:{color: '#717980', width: 1, type: 'solid'}},
+            'axisTick':{show : true,lineStyle:{color: '#717980', width: 1, type: 'solid'}},
+            'splitLine':{show : false},
+            data: [],
+        }],
+        yAxis: [{
+            type: 'value',
+            'splitLine':{show : false},
+            'axisTick':{show : true,lineStyle:{color: '#717980', width: 1, type: 'solid'}},
+            'axisLine':{lineStyle:{color: '#717980', width: 1, type: 'solid'}},
+            'axisLabel':{'textStyle':{color: '#E2F3F6'}},
+            'nameTextStyle':{color: '#E2F3F6'}
+        }, {
+            type: 'value',
+            'splitLine':{show : false},
+            'axisTick':{show : true,lineStyle:{color: '#717980', width: 1, type: 'solid'}},
+            'axisLine':{lineStyle:{color: '#717980', width: 1, type: 'solid'}},
+            'axisLabel':{'textStyle':{color: '#E2F3F6'}},
+            'nameTextStyle':{color: '#E2F3F6'}
+        }],
+        series: [{
+                name: 'Open',
+                type: 'bar',
+                stack: 'sum',
+                barCategoryGap: '40%',
+                data: []
+            }, {
+                name: 'Monitor',
+                type: 'bar',
+                barCategoryGap: '40%',
+                stack: 'sum',
+                data: []
+            }, {
+                name: 'Close',
+                type: 'bar',
+                barCategoryGap: '40%',
+                stack: 'sum',
+                data: []
+            }, {
+                name: 'IRCT',
+                type: 'line',
+                data: [],
+                yAxisIndex: 1,
+                markLine: {
+                    symbol: 'none',
+                    itemStyle: {
+                        normal: {
+                            color: '#F97360',
+                            label: {
+                                show: false
+                            }
+                        }
+                    },
+                    data: [
+                        [{
+                            name: 'IRCT Target',
+                            value: mydata.target_value,
+                            xAxis: 0,
+                            yAxis: mydata.target_value
+                        }, // 当xAxis或yAxis为数值轴时，不管传入是什么，都被理解为数值后做空间位置换算
+                        {
+                            xAxis: mydata.xAxis.length-1,
+                            yAxis: mydata.target_value
+                        }]
+                    ]
+                }
+            }
+        ]
+    };
+    option.legend.data = mydata.legend;
+    // x轴
+    option.xAxis[0].data = mydata.xAxis;
+    option.series[0].name = mydata.series_bar_1.name;
+    option.series[0].data = mydata.series_bar_1.data;
+    option.series[1].name = mydata.series_bar_2.name;
+    option.series[1].data = mydata.series_bar_2.data;
+    option.series[2].name = mydata.series_bar_3.name;
+    option.series[2].data = mydata.series_bar_3.data;
+    option.series[3].name = mydata.series_line_1.name;
+    option.series[3].data = mydata.series_line_1.data;
+    return new MyChart(lvChart.echarts, lvChart.ecConfig, container, option, 0, 1);
+}
+
+$(function() {
+  function requireCallback(ec) {
+      lvChart.echarts = ec;
+      lvChart.ecConfig = require('echarts/config');
+      getChartData();
+  }
+  requireEcharts(0, requireCallback);
+});
+
+var chart_arr = [];
+function getChartData(){
+    if(lvChart.echarts == null){
+        return false;
+    }
+    var mydata1 =  {
+        legend:['Open', 'Monitor', 'Close','IRCT'],
+        xAxis:['TNID', 'CKSN', 'CKSD', 'WZSD', 'QSJD', 'BLDN', 'BJPD','SHPN', 'SHPD', 'HYPD', 'CDPD', 'WKSN', 'LCFC', 'PEGN','CCDN', 'WCDN', 'IUTN', 'INNB', 'WRGN', 'ITUD', 'BLDD'],
+        other_parm_data:['TNID1', 'CKSN2', 'CKSD3', 'WZSD4', 'QSJD5', 'BLDN6', 'BJPD7','SHPN8', 'SHPD9', 'HYPD10', 'CDPD11', 'WKSN12', 'LCFC13', 'PEGN14','CCDN15', 'WCDN16', 'IUTN17', 'INNB18', 'WRGN19', 'ITUD20', 'BLDD21'],//其他不可见参数
+        series_bar_1:{name:'Open',data:[1, 0, 0, 0, 0, 2, 2, 1, 0, 0, 0, 0, 0, 2, 1, 0, 0, 0, 0, 0, 2]},
+        series_bar_2:{name:'Monitor',data:[1, 0, 0, 2, 0, 0, 2, 1, 0, 0, 2, 0, 0, 2, 1, 0, 0, 2, 0, 0, 2]},
+        series_bar_3:{name:'Close',data:[5, 6, 4, 3, 4, 1.5, 5, 5, 6, 4, 3, 4, 1.5, 5, 5, 6, 4, 3, 4, 1.5, 5]},
+        series_line_1:{name:'IRCT',data:[12, 7, 8, 10, 6, 14, 12, 12, 7, 8, 10, 6, 14, 12, 12, 7, 8, 10, 6, 14, 12]},
+        series_pie_1:[
+            {name: 'Design',value: 15},
+            {name: 'Supplier',value: 30},
+            {name: 'MFG',value: 32},
+            {name: 'Engineering',value: 25}
+        ],
+        target_value:8
+    };
+    var myChart1 = drawChart_line('chartContainer',mydata1);
+    myChart1.loadingData();
+}
+
+
+
+                    

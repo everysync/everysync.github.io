@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- ------------------------------------------------------------------
+***********************************************************************
+开发人员书写规范:
+1.所有缩进都用 TAB， 而不是空格。
+2.非必要，禁止用行内样式例如 <div style="display:block"> 
+
+浏览器兼容：
+	IE10+
+	FireFox
+	Webkit内核浏览器:
+		Chrome,
+		Opear(WebKit版),
+		360浏览器(7.0+),
+		360急速浏览器,
+		搜狗浏览器,
+		115浏览器,
+		UC桌面浏览器,
+		枫树浏览器,
+		Safari 5.1+
+		Safari 7+ (Mac OS)
+注:由于国内IE6-7份额已经非常低，基本是测试人员跟一些非常旧的政府机构，所以不做兼容。
+***********************************************************************
+---------------------------------------------------------------------- -->
+	<!-- Basic Page Needs
+	================================================== -->
+	<meta charset="utf-8">
+	<title>EverySync</title>
+	<meta name="description" content="">
+	<meta name="author" content="JayChen">
+	<!-- 让IE浏览器用最高级内核渲染页面 还有用 Chrome 框架的页面用webkit 内核
+	================================================== -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<script src="../js/modernizr.custom.js"></script>
+	<script>
+		!Modernizr.csstransitions?window.location.href="../np.html":'';
+		if (!Modernizr.svg) {alert("\u5bf9\u4e0d\u8d77\uff0c\u60a8\u7684\u6d4f\u89c8\u5668\u4e0d\u652f\u6301\u0053\u0056\u0047\u683c\u5f0f\u56fe\u50cf\uff0c\u8bf7\u5347\u7ea7\u7248\u672c\uff0c\u5982\u679c\u8fd8\u662f\u51fa\u73b0\u8fd9\u4e2a\u63d0\u793a\uff0c\u90a3\u4e48\u8bf7\u6362\u4e2a\u6d4f\u89c8\u5668\uff0c\u5bf9\u60a8\u9020\u6210\u4e0d\u4fbf\u8bf7\u8c05\u89e3\u3002")}
+	</script>
+	<!-- IOS6全屏 Chrome高版本全屏
+	================================================== -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes"> 
+	<!-- 让360双核浏览器用webkit内核渲染页面
+	================================================== -->
+	<meta name="renderer" content="webkit">
+	<!-- Mobile Specific Metas
+	================================================== -->
+	<!-- !!!注意 minimal-ui 是IOS7.1的新属性，最小化浏览器UI，但是在iOS8.1突然被取消 -->
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- CSS
+	================================================== -->
+	<link href="../css/reset.css" rel="stylesheet" type="text/css">
+	<link href="../css/Bina.css" rel="stylesheet" type="text/css">
+	<link href="../css/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../css/mobiscroll.scroller.css">
+    <link href="../css/EC.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="../css/flat.css">
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="../favicon.ico" >
+	<!-- Android 主屏图标
+	================================================== -->	
+	<link rel="icon" sizes="196x196" href="../touch-icon.png">
+	<!-- IOS 主屏图标
+	================================================== -->
+	<link rel="apple-touch-icon" href="../touch-icon-iphone.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="../touch-icon-ipad.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="../touch-icon-iphone-retina.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="../touch-icon-ipad-retina.png">
+	<script src="../js/jquery-2.1.1.min.js"></script>
+	<script src="../js/tab_pick.js"></script>
+	<script src="../js/page_control_Audit_Create_demo.js"></script>
+    <script type="text/javascript">
+	//$(function() {
+//		require(["page_audit"], function(page) {
+//				page.init();
+//		});
+//	});
+	</script>
+	<style>
+		html,body {
+			height: 100%;
+		}
+	</style>
+</head>
+<body class="pagebgc-3">
+<div class="app_header">
+	<div class="sideBtn">
+		<div class="side_show_btn ficon-icon-6"></div>
+		<div class="side_hide_btn ficon-icon-7"></div>
+	</div>
+	<div class="ctrBtns">
+		<div class="ctr_1 ficon-icon-1"></div>
+		<div class="ctr_2 ficon-icon-2"></div>
+		<div class="ctr_3 ficon-icon-3"></div>
+        <div class="ctr_2 ficon-icon-4"></div>
+		<div class="ctr_3 ficon-icon-5"></div>
+	</div>
+</div>
+<div class="h_auto eachBlck">
+	<div class="EcScroll has-score-foot">
+        <div class="audit_create es_tabwraps">
+			<div class="audit_search"><input type="button" value="Create" class="audit_bt"><input id="addnewss" type="button" value="+ Add new" style="margin-right: 10px;" class="audit_bt">Shift: <i>Night</i>ODM: <i>Wistron_KS</i></div>
+			<div class="es_tabwrap font_14 iscrollelem">
+				<ul class="es_tabwrap_tab tabstyle_1 clearfix">
+					<li class="iTab">
+						<span class="count"></span>
+						<span class="auditBor">OP QUALIFY</span>
+					</li>
+					<li class="iTab cur">
+						<span class="count"></span>
+						<span class="auditBor">MACHINE&amp;FIXTURE</span>
+					</li>
+					<li class="iTab">
+						<span class="count"></span>
+						<span class="auditBor">SOP EXECUTION</span>
+					</li>
+					<li class="iTab">
+						<span class="count"></span>
+						<span class="auditBor">EC PC AUDIT</span>
+					</li>
+					<li class="iTab">
+						<span class="count"></span>
+						<span class="auditBor">QUALITY INSPECTION</span>
+					</li>
+					<li class="iTab">
+						<span class="count"></span>
+						<span class="auditBor">LESSON LEARN</span>
+					</li>
+				</ul>
+				<div class="es_tabwrap_tabbox clearfix audit_creat_jay">
+					<div class="layoutst_1 stopHide">
+						<div class="Qualify_flex">
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">1.该作业的操作人员是否合格？（取得培训认证）</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">2.是否有作业人员再评核的计划或课程？</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">3.作业人员是否熟悉该站作业内容，并具有自主检查的能力</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">4.是否依指导书进行作业？</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">5.每位作业人员都有ESD的训练记录</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">6.是否有全程监督作业人员之良率？</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">7.包装线的关键工位是否有明确标识, 并使用了熟练员工</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">8.供应商开线，产线人数是否异常</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+						</div>
+					</div>
+					<div class="layoutst_1">
+						<div class="Qualify_flex">
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">测试所需储存设备（SD卡 USB等)要定期杀毒、检测及更换.</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">拆箱刀具必须固定，不得随意放置</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">产线电动扭力起扭力有检点记录</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">ESD相关记录齐备(ESD相关设备点检,校验,记录等)</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+						</div>
+					</div>
+					<div class="layoutst_1 stopHide">
+						<div class="Qualify_flex">
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">返工有SOP,清晰的说明返工原因和返工流程，站别和实际操作与SOP定义一致</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">硬盘组装按照要求操作，轻拿轻放，HDD正面小孔不可挡住，HDD不可拿中间马达部分</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">返工发现不良机器需按照正常流程维修</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">产线螺丝锁附一颗颗拿取</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">工作人员、半导体材料、机器、仪器、治具及工作台是否对静电反应灵敏？作业站是否接地？</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">拿取DIMM须拿两边，不可以接触金手指</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">返工有返工工单,清晰的定义返工的范围,数量</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">线速不超过标准，每一站无追赶机器现象</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">ESD区域划分是否清晰,标识是否清晰,可以产生静电材料应妥善隔离, 储放、转送及处理时应有足够保护;</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">非维修人员禁止在维修桌上拆装任何机器，工程人员必须遵守维修准则.</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">每一站是否有工作指导书？可否对应出作业机器名称、站别、机器程式名称和版别、治具名称/料号和版别？</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">在线材料管理是否符合规定：材料码放储蓄符合要求，标示清晰，先进先出，不合格品有效隔离</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">SOP是否有重点站别定义？以及该作业对操作人员要求</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">在线物料是否与SOP和订单需求相符</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">作业人员是否严格按照SOP作业</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">拍灯取料符合规定</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">产线离子风扇正常工作</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">产线是否悬挂了和正在生产的机器相匹配的SOP?</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">包装线员工是否按照规定的SOP进行操作(包含打栈板区域)?</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							
+						</div>
+					</div>
+					<div class="layoutst_1 stopHide">
+						<div class="Qualify_flex">
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">供应商是否有按照EC plan做执行</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">按非LEVEL1的EC LIST 抽查，是否有执行完成</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">产线是否有在未经准许的情况下更改制程站别</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+						</div>
+					</div>
+					<div class="layoutst_1 stopHide">
+						<div class="Qualify_flex">
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">系统自动执行OOB抽样，XCSA抽检，新MTM/59/57的FAI检验等 是否按照规则执行</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">AP-OBE-1的無線速率測試是否落實</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">FAI/OOB/XCSA检验不良机器的区分以及分析处理的明确定义和执行</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">AP-OBE-1是否比對OS版本</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">各个检验清单是否最新版本，是否涵盖最新LL检验内容，并明落实检验动作</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">AP-稽核OBE-2是否比對外箱描述與實際配置</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">FAI/OOB/XCSA检验记录存储，上传以及数据准确性</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">Label的打印信息和模板是否被确认, 需要贴附的label是否缺少以及位置是否正确?</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">返工机台需有特殊标识，并经过正常外观检验和OOB/XCSA抽检</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">产线的外观终检站人员是否执行了Lenovo的外观标准, 包含外观 gap &step; step.</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">AP-IPQC的無線AP與產線距離需大於5m</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">附件(CD, 说明书,labels,Battery, Adapter, 其他附件)是否进行使用了IT系统管控</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">AP-OBE-1增加"輸入鍵盤特殊符號"比對鍵盤印刷</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">无法使用IT系统管控的附件, 是否采取了防呆了措施防止错乱?</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							
+						</div>
+					</div>
+					<div class="layoutst_1 stopHide">
+						<div class="Qualify_flex">
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">确认按压BUTTON是否回弹顺利，是否有手感不顺</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">Panel touch 功能测试，是否有爆点，是否有全屏测试</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">PAD DOCKING 正反插，是否有功能异常</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">Miix-2 10 &amp; 11 模式的PAD需要测试站立模式DOCK相应功能(USB, SPEAKER &amp; SUBWOOFER)</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">确认产线有按照要求100%测试B/T, W/L 以及3G的功能</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">Miix-2 10 &amp; 11 模式的PAD需要测试睡眠后DOCK键盘唤醒功能</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">Touch pad 压合是否有使用治具，是否有定义参数，参数是否有被执行，记录是否完整，可追溯</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">Hinge 翻转到极限值，是否有翻转不顺，NOSIE以及机器功能性不良</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">Logo 压合是否有使用治具，是否有定义参数，参数是否有被执行，记录是否完整，可追溯</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<article class="qsitem_block">
+								<div class="qsitem_t clearfix">
+									<span class="qsitem_ckb">
+										<input type="radio">
+										<input type="radio">
+									</span>
+									<span class="qsitem_ckf">重量标签不能离线打印, 封箱标贴不能二次封箱(特别是中国区).</span>
+								</div>
+								<div class="qsitem_qus_wrap_slide">
+									<div class="qsitem_qus_wrap clearfix">
+										<textarea name="" cols="" rows="" class="setYourWords"></textarea>
+										<div class="uploadimg clearfix">
+											<span><i>+</i> Images</span>
+											<div class="syimg_wrap"><input type="file" multiple class="syimg"></div>
+										</div>
+									</div>
+								</div>
+							</article>
+						</div>
+					</div>
+				</div>
+				<div class="txa_c"><input name="" type="button" class="audit_bt score_btn" value="Save"></div>
+			</div>
+		</div>
+    </div>
+	<div class="score_con">
+		<div class="red_score"><span id="nonono">0</span><em>Lose Score</em></div>
+		<div class="green_score"><span id="yesyesye">0</span><em>Score</em></div>
+		<input type="button" class="audit_bt yesBtn" value="Submit">
+	</div>
+	
+</div>
+<div class="sidebar_wrap">
+	<div class="sidebar" id="sidebar">
+		<div class="sideItems">
+			<div class="silinks">
+			<span>HOME</span></div>
+		</div>
+		<div class="sideItems">
+			<div class="silinks">
+				<span>Q-STOP</span>
+				<div class="silinksSec"><span class="skInner">Create</span></div>
+				<div class="silinksSec"><span class="skInner">Managment</span></div>
+				<div class="silinksSec"><span class="skInner">ODM Status</span></div>
+				<div class="silinksSec"><span class="skInner">Search</span></div>
+			</div>
+		</div>
+		<div class="sideItems">
+			<div class="silinks">
+				<span>FPY/OOB</span>
+				<div class="silinksSec"><span class="skInner">Create</span></div>
+				<div class="silinksSec"><span class="skInner">Create2</span></div>
+				<div class="silinksSec"><span class="skInner">Create3</span></div>
+			</div>
+		</div>
+		<div class="sideItems">
+			<div class="silinks">
+				<span>AUDIT</span>
+				<div class="silinksSec"><span class="skInner">Create</span></div>
+			</div>
+		</div>
+		<div class="sideItems">
+			<div class="silinks">
+				<span>FAI</span>
+				<div class="silinksSec"><span class="skInner">Create</span></div>
+			</div>
+		</div>
+		<div class="sideItems">
+			<div class="silinks">
+				<span>EC</span>
+				<div class="silinksSec"><span class="skInner">Create</span></div>
+			</div>
+		</div>	
+	</div>
+</div>
+<!-- Javascript with AMD 
+================================================== 
+<script src="../js/require.js" data-main="../js/main" ></script>-->
+</body>
+</html>

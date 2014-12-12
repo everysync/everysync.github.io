@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html class="onepage-scroll">
+<head>
+<!-- ------------------------------------------------------------------
+***********************************************************************
+开发人员书写规范:
+1.所有缩进都用 TAB， 而不是空格。
+2.非必要，禁止用行内样式例如 <div style="display:block"> 
+
+浏览器兼容：
+	IE10+
+	FireFox
+	Webkit内核浏览器:
+		Chrome,
+		Opear(WebKit版),
+		360浏览器(7.0+),
+		360急速浏览器,
+		搜狗浏览器,
+		115浏览器,
+		UC桌面浏览器,
+		枫树浏览器,
+		Safari 5.1+
+		Safari 7+ (Mac OS)
+注:由于国内IE6-7份额已经非常低，基本是测试人员跟一些非常旧的政府机构，所以不做兼容。
+***********************************************************************
+---------------------------------------------------------------------- -->
+	<!-- Basic Page Needs
+	================================================== -->
+	<meta charset="utf-8">
+	<title>EverySync</title>
+	<meta name="description" content="">
+	<meta name="author" content="JayChen">
+	<!-- 让IE浏览器用最高级内核渲染页面 还有用 Chrome 框架的页面用webkit 内核
+	================================================== -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<script src="js/modernizr.custom.js"></script>
+	<script>
+		!Modernizr.csstransitions?window.location.href="np.html":'';
+		if (!Modernizr.svg) {alert("\u5bf9\u4e0d\u8d77\uff0c\u60a8\u7684\u6d4f\u89c8\u5668\u4e0d\u652f\u6301\u0053\u0056\u0047\u683c\u5f0f\u56fe\u50cf\uff0c\u8bf7\u5347\u7ea7\u7248\u672c\uff0c\u5982\u679c\u8fd8\u662f\u51fa\u73b0\u8fd9\u4e2a\u63d0\u793a\uff0c\u90a3\u4e48\u8bf7\u6362\u4e2a\u6d4f\u89c8\u5668\uff0c\u5bf9\u60a8\u9020\u6210\u4e0d\u4fbf\u8bf7\u8c05\u89e3\u3002")}
+	</script>
+	<!-- IOS6全屏 Chrome高版本全屏
+	================================================== -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes"> 
+	<!-- 让360双核浏览器用webkit内核渲染页面
+	================================================== -->
+	<meta name="renderer" content="webkit">
+	<!-- Mobile Specific Metas
+	================================================== -->
+	<!-- !!!注意 minimal-ui 是IOS7.1的新属性，最小化浏览器UI，但是在iOS8.1突然被取消 -->
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- CSS
+	================================================== -->
+	<link href="css/reset.css" rel="stylesheet" type="text/css">
+	<link href="css/onepage-scroll.css" rel="stylesheet" type="text/css">
+	<link href="css/style.css" rel="stylesheet" type="text/css">
+
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="favicon.ico" >
+	<!-- Android 主屏图标
+	================================================== -->	
+	<link rel="icon" sizes="196x196" href="touch-icon.png">
+	<!-- IOS 主屏图标
+	================================================== -->
+	<link rel="apple-touch-icon" href="touch-icon-iphone.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+	<script src="js/prefixfree.min.js"></script>
+</head>
+<body>
+<div class="app_header">
+	<div class="sideBtn">
+		<div class="side_show_btn ficon-icon-6"></div>
+		<div class="side_hide_btn ficon-icon-7"></div>
+	</div>
+	<div class="ctrBtns">
+		<div class="ctr_7 ficon-icon-chart"></div>
+		<div class="ctr_1 ficon-icon-1"></div>
+		<div class="ctr_2 ficon-icon-2"></div>
+		<div class="ctr_3 ficon-icon-3"></div>
+		<div class="ctr_4 ficon-icon-4"></div>
+		<div class="ctr_6 ficon-icon-search" id="qstop_search"></div>
+		<div class="ctr_5 ficon-icon-5"></div>
+	</div>
+</div>
+<div class="app_container" data-page="index">
+	<div class="container hardware-acceleration">
+		<!--eachBlck-->
+		<div class="eachBlck demopagec-1">
+			<h2 class="eachBlockTitle">MFG-OPS</h2>
+			<div class="mapSideTop">
+				<span class="mapswipebtn cur">SNAP SHOT</span>
+				<span class="mapswipebtn">CHARTS</span>
+			</div>
+			<div class="page_swicher_wrap">
+				<div class="page_swicher_1">
+					<div id="mapSide">
+						<div class="mapSideBot height_firstp swiper-container">
+							<ul class="mslist swiper-wrapper" style="height:900px">
+								<li class="msEachlist swiper-slide">
+									<div class="mapDataDetail">
+										<h2 class="mdh2">
+											<!-- <span class="mdh2_1">ODM Name:</span> -->
+											<span class="mdh2_2">SHP_SH_DTA</span>
+										</h2>
+										<ul class="mdhlist">
+											<li class="mdhli">
+												<span class="mli_l">Tgt</span>
+												<span class="mli_r">2.1M</span>
+											</li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div id="mapWrap"></div>
+					<div class="map_tips">
+						
+					</div>
+					
+					<!-- <div class="map_tips_red">
+						<h2 class="mtt">SHP_SH_DTA</h2>
+						<div class="mtc">
+							<span>03</span>
+							<p>DAY</p>
+							<p>8Hours</p>
+						</div>
+						<div class="maptiptable">
+							<div class="row">
+								<div class="cell">Stop:</div>
+								<div class="cell">03-24 18:05:30</div>
+							</div>
+							<div class="row">
+								<div class="cell">Recovery:</div>
+								<div class="cell">03-24 18:05:30</div>
+							</div>
+						</div>
+						<div class="maptiptable2">
+							<div class="row">
+								<div class="cell">-FGs:1</div>
+								<div class="cell">-WIP:4</div>
+								<div class="cell">-ONS:6</div>
+								<div class="cell">-Category:design</div>
+							</div>
+						</div>
+						<div class="mtb">
+							<h3>STOP WIRE PRODUCTS STOP WIRE PRODUCTS</h3>
+							<p>H520s Enginneering related yuanjqH520s</p>
+							<p>related Enginneering related related</p>
+						</div>
+					</div>-->
+				</div> 
+				<div class="page_swicher_2">
+					<div class="chwrap">
+						<div id="chart_home_bar"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--eachBlck-->
+		<div class="eachBlck demopagec-2">
+			<h2 class="eachBlockTitle">FPY/OOB <span class="tiny">Ramp Up</span></h2>
+			<div id="center-nav-1" class="center-nav show-1">
+				<div class="center-item ci-1">
+					<span class="ciicons cii-1"></span>
+					<span class="ciicons cii-2"></span>
+					<span class="ciicons cii-3"></span>
+					<span class="ciicons cii-4"></span>
+				</div>
+				<div class="center-item ci-2">
+					<span class="ciicons cii-1"></span>
+					<span class="ciicons cii-2"></span>
+					<span class="ciicons cii-3"></span>
+					<span class="ciicons cii-4"></span>
+					<span class="ciicons cii-5"></span>
+					<span class="ciicons cii-6"></span>
+				</div>
+			</div>
+			<div class="mapSideTop ramp_switch">
+				<span class="pageswipebtn cur">LENOVO</span>
+				<span class="pageswipebtn">THINK</span>
+			</div>
+			<div class="page_swicher_wrap">
+				<div class="eachBlockTitle_dt" id="fpyoob_proInfo">
+					<h2 class="ebtd_h2">Product: <span>H520s</span></h2>
+					<h3 class="ebtd_h3">
+						<span class="ebtd_down"><i class="ficon-icon_arrow_down"></i><em>92</em><b>%FPY</b></span>
+						<span class="ebtd_up"><i class="ficon-icon_arrow_up"></i><em>97</em><b>%OOB</b></span>
+					</h3>
+					<div class="ebtd_table">
+						<div class="row">
+							<div class="cell-th">MFG</div>
+							<div class="cell-td">Compal_KS</div>
+						<!--</div>
+						<div class="row">-->
+							<div class="cell-th">Phase</div>
+							<div class="cell-td">SVT</div>
+						</div>
+						<div class="row">
+							<div class="cell-th">SS</div>
+							<div class="cell-td">2014-08-12</div>
+						<!--</div>
+						<div class="row">-->
+							<div class="cell-th">Input Q'ty</div>
+							<div class="cell-td">2000</div>
+						</div>
+						<div class="row">
+							<div class="cell-th">TOP1</div>
+							<div class="cell-td" colspan="3">Data from your mouse/finger</div>
+						</div>
+						<div class="row">
+							<div class="cell-th">TOP2</div>
+							<div class="cell-td" colspan="3">Data from your mouse/finger</div>
+						</div>
+					</div>
+				</div>
+				<div class="first_page_swicher_1">
+					<div class="chwrap2">
+						<div id="line"></div>
+						<div id="fpy_module_name">SVT</div>
+						<div id="chart_fpy_Line"></div>
+						<div class="fpy_line_type"><span>SVT</span><span>SOVP</span><span>RAMP UP</span></div>
+					</div>
+				</div>
+				<div class="chartFilter">
+					<div class="ccs cur">A</div>
+					<div class="ccs">B</div>
+					<div class="ccs">C</div>
+					<div class="ccs">D</div>
+					<div class="ccs">E</div>
+					<div class="ccs">F</div>
+					<div class="ccs">G</div>
+					<div class="ccs">H</div>
+					<div class="ccs">I</div>
+					<div class="ccs">J</div>
+					<div class="ccs">K</div>
+					<div class="ccs">L</div>
+					<div class="ccs">N</div>
+					<div class="ccs">M</div>
+					<div class="ccs">O</div>
+					<div class="ccs">P</div>
+					<div class="ccs">Q</div>
+					<div class="ccs">R</div>
+					<div class="ccs">S</div>
+					<div class="ccs">T</div>
+					<div class="ccs">U</div>
+					<div class="ccs">V</div>
+					<div class="ccs">W</div>
+					<div class="ccs">X</div>
+					<div class="ccs">Y</div>
+					<div class="ccs">Z</div>
+				</div>
+			</div>
+			
+		</div>
+		<!--eachBlck-->
+		<div class="eachBlck demopagec-2-2">
+			<h2 class="eachBlockTitle">FPY/OOB <span class="tiny">Mass Production</span></h2>
+			<div id="center-nav-2" class="center-nav show-1">
+				<div class="center-item ci-1">
+					<span class="ciicons cii-1"></span>
+					<span class="ciicons cii-2"></span>
+					<span class="ciicons cii-3"></span>
+					<span class="ciicons cii-4"></span>
+				</div>
+				<div class="center-item ci-2">
+					<span class="ciicons cii-1"></span>
+					<span class="ciicons cii-2"></span>
+					<span class="ciicons cii-3"></span>
+					<span class="ciicons cii-4"></span>
+					<span class="ciicons cii-5"></span>
+					<span class="ciicons cii-6"></span>
+				</div>
+			</div>
+			<div class="mapSideTop mass_switch">
+				<span class="pageswipebtn cur">LENOVO</span>
+				<span class="pageswipebtn">THINK</span>
+			</div>
+			<div class="page_swicher_wrap">
+				<div id="chart_fpy_timeLine"></div>
+			</div>
+		</div>
+		<!--eachBlck-->
+		<div class="eachBlck demopagec-3 eb_audit_wrap">
+			<h2 class="eachBlockTitle">AUDIT</h2>	
+			<div class="eb_audit_inner"></div>
+			<!-- <div class="eb_audit_inner">
+				<div class="eb_audit_items">
+					<div class="vam">
+						<div class="eai_logo" style=""></div>
+						<div class="eai_score">00</div>
+						<div class="eai_comname"></div>
+					</div>
+				</div>
+			</div> -->
+		</div>
+		<!--eachBlck-->
+		<div class="eachBlck demopagec-4">
+			<h2 class="eachBlockTitle">FAI</h2>
+			<div class="topChartContainer home">
+				<div id="chart_fai_pie"></div>
+			</div>
+			<div class="topRChartContainer">
+				<div class="passFailResult chartSplit">
+		            <img src="svg/icon-right.svg"/><span>96</span>
+		            <img src="svg/icon-fail.svg"/><span>15</span>
+		        </div>
+				<div id="chart_fai_bar"></div>
+			</div>
+			<div class="botChartContainer">
+				<div class="botChartContainerInner" id="svgwrap">
+					
+				</div>
+			</div>
+		</div>
+		<!--eachBlck-->
+		<div class="eachBlck demopagec-5">
+			<h2 class="eachBlockTitle">EC</h2>
+			<div class="Topblck"><!-- EcBg 背景 -->
+				<div class="coL-5 layCenter">
+					<div class="mRL60">
+						<div class="diamTit"><i class="dTicon1"></i>DT</div>
+						<div class="ECell-td">
+							<div class="diamonds-1 diabg1">
+								<div class="diaNumTit">CUT IN</div>
+								<span>0</span>
+							</div>
+						</div>
+						<div class="ECell-td">
+							<div class="diamonds-1 diabg2">
+								<div class="diaNumTit">RUN IN</div>
+								<span>7</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="coL-5 layCenter">
+					<div class="mRL60">
+						<div class="diamTit"><i class="dTicon2"></i>NB</div>
+						<div class="ECell-td">
+							<div class="diamonds-1 diabg3">
+								<div class="diaNumTit">CUT IN</div>
+								<span>7</span>
+							</div>
+						</div>
+						<div class="ECell-td">
+							<div class="diamonds-1 diabg4">
+								<div class="diaNumTit">RUN IN</div>
+								<span>10</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ecPageTab">
+				<table cellpadding="0" cellspacing="0" border="0" width="100%">
+					<thead>
+						<tr>
+							<th width="8%">EC NO.</th>
+							<th>PRODUCT</th>
+							<th>ODM</th>
+							<th width="40%">EC DESCRIPTION</th>
+							<th>RESULT</th>
+							<th>OPERATING</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="textWordWrap">WKSNBFLEX2 -1420140924</td>
+							<td>FLEX 2-14</td>
+							<td>WISTRON_KS_NB</td>
+							<td class="textWordWrap textL">适用所有机型   出印度的产品，BIS LABEL更改，原来为ODM产线打印，更改为购 买张贴</td>
+							<td>PASS</td>
+							<td><span class="showBox ficon-icon-eye"></span></td>
+						</tr>
+						<tr>
+							<td class="textWordWrap">CKSB20140922</td>
+							<td>Y40-70</td>
+							<td>COMPAL_KS_NB</td>
+							<td class="textWordWrap textL">适用机型：所有出土耳其和越南的产品    出土耳其和越南的WARRANTY CARD上增加BARCODE条码。    9/22出土耳其FAL确认OK，保修卡料号:审批0光0374，与LENOVO BOM一致。与赵亮确认PASS，     出越南暂无订单</td>
+							<td>PASS</td>
+							<td><span class="showBox ficon-icon-eye"></span></td>
+						</tr>
+						<tr>
+							<td class="textWordWrap">CKSN20140917</td>
+							<td>Y50-70</td>
+							<td>COMPAL_KS_NB</td>
+							<td class="textWordWrap textL">适用机型：所有出印度机型  导入时间：9月15日   出印度的产品，BIS LABEL更改，原来为ODM产线打印，以后更改为购买张贴</td>
+							<td>PASS</td>
+							<td><span class="showBox ficon-icon-eye"></span></td>
+						</tr>
+						<tr>
+							<td class="textWordWrap">PSZN20140917</td>
+							<td>G710</td>
+							<td>PEGATRON_SH_NB</td>
+							<td class="textWordWrap textL">适用机型：所有机型  RATING LABEL增加1个一维码和1个二位条码  1维条码内容为：S/N+MO，二维条码内容为SERVICE网址，出中国区：HTTP：//WEIXIN.LENOVO.COM</td>
+							<td>PASS</td>
+							<td><span class="showBox ficon-icon-eye"></span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="app-init-page">
+	<div class="app-init-page-pd">
+		
+	</div>
+	<div class="app-load-back" id="app-load-back"></div>
+</div>
+<div class="sidebar_wrap">
+	<div class="sidebar" id="sidebar">
+		<div class="sideItems">
+			<div class="silinks fslinks" id="qstop_home">
+				<span>MFG－OPS</span>
+				<div class="silinksSec fslinks" id="qstop_create"><span class="skInner">Create</span></div>
+				<div class="silinksSec fslinks" id="qstop_managment"><span class="skInner">Managment</span></div>
+			</div>
+		</div>
+		<div class="sideItems">
+			<div class="silinks fslinks" id="fpyoob_home">
+				<span>FPY/OOB</span>
+				<div class="silinksSec fslinks" id="fpyoob_create"><span class="skInner">Create</span></div>
+				<div class="silinksSec fslinks" id="fpyoob_managment"><span class="skInner">Managment</span></div>
+			</div>
+		</div>
+		<div class="sideItems">
+			<div class="silinks fslinks" id="audit_home">
+				<span>AUDIT</span>
+				<div class="silinksSec fslinks" id="audit_create"><span class="skInner">Create</span></div>
+				<div class="silinksSec fslinks" id="audit_managment"><span class="skInner">Managment</span></div>
+			</div>
+		</div>
+		<div class="sideItems">
+			<div class="silinks fslinks" id="fai_home">
+				<span>FAI</span>
+				<div class="silinksSec fslinks" id="fai_create"><span class="skInner">Create</span></div>
+				<div class="silinksSec fslinks" id="fai_managment"><span class="skInner">Managment</span></div>
+			</div>
+		</div>
+		<div class="sideItems">
+			<div class="silinks fslinks" id="ec_home">
+				<span>EC</span>
+				<div class="silinksSec fslinks" id="ec_create"><span class="skInner">Create</span></div>
+				<div class="silinksSec fslinks" id="ec_managment"><span class="skInner">Managment</span></div>
+			</div>
+		</div>	
+	</div>
+</div>
+
+<!--chat element-->
+<div id="chatTemplate"><div id="chats"></div></div>
+<!--pop element-->
+<div class="pop_mask" data-states="hide"></div>
+<div class="pop_right_element" data-states="hide">
+	<div id="pr_inner"></div>
+</div>
+<div class="pop_top_element" data-states="hide">
+	<div id="pt_inner"></div>
+</div>
+<!-- Javascript with AMD 
+================================================== -->
+<script src="js/require.js" data-main="js/main" ></script>
+</body>
+</html>
