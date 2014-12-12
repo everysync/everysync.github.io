@@ -50,6 +50,22 @@ define(function(){
 			line.fbyType = 0;
 			line.getChartData(1);
 		});
+		// $("#filterCanvas").on('touchmove',function(e){
+  //           var touch = e.originalEvent.targetTouches[0]; 
+  //           var heightT = $(this).height();
+  //           var css = $(".chartFilter .ccs");
+  //           var cur = Math.round((touch.pageY*css.length)/heightT);
+  //           css.eq(cur).addClass("cur").siblings().removeClass('cur');
+		// 	line.letter =  css.eq(cur).text();
+		// 	line.refreshChartMarkPoint();
+  //       }).on('mousemove',function(e){
+  //           var heightT = $(this).height();
+  //           var css = $(".chartFilter .ccs");
+  //           var cur = Math.round((e.offsetY*css.length)/heightT);
+  //           css.eq(cur).addClass("cur").siblings().removeClass('cur');
+		// 	line.letter =  css.eq(cur).text();
+		// 	line.refreshChartMarkPoint();
+  //       });
 		$(".chartFilter").on('tap','.ccs:not(.cur)',function(){//切换字母后执行刷新图表
 			$(this).addClass("cur").siblings().removeClass('cur');
 			line.letter = $(this).text();

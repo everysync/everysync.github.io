@@ -228,7 +228,7 @@ define('page_audit',[],function() {
 		//加载product
 		require(["isk_LPL"],function(isk){
 			isk.init&&isk.init();
-    });
+    	});
 		$('#audit_search_btn').on("tap.audser",function(){
 			page_modules.loadinto("moduleHtml/Audit_SearchResult.html", ".eachBlck" ,"pagebgc-3","audit_result");
 		});
@@ -274,22 +274,50 @@ define('isk_LPL',["isk/isk_LPL_Data","isk/isk_LPL_Function","icheck.min"],functi
 			radioClass: 'iradio_flat',
 			increaseArea: '20%' // optional
 		});
+		//包含全选的checkBox
+		$(".cbHasAll").each(function(index,dom) {
+			var cbinput =  $(dom).find("input[type='checkbox']");
+			var formInput = $(dom).find('.icheckWarp').prev();
+			cbinput.filter(".togAll").on('ifClicked', function(e){
+			  if($(this).parent().hasClass('checked')){
+			      cbinput.not('.togAll').iCheck('uncheck');
+			  }else{
+			      cbinput.not('.togAll').iCheck('check');
+			  }
+			  setTimeout(setCbInput,0);
+			});
+			cbinput.not('.togAll').on("ifToggled",function(e) {
+				if($(this).parent().hasClass('checked')){
+					cbinput.filter(".togAll").iCheck('uncheck');
+			  	}
+			  	setTimeout(setCbInput,0);
+			});
 
-		var $odmDetail = $(".odmList");
-		var odminput =  $odmDetail.find("input[type='checkbox']");
-		odminput.filter(".togAll").on('ifClicked', function(e){
-		  if($(this).parent().hasClass('checked')){
-		      odminput.not('.togAll').iCheck('uncheck');
-		  }else{
-		      odminput.not('.togAll').iCheck('check');
-		  }
+			function setCbInput(){
+				var input_id = '';
+				var checkedList = $(dom).find(".checked input[type='checkbox']:not(.togAll)");
+			    if(checkedList.length > 0){
+			      if(checkedList.length == cbinput.length-1){
+			        input_id = 'All  ';
+			      }else{
+			        $.each(checkedList, function( key, item ) {
+			          input_id += $(item).attr('id')+',';
+			        });
+			      }
+			    }
+			    formInput.val(input_id);
+			}
 		});
-		odminput.not('.togAll').on("ifToggled",function(e) {
-			if($(this).parent().hasClass('checked')){
-				odminput.filter(".togAll").iCheck('uncheck');
-		  }
+		//开关选择按钮
+		$(".ons_icon").each(function(index,dom){
+			var ons =  $(dom).find("span");
+			var input = $(dom).parent().prev();
+			ons.on('click',function(){
+				ons.toggleClass('stopHide');
+				var val = input.val()=='1'?0:1
+				input.val(val);
+			});
 		});
-
 		//product多选框
 		var $schDetail = $(".productList");
 		chkinput =  $schDetail.find("input");
@@ -323,37 +351,37 @@ define('isk_LPL',["isk/isk_LPL_Data","isk/isk_LPL_Function","icheck.min"],functi
 	}
 
 	function setStep(lv_id,step_id,allFlag){
-    var span_text = '',
-        input_id = '';
-    var dl_level = $(lv_id).find("input.dckb").not('.togAll');
-    var checked = $(lv_id).find(".checked input.dckb").not('.togAll');
-    if(checked.length > 0){
-      if(checked.length == dl_level.length && allFlag){
-        span_text = 'All  ';
-        input_id = 'All  ';
-      }else{
-        $.each(checked, function( key, item ) {
-          span_text += $(item).parents('.proLabel').find('span').html()+', ';
-          input_id += $(item).attr('data-id').split("|")[2]+',';
-        });
-      }
-    }
-    span_text = span_text.substring(0,span_text.length-2);
-    input_id = input_id.substring(0,input_id.length-1);
-    $(step_id).parent().attr('data-text',span_text);
-    $(step_id).parent().find('.pst_d').html(span_text);
-    $(step_id).val(input_id);
+	    var span_text = '',
+	        input_id = '';
+	    var dl_level = $(lv_id).find("input.dckb").not('.togAll');
+	    var checked = $(lv_id).find(".checked input.dckb").not('.togAll');
+	    if(checked.length > 0){
+	      if(checked.length == dl_level.length && allFlag){
+	        span_text = 'All  ';
+	        input_id = 'All  ';
+	      }else{
+	        $.each(checked, function( key, item ) {
+	          span_text += $(item).parents('.proLabel').find('span').html()+', ';
+	          input_id += $(item).attr('data-id').split("|")[2]+',';
+	        });
+	      }
+	    }
+	    span_text = span_text.substring(0,span_text.length-2);
+	    input_id = input_id.substring(0,input_id.length-1);
+	    $(step_id).parent().attr('data-text',span_text);
+	    $(step_id).parent().find('.pst_d').html(span_text);
+	    $(step_id).val(input_id);
 	}
 	
 	//设置steps
-  function setSteps(){
-    setStep("#dl_level1",'#first_step_type',0);
-    setStep("#dl_level2",'#second_step_type',0);
-    setStep("#dl_level3",'#thrid_step_type',0);
-    setStep("#dl_level4",'#fourth_step_type',1);
-  }
+	function setSteps(){
+		setStep("#dl_level1",'#first_step_type',0);
+		setStep("#dl_level2",'#second_step_type',0);
+		setStep("#dl_level3",'#thrid_step_type',0);
+		setStep("#dl_level4",'#fourth_step_type',1);
+	}
     
-  function showInput(item,opt,display){
+	function showInput(item,opt,display){
 		var data_id = $(item).attr('data-id').split("|");
 		var level = parseInt(data_id[0])+1;
 		var last_step = parseInt(data_id[1]);

@@ -651,6 +651,78 @@ var popLayoutfns = {
 				$mask.removeClass(opts.helpClass_showing).addClass(opts.helpClass_showed).off(".popmask");
 			});	
 		}
+	},
+	modalinit:function() {
+		var modal_template = $("<div>").attr("id","MODAL_TEMPLATE").css("display","none");
+		$body.append(modal_template);
+		var $modaltemp = $("#MODAL_TEMPLATE")
+		$modaltemp.load("moduleHtml/!!!popup_1.html .popMod-template", function() {
+			//初始化
+			$modaltemp.find(".popMod").removeClass("popMod-template");
+			window.modalinit = {
+				"init":true,
+				"cacheModals":[],
+				"modal_show_class":"modal-in",
+				"modal_hide_class":"modal-out",
+				"detal":{
+					"modal":$modaltemp.find(".popMod")
+				}
+			};
+		})
+	},
+	modalshow:function(title,content,buttons,callback) {
+		var _title = title || false;
+		var _content = content || false;
+		var _buttons = buttons || false;
+		var newModal = modalinit.detal.modal.clone();
+		var $buttonArea = newModal.find(".popMod-button-wrap");
+		//加载标题
+		if (_title === false) {
+			newModal.find(".popMod-title").hide();
+		} else if (_title !== false && typeof _title != "function"){
+			newModal.find(".popMod-title").html($.parseHTML(_title));
+		} else if (_title !== false && typeof _title == "function") {
+			newModal.find(".popMod-title").html(_title);
+		}
+		//加载按钮区域
+		if (_buttons!==false || typeof _buttons != "function") {
+			$buttonArea.html( $.parseHTML(_buttons) );
+		} else if (_buttons!==false || typeof _buttons == "function") {
+			$buttonArea.html( _buttons );
+		} else {
+			$buttonArea.on("click.event_modal_button_click",".pm-button", function(e) {
+				/*popLayoutfns.modalhide();*/
+				newModal.on(transEnd("modalend"),function(){
+					newModal.remove();
+				});
+				newModal.addClass(modalinit.modal_hide_class);
+				popLayoutfns.maskhide();
+			});
+		}
+		//加载内容区域
+		if (_content !== false && typeof _content != "function") {
+			newModal.find(".pm-cont-inner").html( $.parseHTML(_content) );
+			/*console.log("initHTML")*/
+		} else if (_content !== false && typeof _content == "function"){
+			newModal.find(".pm-cont-inner").html( _content );
+			/*console.log("initFunction")*/
+		}
+		
+		//显示遮罩
+		popLayoutfns.maskshow();
+		//把新Modal添加到body
+		newModal.appendTo($body);
+		modalinit.cacheModals.push(newModal);
+		//重新定位Modal高度，并居中它
+		newModal.css({
+			"marginTop":-newModal.height()/2
+		});
+		setTimeout(function() {newModal.addClass(modalinit.modal_show_class)},28);
+		console.log(modalinit.cacheModals)
+		//callback
+		if (callback) {
+			callback(newModal);
+		}
 	}
 }
 
@@ -694,7 +766,7 @@ function jayfunction() {
 	//加载Chat
 	initChat();
 	//init pageside cache html
-		
+	popLayoutfns.modalinit();	
 	
 	$(".ctrBtns").on("tap",".ctr_3", function() {
 		var $psc = page_modules.$page_show_content;

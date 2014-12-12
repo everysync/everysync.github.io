@@ -12,17 +12,46 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="mobile-web-app-capable" content="yes"> 
 	<script src="../js/jquery-2.1.1.min.js"></script>
+	<link href="../css/reset.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 <div class="pop_mask showed" data-states="hide"></div>
 	<div class="popMod modal-showed">
 		<div class="pm-modal-inner">
-			<div class="popMod-title">
-				<div class="pm-title-inner">Aadd FAI FUNSL</div>
-			</div>
+			<!--<div class="popMod-title">
+				<div class="pm-title-inner">ADD NEW</div>
+			</div>-->
 			<div class="popMod-content">
-				<div class="pm-cont-inner">123</div>
+				<div class="pm-cont-inner">
+					<!--<div class="content-block-title">添加到: <a href="#" class="link">当前分类</a></div>-->
+					<!--<div class="buttons-row">
+						<div class="button active">当前分类</div>
+						<div class="button">其它分类</div>
+					</div>-->
+					<input type="text" class="modal-text-input" placeholder="请输入要添加的字段">
+					<div class="content-block-title">添加到：</div>
+					<div class="content-block">
+						<p class="pdtb15"><a class="button button-round">Round Button 1</a></p>
+						<p class="pdtb15"><a class="button button-round">Round Button 2</a></p>
+						<p class="pdtb15"><a class="button button-round">Round Button 3</a></p>
+						<p class="pdtb15"><a class="button button-round">Round Button 4</a></p>
+						<p class="pdtb15"><a class="button button-round">Round Button 5</a></p>
+						<p class="pdtb15"><a class="button button-round active">Round Button Active</a></p>
+						<div class="item-row ifpush clearfix">
+							<span class="ifp-text fl_l">
+								是否推送到服务器通知
+							</span>
+							<label class="label-switch fl_r ifp-switch-wrap">
+								<input type="checkbox" checked>
+								<div class="checkbox"></div>
+							</label>	
+						</div>
+						
+					</div>
+					
+					
+				</div>
 			</div>	
 		</div>
 		<div class="popMod-button-wrap">
@@ -30,5 +59,38 @@
 			<div class="pm-button button-yes">确定</div>
 		</div>
 	</div>
+	
+	
+<!--<div class="popover popover-links modal-in" style="display: block; top: 602px; left: 615px; display:none">
+	<div class="popover-angle on-top" style="left: 151.5px;"></div>
+	<div class="popover-inner">
+		<div class="list-block">
+			<ul>
+				<li><a href="#" class="list-button item-link">Link 1</a></li>
+				<li><a href="#" class="list-button item-link">Link 2</a></li>
+				<li><a href="#" class="list-button item-link">Link 3</a></li>
+				<li><a href="#" class="list-button item-link">Link 4</a></li>
+			</ul>
+		</div>
+	</div>
+</div>-->
+    
+    
+    
+    <div class="popMod popMod-template">
+		<div class="pm-modal-inner">
+			<div class="popMod-title">
+				<div class="pm-title-inner"></div>
+			</div>
+			<div class="popMod-content">
+				<div class="pm-cont-inner"></div>
+			</div>	
+		</div>
+		<div class="popMod-button-wrap">
+			<div class="pm-button button-no">取消</div>
+			<div class="pm-button button-yes">确定</div>
+		</div>
+	</div>
+    
 </body>
 </html>
