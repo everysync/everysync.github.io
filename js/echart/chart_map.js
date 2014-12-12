@@ -470,8 +470,8 @@ define(['echarts','echarts/chart/map'],
 //				loop:true,
 				autoplayDisableOnInteraction:false,
                 // Autoplay
-                autoplay: 100,
-                speed: 1000,
+                autoplay: 800,
+                speed: 300,
                 // onSlideChangeStart: function(sw){
                 //     var $sides = $(page_1_swiper.activeSlide());
                 //     $sides
@@ -489,7 +489,7 @@ define(['echarts','echarts/chart/map'],
 					page_1_swiper.stopAutoplay();
 					swipetimeout = setTimeout(function() {
 						page_1_swiper.startAutoplay();
-					} ,900)
+					} ,2000)
                     page_1_swiper.swipeTo(page_1_swiper.clickedSlideIndex,300);
                     var $sides = $(page_1_swiper.clickedSlide);
                     $sides
