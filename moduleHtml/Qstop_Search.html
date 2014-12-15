@@ -76,25 +76,6 @@
     <script src="../js/mobiscroll/mobiscroll.scroller.js" type="text/javascript"></script>	<!-- 日期插件 JS -->
     <script src="../js/mobiscroll/mobiscroll.datetime.js" type="text/javascript"></script>	<!-- 日期插件 JS -->
     <script src="../js/mobiscroll/mobiscroll.select.js" type="text/javascript"></script>		<!-- 日期插件 JS -->
-    
-    <script type="text/javascript">
-	$(function() {
-        //单选\复选框定制js
-        $('.form_radio,.form_check').iCheck({
-            checkboxClass: 'icheckbox_flat',
-            radioClass: 'iradio_flat',
-            increaseArea: '20%' // optional
-        });
-		$(".ons_yes").click(function(){
-			$(this).hide();
-			$(".ons_no").show();
-		});
-		$(".ons_no").click(function(){
-			$(this).hide();
-			$(".ons_yes").show();
-		});
-	});
-</script>
 	<style>
 		html,body {height: 100%;}
 	</style>
@@ -266,9 +247,13 @@
 			</div>
 			<div class="icheckForm">
 				<h3 class="icheckTit">ONS:</h3>
-				<input id="onsVlaue" name="onsVlaue" style="display:none" value="1" type="text">
+				<!-- <input id="onsVlaue" name="onsVlaue" style="display:none" value="1" type="text"> -->
 				<div class="icheckWarp">
-					<div class="ons_icon"><span class="ons_yes"><i></i>Yes</span><span class="ons_no stopHide">No<i></i></span></div>
+					<label class="label-switch ifp-switch-wrap" for="onsVlaue">
+						<input id="onsVlaue" type="checkbox" name="onsVlaue" checked="">
+						<div class="checkbox"></div>
+					</label>
+					<!-- <div class="ons_icon"><span class="ons_yes"><i></i>Yes</span><span class="ons_no stopHide">No<i></i></span></div> -->
 				</div>
 			</div>
 			<div class="icheckForm">

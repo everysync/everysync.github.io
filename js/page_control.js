@@ -6,19 +6,19 @@ define('page_control',[],function(){
 		var moduleName = $(this).find("em").html();
 		switch(moduleName){
 			case "Q-STOP":
-				page_modules.loadinto("moduleHtml/Qstop_Search.html", ".eachBlck" ,"pagebgc-1","page_audit");
+				page_modules.loadinto("moduleHtml/Qstop_Search.html", ".eachBlck" ,"pagebgc-1","page_search");
 				break;
 			case "FPY/OOB":
-				page_modules.loadinto("moduleHtml/FPY_OOB_Search.html", ".eachBlck" ,"pagebgc-1","page_audit");
+				page_modules.loadinto("moduleHtml/FPY_OOB_Search.html", ".eachBlck" ,"pagebgc-1","page_search");
 				break;
 			case "AUDIT":
-				page_modules.loadinto("moduleHtml/Audit_Search.html", ".eachBlck" ,"pagebgc-1","page_audit");
+				page_modules.loadinto("moduleHtml/Audit_Search.html", ".eachBlck" ,"pagebgc-1","page_search");
 				break;
 			case "FAI":
-				page_modules.loadinto("moduleHtml/FAI_Search.html", ".eachBlck" ,"pagebgc-1","page_audit");
+				page_modules.loadinto("moduleHtml/FAI_Search.html", ".eachBlck" ,"pagebgc-1","page_search");
 				break;
 			case "EC":
-				page_modules.loadinto("moduleHtml/EC_Search.html", ".eachBlck" ,"pagebgc-1","page_audit");
+				page_modules.loadinto("moduleHtml/EC_Search.html", ".eachBlck" ,"pagebgc-1","page_search");
 				break;
 			default:break;
 		}
@@ -28,6 +28,11 @@ define('page_control',[],function(){
 		switch(pageName){
 			case "page_audit":
 				require(["page_audit"], function(page){
+						page.init();
+				});
+				break;
+			case "page_search":
+				require(["page_search"], function(page){
 						page.init();
 				});
 				break;
@@ -168,6 +173,31 @@ define('page_audit',[],function() {
 				function mokupconten(cont) {
 //					console.log(cont)
 					cont.load("moduleHtml/!!!popup_1.html #add_data_from", function() {
+						var area = $("#acitveTabArea")
+						var newtabs = area.find("p.pdtb15").eq(0).clone();
+						area.html("");
+						var tablength=$(".es_tabwrap_tab").find(".iTab").length;
+						$(".es_tabwrap_tab").find(".iTab").each(function(i,el) {
+							var $this = $(this);
+							var text = $this.find(".auditBor").text();
+							var newtabsc = newtabs.clone();
+							if ($this.hasClass("cur")) {
+								var _index = $(this).index();
+								modalinit.cacheModals[0].find(".button-yes").data("currentIndex", _index);
+								newtabsc.find(".button").addClass("active");
+							}
+							newtabsc.find(".button").html(text);
+							area.append(newtabsc);
+						});
+						area.removeAttr("style");
+						area.on("click", "p", function() {
+							var _this = $(this);
+							var _index = _this.index();
+							_this.addClass("cur").siblings().removeClass("cur");
+							_this.children(".button").addClass("active").end().siblings().children(".button").removeClass("active");
+							modalinit.cacheModals[0].find(".button-yes").data("currentIndex", _index);
+						});
+						
 						w_popLayoutfns.modalrefresh();
 					});
 				}
@@ -176,6 +206,7 @@ define('page_audit',[],function() {
 					var btn_2 = '<div class="pm-button button-yes">添加</div>';
 					return btn_1+ btn_2;
 				}
+				
 				
 				function mokupcallback(obj) {
 					//console.log(obj)
@@ -194,26 +225,30 @@ define('page_audit',[],function() {
 							return;
 						}
 						
+						
 						//插入跟初始化选项
 						var newtepm = $qustemplate.clone();
-						$(".layoutst_1").eq(0).find(".Qualify_flex").append(newtepm.find("span.qsitem_ckf").html(_valobj.val()).end() );
+						$(".layoutst_1").eq($(this).data("currentIndex")).find(".Qualify_flex").append(newtepm.find("span.qsitem_ckf").html(_valobj.val()).end() );
 						audit_create();
 						cuntNumInit();
 						flieUploadsmode();
 						
 						if ( $("#add_autofill_send").prop("checked") === true ) {
 							$(".ctr_7").trigger("tap");
-							var inputVal = "[通知]我增加了一条FAI规则：" + _valobj.val();
+							var inputVal = "[通知]我增加了一条规则：" + _valobj.val();
 							$(document).on("side_showed.add2input", function(e) {
 								$("#chatInput").val(inputVal);
 								$("#btnsend").trigger("click");
+								setTimeout(function(){
+									$(".pop_mask").trigger("tap");
+								}, 1800)
 								$(document).off(".add2input");
 							})
 							w_popLayoutfns.modalhide(0,true);
 							
 						} else if ($("#add_autofill").prop("checked") === true) {
 							$(".ctr_7").trigger("tap");
-							var inputVal = "[通知]我增加了一条FAI规则：" + _valobj.val();
+							var inputVal = "[通知]我增加了一条规则：" + _valobj.val();
 							$(document).on("side_showed.add2input", function(e) {
 								$("#chatInput").val(inputVal);
 								$(document).off(".add2input");
@@ -240,7 +275,7 @@ define('page_audit',[],function() {
 		
 		var qustemplate = 
 			'<article class="qsitem_block">'+
-			'	<div class="qsitem_t clearfix">'+
+			'	<div class="qsitem_t clearfix"><div class="qsremovebtn ficon-cancel"></div>'+
 			'		<span class="qsitem_ckb">'+
 			'			<input type="radio">'+
 			'			<input type="radio">'+
@@ -260,8 +295,41 @@ define('page_audit',[],function() {
 		
 		var $qustemplate = $(qustemplate);
 		
+		function editingel() {
+			$("#delelemts").on("click", function(e) {
+				var $this = $(this);
+				if ($this.data("editing") === true ) {
+					$(".qsitem_block").removeClass("qsedit");
+					$this
+						.data("editing",false)
+						.width(42)
+						.val("");
+					cuntNumInit();
+				} else {
+					$(".qsitem_block").addClass("qsedit");
+					$this
+						.width(184)
+						.data("editing",true)
+						.val(" 完成编辑");
+				}
+				
+			});
+		}
+		editingel();
 		
 		
+		function deltingfunction() {
+			$(".layoutst_1").on("click", ".qsremovebtn", function() {
+				var $this = $(this);
+				var $paretn = $this.closest(".qsitem_block");
+				$paretn.on(animateEnd("delting"), function() {
+					$paretn.remove();
+				});
+				$paretn.addClass("removing");
+				
+			});
+		}
+		deltingfunction();
 		//上传Files
 		window.flieUploadsmode = function() {
 			$(".syimg").each(function(index, element) {
@@ -289,7 +357,12 @@ define('page_audit',[],function() {
 			});	
 		};
 		flieUploadsmode();
+	}
+	return {init:init};
+});
 
+define('page_search',[],function() {
+	function init() {
 		//加载product
 		require(["isk_LPL"],function(isk){
 			isk.init&&isk.init();
@@ -314,13 +387,6 @@ define('page_audit',[],function() {
 			page_modules.params = {type:4};
 			page_modules.loadinto("moduleHtml/Qstop_SearchResult.html", ".eachBlck" ,"pagebgc-1","qstop_result");
 		});
-	}
-	return {init:init};
-});
-
-define('page_fai',[],function() {
-	function init() {
-		alert('fai');
 	}
 	return {init:init};
 });

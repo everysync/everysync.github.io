@@ -10,6 +10,8 @@ define(['echarts','echarts/chart/map'],
             this.getChartData(1);
             this.shapeListData = null;
             this.tip_idx = -1;
+            this.swipetimeout = null;
+            this.page_1_swiper = null;
         }
         iheritPrototype(LvMap, MyChart);
         LvMap.prototype._setOption = function(mydata){
@@ -78,7 +80,6 @@ define(['echarts','echarts/chart/map'],
                         },
                         selectedMode: null,
                         hoverable: false,
-                        clickable:false,
                         roam: false,
                         data: [], 
                         geoCoord: {
@@ -344,7 +345,7 @@ define(['echarts','echarts/chart/map'],
             if(v.data.color == 's2'){
                 $(".map_tips").attr('class','map_tips map_tips_red map_tips_yellow');
             }
-            $(".map_tips").animate({'top':v.pos.y-$(".map_tips").outerHeight()-10+'px','left':v.pos.x-parseInt($(".map_tips").outerWidth()/2)+46+'px'}, 120, function() {
+            $(".map_tips").animate({'top':v.pos.y-$(".map_tips").outerHeight()-7+'px','left':v.pos.x-parseInt($(".map_tips").outerWidth()/2)+50+'px'}, 120, function() {
                 $(".map_tips").show();
             });
             v = null;
@@ -369,12 +370,14 @@ define(['echarts','echarts/chart/map'],
             });
             this.chart.on(lvChart.ecConfig.EVENT.CLICK, function(param){
                 if(param.seriesIndex > 0){
-                    $(".mapDataDetail").filter('[data-cname="'+param.name+'"]').trigger('click');//模拟右侧列表相应项被点击了
+                    var idx = $(".mapDataDetail").filter('[data-cname="'+param.name+'"]').parent().index();
+                    self._setRightListAction(idx);
+                    //$(".mapDataDetail").filter('[data-cname="'+param.name+'"]').trigger('click');//模拟右侧列表相应项被点击了
                 }
             });
             setTimeout(function(){//获取地图上标注点的坐标，延时执行时因为直接执行shapeList为空，与页面执行速度有问题
                 $.each(self.chart._chartList[1].shapeList,function(k,v){
-                    if(v.clickable){
+                    if(v.clickable && self.shapeListData[v._echartsData._name]!=undefined && self.shapeListData[v._echartsData._name]['pos']['x']==undefined){
                         self.shapeListData[v._echartsData._name]['pos'] = 
                             { 
                                 x:v.style.x + v.position[0],
@@ -485,11 +488,11 @@ define(['echarts','echarts/chart/map'],
                 onSlideClick:function(sw) {
 					/*page_1_swiper.stopAutoplay();
 					page_1_swiper.params.speed=300;*/
-					clearTimeout(swipetimeout);
+					/*clearTimeout(swipetimeout);
 					page_1_swiper.stopAutoplay();
 					swipetimeout = setTimeout(function() {
 						page_1_swiper.startAutoplay();
-					} ,2000)
+					} ,2000);
                     page_1_swiper.swipeTo(page_1_swiper.clickedSlideIndex,300);
                     var $sides = $(page_1_swiper.clickedSlide);
                     $sides
@@ -497,9 +500,12 @@ define(['echarts','echarts/chart/map'],
                         .siblings()
                         .removeClass("swiper-slide-click-active");
                     self.tip_idx = page_1_swiper.clickedSlideIndex;
-                    self.showTip($sides.find(".mdh2_2").text());
+                    self.showTip($sides.find(".mdh2_2").text());*/
+                    self._setRightListAction(page_1_swiper.clickedSlideIndex);
                 }
             });
+            self.swipetimeout = null;
+            self.page_1_swiper = page_1_swiper;
             $swiperTarget.on("transitionend.swiper webkitTransitionEnd.swiper oTransitionEnd.swiper", function(e) {
                 e.stopPropagation();
             });
@@ -510,6 +516,22 @@ define(['echarts','echarts/chart/map'],
             MapArrylength =null;
             $a            =null;
         };
+        LvMap.prototype._setRightListAction = function(idx) {//设置右侧列表
+            var self = this;
+            clearTimeout(self.swipetimeout);
+            self.page_1_swiper.stopAutoplay();
+            self.swipetimeout = setTimeout(function() {
+                self.page_1_swiper.startAutoplay();
+            } ,2000);
+            self.page_1_swiper.swipeTo(idx,300);
+            var $sides = $(".msEachlist").eq(idx);
+            $sides
+                .addClass("swiper-slide-click-active")
+                .siblings()
+                .removeClass("swiper-slide-click-active");
+            self.tip_idx = idx;
+            self.showTip($sides.find(".mdh2_2").text());
+        }
         return LvMap;
     }
 );

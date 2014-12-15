@@ -442,7 +442,7 @@ var page_modules = {
 		page_modules.initListLinks("#audit_managment","moduleHtml/Audit_Managment.html",".eachBlck","pagebgc-3");
 
 		//fai
-		page_modules.initListLinks("#fai_create","moduleHtml/FAI_CreateMQE.html",".eachBlck","pagebgc-4","page_audit");
+		page_modules.initListLinks("#fai_create","moduleHtml/FAI_CreateMQE2.html",".eachBlck","pagebgc-4","page_audit");
 		page_modules.initListLinks("#fai_managment","moduleHtml/FAI_Managment.html",".eachBlck","pagebgc-4");
 
 		//ec
@@ -762,9 +762,16 @@ function initChat() {
 			if ( $("#chatInput").val() != "" ) {
 				var newtemplate = $(chattemplate).clone();
 				var NewDate = new Date();
+				var $appcont = w_popLayoutfns.$selectors.pop_right_innerDOM.find(".EcdialogCon");
 				newtemplate.find(".emailcon-text").html( $("#chatInput").val() );
 				newtemplate.find(".emailcon-time").html( NewDate.getFullYear() +"-"+NewDate.getMonth() + "-" + NewDate.getDay() + " " +  NewDate.getHours()+":"+ NewDate.getMinutes()+":"+NewDate.getSeconds() );
-				w_popLayoutfns.$selectors.pop_right_innerDOM.find(".EcdialogCon").append(newtemplate);
+				$appcont.append(newtemplate);
+				if ($appcont[0].scrollHeight - $appcont[0].clientHeight > 0 ) {
+					$appcont.animate({
+						scrollTop: $appcont[0].scrollHeight - $appcont[0].clientHeight
+					});
+				}
+				
 				$("#chatInput").val("");
 			}
 		});
@@ -824,7 +831,7 @@ function jayfunction() {
 			}
 		});			
 	}).on("tap","#qstop_search", function() {
-		page_modules.loadinto("moduleHtml/Qstop_Search.html",".eachBlck","pagebgc-1","page_audit");
+		page_modules.loadinto("moduleHtml/Qstop_Search.html",".eachBlck","pagebgc-1","page_search");
 	});
 	
 	$(".ctrBtns").on("tap",".ctr_1", function() {

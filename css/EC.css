@@ -229,11 +229,23 @@
 	width:100%;
 	height:45px;
 	text-align:center;
-	background:rgba(255, 255, 255, 0.1);
+	background:rgb(0, 0, 0);
+	position: relative;
+	z-index: 2;
 }
 .EcdialogCon{
 	width:100%;
+	height: 100%;	
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
 	padding:20px 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	margin-top: -45px;
+	padding-top: 65px;
+	padding-bottom: 51px;
+	margin-bottom: -51px;
 }
 .EcdialogCon p{
 	width:100%;
@@ -630,7 +642,7 @@
 	top:20px;
 	right:40px;
 	width:180px;
-	z-index: 1;
+	z-index: 20;
 }
 .userMsg .page_swicher_1,
 .userMsg .page_swicher_2{height: auto;}

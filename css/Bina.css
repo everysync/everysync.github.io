@@ -202,7 +202,7 @@
 	line-height:57px;
 	color:#fff;
 	padding-top:16px;
-	border-bottom:1px solid #7e819b;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.16);
 }
 .audit_search i {
 	font-weight:normal;
@@ -217,7 +217,7 @@
 	line-height:42px;
 	color:#07a1c3;
 	text-align:center;
-	font-family:Microsoft YaHei;
+/*	font-family:Microsoft YaHei;*/
 	border-radius:22px;
 	background:#fff;
 	text-decoration:none;
@@ -240,6 +240,7 @@
 	float:left;
 	position:relative;
 	cursor:pointer;
+	margin-bottom: 15px;
 }
 .tabstyle_1 .auditBor {
 	height:38px;
@@ -281,7 +282,35 @@
 	width:100%;
 	position: relative;
 	display:block;
+	margin-bottom: 4px;
 }
+.qsitem_block.removing {
+	overflow: hidden;
+	-webkit-animation-name: qsremove;
+	animation-name: qsremove;
+	-webkit-animation-duration: 0.3s;
+	animation-duration: 0.3s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+	-webkit-animation-timing-function: linear;
+	animation-timing-function: linear;
+}
+/*@keyframes qsremove {
+	0% { transform: translate3d(0,0,0);}
+	50% { transform: translate3d(-120%,0,0); height:50px; }
+	100% { transform: translate3d(-120%,0,0); height: 0px;}
+}*/
+@-webkit-keyframes qsremove {
+	0% { -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0);}
+	50% { -webkit-transform: translate3d(-120%,0,0); transform: translate3d(-120%,0,0); height:50px; }
+	100% { -webkit-transform: translate3d(-120%,0,0); transform: translate3d(-120%,0,0); height: 0px;}
+}
+@keyframes qsremove {
+	0% { -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0);}
+	50% { -webkit-transform: translate3d(-120%,0,0); transform: translate3d(-120%,0,0); height:50px; }
+	100% { -webkit-transform: translate3d(-120%,0,0); transform: translate3d(-120%,0,0); height: 0px;}
+}
+
 .qsitem_t {
 	font-size: 16px;
 	line-height: 1.8em;
@@ -292,6 +321,12 @@
     display: block;
 	line-height:50px;
     margin-left: 94px;
+	-webkit-transition: margin-left .2s linear;
+	-o-transition: margin-left .2s linear;
+	transition: margin-left .2s linear;
+}
+.qsedit .qsitem_ckf {
+	margin-left: 15px;
 }
 
 .qsitem_ckb {
@@ -299,14 +334,69 @@
 	position: relative;
     float: left;
 	font-size: 0;
+	overflow: hidden;
+	height: 32px;
+	width: 84px;
     margin: 10px 0 0 4px;
+	-webkit-transition: width .2s linear;
+	-o-transition: width .2s linear;
+	transition: width .2s linear;
+}
+#delelemts {
+	-webkit-transition: width .2s linear;
+	-o-transition: width .2s linear;
+	transition: width .2s linear;
 }
 .qsyes .qsitem_ckb:before {
 	left: 0;
 }
+.qsedit,
 .qsno {
+	-webkit-transition: background-color .4s linear;
+	-o-transition: background-color .4s linear;
+	transition:background-color .4s linear;
 	background-color: rgba(0,0,0,0.1);
 }
+.qsedit .qsitem_ckb {
+	width: 0px;
+}
+.qsremovebtn {
+	display: none;
+	margin: 4px;
+	float: right;
+	width: 42px;
+	height: 42px;
+	font-size: 32px;
+	text-align: center;
+	line-height: 42px;
+	color: #f97360;
+	cursor: pointer;
+}
+.qsedit .qsremovebtn {
+	display: block;
+	-webkit-animation-name: cbtnanimate;
+	animation-name: cbtnanimate;
+	-webkit-animation-duration: 0.3s;
+	animation-duration: 0.3s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+	-webkit-animation-timing-function: cubic-bezier(0, 2, .48, .79);
+	animation-timing-function:cubic-bezier(0, 2, .48, .79);
+}
+
+/*@keyframes cbtnanimate {
+	from { opacity: 0; transform: translate3d(100px,0,0) rotate(720deg);}
+	to {opacity: 1; transform: translate3d(0px,0,0) rotate(0deg);}
+}*/
+@-webkit-keyframes cbtnanimate {
+	from { opacity: 0; -webkit-transform: translate3d(100px,0,0) rotate(720deg); transform: translate3d(100px,0,0) rotate(720deg);}
+	to {opacity: 1; -webkit-transform: translate3d(0px,0,0) rotate(0deg); transform: translate3d(0px,0,0) rotate(0deg);}
+}
+@keyframes cbtnanimate {
+	from { opacity: 0; -webkit-transform: translate3d(100px,0,0) rotate(720deg); transform: translate3d(100px,0,0) rotate(720deg);}
+	to {opacity: 1; -webkit-transform: translate3d(0px,0,0) rotate(0deg); transform: translate3d(0px,0,0) rotate(0deg);}
+}
+
 .qsyes .qsitem_ckb,
 .qsno .qsitem_ckb {
 	background-image: none;
@@ -326,6 +416,9 @@
 }
 .qsno .qsitem_qus_wrap_slide {
 	max-height: 500px;
+}
+.qsedit .qsitem_qus_wrap_slide {
+	max-height: 0px;
 }
 .setYourWords {
 	width: 83%;

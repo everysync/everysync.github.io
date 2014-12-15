@@ -60,6 +60,17 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+
+.ficon-plus:before {
+	content: "\f05d";
+}
+.ficon-cancel:before {
+	content: "\e612";
+}
+.ficon-pencil:before {
+	content: "\e611";
+}
+
 .ficon-icon-search:before {
 	content: "\e60a";
 }
@@ -1162,9 +1173,17 @@ html.onepage-scroll body {
 }
 
 .passFailResult{
+  display:-webkit-box;
+  display:box;
+  display:-webkit-flex;
   display:flex;
   height:50px;
-  align-items:center;
+  -webkit-box-align: center;
+  box-align: center;
+  -webkit-box-pack: end;
+  box-pack: end;
+  -webkit-align-items:center;
+  align-items: center;
   justify-content:flex-end;
   padding-right:30px;
 }
@@ -2361,7 +2380,7 @@ input.modal-text-input {
 	opacity:0;
 }
 
-
+#chats {height: 100%;}
 @media only screen and (max-width:1280px){
 .ctrBtns .ctr_1,
 .ctrBtns .ctr_2,

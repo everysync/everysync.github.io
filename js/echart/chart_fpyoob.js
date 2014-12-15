@@ -27,8 +27,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
             }
         };
         LvFpyOob.prototype.bindEvents = function () {//绑定相关事件
-            var self = this;
-            
+            var self = this;       
             switch(this.chartType){
                 case "timeLine":
                     this.chart.on(lvChart.ecConfig.EVENT.CLICK, function(param){
@@ -297,7 +296,6 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
             self._setOptionTimeLine(mydata);
             drawFlag&&self.resetOption();
         };
-
         //_setOptionTimeLine_2
         LvFpyOob.prototype._setOptionTimeLine_2 = function(mydata){
             var option = {
@@ -802,7 +800,10 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                 $("#fpy_module_name").text(self.chartData[idx].Phase);
             }
             //修改背景颜色
-            $(".demopagec-2 ."+colorCls[self.chartData[idx].Phase]).css({opacity:1}).siblings().css({opacity:0});
+             if(!$(".demopagec-2").hasClass(colorCls[self.chartData[idx].Phase])){
+                $(".demopagec-2").attr('class','eachBlck demopagec-2 '+colorCls[self.chartData[idx].Phase]+' section active');
+            }
+            // $(".demopagec-2 ."+colorCls[self.chartData[idx].Phase]).css({opacity:1}).siblings().css({opacity:0});
             //修改标线
             self.chart.delMarkLine(0,'标线1');
             self.chart.addMarkLine(0,{data :[[{name: '标线1', xAxis: self.chartData[idx].ProductId, yAxis: 0},{xAxis: self.chartData[idx].ProductId, yAxis: self.chartData[idx].fpyNumber}]]});
