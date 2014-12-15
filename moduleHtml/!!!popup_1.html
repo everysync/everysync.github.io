@@ -29,25 +29,35 @@
 						<div class="button active">当前分类</div>
 						<div class="button">其它分类</div>
 					</div>-->
-					<input type="text" class="modal-text-input" placeholder="请输入要添加的字段">
-					<div class="content-block-title">添加到：</div>
-					<div class="content-block">
-						<p class="pdtb15"><a class="button button-round">Round Button 1</a></p>
-						<p class="pdtb15"><a class="button button-round">Round Button 2</a></p>
-						<p class="pdtb15"><a class="button button-round">Round Button 3</a></p>
-						<p class="pdtb15"><a class="button button-round">Round Button 4</a></p>
-						<p class="pdtb15"><a class="button button-round">Round Button 5</a></p>
-						<p class="pdtb15"><a class="button button-round active">Round Button Active</a></p>
-						<div class="item-row ifpush clearfix">
-							<span class="ifp-text fl_l">
-								是否推送到服务器通知
-							</span>
-							<label class="label-switch fl_r ifp-switch-wrap">
-								<input type="checkbox" checked>
-								<div class="checkbox"></div>
-							</label>	
+					<div id="add_data_from">
+						<input type="text" class="modal-text-input" placeholder="请输入要添加的字段">
+						<div class="content-block-title">添加到：</div>
+						<div class="content-block">
+							<p class="pdtb15"><a class="button button-round">Round Button 1</a></p>
+							<p class="pdtb15"><a class="button button-round">Round Button 2</a></p>
+							<p class="pdtb15"><a class="button button-round">Round Button 3</a></p>
+							<p class="pdtb15"><a class="button button-round">Round Button 4</a></p>
+							<p class="pdtb15"><a class="button button-round">Round Button 5</a></p>
+							<p class="pdtb15"><a class="button button-round active">Round Button Active</a></p>
+							<div class="item-row ifpush clearfix">
+								<span class="ifp-text fl_l">
+									添加到服务通知并<font color="#07a1c3">自动发送</font>
+								</span>
+								<label class="label-switch fl_r ifp-switch-wrap" for="add_autofill_send">
+									<input id="add_autofill_send" type="radio" name="atf" checked>
+									<div class="checkbox"></div>
+								</label>	
+							</div>
+							<div class="item-row ifpush clearfix" style="padding-top:15px">
+								<span class="ifp-text fl_l">
+									添加到服务通知但<font color="#07a1c3">让我编辑</font>
+								</span>
+								<label class="label-switch fl_r ifp-switch-wrap" for="add_autofill">
+									<input id="add_autofill" type="radio" name="atf" checked>
+									<div class="checkbox"></div>
+								</label>	
+							</div>
 						</div>
-						
 					</div>
 					
 					

@@ -165,10 +165,75 @@ define('page_audit',[],function() {
 		
 		var createdbtn = function() {
 			$("#addnewss").on("click", function(e) {
-				$(".layoutst_1").eq(0).find(".Qualify_flex").append(qustemplate);
-				audit_create();
-				cuntNumInit();
-				flieUploadsmode();
+				function mokupconten(cont) {
+//					console.log(cont)
+					cont.load("moduleHtml/!!!popup_1.html #add_data_from", function() {
+						w_popLayoutfns.modalrefresh();
+					});
+				}
+				function mokupbutton() {
+					var btn_1 = '<div class="pm-button button-no">取消</div>';
+					var btn_2 = '<div class="pm-button button-yes">添加</div>';
+					return btn_1+ btn_2;
+				}
+				
+				function mokupcallback(obj) {
+					//console.log(obj)
+					obj.on("click", ".button-no",function() {
+						w_popLayoutfns.modalhide(0,true);
+					}).on("click", ".button-yes", function() {
+						var _valobj = obj.find("input.modal-text-input");
+						if (_valobj.val().replace(/(^\s*)|(\s*$)/g, "") == "") {
+							w_popLayoutfns.modalshow(0,"你什么都没写。",'<div class="pm-button button-no">不写了</div><div class="pm-button button-yes">重来</div>',function(obj) {
+								obj.on("click", ".button-no", function() {
+									w_popLayoutfns.modalhide(0,true);
+								}).on("click",".button-yes", function() {
+									showaddmodal();
+								});
+							})
+							return;
+						}
+						
+						//插入跟初始化选项
+						var newtepm = $qustemplate.clone();
+						$(".layoutst_1").eq(0).find(".Qualify_flex").append(newtepm.find("span.qsitem_ckf").html(_valobj.val()).end() );
+						audit_create();
+						cuntNumInit();
+						flieUploadsmode();
+						
+						if ( $("#add_autofill_send").prop("checked") === true ) {
+							$(".ctr_7").trigger("tap");
+							var inputVal = "[通知]我增加了一条FAI规则：" + _valobj.val();
+							$(document).on("side_showed.add2input", function(e) {
+								$("#chatInput").val(inputVal);
+								$("#btnsend").trigger("click");
+								$(document).off(".add2input");
+							})
+							w_popLayoutfns.modalhide(0,true);
+							
+						} else if ($("#add_autofill").prop("checked") === true) {
+							$(".ctr_7").trigger("tap");
+							var inputVal = "[通知]我增加了一条FAI规则：" + _valobj.val();
+							$(document).on("side_showed.add2input", function(e) {
+								$("#chatInput").val(inputVal);
+								$(document).off(".add2input");
+							})
+							w_popLayoutfns.modalhide(0,true);
+						}
+						
+						
+					});
+				}
+				
+				function showaddmodal() {
+					w_popLayoutfns.modalshow(
+						0,
+						function(cont){mokupconten(cont)}, 
+						mokupbutton(),
+						function(obj) {mokupcallback(obj)}
+					);	
+				}
+				showaddmodal();
 			})
 		};
 		createdbtn();

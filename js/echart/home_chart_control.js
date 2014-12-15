@@ -24,11 +24,11 @@ define(function(){
 		chartObj['p2'].push(line);
 		$(".ramp_switch").on('tap','.pageswipebtn:not(.cur)',function(){//切换工厂后执行刷新图表
 			var $this = $(this);
-			var $center = $('#center-nav-1');
+			var $center = $('.demopagec-2 .center-nav');
 			$this.addClass("cur").siblings().removeClass('cur');
 			line.factoryName = $(this).text();
 			var tidx = Number($this.index()+1);
-			var ciiconCur = $('.center-nav .ci-'+tidx+' .ciicons.cur');
+			var ciiconCur = $('.demopagec-2 .center-nav .ci-'+tidx+' .ciicons.cur');
 			if(ciiconCur.length>0){
 				line.fbyType = ciiconCur.index()+1;
 			}else{
@@ -40,7 +40,7 @@ define(function(){
 			$center.addClass( 'show-'+tidx);
 			line.getChartData(1);
 		});
-		$(".center-item").on('tap','.ciicons:not(.cur)',function(){//
+		$(".demopagec-2 .center-item").on('tap','.ciicons:not(.cur)',function(){//
 			var $this = $(this);
 			$this.addClass("cur").siblings().removeClass('cur');
 			line.fbyType = $(this).index()+1;
@@ -75,18 +75,34 @@ define(function(){
 	require(["chart_fpyoob"],function(LvFpyOob){//FPY/OOB Mass Production
 		var line = new LvFpyOob('chart_fpy_timeLine','timeLine');
 		chartObj['p3'].push(line);
+
 		$(".mass_switch").on('tap','.pageswipebtn:not(.cur)',function(){//切换工厂后执行刷新图表
-			$(this).addClass("cur").siblings().removeClass('cur');
-			line.factoryName = $(this).text();
-			line.getChartData(1);
 			var $this = $(this);
-			var $center = $('#center-nav-2');
+			var $center = $('.demopagec-2-2 .center-nav');
+			$this.addClass("cur").siblings().removeClass('cur');
+			line.factoryName = $(this).text();
+			var tidx = Number($this.index()+1);
+			var ciiconCur = $('.demopagec-2-2 .center-nav .ci-'+tidx+' .ciicons.cur');
+			if(ciiconCur.length>0){
+				line.fbyType = ciiconCur.index()+1;
+			}else{
+				line.fbyType = 0;
+			}
 			//切换中间center-nav
 			$center.removeClass("show-1 show-2");
-			console.log('show-'+Number($this.index()+1))
-			$center.addClass( 'show-'+Number($this.index()+1) );
-			
-			
+			console.log('show-'+tidx)
+			$center.addClass( 'show-'+tidx);
+			line.getChartData(1);
+		});
+		$(".demopagec-2-2 .center-item").on('tap','.ciicons:not(.cur)',function(){//
+			var $this = $(this);
+			$this.addClass("cur").siblings().removeClass('cur');
+			line.fbyType = $(this).index()+1;
+			line.getChartData(1);
+		}).on('tap','.ciicons.cur',function(){//取消选择 
+			$(this).removeClass('cur');
+			line.fbyType = 0;
+			line.getChartData(1);
 		});
 	});
 	require(["chart_fai"],function(LvFai){//FAI

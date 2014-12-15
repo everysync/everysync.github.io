@@ -36,28 +36,24 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                     }); 
                     break;
                 case "line":
-                    $("#lineCanvas").on('touchmove',function(e){
+                    if(self.chartData.length>0){
+                        self.refreshPointData(0);
+                    }
+                    $("#rampCanvas").on('touchmove',function(e){
                         var touch = e.originalEvent.targetTouches[0]; 
                         var widthT = $(this).width();
                         var len = self.chartData.length;
                         var cur = Math.round(((touch.pageX-70)*len)/widthT);
                         cur = cur<0?0:cur;
-                        cur = cur>len-1?len-1:cur;
-                        console.log(cur);
-                        self.refreshPointData(self.chart.component.xAxis.getAxis(0).getIndexByName(self.chartData[cur].ProductId));
-                        self.chart.delMarkLine(0,'标线1');
-                        self.chart.addMarkLine(0,{data :[[{name: '标线1', xAxis: self.chartData[cur].ProductId, yAxis: 0}, 
-        {xAxis: self.chartData[cur].ProductId, yAxis: self.chartData[cur].fpyNumber}]]});
+                        cur = cur>(len-1)?(len-1):cur;
+                        self.refreshPointData(cur);
                     }).on('mousemove',function(e){
                         var widthT = $(this).width();
                         var len = self.chartData.length;
                         var cur = Math.round((e.offsetX*len)/widthT);
                         cur = cur<0?0:cur;
-                        cur = cur>len-1?len:cur-1;
-                        self.refreshPointData(self.chart.component.xAxis.getAxis(0).getIndexByName(self.chartData[cur].ProductId));
-                        self.chart.delMarkLine(0,'标线1');
-                        self.chart.addMarkLine(0,{data :[[{name: '标线1', xAxis: self.chartData[cur].ProductId, yAxis: 0}, 
-        {xAxis: self.chartData[cur].ProductId, yAxis: self.chartData[cur].fpyNumber}]]});
+                        cur = cur>(len-1)?(len-1):cur;
+                        self.refreshPointData(cur);
                     });
                     break;
                 default:break;
@@ -561,12 +557,6 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
 
         LvFpyOob.prototype._setOptionLine = function(mydata){
             var self = this;
-            $("#lineCanvas").css({
-                width:$('#chart_fpy_Line').width()-120+"px",
-                height:$('#chart_fpy_Line').height()-90+"px",
-                top:'180px',
-                left:'70px'
-            });
             // require(["chart_line"],function(chartline){            
             //        self.line = chartline;                  
             //        self.line.init();
@@ -689,13 +679,6 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                     self.chartMp++;
                 }
             };   
-            if(mydata.length>0){
-                option.series[0].markLine.data.push([
-                    {name: '标线1', xAxis: mydata[0].ProductId, yAxis: 0}, 
-                    {xAxis: mydata[0].ProductId, yAxis: mydata[0].fpyNumber}
-                ]);
-                self.refreshPointData(0);
-            }
             this.option = option;
             this.loadStatus = true;
             return option;
@@ -717,7 +700,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                 ramp = [];
             for (var i = 0; i < 30; i++) {
                 svt.push({
-                    "ProductId": 'P'+(10100+1),
+                    "ProductId": 'P'+(10100+i),
                     "ProductName": "C520s",
                     "Mfg": "Compal Brazil",
                     "Phase": "SVT",
@@ -814,13 +797,15 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                 '    </div>'+
                 '</div>'
             );
+            //修改phase字段
             if(self.chartData[idx].Phase != $("#fpy_module_name").text()){
                 $("#fpy_module_name").text(self.chartData[idx].Phase);
             }
-            if(!$(".demopagec-2").hasClass(colorCls[self.chartData[idx].Phase])){
-                // $(".demopagec-2").attr('class','eachBlck demopagec-2 '+colorCls[self.chartData[idx].Phase]+' section active');
-                $(".demopagec-2 ."+colorCls[self.chartData[idx].Phase]).css({opacity:1}).siblings().css({opacity:0});
-            }
+            //修改背景颜色
+            $(".demopagec-2 ."+colorCls[self.chartData[idx].Phase]).css({opacity:1}).siblings().css({opacity:0});
+            //修改标线
+            self.chart.delMarkLine(0,'标线1');
+            self.chart.addMarkLine(0,{data :[[{name: '标线1', xAxis: self.chartData[idx].ProductId, yAxis: 0},{xAxis: self.chartData[idx].ProductId, yAxis: self.chartData[idx].fpyNumber}]]});
         };
         return LvFpyOob;
     }

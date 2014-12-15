@@ -163,9 +163,9 @@
 		<!--eachBlck-->
 		<div class="eachBlck demopagec-2">
 			<div>
-				<div class="pagebgc-2 backcolor"></div>
-				<div class="pagebgc-3 backcolor"></div>
-				<div class="pagebgc-4 backcolor"></div>
+				<div class="pagebgc-2 backcolor" style="position:absolute;width:100%;top:0;bottom:0;z-index:1;opacity:0;"></div>
+				<div class="pagebgc-3 backcolor" style="position:absolute;width:100%;top:0;bottom:0;height:100%;z-index:1;opacity:0;"></div>
+				<div class="pagebgc-4 backcolor" style="position:absolute;width:100%;top:0;bottom:0;height:100%;z-index:1;opacity:0;"></div>
 			</div>
 			<h2 class="eachBlockTitle">FPY/OOB <span class="tiny">Ramp Up</span></h2>
 			<div id="center-nav-1" class="center-nav show-1">
@@ -224,7 +224,9 @@
 				</div>
 				<div class="first_page_swicher_1">
 					<div class="chwrap2">
-						<div id="rampCanvas"><div id="fpy_module_name">SVT</div></div>
+						<div id="lineCanvas" style="position:absolute;z-index:5;background:rgba(0,0,0,0);"></div>
+						<!-- <div id="line"></div> -->
+						<div id="fpy_module_name">SVT</div>
 						<div id="chart_fpy_Line"></div>
 						<div class="fpy_line_type"><span>SVT</span><span>SOVP</span><span>RAMP UP</span></div>
 					</div>

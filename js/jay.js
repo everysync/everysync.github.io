@@ -670,6 +670,23 @@ var popLayoutfns = {
 			};
 		})
 	},
+	modalrefresh:function() {
+		modalinit.cacheModals[0].css({
+			"marginTop":"-" + modalinit.cacheModals[0].height()/2 +"px"
+		});
+	},
+	modalhide:function(target,himask) {
+		var _target = target || modalinit.cacheModals[0];
+		var hidemask = himask || false;
+		var oldmodal = _target;
+		oldmodal.on(transEnd("modalend"),function(){
+			oldmodal.remove();
+		});
+		oldmodal.addClass(modalinit.modal_hide_class);
+		if (hidemask === true ) {
+			popLayoutfns.maskhide();
+		}
+	},
 	modalshow:function(title,content,buttons,callback) {
 		var _title = title || false;
 		var _content = content || false;
@@ -685,18 +702,11 @@ var popLayoutfns = {
 			newModal.find(".popMod-title").html(_title);
 		}
 		//加载按钮区域
-		if (_buttons!==false || typeof _buttons != "function") {
-			$buttonArea.html( $.parseHTML(_buttons) );
-		} else if (_buttons!==false || typeof _buttons == "function") {
-			$buttonArea.html( _buttons );
-		} else {
+		if (_buttons!==false) {
+			$buttonArea.html(_buttons);
+		}  else {
 			$buttonArea.on("click.event_modal_button_click",".pm-button", function(e) {
-				/*popLayoutfns.modalhide();*/
-				newModal.on(transEnd("modalend"),function(){
-					newModal.remove();
-				});
-				newModal.addClass(modalinit.modal_hide_class);
-				popLayoutfns.maskhide();
+				popLayoutfns.modalhide(0,true);
 			});
 		}
 		//加载内容区域
@@ -704,7 +714,7 @@ var popLayoutfns = {
 			newModal.find(".pm-cont-inner").html( $.parseHTML(_content) );
 			/*console.log("initHTML")*/
 		} else if (_content !== false && typeof _content == "function"){
-			newModal.find(".pm-cont-inner").html( _content );
+			newModal.find(".pm-cont-inner").html( _content( newModal.find(".pm-cont-inner") ) );
 			/*console.log("initFunction")*/
 		}
 		
@@ -712,13 +722,16 @@ var popLayoutfns = {
 		popLayoutfns.maskshow();
 		//把新Modal添加到body
 		newModal.appendTo($body);
-		modalinit.cacheModals.push(newModal);
+		if (modalinit.cacheModals[0]) {
+			popLayoutfns.modalhide();
+		}
+		modalinit.cacheModals[0] = newModal;
 		//重新定位Modal高度，并居中它
 		newModal.css({
 			"marginTop":-newModal.height()/2
 		});
 		setTimeout(function() {newModal.addClass(modalinit.modal_show_class)},28);
-		console.log(modalinit.cacheModals)
+//		console.log(modalinit.cacheModals)
 		//callback
 		if (callback) {
 			callback(newModal);
@@ -732,7 +745,30 @@ function testload() {
 }
 
 function initChat() {
-	$("#chats").load("moduleHtml/UserCenter-Comment.html .EcR-box")
+	var chattemplate =	'<div class="emaillist clearfix">'+
+						'	<span class="commenticon" style="background-image:url(images/EcIcon/comment-icon.png)"></span>	'+
+						'	<div class="emailcon commentcon">'+
+						'		<div class="marB10 clearfix">'+
+						'			<span class="emailcon-name">Jason_Zhao</span>'+
+						'			<span class="emailcon-time">2014-09-04 00:51:21</span>'+
+						'		</div>'+
+						'		<div class="emailcon-text">Great job!Brothers! </div> '+
+						'	</div>'+
+						'</div>';
+	
+	
+	$("#chats").load("moduleHtml/UserCenter-Comment.html .EcR-box",function() {
+		$("#btnsend").on("click", function() {
+			if ( $("#chatInput").val() != "" ) {
+				var newtemplate = $(chattemplate).clone();
+				var NewDate = new Date();
+				newtemplate.find(".emailcon-text").html( $("#chatInput").val() );
+				newtemplate.find(".emailcon-time").html( NewDate.getFullYear() +"-"+NewDate.getMonth() + "-" + NewDate.getDay() + " " +  NewDate.getHours()+":"+ NewDate.getMinutes()+":"+NewDate.getSeconds() );
+				w_popLayoutfns.$selectors.pop_right_innerDOM.find(".EcdialogCon").append(newtemplate);
+				$("#chatInput").val("");
+			}
+		});
+	});
 }
 
 
