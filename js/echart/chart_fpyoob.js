@@ -647,7 +647,8 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                             }}},
                         data:[],
                         markPoint : {
-                            symbolSize: 6,
+                            symbol:"emptyCircle",
+                            symbolSize: 4,
                             data : []
                         },
                         markLine : {
@@ -695,8 +696,10 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
             // });
             var svt = [],
                 sovp = [],
-                ramp = [];
-            for (var i = 0; i < 30; i++) {
+                ss1 = [],
+                ss2 = [],
+                ss3 = [];
+            for (var i = 0; i < 20; i++) {
                 svt.push({
                     "ProductId": 'P'+(10100+i),
                     "ProductName": "C520s",
@@ -712,7 +715,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                     "oobstatus": "up"
                 });
                 sovp.push({
-                    "ProductId": 'P'+(10130+i),
+                    "ProductId": 'P'+(10120+i),
                     "ProductName": "H520s",
                     "Mfg": "Compal Brazil",
                     "Phase": "SOVP",
@@ -725,11 +728,39 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                     "oobNumber": 80+Math.floor(Math.random()*18),
                     "oobstatus": "up"
                 });
-                ramp.push({
+                ss1.push({
+                    "ProductId":'P'+(10140+i),
+                    "ProductName": "Y520s",
+                    "Mfg": "Compal Brazil",
+                    "Phase": "SS+1",
+                    "SS": "2014-09-03",
+                    "InputQty": "2014-09-24",
+                    "TOP1": 80+Math.floor(Math.random()*18),
+                    "TOP2": 80+Math.floor(Math.random()*18),
+                    "fpystatus": "down",
+                    "fpyNumber": 50+Math.floor(Math.random()*10),
+                    "oobNumber": 50+Math.floor(Math.random()*10),
+                    "oobstatus": "up"
+                });
+                ss2.push({
                     "ProductId":'P'+(10160+i),
                     "ProductName": "Y520s",
                     "Mfg": "Compal Brazil",
-                    "Phase": "RAMP",
+                    "Phase": "SS+2",
+                    "SS": "2014-09-03",
+                    "InputQty": "2014-09-24",
+                    "TOP1": 80+Math.floor(Math.random()*18),
+                    "TOP2": 80+Math.floor(Math.random()*18),
+                    "fpystatus": "down",
+                    "fpyNumber": 50+Math.floor(Math.random()*10),
+                    "oobNumber": 50+Math.floor(Math.random()*10),
+                    "oobstatus": "up"
+                });
+                ss3.push({
+                    "ProductId":'P'+(10180+i),
+                    "ProductName": "Y520s",
+                    "Mfg": "Compal Brazil",
+                    "Phase": "SS+3",
                     "SS": "2014-09-03",
                     "InputQty": "2014-09-24",
                     "TOP1": 80+Math.floor(Math.random()*18),
@@ -740,7 +771,7 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                     "oobstatus": "up"
                 });
             };
-            self.chartData = svt.concat(sovp,ramp);
+            self.chartData = svt.concat(sovp,ss1,ss2,ss3);
             self._setOptionLine(self.chartData);
             drawFlag&&self.resetOption();
         };
@@ -771,12 +802,39 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
         //刷新上部的点的信息
         LvFpyOob.prototype.refreshPointData = function(idx){
             var self = this;
-            var colorCls = {SVT:'pagebgc-2',SOVP:'pagebgc-3',RAMP:'pagebgc-4'};
+            var colorCls = {'SVT':'fpyramp-1','SOVP':'fpyramp-2','SS+1':'fpyramp-3','SS+2':'fpyramp-4','SS+3':'fpyramp-5'};
             $('#fpyoob_proInfo').html(
+                '<table ><tbody>'+
+                '    <tr>'+
+                '        <td class="cell-th td-h">Product:</td>'+
+                '        <td class="cell-td td-h" colspan="3">'+self.chartData[idx].ProductName+'</td>'+
+                '        <td rowspan="2" class="cell-status"><span class="ebtd_'+self.chartData[idx].fpystatus+'"><i class="ficon-icon_arrow_down"></i><em>'+self.chartData[idx].fpyNumber+'</em><b>%FPY</b></span></td>'+
+                '    </tr>'+
+                '    <tr>'+
+                '        <td class="cell-th">MFG:</td>'+
+                '        <td class="cell-td">'+self.chartData[idx].Mfg+'</td>'+
+                '        <td class="cell-th">SS:</td>'+
+                '        <td class="cell-td">'+self.chartData[idx].SS+'</td>'+
+                '    </tr>'+
+                '    <tr>'+
+                '        <td class="cell-th">Phase:</td>'+
+                '        <td class="cell-td">'+self.chartData[idx].Phase+'</td>'+
+                '        <td class="cell-th">TOP1:</td>'+
+                '        <td class="cell-td">'+self.chartData[idx].TOP1+'</td>'+
+                '        <td rowspan="2" class="cell-status"><span class="ebtd_'+self.chartData[idx].oobstatus+'"><i class="ficon-icon_arrow_up"></i><em>'+self.chartData[idx].oobNumber+'</em><b>%OOB</b></span></td>'+
+                '    </tr>'+
+                '    <tr>'+
+                '        <td class="cell-th">Input Q\'ty:</td>'+
+                '        <td class="cell-td">'+self.chartData[idx].InputQty+'</td>'+
+                '        <td class="cell-th">TOP2:</td>'+
+                '        <td class="cell-td">'+self.chartData[idx].TOP2+'</td>'+
+                '    </tr>'+
+                '</tbody></table>');
+            /*$('#fpyoob_proInfo').html(
                 '<h2 class="ebtd_h2">Product: <span>'+self.chartData[idx].ProductName+'</span></h2>'+
                 '<h3 class="ebtd_h3">'+
-                '    <span class="ebtd_down"><i class="ficon-icon_arrow_down"></i><em>'+self.chartData[idx].fpyNumber+'</em><b>%FPY</b></span>'+
-                '    <span class="ebtd_up"><i class="ficon-icon_arrow_up"></i><em>'+self.chartData[idx].oobNumber+'</em><b>%OOB</b></span>'+
+                '    <span class="ebtd_down"><i class="ficon-icon_arrow_'+self.chartData[idx].fpystatus+'"></i><em>'+self.chartData[idx].fpyNumber+'</em><b>%FPY</b></span>'+
+                '    <span class="ebtd_up"><i class="ficon-icon_arrow_'+self.chartData[idx].oobstatus+'"></i><em>'+self.chartData[idx].oobNumber+'</em><b>%OOB</b></span>'+
                 '</h3>'+
                 '<div class="ebtd_table">'+
                 '    <div class="row">'+
@@ -794,16 +852,16 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                 '        <div class="cell-th">TOP2</div><div class="cell-td" colspan="3">'+self.chartData[idx].TOP2+'</div>'+
                 '    </div>'+
                 '</div>'
-            );
+            );*/
             //修改phase字段
             if(self.chartData[idx].Phase != $("#fpy_module_name").text()){
                 $("#fpy_module_name").text(self.chartData[idx].Phase);
             }
             //修改背景颜色
-             if(!$(".demopagec-2").hasClass(colorCls[self.chartData[idx].Phase])){
-                $(".demopagec-2").attr('class','eachBlck demopagec-2 '+colorCls[self.chartData[idx].Phase]+' section active');
-            }
-            // $(".demopagec-2 ."+colorCls[self.chartData[idx].Phase]).css({opacity:1}).siblings().css({opacity:0});
+            //  if(!$(".demopagec-2").hasClass(colorCls[self.chartData[idx].Phase])){
+            //     $(".demopagec-2").attr('class','eachBlck demopagec-2 '+colorCls[self.chartData[idx].Phase]+' section active');
+            // }
+            $(".demopagec-2 ."+colorCls[self.chartData[idx].Phase]).css({opacity:1}).siblings().css({opacity:0});
             //修改标线
             self.chart.delMarkLine(0,'标线1');
             self.chart.addMarkLine(0,{data :[[{name: '标线1', xAxis: self.chartData[idx].ProductId, yAxis: 0},{xAxis: self.chartData[idx].ProductId, yAxis: self.chartData[idx].fpyNumber}]]});

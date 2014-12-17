@@ -505,7 +505,34 @@ html.onepage-scroll body {
 	position: absolute;
 	z-index: 1;
 	top: 50px;
-	left: 72px;
+	width:100%;
+}
+
+.eachBlockTitle_dt table{
+	width:93%;
+	margin:0 auto;
+	table-layout:auto;
+	color:rgba(255,255,255,0.95);
+}
+.eachBlockTitle_dt table .cell-th{
+	text-align: right;
+	padding-right: 8px;
+	padding-top: 8px;
+	font-size: 16px;
+}
+
+.eachBlockTitle_dt table .cell-td{
+	text-align: left;
+	padding-right: 8px;
+	padding-top: 8px;
+	font-size: 16px;
+}
+.eachBlockTitle_dt table .td-h{
+	font-size: 24px!important;
+}
+.eachBlockTitle_dt table .cell-status{
+	text-align: center;
+	padding-top:8px;
 }
 .eachBlockTitle_dt .ebtd_h2 {
 	display: inline-block;
@@ -574,10 +601,10 @@ html.onepage-scroll body {
 	top: 100%;
 	-webkit-transition: background-image 2s linear;
 	transition: background-image 2s linear;
-	background-image: -webkit-linear-gradient(60deg, #0d7db7, #00c6d0);
-	background-image: -moz-linear-gradient(60deg, #0d7db7, #00c6d0);
-	background-image: -o-linear-gradient(60deg, #0d7db7, #00c6d0);
-	background-image: linear-gradient(60deg, #0d7db7, #00c6d0);
+	background-image: -webkit-linear-gradient(0deg,#0D95B7,#01CEBF);
+	background-image: -moz-linear-gradient(0deg,#0D95B7,#01CEBF);
+	background-image: -o-linear-gradient(0deg,#0D95B7,#01CEBF);
+	background-image: linear-gradient(0deg,#0D95B7,#01CEBF);
 }
 
 .demopagec-2-2 {
@@ -1010,10 +1037,12 @@ html.onepage-scroll body {
 .map_tips_red {
 	background:#ff9393;
 	color:#fff;
+	max-width: 300px;
 }
 .map_tips_yellow {
 	background:#EC8824;
 	color:#fff;
+	max-width: 300px;
 }
 .map_tips:after {
 	position:absolute;
@@ -2378,6 +2407,36 @@ input.modal-text-input {
 	bottom:0;
 	z-index:1;
 	opacity:0;
+}
+.fpyramp-1.backcolor{
+	background-image: -webkit-linear-gradient(0deg,#0D95B7,#01CEBF);
+	background-image: -moz-linear-gradient(0deg,#0D95B7,#01CEBF);
+	background-image: -o-linear-gradient(0deg,#0D95B7,#01CEBF);
+	background-image: linear-gradient(0deg,#0D95B7,#01CEBF);
+}
+.fpyramp-2.backcolor{
+	background-image: -webkit-linear-gradient(0deg,#356EBE,#02A4CF);
+	background-image: -moz-linear-gradient(0deg,#356EBE,#02A4CF);
+	background-image: -o-linear-gradient(0deg,#356EBE,#02A4CF);
+	background-image: linear-gradient(0deg,#356EBE,#02A4CF);
+}
+.fpyramp-3.backcolor{
+	background-image: -webkit-linear-gradient(0deg,#9864BA,#8C71E0);
+	background-image: -moz-linear-gradient(0deg,#9864BA,#8C71E0);
+	background-image: -o-linear-gradient(0deg,#9864BA,#8C71E0);
+	background-image: linear-gradient(0deg,#9864BA,#8C71E0);
+}
+.fpyramp-4.backcolor{
+	background-image: -webkit-linear-gradient(0deg,#2AC8CA,#47A9FC);
+	background-image: -moz-linear-gradient(0deg,#2AC8CA,#47A9FC);
+	background-image: -o-linear-gradient(0deg,#2AC8CA,#47A9FC);
+	background-image: linear-gradient(0deg,#2AC8CA,#47A9FC);
+}
+.fpyramp-5.backcolor{
+	background-image: -webkit-linear-gradient(0deg,#8A6DA9,#837EC0);
+	background-image: -moz-linear-gradient(0deg,#8A6DA9,#837EC0);
+	background-image: -o-linear-gradient(0deg,#8A6DA9,#837EC0);
+	background-image: linear-gradient(0deg,#8A6DA9,#837EC0);
 }
 
 #chats {height: 100%;}

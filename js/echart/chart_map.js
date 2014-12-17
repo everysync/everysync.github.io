@@ -84,7 +84,33 @@ define(['echarts','echarts/chart/map'],
                         data: [], 
                         geoCoord: {
                             india:[81.18,16.54],
-                            southAmerica:[92.18,16.54]
+                            southAmerica:[92.18,16.54],
+                            "T&I_SH_DT": [120.5, 29.63],
+                            "Compal_KS_NB": [119.45, 31.39],
+                            "Compal_KS_DT": [119.15, 28.19],
+                            "Wistron ZS_DT": [112.38, 22.32],
+                            "Zowee": [113.38, 23.52],
+                            "Quanta_SJ_NB": [120.7, 32.58],
+                            "Quanta_SJ_DT": [118.88, 33.23],
+                            "Quanta_SH_NB": [120.7, 32.58],
+                            "Quanta_SH_DT": [118.88, 33.23],
+                            "Bitland_HF_NB": [117.34, 32.08],
+                            "BJP_BJ_DT": [116.46, 39.92],
+                            "SHP_SH_NB": [121.35, 28.05],
+                            "SHP_SH_DT": [122.35, 30.15],
+                            "HYP_HY_DT": [115.46, 22.85],
+                            "CDP_CD_DT": [101.51, 28.88],
+                            "Wistron_KS_NB": [120.15, 34.22],
+                            "LCFC_HF_NB": [117.27, 30.36],
+                            "Pegatron_SH_NB": [121.44, 31.19],
+                            "Pegatron_SZ_NB": [121.44, 31.19],
+                            "Wistron_CD_NB": [106.17, 31.75],
+                            "Compal_CD_NB": [103.06, 30.67],
+                            "Bitland_HF_DT": [116.34, 33.48],
+                            "Pondicherry_IN_NB": [80.58, 16.54],
+                            "ITU_BR_DT": [91.23, 16.14],
+                            "ITU_BR_NB": [91.23, 16.14],
+                            "Newsan_AR_NB": [93.48, 17.34]
                         },
                         markPoint: {
                             clickable:false,
@@ -135,8 +161,7 @@ define(['echarts','echarts/chart/map'],
                         type: 'map',
                         mapType: 'china',
                         roam: false,
-                        geoCoord: {
-                        },
+                        geoCoord: {},
                         mapLocation: {
                             x: 'center',
                             //X: '5%',
@@ -164,8 +189,7 @@ define(['echarts','echarts/chart/map'],
                         type: 'map',
                         mapType: 'china',
                         roam: false,
-                        geoCoord: {
-                        },
+                        geoCoord: {},
                         mapLocation: {
                             x: 'center',
                             //X: '5%',
@@ -193,8 +217,7 @@ define(['echarts','echarts/chart/map'],
                         type: 'map',
                         mapType: 'china',
                         roam: false,
-                        geoCoord: {
-                        },
+                        geoCoord: {},
                         mapLocation: {
                             x: 'center',
                             //X: '5%',
@@ -222,8 +245,7 @@ define(['echarts','echarts/chart/map'],
                         type: 'map',
                         mapType: 'china',
                         roam: false,
-                        geoCoord: {
-                        },
+                        geoCoord: {},
                         mapLocation: {
                             x: 'center',
                             //X: '5%',
@@ -251,7 +273,7 @@ define(['echarts','echarts/chart/map'],
                 ]      
             };
             var itemStyle = {};
-            itemStyle.s1 = {
+            itemStyle.error = {
                 normal: {
                     borderWidth: 3,
                     color: 'rgba(255, 147, 147,1)',
@@ -259,7 +281,7 @@ define(['echarts','echarts/chart/map'],
                     label: { show: false, formatter:' '}
                 }
             };
-            itemStyle.s2 = {
+            itemStyle.warning = {
                 normal: {
                     borderWidth: 3,
                     color: 'rgba(255, 233, 0,1)',
@@ -267,7 +289,7 @@ define(['echarts','echarts/chart/map'],
                     label: { show: false, formatter:' '}
                 }
             };
-            itemStyle.s3 = {
+            itemStyle.normal = {
                 normal: {
                     borderWidth: 3,
                     color: 'rgba(0, 251, 174,1)',
@@ -283,20 +305,19 @@ define(['echarts','echarts/chart/map'],
             this.shapeListData = {};
             for (var i = 0; i < mydata.length; i++) {
                 var v = mydata[i];
-                geoCoord[v['listName']] = v['geo'];
-                switch(v.color){
-                    case 's1':dataMarkS1.push({name: v['listName'], value: v['valu'], itemStyle: itemStyle[v.color]});
+                switch(v.RunningStatus){
+                    case 'error':dataMarkS1.push({name: v['title'], value: v['MonthlyTag'], itemStyle: itemStyle[v.RunningStatus]});
                         break;
-                    case 's2':dataMarkS2.push({name: v['listName'], value: v['valu'], itemStyle: itemStyle[v.color]});
+                    case 'warning':dataMarkS2.push({name: v['title'], value: v['MonthlyTag'], itemStyle: itemStyle[v.RunningStatus]});
                         break;
-                    case 's3':dataMarkS3.push({name: v['listName'], value: v['valu'], itemStyle: itemStyle[v.color]});
+                    case 'normal':dataMarkS3.push({name: v['title'], value: v['MonthlyTag'], itemStyle: itemStyle[v.RunningStatus]});
                         break;
                     default:break;
                 }
-                dataMark.push({name: v['listName'], value: v['valu'], itemStyle: itemStyle[v.color]});
-                this.shapeListData[v['listName']]= {data:v,pos:{}};
+                dataMark.push({name: v['title'], value: v['MonthlyTag'], itemStyle: itemStyle[v.RunningStatus]});
+                this.shapeListData[v['title']]= {data:v,pos:{}};
             }
-            option.series[0].geoCoord = geoCoord;
+            console.log(dataMark);
             option.series[1].markPoint.data = dataMarkS1;
             option.series[2].markPoint.data = dataMarkS2;
             option.series[3].markPoint.data = dataMarkS3;
@@ -307,42 +328,49 @@ define(['echarts','echarts/chart/map'],
         };
         LvMap.prototype.showTip = function(currname){//显示提示框
             var v = this.shapeListData[currname];
-            if(v.data.color == 's1' || v.data.color == 's2'){
+            if(v.data.RunningStatus == 'error' || v.data.RunningStatus == 'warning'){
+                var arrStartDate = v.data.RunningData.Stop.split("-");     
+                var startDate = new Date(arrStartDate[0],arrStartDate[1]-1,arrStartDate[2]);
+                var arrEndDate = v.data.RunningData.Recovery.split("-");     
+                var endDate = new Date(arrEndDate[0],arrEndDate[1]-1,arrEndDate[2]); 
+                var hours = parseInt((endDate.getTime()-startDate.getTime())/(60*60*1000));
+                var days = Math.ceil(hours/24);
+                var hour = hours%24;
+                days = days<10?'0'+days:days;
                 $(".map_tips").html(
-                    '<h2 class="mtt">'+v.data.listName+'</h2>'+
+                    '<h2 class="mtt">'+v.data.title+'</h2>'+
                     '<div class="mtc">'+
-                    '   <span>03</span>'+
+                    '   <span>'+days+'</span>'+
                     '   <p>DAY</p>'+
-                    '   <p>8Hours</p>'+
+                    '   <p>'+hour+'Hours</p>'+
                     '</div>'+
                     '<div class="maptiptable">'+
                     '   <div class="row">'+
                     '       <div class="cell">Stop:</div>'+
-                    '       <div class="cell">03-24 18:05:30</div>'+
+                    '       <div class="cell">'+v.data.RunningData.Stop+'</div>'+
                     '   </div>'+
                     '   <div class="row">'+
                     '       <div class="cell">Recovery:</div>'+
-                    '       <div class="cell">03-24 18:05:30</div>'+
+                    '       <div class="cell">'+v.data.RunningData.Recovery+'</div>'+
                     '   </div>'+
                     '</div>'+
                     '<div class="maptiptable2">'+
                     '   <div class="row">'+
-                    '       <div class="cell">-FGs:1</div>'+
-                    '       <div class="cell">-WIP:4</div>'+
-                    '       <div class="cell">-ONS:6</div>'+
-                    '       <div class="cell">-Category:design</div>'+
+                    '       <div class="cell">-FGs:'+v.data.RunningData.FGs+'</div>'+
+                    '       <div class="cell">-WIP:'+v.data.RunningData.WIP+'</div>'+
+                    '       <div class="cell">-ONS:'+v.data.RunningData.ONS+'</div>'+
+                    '       <div class="cell">-Category:'+v.data.RunningData.CateGory+'</div>'+
                     '   </div>'+
                     '</div>'+
                     '<div class="mtb">'+
-                    '   <h3>STOP WIRE PRODUCTS STOP WIRE PRODUCTS</h3>'+
-                    '   <p>H520s Enginneering related yuanjqH520s</p>'+
-                    '   <p>related Enginneering related related</p>'+
+                    '   <h3>'+v.data.RunningData.product+'</h3>'+
+                    '   <p>'+v.data.RunningData.issue+'</p>'+
                     '</div>'+
 					'<div class="map_dialog_cls_btn"></div>').attr('class','map_tips map_tips_red').data('compname',currname);
             }else{
-                $(".map_tips").html(v.data.listName+'<div class="map_dialog_cls_btn"></div>').attr('class','map_tips').data('compname',currname);
+                $(".map_tips").html(v.data.title+'<div class="map_dialog_cls_btn"></div>').attr('class','map_tips').data('compname',currname);
             }
-            if(v.data.color == 's2'){
+            if(v.data.RunningStatus == 'warning'){
                 $(".map_tips").attr('class','map_tips map_tips_red map_tips_yellow');
             }
             $(".map_tips").animate({'top':v.pos.y-$(".map_tips").outerHeight()-7+'px','left':v.pos.x-parseInt($(".map_tips").outerWidth()/2)+50+'px'}, 120, function() {
@@ -372,7 +400,6 @@ define(['echarts','echarts/chart/map'],
                 if(param.seriesIndex > 0){
                     var idx = $(".mapDataDetail").filter('[data-cname="'+param.name+'"]').parent().index();
                     self._setRightListAction(idx);
-                    //$(".mapDataDetail").filter('[data-cname="'+param.name+'"]').trigger('click');//模拟右侧列表相应项被点击了
                 }
             });
             setTimeout(function(){//获取地图上标注点的坐标，延时执行时因为直接执行shapeList为空，与页面执行速度有问题
@@ -392,10 +419,11 @@ define(['echarts','echarts/chart/map'],
             var self = this;
             $.ajax({
                 type: "get",
-                url: "jsonpcallback/jsonpcallback.js",
+                url: "jsonpcallback/jsonpcallback_2.js",
                 dataType: "jsonp",
                 jsonpCallback:"mapListData"
             }).done(function(data) {
+                console.log(data);
                 self._setRightList(data.mapListData);
                 self._setOption(data.mapListData);
                 drawFlag&&self.resetOption();
@@ -410,54 +438,25 @@ define(['echarts','echarts/chart/map'],
             });
             var page_1_content = $(".demopagec-1");
             var $mslistwrap    = $(".mslist");
-            var liTempWrap     = $("<div>").attr("id","wpt");
-            var liTemplate     = 
-                    '<div class="mapDataDetail">'+
+            var shtml = '';
+            var MapArrylength = MapArry.length;
+            for (var i=0; i<MapArrylength; i++) {
+                shtml +='<li class="msEachlist swiper-slide"><div class="mapDataDetail" data-cname="'+MapArry[i].title+'">'+
                     '   <h2 class="mdh2">'+
-                    //'       <span class="mdh2_1">标题:</span>'+
-                    '       <span class="mdh2_2">标题名</span>'+
+                    '       <span class="mdh2_2">'+MapArry[i].title+'</span>'+
                     '   </h2>'+
                     '   <ul class="mdhlist">'+
-                    '       <li class="mdhli">'+
-                    '           <span class="mli_l">名字</span>'+
-                    '           <span class="mli_r">数据</span>'+
-                    '       </li>'+
+                    '       <li class="mdhli"><span class="mli_l">Monthly Tgt</span><span class="mli_r">'+MapArry[i].MonthlyTag+'</span></li>'+
+                    '       <li class="mdhli"><span class="mli_l">MTD Input</span><span class="mli_r">'+MapArry[i].MTDInput+'</span></li>'+
+                    '       <li class="mdhli"><span class="mli_l">MTD Order</span><span class="mli_r">'+MapArry[i].MTDOrder+'</span></li>'+
+                    '       <li class="mdhli"><span class="mli_l">CountDown</span><span class="mli_r">'+MapArry[i].Countdown+'</span></li>'+
+                    '       <li class="mdhli"><span class="mli_l">ATB</span><span class="mli_r">'+MapArry[i].ATB+'</span></li>'+
+                    '       <li class="mdhli"><span class="mli_l">To Go Bulid</span><span class="mli_r">'+MapArry[i].ToGoBuild+'</span></li>'+
+                    '       <li class="mdhli"><span class="mli_l">To Go Gap</span><span class="mli_r">'+MapArry[i].ToGoCap+'</span></li>'+
                     '   </ul>'+
-                    '</div>';
-            var MapArrylength = MapArry.length;
-            var $a = $(liTemplate);
-            for (var i=0; i<MapArrylength; i++) {
-                var $kt = $(liTemplate);
-                var $ktlist = $kt.find(".mdhlist");
-                //$kt.find(".mdh2_1").html("");
-                $kt.find(".mdh2_2").html(MapArry[i]['listName']);
-                $kt.attr('data-cname',MapArry[i]['listName']);
-                $ktlist.html("");
-                $.each(MapArry[i]['listdata'], function(i,d) {
-                    $ktlist.append(
-                        $("<li>").addClass("mdhli").html(
-                            '<span class="mli_l">'+ d[0] +'</span>'+' <span class="mli_r">'+ d[1] +'</span>'
-                        )
-                    );
-                });
-                liTempWrap.append( $('<li class="msEachlist swiper-slide"></li>').append($kt) );
-                if(MapArry[i]['color'] == "s1" && self.tip_idx < 0){//初始化tip索引值，设置为第一个红色
-                    self.tip_idx = i;
-                }
+                    '</div></li>';
             }
-            $mslistwrap.html( liTempWrap.html() );
-                
-            //init swiper
-			
-			/*$('.mslist').slick({
-				slidesToShow:3,
-				vertical:true,
-				infinite: true,
-				speed: 300,	
-				slide:"li",
-				autoplay:true
-			});*/
-      
+            $mslistwrap.html(shtml);
 			
 			var swipetimeout = null;
             var $swiperTarget = $(".mapSideBot");
