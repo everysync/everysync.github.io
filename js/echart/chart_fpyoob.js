@@ -293,6 +293,8 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                 mydata.series_bar_1.data.push(newBarArr);
                 mydata.series_line_1.data.push(newLineArr);
             };
+            console.log("ss");
+            console.log(mydata);
             self._setOptionTimeLine(mydata);
             drawFlag&&self.resetOption();
         };
@@ -779,26 +781,21 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
         LvFpyOob.prototype.refreshChartMarkPoint = function(){
             var self = this;
             for(var i=0;i<self.chartMp;i++){
-                self.chart.delMarkPoint(0,'标注'+i);
+                self.chart.delMarkLine(0,'标注'+i);
             }
             self.chartMp = 0;
             var mdata = [];
             for (var i = 0,len=self.chartData.length; i < len; i++) {
                 if(self.chartData[i].ProductName.indexOf(self.letter) == 0){
-                    mdata.push({name: '标注'+self.chartMp, xAxis: self.chartData[i].ProductId, yAxis: 0});
+                    mdata.push([{name: '标注'+self.chartMp, xAxis: self.chartData[i].ProductId, yAxis: 0},{xAxis: self.chartData[i].ProductId, yAxis: 2,symbolSize:4}]);
+                    //mdata.push({name: '标注'+self.chartMp, xAxis: self.chartData[i].ProductId, yAxis: 0});
                     self.chartMp++;
                 }
             }; 
             if(mdata.length > 0){
-                self.chart.addMarkPoint(0,{data :mdata});
+                self.chart.addMarkLine(0,{data :mdata});
             }
         };
-        //刷新图表的标记线
-        LvFpyOob.prototype.refreshChartMarkLine = function(){
-            self.chart.delMarkLine(0,'标线1');
-            mdata.push({name: '标注'+self.chartMp, xAxis: self.chartData[i].ProductId, yAxis: 0});
-        };
-
         //刷新上部的点的信息
         LvFpyOob.prototype.refreshPointData = function(idx){
             var self = this;

@@ -172,12 +172,13 @@ define(['echarts','echarts/chart/map'],
                         data: [],
                         markPoint: {
                             symbol: 'circle',
-                            symbolSize: 10,
+                            large: true,
+                            symbolSize: 12,
                             effect: {
                                 show: true,
-                                period: 15, 
-                                scaleSize:  window.devicePixelRatio > 1?2:1,
-                                color : 'rgba(255, 147, 147, 0.51)',
+                                period: 20, 
+                                scaleSize:  window.devicePixelRatio > 1?2:2,
+                                color : 'rgba(255, 147, 147, 1)',
                                 shadowColor : 'rgba(255,255,252, 0.35)', 
                                 shadowBlur : 4  
                             },
@@ -200,12 +201,13 @@ define(['echarts','echarts/chart/map'],
                         data: [],
                         markPoint: {
                             symbol: 'circle',
-                            symbolSize: 10,
+                            large: true,
+                            symbolSize: 12,
                             effect: {
                                 show: true,
-                                period: 15, 
-                                scaleSize:  window.devicePixelRatio > 1?2:1,
-                                color : 'rgba(255, 233, 0, 0.51)',
+                                period: 20, 
+                                scaleSize:  window.devicePixelRatio > 1?2:2,
+                                color : 'rgba(255, 233, 0, 1)',
                                 shadowColor : 'rgba(255,255,252, 0.35)', 
                                 shadowBlur : 4  
                             },
@@ -228,15 +230,16 @@ define(['echarts','echarts/chart/map'],
                         data: [],
                         markPoint: {
                             symbol: 'circle',
-                            symbolSize: 10,
-							effect: {
-								show: true,
-								period: 15, 
-								scaleSize: window.devicePixelRatio > 1?2:1,
-								color : 'rgba(0, 251, 174, 0.51)',
-								shadowColor : 'rgba(255,255,252, 0.35)', 
-								shadowBlur : 4  
-							},
+                            large: true,
+                            symbolSize: 12,
+                            effect: {
+                                show: true,
+                                period: 20, 
+                                scaleSize: window.devicePixelRatio > 1?2:2,
+                                color : 'rgba(0, 251, 174, 1)',
+                                shadowColor : 'rgba(255,255,252, 0.35)', 
+                                shadowBlur : 4  
+                            },
                             data: []
                         }
                     }, {
@@ -256,7 +259,7 @@ define(['echarts','echarts/chart/map'],
                         data: [],
                         markPoint: {
                             symbol: 'circle',
-                            symbolSize: 6,
+                            symbolSize: 3,
                             //large: true,
                             /*effect: {
                                 show: true,
@@ -275,24 +278,24 @@ define(['echarts','echarts/chart/map'],
             var itemStyle = {};
             itemStyle.error = {
                 normal: {
-                    borderWidth: 3,
-                    color: 'rgba(255, 147, 147,1)',
+                    borderWidth: 0,
+                    color: 'rgba(255, 147, 147,0.5)',
                     borderColor: 'rgba(231,43,14,1)',
                     label: { show: false, formatter:' '}
                 }
             };
             itemStyle.warning = {
                 normal: {
-                    borderWidth: 3,
-                    color: 'rgba(255, 233, 0,1)',
+                    borderWidth: 0,
+                    color: 'rgba(255, 233, 0,0.5)',
                     borderColor: 'rgba(236, 136, 36,1)',
                     label: { show: false, formatter:' '}
                 }
             };
             itemStyle.normal = {
                 normal: {
-                    borderWidth: 3,
-                    color: 'rgba(0, 251, 174,1)',
+                    borderWidth: 0,
+                    color: 'rgba(0, 251, 174,0.5)',
                     borderColor: 'rgba(4, 162, 114,1)',
                     label: { show: false, formatter:' '}
                 }
@@ -321,7 +324,7 @@ define(['echarts','echarts/chart/map'],
             option.series[1].markPoint.data = dataMarkS1;
             option.series[2].markPoint.data = dataMarkS2;
             option.series[3].markPoint.data = dataMarkS3;
-            option.series[4].markPoint.data = dataMark;
+           option.series[4].markPoint.data = dataMark;
             this.option = option;
             this.loadStatus = true;
             return option;
@@ -366,7 +369,7 @@ define(['echarts','echarts/chart/map'],
                     '   <h3>'+v.data.RunningData.product+'</h3>'+
                     '   <p>'+v.data.RunningData.issue+'</p>'+
                     '</div>'+
-					'<div class="map_dialog_cls_btn"></div>').attr('class','map_tips map_tips_red').data('compname',currname);
+                    '<div class="map_dialog_cls_btn"></div>').attr('class','map_tips map_tips_red').data('compname',currname);
             }else{
                 $(".map_tips").html(v.data.title+'<div class="map_dialog_cls_btn"></div>').attr('class','map_tips').data('compname',currname);
             }
@@ -457,8 +460,8 @@ define(['echarts','echarts/chart/map'],
                     '</div></li>';
             }
             $mslistwrap.html(shtml);
-			
-			var swipetimeout = null;
+            
+            var swipetimeout = null;
             var $swiperTarget = $(".mapSideBot");
             var page_1_swiper = $swiperTarget.swiper({
                 mode:'vertical',
@@ -469,8 +472,8 @@ define(['echarts','echarts/chart/map'],
                 calculateHeight:true,
                 slidesPerViewFit:true,
                 centeredSlides:true,
-//				loop:true,
-				autoplayDisableOnInteraction:false,
+//              loop:true,
+                autoplayDisableOnInteraction:false,
                 // Autoplay
                 autoplay: 800,
                 speed: 300,
@@ -485,13 +488,13 @@ define(['echarts','echarts/chart/map'],
                 //     sw.startAutoplay();
                 // },
                 onSlideClick:function(sw) {
-					/*page_1_swiper.stopAutoplay();
-					page_1_swiper.params.speed=300;*/
-					/*clearTimeout(swipetimeout);
-					page_1_swiper.stopAutoplay();
-					swipetimeout = setTimeout(function() {
-						page_1_swiper.startAutoplay();
-					} ,2000);
+                    /*page_1_swiper.stopAutoplay();
+                    page_1_swiper.params.speed=300;*/
+                    /*clearTimeout(swipetimeout);
+                    page_1_swiper.stopAutoplay();
+                    swipetimeout = setTimeout(function() {
+                        page_1_swiper.startAutoplay();
+                    } ,2000);
                     page_1_swiper.swipeTo(page_1_swiper.clickedSlideIndex,300);
                     var $sides = $(page_1_swiper.clickedSlide);
                     $sides
