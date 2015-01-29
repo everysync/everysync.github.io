@@ -176,8 +176,8 @@ define(['echarts','echarts/chart/map'],
                             symbolSize: 12,
                             effect: {
                                 show: true,
-                                period: 20, 
-                                scaleSize:  window.devicePixelRatio > 1?2:2,
+                                period: window.devicePixelRatio > 1?40:20, 
+                                scaleSize:  2,
                                 color : 'rgba(255, 147, 147, 1)',
                                 shadowColor : 'rgba(255,255,252, 0.35)', 
                                 shadowBlur : 4  
@@ -205,8 +205,8 @@ define(['echarts','echarts/chart/map'],
                             symbolSize: 12,
                             effect: {
                                 show: true,
-                                period: 20, 
-                                scaleSize:  window.devicePixelRatio > 1?2:2,
+                                period: window.devicePixelRatio > 1?40:20, 
+                                scaleSize:  2,
                                 color : 'rgba(255, 233, 0, 1)',
                                 shadowColor : 'rgba(255,255,252, 0.35)', 
                                 shadowBlur : 4  
@@ -234,8 +234,8 @@ define(['echarts','echarts/chart/map'],
                             symbolSize: 12,
                             effect: {
                                 show: true,
-                                period: 20, 
-                                scaleSize: window.devicePixelRatio > 1?2:2,
+                                period: window.devicePixelRatio > 1?40:20, 
+                                scaleSize:  2,
                                 color : 'rgba(0, 251, 174, 1)',
                                 shadowColor : 'rgba(255,255,252, 0.35)', 
                                 shadowBlur : 4  
@@ -320,11 +320,10 @@ define(['echarts','echarts/chart/map'],
                 dataMark.push({name: v['title'], value: v['MonthlyTag'], itemStyle: itemStyle[v.RunningStatus]});
                 this.shapeListData[v['title']]= {data:v,pos:{}};
             }
-            console.log(dataMark);
             option.series[1].markPoint.data = dataMarkS1;
             option.series[2].markPoint.data = dataMarkS2;
             option.series[3].markPoint.data = dataMarkS3;
-           option.series[4].markPoint.data = dataMark;
+            option.series[4].markPoint.data = dataMark;
             this.option = option;
             this.loadStatus = true;
             return option;
@@ -376,7 +375,7 @@ define(['echarts','echarts/chart/map'],
             if(v.data.RunningStatus == 'warning'){
                 $(".map_tips").attr('class','map_tips map_tips_red map_tips_yellow');
             }
-            $(".map_tips").animate({'top':v.pos.y-$(".map_tips").outerHeight()-7+'px','left':v.pos.x-parseInt($(".map_tips").outerWidth()/2)+50+'px'}, 120, function() {
+            $(".map_tips").animate({'top':v.pos.y-$(".map_tips").outerHeight()-15+'px','left':v.pos.x-parseInt($(".map_tips").outerWidth()/2)+42+'px'}, 120, function() {
                 $(".map_tips").show();
             });
             v = null;
@@ -426,7 +425,6 @@ define(['echarts','echarts/chart/map'],
                 dataType: "jsonp",
                 jsonpCallback:"mapListData"
             }).done(function(data) {
-                console.log(data);
                 self._setRightList(data.mapListData);
                 self._setOption(data.mapListData);
                 drawFlag&&self.resetOption();

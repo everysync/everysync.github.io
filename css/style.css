@@ -2440,6 +2440,8 @@ input.modal-text-input {
 }
 
 #chats {height: 100%;}
+#operatingTemplate {display: none;}
+#operatingBox {height: 100%;}
 @media only screen and (max-width:1280px){
 .ctrBtns .ctr_1,
 .ctrBtns .ctr_2,

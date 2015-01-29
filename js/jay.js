@@ -328,7 +328,11 @@ var page_modules = {
 	$siderEl:"",
 	$page_show_content:"",
 	$page_show_wrap:"",
+	_lastPage:{},//上一页（以便返回）
+	_curPage:{},//当前页
 	showpage:function(_this,directRun) {
+		page_modules._lastPage = page_modules._curPage;
+		page_modules._curPage = _this.data();
 		var $psc = page_modules.$page_show_content;
 		var contantState = $psc.data("hasShowed");
 		var linkURL = _this.data("url");
@@ -362,9 +366,10 @@ var page_modules = {
 				.data("prevClass",_this.data("wrapclass"));
 			afterEvent();
 		}
-
 	},
 	hidepage:function(_this) {
+		page_modules._lastPage = {};
+		page_modules._curPage = {};
 		var $psc = page_modules.$page_show_content;
 		$(".app_container").removeClass("hide");
 		$psc.addClass("page_hidding");
@@ -378,8 +383,6 @@ var page_modules = {
 			$psc.off(".phide");
 		});
 	},
-
-
 	init_modules_action:function(time) {
 		page_modules.applyTolinks();
 		page_modules.$siderEl = $("#sidebar");
@@ -416,16 +419,22 @@ var page_modules = {
 		
 		$("#app-load-back").on("tap", function(e) {
 			e.stopPropagation();
-			var _this = $(this);
-			page_modules.hidepage(_this);
+			if(page_modules._curPage.backFlag){
+				page_modules._curPage = {};
+				page_modules.loadinto(page_modules._lastPage.url, page_modules._lastPage.selector ,page_modules._lastPage.wrapclass,page_modules._lastPage.requirejs,page_modules._lastPage.backFlag);
+			}else{
+				var _this = $(this);
+				page_modules.hidepage(_this);
+			}
 		});
 	},
-	initListLinks: function(target,url,selector,wrapclass,requirejs) {
+	initListLinks: function(target,url,selector,wrapclass,requirejs,backFlag) {
 		$(target).data({
 			"url":url,
 			"selector":selector,
 			"wrapclass":wrapclass,
-			"requirejs":requirejs
+			"requirejs":requirejs,
+			"backFlag":arguments[5]||false
 		});
 	},
 	applyTolinks:function() {
@@ -449,7 +458,7 @@ var page_modules = {
 		page_modules.initListLinks("#ec_create","moduleHtml/EC_Create.html",".eachBlck","pagebgc-5","page_audit");
 		page_modules.initListLinks("#ec_managment","moduleHtml/EC_Managment.html",".eachBlck","pagebgc-5");
 	},
-	loadinto:function(url,selector,backgroundcss,requirejs) {
+	loadinto:function(url,selector,backgroundcss,requirejs,backFlag) {
 		var $psc = page_modules.$page_show_content;
 		var megerURL = url + " " + selector;
 		var loadjs = requirejs;
@@ -457,7 +466,8 @@ var page_modules = {
 			"url":url,
 			"selector":selector,
 			"wrapclass":backgroundcss,
-			"requirejs":loadjs
+			"requirejs":loadjs,
+			"backFlag":arguments[4]||false
 		});
 		$psc.on("page_showed.loadpage", function() {
 			page_modules.$page_show_wrap.load(megerURL,function() {
@@ -480,8 +490,7 @@ var page_modules = {
 			cacheinner  = $(cachehtml.html());
 			opts.loadCacheJS?opts.loadCacheJS(cacheinner):"";
 		});
-	},
-
+	}
 };
 
 var popLayoutfns = {
@@ -771,14 +780,11 @@ function initChat() {
 						scrollTop: $appcont[0].scrollHeight - $appcont[0].clientHeight
 					});
 				}
-				
 				$("#chatInput").val("");
 			}
 		});
 	});
 }
-
-
  
 //INIT FUNCTIONS
 function jayfunction() {
@@ -842,17 +848,15 @@ function jayfunction() {
 		if ($this.data("chat") == "true") {return;}*/
 		$doc.on("side_showed.chat", function(e,k,tar) {
 			tar.append($("#chats"));
-			$doc.off(".chat")
+			$doc.off(".chat");
 		});
 		popLayoutfns.popshow({
 			direction:"right"
-		});
-		
+		});	
 	}).on("tap", ".ctr_4",function() {
 		popLayoutfns.popshow({
 			direction:"top"
 		});
-		
 		$doc.on("side_showed.peo_4_s", function(e,k,tar) {
 			if (k == "top") {
 				console.log(k,tar)
@@ -867,15 +871,60 @@ function jayfunction() {
 			popLayoutfns.$selectors.pop_top_innerDOM.children().remove();
 			$doc.off(".peo_4_h");
 		});
-		
-		
-	})
-	
+	});
+
 	$(".pop_mask").on("tap", function() {
 		popLayoutfns.pophide({
 			hideAll:true
 		});
-	})
-	
-	
+	});
+	$doc.on("tap",'.showBox', function() {
+		//获取产品的id，用于请求后台的参数
+		var pid = $(this).data('pid');
+		//请求后台相应的产品的详情，按如下格式拼接起来
+		var shtml = '<div class="EcR-box">'+
+			'	<div class="dialogTit">LCFC_HF_NB</div>'+
+			'	<div class="EcdialogCon clearfix">'+
+			'		<p><em class="EcDiaTit">Status:</em><span class="EcDiaInfo">Monitor</span></p>'+
+			'		<p><em class="EcDiaTit">Open Date:</em><span class="EcDiaInfo">2014-09-28  08：05：51</span></p>'+
+			'		<p><em class="EcDiaTit">Recovery Date:</em><span class="EcDiaInfo">2014-10-06  08：05：51</span></p>'+
+			'		<p><em class="EcDiaTit">IRCT:</em><span class="EcDiaInfo">14</span></p>'+
+			'		<p><em class="EcDiaTit">ODM:</em><span class="EcDiaInfo">LCFC_HF_NB</span></p>'+
+			'		<p><em class="EcDiaTit">Product:</em><span class="EcDiaInfo">Yoga3 Pro</span></p>'+
+			'		<p><em class="EcDiaTit">OS:</em><span class="EcDiaInfo">Windows</span></p>'+
+			'		<p><em class="EcDiaTit">Issue Type:</em><span class="EcDiaInfo">Alert</span></p>'+
+			'	    <p><em class="EcDiaTit">Category:</em><span class="EcDiaInfo">Supplier</span></p>'+
+			'	    <p><em class="EcDiaTit">GEO:</em><span class="EcDiaInfo">EMEA AG PRG EAP MAP</span></p>'+
+			'	    <p><em class="EcDiaTit">ONS:</em><span class="EcDiaInfo">No</span></p>'+
+			'	    <p><em class="EcDiaTit">Q-Hold:</em><span class="EcDiaInfo">EMEA;FGs 0 WIP 0<br/>'+
+			'		AG:FGs 0 WIP 0<br/>'+
+			'		PRC:FGs 0 WIP 0<br/>'+
+			'		EAP:FGs 0 WIP 0</span></p>'+
+			'	    <p><em class="EcDiaTit">Issue Description:</em><span class="EcDiaInfo">Yoga3 Bach found 19pcs LCD </span></p>'+
+			'	    <p><em class="EcDiaTit">Mfg Impact:</em><span class="EcDiaInfo">flicker at OOB inspection station,'+
+			'		FR is 19/2000=0.95%</span></p>'+
+			'	    <p><em class="EcDiaTit">Field Impact:</em><span class="EcDiaInfo">Stop input Yoga3 8ach</span></p>'+
+			'	    <p><em class="EcDiaTit">Root Cause:</em><span class="EcDiaInfo">TBD</span></p>'+
+			'	    <p><em class="EcDiaTit">Recovery plan:</em><span class="EcDiaInfo">Sumsung LCD display FW issue'+
+			'		Shut up the PSR function from'+
+			'		BIOS as ST solution to resume '+
+			'		production line,controlrun result'+
+			'		is pass</span></p>'+
+			'	    <p><em class="EcDiaTit">L&amp;L</em><span class="EcDiaInfo">TBD</span></p>'+
+			'	</div>'+
+			'</div>';
+		$doc.on("side_showed.operating", function(e,k,tar) {
+			tar.append(shtml);
+			$doc.off(".operating");
+		});
+		popLayoutfns.popshow({
+			direction:"right"
+		});	
+	});
+
+	$doc.on("tap",'.pageMore', function() {
+		//加载更多数据..这里只是模拟效果，正式需请求后台数据
+		var tbody = $(this).prev().find('table tbody');
+		tbody.append(tbody.html());
+	});
 }

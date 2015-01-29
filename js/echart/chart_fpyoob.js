@@ -293,8 +293,6 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
                 mydata.series_bar_1.data.push(newBarArr);
                 mydata.series_line_1.data.push(newLineArr);
             };
-            console.log("ss");
-            console.log(mydata);
             self._setOptionTimeLine(mydata);
             drawFlag&&self.resetOption();
         };

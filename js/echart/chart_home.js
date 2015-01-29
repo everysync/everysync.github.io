@@ -344,7 +344,9 @@ define(['echarts','echarts/chart/line','echarts/chart/bar'],
             switch(this.chartType){
                 case "dataZoom":
                     this.chart.on(lvChart.ecConfig.EVENT.CLICK, function(param){
+                      if(param.seriesIndex < 4){
                         page_modules.loadinto("moduleHtml/Qstop_In.html", ".eachBlck" ,"pagebgc-1","qstop_in");
+                      }
                     }); 
                     break;
                 default:break;

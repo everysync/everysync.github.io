@@ -24,7 +24,6 @@ define('page_control',[],function(){
 		}
 	});
 	function init(pageName){
-		console.log('init');
 		switch(pageName){
 			case "page_audit":
 				require(["page_audit"], function(page){
@@ -132,7 +131,6 @@ define('page_audit',[],function() {
 			window.cuntNumInit = function() {
 				var eachlayout = $(".layoutst_1");
 				var tabs = $(".es_tabwrap_tab").find(".iTab");
-//				console.log(eachlayout,tabs)
 				eachlayout.each(function(i,el) {
 					var $this = $(this);
 					var index = $this.index();
@@ -143,7 +141,6 @@ define('page_audit',[],function() {
 						}
 					}).length;
 					
-//					console.log(isnoChecked)
 					if (isnoChecked==0) {
 						tabs.eq(index).find(".count").remove();
 					} else {
@@ -171,7 +168,6 @@ define('page_audit',[],function() {
 		var createdbtn = function() {
 			$("#addnewss").on("click", function(e) {
 				function mokupconten(cont) {
-//					console.log(cont)
 					cont.load("moduleHtml/!!!popup_1.html #add_data_from", function() {
 						var area = $("#acitveTabArea")
 						var newtabs = area.find("p.pdtb15").eq(0).clone();
@@ -357,6 +353,13 @@ define('page_audit',[],function() {
 			});	
 		};
 		flieUploadsmode();
+		fpyCreateInit();
+	}
+	function fpyCreateInit(){
+		//切换角色
+		$('#fpyCreatType').on('tap', '.iTab:not(.cur)',function(){
+			$(this).addClass('cur').siblings().removeClass('cur');
+		});
 	}
 	return {init:init};
 });
@@ -368,24 +371,24 @@ define('page_search',[],function() {
 			isk.init&&isk.init();
     	});
 		$('#audit_search_btn').on("tap.audser",function(){
-			page_modules.loadinto("moduleHtml/Audit_SearchResult.html", ".eachBlck" ,"pagebgc-3","audit_result");
+			page_modules.loadinto("moduleHtml/Audit_SearchResult.html", ".eachBlck" ,"pagebgc-3","audit_result",true);
 		});
 		$('#ec_search_btn').on("tap.ecser",function(){
-			page_modules.loadinto("moduleHtml/EC_SearchResult.html", ".eachBlck" ,"pagebgc-5");
+			page_modules.loadinto("moduleHtml/EC_SearchResult.html", ".eachBlck" ,"pagebgc-5","ec_result",true);
 		});
 		$('#fai_search_btn').on("tap.faiser",function(){
 			page_modules.params = {type:1};
-			page_modules.loadinto("moduleHtml/FAI_SearchResult-1.html", ".eachBlck" ,"pagebgc-3","fai_result");
+			page_modules.loadinto("moduleHtml/FAI_SearchResult-1.html", ".eachBlck" ,"pagebgc-3","fai_result",true);
 		});
 		$('#fpyoob_search_btn').on("tap.fpyoobser",function(){
 			page_modules.params = {type:1};
-			page_modules.loadinto("moduleHtml/FPY_OOBSearchResult.html", ".eachBlck" ,"pagebgc-2","fpyoob_result");
+			page_modules.loadinto("moduleHtml/FPY_OOBSearchResult.html", ".eachBlck" ,"pagebgc-2","fpyoob_result",true);
 		});
-		$('#qstop_search_btn').on("tap.qstopser",function(){
+		$('#qstop_search_btn').on("click.qstopser",function(){
 			var str = $("#searchForm").serialize();
 			console.log(str);
 			page_modules.params = {type:4};
-			page_modules.loadinto("moduleHtml/Qstop_SearchResult.html", ".eachBlck" ,"pagebgc-1","qstop_result");
+			page_modules.loadinto("moduleHtml/Qstop_SearchResult.html", ".eachBlck" ,"pagebgc-1","qstop_result",true);
 		});
 	}
 	return {init:init};
