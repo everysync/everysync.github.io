@@ -219,7 +219,14 @@ function initworldmap(target) {
 			$tar.on("tap",obj,function(e) {
 				e.stopPropagation();
 				var newClassName = $(obj).attr("id");
-				$tar.attr("class",newClassName).trigger(newClassName);
+				//console.log()
+				//console.log(newClassName)
+				if ($tar.attr("class") == newClassName) {
+					$tar.removeAttr("class");
+					$tar.trigger(newClassName+"_off");
+				} else {
+					$tar.attr("class",newClassName).trigger(newClassName);
+				}
 			});
 		}
 		
@@ -927,4 +934,11 @@ function jayfunction() {
 		var tbody = $(this).prev().find('table tbody');
 		tbody.append(tbody.html());
 	});
+	
+	$doc.on("DOMMouseScroll mousewheel", ".ecPageTab", function(e) {
+		console.log(0)
+		e.stopPropagation();
+		//return false
+	})
+	
 }

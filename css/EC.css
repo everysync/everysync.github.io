@@ -203,6 +203,15 @@
 	width:60%\9;
 	background-color:rgba(0, 0, 0, 0.2);
 }
+
+.demopagec-5 .ecPageTab 
+{
+	height: -webkit-calc(100% - 280px);
+	height: calc(100% - 280px);
+	margin-left: 50px;
+	overflow: auto;
+	-webkit-overflow-scrolling:touch;
+}
 /* Dialog */
 .EC_Dialog{
 	position:absolute;
