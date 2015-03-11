@@ -425,7 +425,7 @@ var page_modules = {
 		});
 		
 		$("#app-load-back").on("tap", function(e) {
-			e.stopPropagation();
+			//e.stopPropagation();
 			if(page_modules._curPage.backFlag){
 				page_modules._curPage = {};
 				page_modules.loadinto(page_modules._lastPage.url, page_modules._lastPage.selector ,page_modules._lastPage.wrapclass,page_modules._lastPage.requirejs,page_modules._lastPage.backFlag);
@@ -792,7 +792,22 @@ function initChat() {
 		});
 	});
 }
- 
+
+function initDateTimepicker() {
+	define("loadpicker",["bootstrap-datetimepicker.min"]);
+	require(["loadpicker"], function(e) {
+		console.log( $.fn.datetimepicker )
+		$doc.on("tap", ".pickerinit", function(e) {
+			var $this = $(this);
+			$this.datetimepicker("show")
+		}).on("tap", ".app-load-back", function(e) {
+			$(".pickerinit").datetimepicker("remove");
+			$(".datetimepicker").remove();
+		})
+	})
+}
+
+
 //INIT FUNCTIONS
 function jayfunction() {
 	$win =$(window);
@@ -823,6 +838,13 @@ function jayfunction() {
 	initChat();
 	//init pageside cache html
 	popLayoutfns.modalinit();	
+	//init datetimepicker
+	initDateTimepicker();
+	//各种返回首页
+	$doc.on("tap", ".retutnToIndex", function(e) {
+		$("#app-load-back,.pop_mask").trigger("tap");
+		return false
+	});
 	
 	$(".ctrBtns").on("tap",".ctr_3", function() {
 		var $psc = page_modules.$page_show_content;
@@ -935,8 +957,7 @@ function jayfunction() {
 		tbody.append(tbody.html());
 	});
 	
-	$doc.on("DOMMouseScroll mousewheel", ".ecPageTab", function(e) {
-		console.log(0)
+	$doc.on("DOMMouseScroll mousewheel touchmove", ".ecPageTab", function(e) {
 		e.stopPropagation();
 		//return false
 	})

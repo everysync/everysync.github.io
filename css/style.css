@@ -2515,6 +2515,18 @@ input.modal-text-input {
 }    
 /*end checkBox style && radioBox style*/
 
+
+/* 
+* 返回首页
+*/
+.retutnToIndex {width: 210px; height: 100%;display: block; position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+}
+
 /* HiDPI support */
 
 /* 视网膜显示屏CSS */
