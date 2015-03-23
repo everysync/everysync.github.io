@@ -794,15 +794,15 @@ function initChat() {
 }
 
 function initDateTimepicker() {
-	define("loadpicker",["bootstrap-datetimepicker.min"]);
+	define("loadpicker",["bootstrap-datepicker.min"]);
 	require(["loadpicker"], function(e) {
-		console.log( $.fn.datetimepicker )
+		//console.log( $.fn.datetimepicker )
 		$doc.on("tap", ".pickerinit", function(e) {
 			var $this = $(this);
-			$this.datetimepicker("show")
+			$this.datepicker("show")
 		}).on("tap", ".app-load-back", function(e) {
-			$(".pickerinit").datetimepicker("remove");
-			$(".datetimepicker").remove();
+			$(".pickerinit").datepicker("remove");
+			//$(".datetimepicker").remove();
 		})
 	})
 }
@@ -953,6 +953,7 @@ function jayfunction() {
 
 	$doc.on("tap",'.pageMore', function() {
 		//加载更多数据..这里只是模拟效果，正式需请求后台数据
+		var tbodyp = $(this).prev().find('table').attr("id");
 		var tbody = $(this).prev().find('table tbody');
 		tbody.append(tbody.html());
 	});
